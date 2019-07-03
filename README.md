@@ -2,6 +2,12 @@
 
 Node.js library for [Gemini](https://docs.gemini.com/).
 
+## Installation
+
+```bash
+npm install gemini-node-api
+```
+
 ## Usage
 
 ### PublicClient
