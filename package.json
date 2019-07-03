@@ -39,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/vansergen/gemini-node-api/issues"
   },
-  "homepage": "https://github.com/vansergen/gemini-node-api#readme"
+  "homepage": "https://github.com/vansergen/gemini-node-api#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
 }
