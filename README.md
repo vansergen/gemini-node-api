@@ -10,3 +10,18 @@ Node.js library for [Gemini](https://docs.gemini.com/).
 const { PublicClient } = require('gemini-node-api');
 const publicClient = new PublicClient();
 ```
+
+- `request`
+
+```javascript
+const method = 'GET';
+const uri = 'v1/pubticker/zecbtc';
+publicClient
+  .request({ method, uri })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+```
