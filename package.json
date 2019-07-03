@@ -14,6 +14,7 @@
     "eslint": "^6.0.1",
     "jsdoc": "^3.6.2",
     "mocha": "^6.1.4",
+    "nock": "^10.0.6",
     "prettier": "^1.18.2"
   },
   "scripts": {
@@ -38,5 +39,11 @@
   "bugs": {
     "url": "https://github.com/vansergen/gemini-node-api/issues"
   },
-  "homepage": "https://github.com/vansergen/gemini-node-api#readme"
+  "homepage": "https://github.com/vansergen/gemini-node-api#readme",
+  "dependencies": {
+    "@types/bluebird": "^3.5.27",
+    "bluebird": "^3.5.5",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
 }
