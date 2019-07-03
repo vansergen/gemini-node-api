@@ -41,6 +41,7 @@
   },
   "homepage": "https://github.com/vansergen/gemini-node-api#readme",
   "dependencies": {
+    "@types/bluebird": "^3.5.27",
     "bluebird": "^3.5.5",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
