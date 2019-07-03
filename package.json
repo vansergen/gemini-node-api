@@ -1,0 +1,42 @@
+{
+  "name": "gemini-node-api",
+  "version": "0.1.0",
+  "description": "Gemini Node.js API",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "engines": {
+    "node": ">=10.16.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "jsdoc": "^3.6.2",
+    "mocha": "^6.1.4",
+    "prettier": "^1.18.2"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "prettier": "prettier -l *.{js,md,ts,json} **/*.{js,md,ts,json}",
+    "prettier-write": "npm run prettier -- --write",
+    "generate-docs": "jsdoc ./ -c jsdoc.json",
+    "test": "mocha --full-trace --ui tdd --bail --reporter spec tests/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vansergen/gemini-node-api.git"
+  },
+  "keywords": [
+    "Gemini",
+    "crypto",
+    "exchange",
+    "API"
+  ],
+  "author": "Sergey Bakulin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vansergen/gemini-node-api/issues"
+  },
+  "homepage": "https://github.com/vansergen/gemini-node-api#readme"
+}
