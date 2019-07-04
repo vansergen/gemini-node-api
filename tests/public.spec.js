@@ -4,6 +4,7 @@ const nock = require('nock');
 const { PublicClient } = require('../index.js');
 const publicClient = new PublicClient();
 const {
+  API_LIMIT,
   EXCHANGE_API_URL,
   SANDBOX_API_URL,
   DEFAULT_TIMEOUT,
@@ -306,6 +307,70 @@ suite('PublicClient', () => {
 
     client
       .getOrderBook()
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
+  test('.getTradeHistory()', done => {
+    const symbol = 'btcusd';
+    const uri = '/v1/trades/' + symbol;
+    const limit_trades = 1;
+    const include_breaks = true;
+    const since = 2;
+    const response = [
+      {
+        timestamp: 1547146811,
+        timestampms: 1547146811357,
+        tid: 5335307668,
+        price: '3610.85',
+        amount: '0.27413495',
+        exchange: 'gemini',
+        type: 'buy',
+      },
+    ];
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .query({ limit_trades, include_breaks, since })
+      .times(1)
+      .reply(200, response);
+
+    publicClient
+      .getTradeHistory({ symbol, limit_trades, include_breaks, since })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
+  test('.getTradeHistory() (with default symbol)', done => {
+    const symbol = 'zecbtc';
+    const uri = '/v1/trades/' + symbol;
+    const limit_trades = API_LIMIT;
+    const response = [
+      {
+        timestamp: 1547146811,
+        timestampms: 1547146811357,
+        tid: 5335307668,
+        price: '3610.85',
+        amount: '0.27413495',
+        exchange: 'gemini',
+        type: 'buy',
+      },
+    ];
+
+    const client = new PublicClient({ symbol });
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .query({ limit_trades })
+      .times(1)
+      .reply(200, response);
+
+    client
+      .getTradeHistory()
       .then(data => {
         assert.deepStrictEqual(data, response);
         done();
