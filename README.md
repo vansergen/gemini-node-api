@@ -65,6 +65,21 @@ const symbol = 'zecltc';
 const auction = await publicClient.getCurrentAuction({ symbol });
 ```
 
+- [`getAuctionHistory`](https://docs.gemini.com/rest-api/#auction-history)
+
+```javascript
+const symbol = 'zecltc';
+const since = 1547146811;
+const limit_auction_results = 100;
+const include_indicative = true;
+const history = await publicClient.getAuctionHistory({
+  symbol,
+  since,
+  limit_auction_results,
+  include_indicative,
+});
+```
+
 - `get`
 
 ```javascript
