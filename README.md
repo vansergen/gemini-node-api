@@ -43,6 +43,21 @@ const book = await publicClient.getOrderBook({
 });
 ```
 
+- [`getTradeHistory`](https://docs.gemini.com/rest-api/#trade-history)
+
+```javascript
+const symbol = 'zecltc';
+const since = 1547146811;
+const limit_trades = 100;
+const include_breaks = true;
+const trades = await publicClient.getTradeHistory({
+  symbol,
+  since,
+  limit_trades,
+  include_breaks,
+});
+```
+
 - `get`
 
 ```javascript
