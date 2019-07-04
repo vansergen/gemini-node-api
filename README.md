@@ -1,4 +1,4 @@
-# Gemini Node.js API [![CircleCI](https://circleci.com/gh/vansergen/gemini-node-api.svg?style=svg)](https://circleci.com/gh/vansergen/gemini-node-api)
+# Gemini Node.js API [![CircleCI](https://circleci.com/gh/vansergen/gemini-node-api.svg?style=svg)](https://circleci.com/gh/vansergen/gemini-node-api) [![GitHub version](https://badge.fury.io/gh/vansergen%2Fgemini-node-api.svg)](https://badge.fury.io/gh/vansergen%2Fgemini-node-api) [![npm version](https://badge.fury.io/js/gemini-node-api.svg)](https://badge.fury.io/js/gemini-node-api) [![languages](https://img.shields.io/github/languages/top/vansergen/gemini-node-api.svg)](https://github.com/vansergen/gemini-node-api) [![dependency status](https://img.shields.io/librariesio/github/vansergen/gemini-node-api.svg)](https://github.com/vansergen/gemini-node-api) [![repo size](https://img.shields.io/github/repo-size/vansergen/gemini-node-api.svg)](https://github.com/vansergen/gemini-node-api) [![npm downloads](https://img.shields.io/npm/dt/gemini-node-api.svg)](https://www.npmjs.com/package/gemini-node-api) [![license](https://img.shields.io/github/license/vansergen/gemini-node-api.svg)](https://github.com/vansergen/gemini-node-api/blob/master/LICENSE)
 
 Node.js library for [Gemini](https://docs.gemini.com/).
 
@@ -21,6 +21,13 @@ const publicClient = new PublicClient();
 
 ```javascript
 const symbols = await publicClient.getSymbols();
+```
+
+- [`getTicker`](https://docs.gemini.com/rest-api/#ticker)
+
+```javascript
+const symbol = 'zecltc';
+const ticker = await publicClient.getTicker({ symbol });
 ```
 
 - `get`
