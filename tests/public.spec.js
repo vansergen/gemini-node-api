@@ -149,4 +149,37 @@ suite('PublicClient', () => {
       })
       .catch(error => assert.fail(error));
   });
+
+  test('.getSymbols()', done => {
+    const uri = '/v1/symbols';
+    const response = [
+      'btcusd',
+      'ethbtc',
+      'ethusd',
+      'bchusd',
+      'bchbtc',
+      'bcheth',
+      'ltcusd',
+      'ltcbtc',
+      'ltceth',
+      'ltcbch',
+      'zecusd',
+      'zecbtc',
+      'zeceth',
+      'zecbch',
+      'zecltc',
+    ];
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .times(1)
+      .reply(200, response);
+
+    publicClient
+      .getSymbols()
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
 });
