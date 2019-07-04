@@ -30,22 +30,11 @@ declare module 'gemini-node-api' {
     include_breaks?: boolean;
   } & SymbolFilter;
 
-  export type AuctionInfo = {
-    closed_until_ms?: number;
-    last_auction_eid?: number;
-    last_auction_price?: string;
-    last_auction_quantity?: string;
-    last_highest_bid_price?: string;
-    last_lowest_ask_price?: string;
-    last_collar_price?: string;
-    most_recent_indicative_price?: string;
-    most_recent_indicative_quantity?: string;
-    most_recent_highest_bid_price?: string;
-    most_recent_lowest_ask_price?: string;
-    most_recent_collar_price?: string;
-    next_update_ms?: number;
-    next_auction_ms?: number;
-  };
+  export type AuctionHistoryFilter = {
+    since?: number;
+    limit_auction_results?: number;
+    include_indicative?: boolean;
+  } & SymbolFilter;
 
   export type RequestResponse = JSONObject | JSONObject[] | string[];
 
@@ -78,6 +67,38 @@ declare module 'gemini-node-api' {
     broken?: boolean;
   };
 
+  export type AuctionInfo = {
+    closed_until_ms?: number;
+    last_auction_eid?: number;
+    last_auction_price?: string;
+    last_auction_quantity?: string;
+    last_highest_bid_price?: string;
+    last_lowest_ask_price?: string;
+    last_collar_price?: string;
+    most_recent_indicative_price?: string;
+    most_recent_indicative_quantity?: string;
+    most_recent_highest_bid_price?: string;
+    most_recent_lowest_ask_price?: string;
+    most_recent_collar_price?: string;
+    next_update_ms?: number;
+    next_auction_ms?: number;
+  };
+
+  export type AuctionHistory = {
+    timestamp: number;
+    timestampms: number;
+    auction_id: number;
+    eid: number;
+    event_type: 'indicative' | 'auction';
+    auction_result: 'success' | 'failure';
+    auction_price?: string;
+    auction_quantity?: string;
+    highest_bid_price?: string;
+    lowest_ask_price?: string;
+    collar_price?: string;
+    unmatched_collar_quantity?: string;
+  };
+
   export type PublicClientOptions = {
     symbol?: string;
     sandbox?: boolean;
@@ -101,5 +122,9 @@ declare module 'gemini-node-api' {
     getTradeHistory(options?: TradeHistoryFilter): Promise<Trade[]>;
 
     getCurrentAuction(options?: SymbolFilter): Promise<AuctionInfo>;
+
+    getAuctionHistory(
+      options?: AuctionHistoryFilter
+    ): Promise<AuctionHistory[]>;
   }
 }
