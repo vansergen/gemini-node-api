@@ -5,14 +5,17 @@ declare module 'gemini-node-api' {
     [key: string]: any;
   };
 
-  export type RequestOptions = {
-    method: 'GET' | 'POST';
+  export type GetOptions = {
     uri: string;
-    headers?: JSONObject;
     qs?: JSONObject;
   };
 
-  export type RequestResponse = JSONObject | JSONObject[];
+  export type RequestOptions = {
+    method: 'GET' | 'POST';
+    headers?: JSONObject;
+  } & GetOptions;
+
+  export type RequestResponse = JSONObject | JSONObject[] | string[];
 
   export type PublicClientOptions = {
     symbol?: string;
@@ -23,6 +26,8 @@ declare module 'gemini-node-api' {
 
   export class PublicClient {
     constructor(options?: PublicClientOptions);
+
+    get(options: GetOptions): Promise<RequestResponse>;
 
     request(options: RequestOptions): Promise<RequestResponse>;
   }
