@@ -377,4 +377,60 @@ suite('PublicClient', () => {
       })
       .catch(error => assert.fail(error));
   });
+
+  test('.getCurrentAuction()', done => {
+    const symbol = 'btcusd';
+    const uri = '/v1/auction/' + symbol;
+    const response = {
+      last_auction_eid: 109929,
+      last_auction_price: '629.92',
+      last_auction_quantity: '430.12917506',
+      last_highest_bid_price: '630.10',
+      last_lowest_ask_price: '632.44',
+      last_collar_price: '631.27',
+      next_auction_ms: 1474567782895,
+      next_update_ms: 1474567662895,
+    };
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .times(1)
+      .reply(200, response);
+
+    publicClient
+      .getCurrentAuction({ symbol })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
+  test('.getCurrentAuction() (with default symbol)', done => {
+    const symbol = 'zecbtc';
+    const uri = '/v1/auction/' + symbol;
+    const response = {
+      last_auction_eid: 110085,
+      most_recent_indicative_price: '632.33',
+      most_recent_indicative_quantity: '151.93847124',
+      most_recent_highest_bid_price: '633.26',
+      most_recent_lowest_ask_price: '633.83',
+      most_recent_collar_price: '633.545',
+      next_auction_ms: 1474567782895,
+      next_update_ms: 1474567722895,
+    };
+
+    const client = new PublicClient({ symbol });
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .times(1)
+      .reply(200, response);
+
+    client
+      .getCurrentAuction()
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
 });
