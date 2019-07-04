@@ -30,6 +30,19 @@ const symbol = 'zecltc';
 const ticker = await publicClient.getTicker({ symbol });
 ```
 
+- [`getOrderBook`](https://docs.gemini.com/rest-api/#current-order-book)
+
+```javascript
+const symbol = 'zecltc';
+const limit_bids = 25;
+const limit_asks = 20;
+const book = await publicClient.getOrderBook({
+  symbol,
+  limit_bids,
+  limit_asks,
+});
+```
+
 - `get`
 
 ```javascript
