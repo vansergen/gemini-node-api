@@ -10,6 +10,10 @@ declare module 'gemini-node-api' {
     qs?: JSONObject;
   };
 
+  export type PostOptions = {
+    request: string;
+  };
+
   export type RequestOptions = {
     method: 'GET' | 'POST';
     headers?: JSONObject;
@@ -143,6 +147,8 @@ declare module 'gemini-node-api' {
 
   export class AuthenticatedClient extends PublicClient {
     constructor(options: AuthenticatedClientOptions);
+
+    post(options: PostOptions): Promise<RequestResponse>;
   }
 
   export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
