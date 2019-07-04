@@ -238,4 +238,78 @@ suite('PublicClient', () => {
       })
       .catch(error => assert.fail(error));
   });
+
+  test('.getOrderBook()', done => {
+    const symbol = 'btcusd';
+    const uri = '/v1/book/' + symbol;
+    const limit_bids = 1;
+    const limit_asks = 1;
+    const response = {
+      bids: [
+        {
+          price: '3607.85',
+          amount: '6.643373',
+          timestamp: '1547147541',
+        },
+      ],
+      asks: [
+        {
+          price: '3607.86',
+          amount: '14.68205084',
+          timestamp: '1547147541',
+        },
+      ],
+    };
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .query({ limit_asks, limit_bids })
+      .times(1)
+      .reply(200, response);
+
+    publicClient
+      .getOrderBook({ symbol, limit_bids, limit_asks })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
+  test('.getOrderBook() (with default symbol)', done => {
+    const symbol = 'zecbtc';
+    const uri = '/v1/book/' + symbol;
+    const limit_bids = 0;
+    const limit_asks = 0;
+    const response = {
+      bids: [
+        {
+          price: '3607.85',
+          amount: '6.643373',
+          timestamp: '1547147541',
+        },
+      ],
+      asks: [
+        {
+          price: '3607.86',
+          amount: '14.68205084',
+          timestamp: '1547147541',
+        },
+      ],
+    };
+
+    const client = new PublicClient({ symbol });
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .query({ limit_bids, limit_asks })
+      .times(1)
+      .reply(200, response);
+
+    client
+      .getOrderBook()
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
 });
