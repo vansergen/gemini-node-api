@@ -36,6 +36,11 @@ declare module 'gemini-node-api' {
     include_indicative?: boolean;
   } & SymbolFilter;
 
+  export type Auth = {
+    key: string;
+    secret: string;
+  };
+
   export type RequestResponse = JSONObject | JSONObject[] | string[];
 
   export type Ticker = {
@@ -99,6 +104,12 @@ declare module 'gemini-node-api' {
     unmatched_collar_quantity?: string;
   };
 
+  export type AuthHeaders = {
+    'X-GEMINI-PAYLOAD': string;
+    'X-GEMINI-SIGNATURE': string;
+    'X-GEMINI-APIKEY': string;
+  };
+
   export type PublicClientOptions = {
     symbol?: string;
     sandbox?: boolean;
@@ -127,4 +138,6 @@ declare module 'gemini-node-api' {
       options?: AuctionHistoryFilter
     ): Promise<AuctionHistory[]>;
   }
+
+  export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
 }
