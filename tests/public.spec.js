@@ -123,4 +123,30 @@ suite('PublicClient', () => {
         });
     });
   });
+
+  test('.get()', done => {
+    const symbol = 'btcusd';
+    const uri = 'v1/auction/' + symbol;
+    const response = {
+      closed_until_ms: 1474567602895,
+      last_auction_price: '629.92',
+      last_auction_quantity: '430.12917506',
+      last_highest_bid_price: '630.10',
+      last_lowest_ask_price: '632.44',
+      last_collar_price: '631.27',
+      next_auction_ms: 1474567782895,
+    };
+    nock(EXCHANGE_API_URL)
+      .get('/' + uri)
+      .times(1)
+      .reply(200, response);
+
+    publicClient
+      .get({ uri })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
 });
