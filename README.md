@@ -117,6 +117,12 @@ const secret = 'gemini-api-secret';
 const authClient = new AuthenticatedClient({ key, secret });
 ```
 
+- `post`
+
+```javascript
+await authClient.post({ request: '/v1/tradevolume' });
+```
+
 ### SignRequest
 
 ```javascript

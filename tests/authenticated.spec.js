@@ -1,10 +1,14 @@
 const assert = require('assert');
 const nock = require('nock');
 
-const { AuthenticatedClient } = require('../index.js');
+const { AuthenticatedClient, SignRequest } = require('../index.js');
+const { EXCHANGE_API_URL } = require('../lib/utilities');
 
 const key = 'Gemini-API-KEY';
 const secret = 'Gemini-API-SECRET';
+const auth = { key, secret };
+
+const authClient = new AuthenticatedClient(auth);
 
 suite('AuthenticatedClient', () => {
   teardown(() => nock.cleanAll());
@@ -39,5 +43,29 @@ suite('AuthenticatedClient', () => {
     assert.deepStrictEqual(client.timeout, timeout);
     assert.deepStrictEqual(client.key, key);
     assert.deepStrictEqual(client.secret, secret);
+  });
+
+  test('.post()', done => {
+    const response = {
+      currency: 'BTC',
+      address: '1EdWhc4RiYqrnSVrdNrbkJ2RYaXd9EfEen',
+    };
+    const request = '/v1/deposit/btc/newAddress';
+    const nonce = 1560742707669;
+    const payload = { request, nonce };
+    authClient.nonce = () => nonce;
+
+    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
+      .post(request)
+      .times(1)
+      .reply(200, response);
+
+    authClient
+      .post(payload)
+      .then(data => {
+        assert.deepEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
   });
 });
