@@ -58,6 +58,13 @@ const trades = await publicClient.getTradeHistory({
 });
 ```
 
+- [`getCurrentAuction`](https://docs.gemini.com/rest-api/#current-auction)
+
+```javascript
+const symbol = 'zecltc';
+const auction = await publicClient.getCurrentAuction({ symbol });
+```
+
 - `get`
 
 ```javascript
