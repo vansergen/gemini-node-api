@@ -108,6 +108,15 @@ publicClient
   });
 ```
 
+### AuthenticatedClient
+
+```javascript
+const { AuthenticatedClient } = require('gemini-node-api');
+const key = 'gemini-api-key';
+const secret = 'gemini-api-secret';
+const authClient = new AuthenticatedClient({ key, secret });
+```
+
 ### SignRequest
 
 ```javascript
