@@ -30,5 +30,7 @@ declare module 'gemini-node-api' {
     get(options: GetOptions): Promise<RequestResponse>;
 
     request(options: RequestOptions): Promise<RequestResponse>;
+
+    getSymbols(): Promise<string[]>;
   }
 }
