@@ -117,6 +117,8 @@ declare module 'gemini-node-api' {
     timeout?: number;
   };
 
+  export type AuthenticatedClientOptions = Auth & PublicClientOptions;
+
   export class PublicClient {
     constructor(options?: PublicClientOptions);
 
@@ -137,6 +139,10 @@ declare module 'gemini-node-api' {
     getAuctionHistory(
       options?: AuctionHistoryFilter
     ): Promise<AuctionHistory[]>;
+  }
+
+  export class AuthenticatedClient extends PublicClient {
+    constructor(options: AuthenticatedClientOptions);
   }
 
   export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
