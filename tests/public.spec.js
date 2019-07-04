@@ -433,4 +433,107 @@ suite('PublicClient', () => {
       })
       .catch(error => assert.fail(error));
   });
+
+  test('.getAuctionHistory()', done => {
+    const symbol = 'btcusd';
+    const uri = '/v1/auction/' + symbol + '/history';
+    const limit_auction_results = 2;
+    const include_indicative = true;
+    const since = 2;
+    const response = [
+      {
+        auction_id: 3,
+        auction_price: '628.775',
+        auction_quantity: '66.32225622',
+        eid: 4066,
+        highest_bid_price: '628.82',
+        lowest_ask_price: '629.48',
+        collar_price: '629.15',
+        auction_result: 'success',
+        timestamp: 1471902531,
+        timestampms: 1471902531225,
+        event_type: 'auction',
+      },
+      {
+        auction_id: 3,
+        auction_price: '628.865',
+        auction_quantity: '89.22776435',
+        eid: 3920,
+        highest_bid_price: '629.59',
+        lowest_ask_price: '629.77',
+        collar_price: '629.68',
+        auction_result: 'success',
+        timestamp: 1471902471,
+        timestampms: 1471902471225,
+        event_type: 'indicative',
+      },
+    ];
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .query({ limit_auction_results, include_indicative, since })
+      .times(1)
+      .reply(200, response);
+
+    publicClient
+      .getAuctionHistory({
+        symbol,
+        limit_auction_results,
+        include_indicative,
+        since,
+      })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
+  test('.getAuctionHistory() (with default symbol)', done => {
+    const symbol = 'zecbtc';
+    const uri = '/v1/auction/' + symbol + '/history';
+    const limit_auction_results = API_LIMIT;
+    const response = [
+      {
+        auction_id: 3,
+        auction_price: '628.775',
+        auction_quantity: '66.32225622',
+        eid: 4066,
+        highest_bid_price: '628.82',
+        lowest_ask_price: '629.48',
+        collar_price: '629.15',
+        auction_result: 'success',
+        timestamp: 1471902531,
+        timestampms: 1471902531225,
+        event_type: 'auction',
+      },
+      {
+        auction_id: 3,
+        auction_price: '628.865',
+        auction_quantity: '89.22776435',
+        eid: 3920,
+        highest_bid_price: '629.59',
+        lowest_ask_price: '629.77',
+        collar_price: '629.68',
+        auction_result: 'success',
+        timestamp: 1471902471,
+        timestampms: 1471902471225,
+        event_type: 'indicative',
+      },
+    ];
+
+    const client = new PublicClient({ symbol });
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .query({ limit_auction_results })
+      .times(1)
+      .reply(200, response);
+
+    client
+      .getAuctionHistory()
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
 });
