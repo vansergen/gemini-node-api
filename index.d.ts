@@ -19,6 +19,11 @@ declare module 'gemini-node-api' {
     symbol?: string;
   };
 
+  export type BookFilter = {
+    limit_bids?: number;
+    limit_asks?: number;
+  } & SymbolFilter;
+
   export type RequestResponse = JSONObject | JSONObject[] | string[];
 
   export type Ticker = {
@@ -26,6 +31,17 @@ declare module 'gemini-node-api' {
     ask: string;
     last: string;
     volume: JSONObject;
+  };
+
+  export type BookEntry = {
+    price: string;
+    amount: string;
+    timestamp: string;
+  };
+
+  export type OrderBook = {
+    bids: BookEntry[];
+    asks: BookEntry[];
   };
 
   export type PublicClientOptions = {
@@ -45,5 +61,7 @@ declare module 'gemini-node-api' {
     getSymbols(): Promise<string[]>;
 
     getTicker(options?: SymbolFilter): Promise<Ticker>;
+
+    getOrderBook(options?: BookFilter): Promise<OrderBook>;
   }
 }
