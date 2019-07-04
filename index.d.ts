@@ -15,7 +15,18 @@ declare module 'gemini-node-api' {
     headers?: JSONObject;
   } & GetOptions;
 
+  export type SymbolFilter = {
+    symbol?: string;
+  };
+
   export type RequestResponse = JSONObject | JSONObject[] | string[];
+
+  export type Ticker = {
+    bid: string;
+    ask: string;
+    last: string;
+    volume: JSONObject;
+  };
 
   export type PublicClientOptions = {
     symbol?: string;
@@ -32,5 +43,7 @@ declare module 'gemini-node-api' {
     request(options: RequestOptions): Promise<RequestResponse>;
 
     getSymbols(): Promise<string[]>;
+
+    getTicker(options?: SymbolFilter): Promise<Ticker>;
   }
 }

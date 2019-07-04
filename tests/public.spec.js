@@ -182,4 +182,60 @@ suite('PublicClient', () => {
       })
       .catch(error => assert.fail(error));
   });
+
+  test('.getTicker()', done => {
+    const symbol = 'btcusd';
+    const uri = '/v1/pubticker/' + symbol;
+    const response = {
+      ask: '977.59',
+      bid: '977.35',
+      last: '977.65',
+      volume: {
+        BTC: '2210.505328803',
+        USD: '2135477.463379586263',
+        timestamp: 1483018200000,
+      },
+    };
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .times(1)
+      .reply(200, response);
+
+    publicClient
+      .getTicker({ symbol })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
+  test('.getTicker() (with default symbol)', done => {
+    const symbol = 'zecbtc';
+    const uri = '/v1/pubticker/' + symbol;
+    const response = {
+      ask: '977.59',
+      bid: '977.35',
+      last: '977.65',
+      volume: {
+        ZEC: '2210.505328803',
+        BTC: '2135477.463379586263',
+        timestamp: 1483018200000,
+      },
+    };
+
+    const client = new PublicClient({ symbol });
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .times(1)
+      .reply(200, response);
+
+    client
+      .getTicker()
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
 });
