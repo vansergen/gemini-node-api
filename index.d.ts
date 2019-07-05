@@ -160,6 +160,14 @@ declare module 'gemini-node-api' {
     sell_taker_count: number;
   };
 
+  export type Balance = {
+    type: 'exchage';
+    currency: string;
+    amount: string;
+    available: string;
+    availableForWithdrawal: string;
+  };
+
   export type AuthHeaders = {
     'X-GEMINI-PAYLOAD': string;
     'X-GEMINI-SIGNATURE': string;
@@ -207,6 +215,8 @@ declare module 'gemini-node-api' {
     getNotionalVolume(): Promise<NotionalVolume>;
 
     getTradeVolume(): Promise<TradeVolume[][]>;
+
+    getAvailableBalances(): Promise<Balance[]>;
   }
 
   export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
