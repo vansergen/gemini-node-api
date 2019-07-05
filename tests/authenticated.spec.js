@@ -378,6 +378,68 @@ suite('AuthenticatedClient', () => {
       .catch(error => assert.fail(error));
   });
 
+  test('.getActiveOrders()', done => {
+    const response = [
+      {
+        order_id: '107421210',
+        id: '107421210',
+        symbol: 'ethusd',
+        exchange: 'gemini',
+        avg_execution_price: '0.00',
+        side: 'sell',
+        type: 'exchange limit',
+        timestamp: '1547241628',
+        timestampms: 1547241628042,
+        is_live: true,
+        is_cancelled: false,
+        is_hidden: false,
+        was_forced: false,
+        executed_amount: '0',
+        remaining_amount: '1',
+        options: [],
+        price: '125.51',
+        original_amount: '1',
+      },
+      {
+        order_id: '107421205',
+        id: '107421205',
+        symbol: 'ethusd',
+        exchange: 'gemini',
+        avg_execution_price: '125.41',
+        side: 'buy',
+        type: 'exchange limit',
+        timestamp: '1547241626',
+        timestampms: 1547241626991,
+        is_live: true,
+        is_cancelled: false,
+        is_hidden: false,
+        was_forced: false,
+        executed_amount: '0.029147',
+        remaining_amount: '0.970853',
+        options: [],
+        price: '125.42',
+        original_amount: '1',
+      },
+    ];
+    const request = '/v1/orders';
+    const nonce = 1;
+    const payload = { request, nonce };
+    authClient.nonce = () => nonce;
+
+    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
+      .post(request)
+      .times(1)
+      .reply(200, response);
+
+    authClient
+      .getActiveOrders()
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
   test('.getNotionalVolume()', done => {
     const response = {
       web_maker_fee_bps: 100,
