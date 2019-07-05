@@ -374,4 +374,34 @@ suite('AuthenticatedClient', () => {
       })
       .catch(error => assert.fail(error));
   });
+
+  test('.withdrawCrypto()', done => {
+    const currency = 'btc';
+    const request = '/v1/withdraw/' + currency;
+    const address = '1EdWhc4RiYqrnSVrdNrbkJ2RYaXd9EfEen';
+    const amount = 1;
+    const nonce = 1;
+    authClient.nonce = () => nonce;
+
+    const payload = { request, address, amount, nonce };
+    const response = {
+      address: '1EdWhc4RiYqrnSVrdNrbkJ2RYaXd9EfEen',
+      amount: '1',
+      withdrawalId: '02176a83-a6b1-4202-9b85-1c1c92dd25c4',
+      message:
+        'You have requested a transfer of 1 BTC to 1EdWhc4RiYqrnSVrdNrbkJ2RYaXd9EfEen. This withdrawal will be sent to the blockchain within the next 60 seconds.',
+    };
+    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
+      .post(request)
+      .times(1)
+      .reply(200, response);
+
+    authClient
+      .withdrawCrypto({ currency, address, amount })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
 });
