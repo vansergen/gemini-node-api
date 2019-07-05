@@ -56,6 +56,10 @@ declare module 'gemini-node-api' {
     ioi?: boolean;
   };
 
+  export type OrderID = {
+    order_id: number;
+  };
+
   export type TransferFilter = {
     timestamp?: number;
     limit_transfers?: number;
@@ -312,6 +316,8 @@ declare module 'gemini-node-api' {
     post(options: PostOptions): Promise<RequestResponse>;
 
     newOrder(options: OrderOptions): Promise<OrderStatus>;
+
+    cancelOrder(options: OrderID): Promise<OrderStatus>;
 
     getNotionalVolume(): Promise<NotionalVolume>;
 
