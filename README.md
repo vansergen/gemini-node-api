@@ -186,6 +186,12 @@ const amount = 500;
 const withdrawal = await authClient.withdrawGUSD({ address, amount });
 ```
 
+- [`heartbeat`](https://docs.gemini.com/rest-api/#heartbeat)
+
+```javascript
+const heartbeat = await authClient.heartbeat();
+```
+
 - `post`
 
 ```javascript
