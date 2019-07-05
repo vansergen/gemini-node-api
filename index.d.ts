@@ -1,6 +1,8 @@
 import * as Promise from 'bluebird';
 
 declare module 'gemini-node-api' {
+  export type callback<T> = (error: any, data: T) => void;
+
   export type JSONObject = {
     [key: string]: any;
   };
@@ -179,6 +181,8 @@ declare module 'gemini-node-api' {
     get(options: GetOptions): Promise<RequestResponse>;
 
     request(options: RequestOptions): Promise<RequestResponse>;
+
+    cb(method: string, callback: callback<any>, options?: JSONObject);
 
     getSymbols(): Promise<string[]>;
 
