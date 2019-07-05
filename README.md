@@ -178,6 +178,14 @@ const withdrawal = await authClient.withdrawCrypto({
 });
 ```
 
+- [`withdrawGUSD`](https://docs.gemini.com/rest-api/#withdraw-usd-as-gusd)
+
+```javascript
+const address = '0x0F2B20Acb2fD7EEbC0ABc3AEe0b00d57533b6bD1';
+const amount = 500;
+const withdrawal = await authClient.withdrawGUSD({ address, amount });
+```
+
 - `post`
 
 ```javascript
@@ -216,4 +224,10 @@ const headers = SignRequest({ key, secret }, { request, nonce, label });
   'X-GEMINI-SIGNATURE': '1bf000f1de4eb00384e5b9e84f8128cdff86b392c202bc5366cd7df408d592a649999fd22a7d9f7e445cf30e6cbcfbb0',
   'X-GEMINI-APIKEY': 'Gemini-API-KEY'
 }
+```
+
+### Test
+
+```bash
+npm test
 ```
