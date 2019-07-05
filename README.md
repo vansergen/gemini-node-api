@@ -148,6 +148,14 @@ const volume = await authClient.getTradeVolume();
 const balances = await authClient.getAvailableBalances();
 ```
 
+- [`getTransfers`](https://docs.gemini.com/rest-api/#transfers)
+
+```javascript
+const timestamp = 1495127793;
+const limit_transfers = 12;
+const transfers = await authClient.getTransfers({ timestamp, limit_transfers });
+```
+
 - `post`
 
 ```javascript
