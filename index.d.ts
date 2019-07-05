@@ -42,6 +42,20 @@ declare module 'gemini-node-api' {
     include_indicative?: boolean;
   } & SymbolFilter;
 
+  export type OrderOptions = {
+    client_order_id?: string;
+    symbol?: string;
+    amount: number;
+    min_amount?: number;
+    price: number;
+    side: 'buy' | 'sell';
+    moc?: boolean;
+    ioc?: boolean;
+    fok?: boolean;
+    ao?: boolean;
+    ioi?: boolean;
+  };
+
   export type TransferFilter = {
     timestamp?: number;
     limit_transfers?: number;
@@ -139,6 +153,33 @@ declare module 'gemini-node-api' {
   export type NotionalOneDay = {
     date: string;
     notional_volume: number;
+  };
+
+  export type OrderStatus = {
+    order_id: string;
+    client_order_id?: string;
+    symbol: string;
+    exchange: 'gemini';
+    price?: string;
+    avg_execution_price: string;
+    side: 'buy' | 'sell';
+    type:
+      | 'exchange limit'
+      | 'auction-only exchange limit'
+      | 'market buy'
+      | 'market sell'
+      | 'indication-of-interest';
+    options: string[];
+    timestamp: string;
+    timestampms: number;
+    is_live: boolean;
+    is_cancelled: boolean;
+    is_hidden: boolean;
+    reason?: string;
+    was_forced: boolean;
+    executed_amount: string;
+    remaining_amount: string;
+    original_amount?: string;
   };
 
   export type NotionalVolume = {
@@ -269,6 +310,8 @@ declare module 'gemini-node-api' {
     constructor(options: AuthenticatedClientOptions);
 
     post(options: PostOptions): Promise<RequestResponse>;
+
+    newOrder(options: OrderOptions): Promise<OrderStatus>;
 
     getNotionalVolume(): Promise<NotionalVolume>;
 
