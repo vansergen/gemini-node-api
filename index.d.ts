@@ -224,6 +224,8 @@ declare module 'gemini-node-api' {
     txHash: string;
   };
 
+  export type Heartbeat = { result: 'ok' };
+
   export type AuthHeaders = {
     'X-GEMINI-PAYLOAD': string;
     'X-GEMINI-SIGNATURE': string;
@@ -281,6 +283,8 @@ declare module 'gemini-node-api' {
     withdrawCrypto(options: WithdrawCryptoFilter): Promise<Withdrawal>;
 
     withdrawGUSD(options: WithdrawGUSDFilter): Promise<GUSDWithdrawal>;
+
+    heartbeat(): Promise<Heartbeat>;
   }
 
   export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
