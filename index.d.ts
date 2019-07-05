@@ -331,6 +331,8 @@ declare module 'gemini-node-api' {
 
     cancelAll(): Promise<CancelOrdersResponse>;
 
+    getOrderStatus(options: OrderID): Promise<OrderStatus>;
+
     getNotionalVolume(): Promise<NotionalVolume>;
 
     getTradeVolume(): Promise<TradeVolume[][]>;
