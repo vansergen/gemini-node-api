@@ -142,6 +142,12 @@ const volume = await authClient.getNotionalVolume();
 const volume = await authClient.getTradeVolume();
 ```
 
+- [`getAvailableBalances`](https://docs.gemini.com/rest-api/#get-available-balances)
+
+```javascript
+const balances = await authClient.getAvailableBalances();
+```
+
 - `post`
 
 ```javascript
