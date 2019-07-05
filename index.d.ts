@@ -59,6 +59,11 @@ declare module 'gemini-node-api' {
     amount: number;
   };
 
+  export type WithdrawGUSDFilter = {
+    address: string;
+    amount: number;
+  };
+
   export type Auth = {
     key: string;
     secret: string;
@@ -213,6 +218,12 @@ declare module 'gemini-node-api' {
     message?: string;
   };
 
+  export type GUSDWithdrawal = {
+    destination: string;
+    amount: string;
+    txHash: string;
+  };
+
   export type AuthHeaders = {
     'X-GEMINI-PAYLOAD': string;
     'X-GEMINI-SIGNATURE': string;
@@ -268,6 +279,8 @@ declare module 'gemini-node-api' {
     getNewAddress(options: NewAddressFilter): Promise<NewAddress>;
 
     withdrawCrypto(options: WithdrawCryptoFilter): Promise<Withdrawal>;
+
+    withdrawGUSD(options: WithdrawGUSDFilter): Promise<GUSDWithdrawal>;
   }
 
   export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
