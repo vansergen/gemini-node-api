@@ -156,6 +156,15 @@ const limit_transfers = 12;
 const transfers = await authClient.getTransfers({ timestamp, limit_transfers });
 ```
 
+- [`getNewAddress`](https://docs.gemini.com/rest-api/#new-deposit-address)
+
+```javascript
+const currency = 'ltc';
+const label = 'New LTC deposit address';
+const legacy = true;
+const address = await authClient.getNewAddress({ currency, label, legacy });
+```
+
 - `post`
 
 ```javascript
