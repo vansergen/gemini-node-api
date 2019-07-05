@@ -1,5 +1,6 @@
 const assert = require('assert');
 const nock = require('nock');
+const Promise = require('bluebird');
 
 const { AuthenticatedClient, SignRequest } = require('../index.js');
 const { EXCHANGE_API_URL } = require('../lib/utilities');
@@ -67,6 +68,42 @@ suite('AuthenticatedClient', () => {
         done();
       })
       .catch(error => assert.fail(error));
+  });
+
+  test('.post() (with callback)', () => {
+    const response = {
+      currency: 'BTC',
+      address: '1EdWhc4RiYqrnSVrdNrbkJ2RYaXd9EfEen',
+    };
+    const request = '/v1/deposit/btc/newAddress';
+    const nonce = 1560742707669;
+    const payload = { request, nonce };
+    authClient.nonce = () => nonce;
+
+    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
+      .post(request)
+      .times(2)
+      .reply(200, response);
+
+    const cbreq = new Promise((resolve, reject) => {
+      const callback = (error, data) => {
+        if (error) {
+          reject(error);
+        } else {
+          assert.deepStrictEqual(data, response);
+          resolve(data);
+        }
+      };
+      authClient.cb('post', callback, payload);
+    });
+
+    const preq = authClient
+      .post(payload)
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+      })
+      .catch(error => assert.fail(error));
+    return Promise.all([cbreq, preq]);
   });
 
   test('.getNotionalVolume()', done => {

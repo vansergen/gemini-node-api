@@ -108,6 +108,19 @@ publicClient
   });
 ```
 
+- `cb`
+
+```javascript
+const callback = (error, data) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.info(data);
+  }
+};
+publicClient.cb('getTicker', callback, { symbol: 'bchusd' });
+```
+
 ### AuthenticatedClient
 
 ```javascript
@@ -132,7 +145,20 @@ const volume = await authClient.getTradeVolume();
 - `post`
 
 ```javascript
-await authClient.post({ request: '/v1/tradevolume' });
+const volume = await authClient.post({ request: '/v1/tradevolume' });
+```
+
+- `cb`
+
+```javascript
+const callback = (error, data) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.info(data);
+  }
+};
+authClient.cb('getNotionalVolume', callback);
 ```
 
 ### SignRequest
