@@ -47,6 +47,12 @@ declare module 'gemini-node-api' {
     limit_transfers?: number;
   };
 
+  export type NewAddressFilter = {
+    currency: string;
+    label?: string;
+    legacy?: boolean;
+  };
+
   export type Auth = {
     key: string;
     secret: string;
@@ -187,6 +193,12 @@ declare module 'gemini-node-api' {
     purpose?: string;
   };
 
+  export type NewAddress = {
+    currency: string;
+    address: string;
+    label?: string;
+  };
+
   export type AuthHeaders = {
     'X-GEMINI-PAYLOAD': string;
     'X-GEMINI-SIGNATURE': string;
@@ -238,6 +250,8 @@ declare module 'gemini-node-api' {
     getAvailableBalances(): Promise<Balance[]>;
 
     getTransfers(options?: TransferFilter): Promise<Transfer[]>;
+
+    getNewAddress(options: NewAddressFilter): Promise<NewAddress>;
   }
 
   export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
