@@ -186,6 +186,14 @@ declare module 'gemini-node-api' {
     original_amount?: string;
   };
 
+  export type CancelSessionResponse = {
+    result: 'ok';
+    details: {
+      cancelledOrders: number[];
+      cancelRejects: number[];
+    };
+  };
+
   export type NotionalVolume = {
     account_id?: number;
     date: string;
@@ -318,6 +326,8 @@ declare module 'gemini-node-api' {
     newOrder(options: OrderOptions): Promise<OrderStatus>;
 
     cancelOrder(options: OrderID): Promise<OrderStatus>;
+
+    cancelSession(): Promise<CancelSessionResponse>;
 
     getNotionalVolume(): Promise<NotionalVolume>;
 
