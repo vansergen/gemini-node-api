@@ -154,6 +154,12 @@ const order_id = 106817811;
 const order = await authClient.cancelOrder({ order_id });
 ```
 
+- [`cancelSession`](https://docs.gemini.com/rest-api/#cancel-all-session-orders)
+
+```javascript
+const response = await authClient.cancelSession();
+```
+
 - [`getNotionalVolume`](https://docs.gemini.com/rest-api/#get-notional-volume)
 
 ```javascript

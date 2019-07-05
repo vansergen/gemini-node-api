@@ -284,6 +284,33 @@ suite('AuthenticatedClient', () => {
       .catch(error => assert.fail(error));
   });
 
+  test('.cancelSession()', done => {
+    const request = '/v1/order/cancel/session';
+    const nonce = 1;
+    authClient.nonce = () => nonce;
+
+    const payload = { request, nonce };
+    const response = {
+      result: 'ok',
+      details: {
+        cancelledOrders: [330429345],
+        cancelRejects: [],
+      },
+    };
+    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
+      .post(request)
+      .times(1)
+      .reply(200, response);
+
+    authClient
+      .cancelSession()
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
   test('.getNotionalVolume()', done => {
     const response = {
       web_maker_fee_bps: 100,
