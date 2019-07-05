@@ -117,6 +117,18 @@ const secret = 'gemini-api-secret';
 const authClient = new AuthenticatedClient({ key, secret });
 ```
 
+- [`getNotionalVolume`](https://docs.gemini.com/rest-api/#get-notional-volume)
+
+```javascript
+const volume = await authClient.getNotionalVolume();
+```
+
+- [`getTradeVolume`](https://docs.gemini.com/rest-api/#get-trade-volume)
+
+```javascript
+const volume = await authClient.getTradeVolume();
+```
+
 - `post`
 
 ```javascript

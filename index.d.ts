@@ -45,7 +45,11 @@ declare module 'gemini-node-api' {
     secret: string;
   };
 
-  export type RequestResponse = JSONObject | JSONObject[] | string[];
+  export type RequestResponse =
+    | JSONObject
+    | JSONObject[]
+    | JSONObject[][]
+    | string[];
 
   export type Ticker = {
     bid: string;
@@ -108,6 +112,52 @@ declare module 'gemini-node-api' {
     unmatched_collar_quantity?: string;
   };
 
+  export type NotionalOneDay = {
+    date: string;
+    notional_volume: number;
+  };
+
+  export type NotionalVolume = {
+    account_id?: number;
+    date: string;
+    last_updated_ms: number;
+    web_maker_fee_bps: number;
+    web_taker_fee_bps: number;
+    web_auction_fee_bps: number;
+    api_maker_fee_bps: number;
+    api_taker_fee_bps: number;
+    api_auction_fee_bps: number;
+    fix_maker_fee_bps: number;
+    fix_taker_fee_bps: number;
+    fix_auction_fee_bps: number;
+    block_maker_fee_bps: number;
+    block_taker_fee_bps: number;
+    notional_30d_volume: number;
+    notional_1d_volume: NotionalOneDay[];
+  };
+
+  export type TradeVolume = {
+    account_id: number;
+    symbol: string;
+    base_currency: string;
+    notional_currency: string;
+    data_date: string;
+    total_volume_base: number;
+    maker_buy_sell_ratio: number;
+    buy_maker_base: number;
+    buy_maker_notional: number;
+    buy_maker_count: number;
+    sell_maker_base: number;
+    sell_maker_notional: number;
+    sell_maker_count: number;
+    buy_taker_base: number;
+    buy_taker_notional: number;
+    buy_taker_count: number;
+    sell_taker_base: number;
+    sell_taker_notional: number;
+    sell_taker_count: number;
+  };
+
   export type AuthHeaders = {
     'X-GEMINI-PAYLOAD': string;
     'X-GEMINI-SIGNATURE': string;
@@ -149,6 +199,10 @@ declare module 'gemini-node-api' {
     constructor(options: AuthenticatedClientOptions);
 
     post(options: PostOptions): Promise<RequestResponse>;
+
+    getNotionalVolume(): Promise<NotionalVolume>;
+
+    getTradeVolume(): Promise<TradeVolume[][]>;
   }
 
   export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
