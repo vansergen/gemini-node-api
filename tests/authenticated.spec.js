@@ -64,7 +64,7 @@ suite('AuthenticatedClient', () => {
     authClient
       .post(payload)
       .then(data => {
-        assert.deepEqual(data, response);
+        assert.deepStrictEqual(data, response);
         done();
       })
       .catch(error => assert.fail(error));
@@ -146,7 +146,7 @@ suite('AuthenticatedClient', () => {
     authClient
       .getNotionalVolume()
       .then(data => {
-        assert.deepEqual(data, response);
+        assert.deepStrictEqual(data, response);
         done();
       })
       .catch(error => assert.fail(error));
@@ -212,7 +212,7 @@ suite('AuthenticatedClient', () => {
     authClient
       .getTradeVolume()
       .then(data => {
-        assert.deepEqual(data, response);
+        assert.deepStrictEqual(data, response);
         done();
       })
       .catch(error => assert.fail(error));
@@ -255,7 +255,93 @@ suite('AuthenticatedClient', () => {
     authClient
       .getAvailableBalances()
       .then(data => {
-        assert.deepEqual(data, response);
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
+  test('.getTransfers()', done => {
+    const response = [
+      {
+        type: 'Deposit',
+        status: 'Advanced',
+        timestampms: 1507913541275,
+        eid: 320013281,
+        currency: 'USD',
+        amount: '36.00',
+        method: 'ACH',
+      },
+      {
+        type: 'Deposit',
+        status: 'Advanced',
+        timestampms: 1499990797452,
+        eid: 309356152,
+        currency: 'ETH',
+        amount: '100',
+        txHash:
+          '605c5fa8bf99458d24d61e09941bc443ddc44839d9aaa508b14b296c0c8269b2',
+      },
+      {
+        type: 'Deposit',
+        status: 'Complete',
+        timestampms: 1495550176562,
+        eid: 298112782,
+        currency: 'BTC',
+        amount: '1500',
+        txHash:
+          '163eeee4741f8962b748289832dd7f27f754d892f5d23bf3ea6fba6e350d9ce3',
+        outputIdx: 0,
+      },
+      {
+        type: 'Deposit',
+        status: 'Advanced',
+        timestampms: 1458862076082,
+        eid: 265799530,
+        currency: 'USD',
+        amount: '500.00',
+        method: 'ACH',
+      },
+      {
+        type: 'Withdrawal',
+        status: 'Complete',
+        timestampms: 1450403787001,
+        eid: 82897811,
+        currency: 'BTC',
+        amount: '5',
+        txHash:
+          'c458b86955b80db0718cfcadbff3df3734a906367982c6eb191e61117b810bbb',
+        outputIdx: 0,
+        destination: 'mqjvCtt4TJfQaC7nUgLMvHwuDPXMTEUGqx',
+      },
+      {
+        type: 'Withdrawal',
+        status: 'Complete',
+        timestampms: 1535451930431,
+        eid: 341167014,
+        currency: 'USD',
+        amount: '1.00',
+        txHash:
+          '7bffd85893ee8e72e31061a84d25c45f2c4537c2f765a1e79feb06a7294445c3',
+        destination: '0xd24400ae8BfEBb18cA49Be86258a3C749cf46853',
+      },
+    ];
+    const request = '/v1/transfers';
+    const nonce = 1;
+    const timestamp = 1;
+    const limit_transfers = 6;
+    const payload = { request, timestamp, limit_transfers, nonce };
+    authClient.nonce = () => nonce;
+
+    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
+      .post(request)
+      .times(1)
+      .reply(200, response);
+
+    authClient
+      .getTransfers({ timestamp, limit_transfers })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
         done();
       })
       .catch(error => assert.fail(error));

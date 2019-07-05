@@ -42,6 +42,11 @@ declare module 'gemini-node-api' {
     include_indicative?: boolean;
   } & SymbolFilter;
 
+  export type TransferFilter = {
+    timestamp?: number;
+    limit_transfers?: number;
+  };
+
   export type Auth = {
     key: string;
     secret: string;
@@ -168,6 +173,20 @@ declare module 'gemini-node-api' {
     availableForWithdrawal: string;
   };
 
+  export type Transfer = {
+    type: 'Deposit' | 'Withdrawal';
+    status: 'Advanced' | 'Complete';
+    timestampms: number;
+    eid: number;
+    currency: string;
+    amount: string;
+    method?: 'ACH' | 'Wire';
+    txHash?: string;
+    outputIdx?: number;
+    destination?: string;
+    purpose?: string;
+  };
+
   export type AuthHeaders = {
     'X-GEMINI-PAYLOAD': string;
     'X-GEMINI-SIGNATURE': string;
@@ -217,6 +236,8 @@ declare module 'gemini-node-api' {
     getTradeVolume(): Promise<TradeVolume[][]>;
 
     getAvailableBalances(): Promise<Balance[]>;
+
+    getTransfers(options?: TransferFilter): Promise<Transfer[]>;
   }
 
   export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
