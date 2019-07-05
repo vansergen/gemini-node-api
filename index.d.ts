@@ -333,6 +333,8 @@ declare module 'gemini-node-api' {
 
     getOrderStatus(options: OrderID): Promise<OrderStatus>;
 
+    getActiveOrders(): Promise<OrderStatus[]>;
+
     getNotionalVolume(): Promise<NotionalVolume>;
 
     getTradeVolume(): Promise<TradeVolume[][]>;
