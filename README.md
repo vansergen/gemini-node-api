@@ -179,6 +179,19 @@ const order = await authClient.getOrderStatus({ order_id });
 const orders = await authClient.getActiveOrders();
 ```
 
+- [`getPastTrades`](https://docs.gemini.com/rest-api/#get-past-trades)
+
+```javascript
+const symbol = 'bcheth';
+const limit_trades = 10;
+const timestamp = 1547232911;
+const trades = await authClient.getPastTrades({
+  symbol,
+  limit_trades,
+  timestamp,
+});
+```
+
 - [`getNotionalVolume`](https://docs.gemini.com/rest-api/#get-notional-volume)
 
 ```javascript
