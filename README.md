@@ -160,6 +160,12 @@ const order = await authClient.cancelOrder({ order_id });
 const response = await authClient.cancelSession();
 ```
 
+- [`cancelAll`](https://docs.gemini.com/rest-api/#cancel-all-active-orders)
+
+```javascript
+const response = await authClient.cancelAll();
+```
+
 - [`getNotionalVolume`](https://docs.gemini.com/rest-api/#get-notional-volume)
 
 ```javascript
