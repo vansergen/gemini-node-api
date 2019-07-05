@@ -3,7 +3,7 @@ const nock = require('nock');
 const Promise = require('bluebird');
 
 const { AuthenticatedClient, SignRequest } = require('../index.js');
-const { EXCHANGE_API_URL } = require('../lib/utilities');
+const { API_LIMIT, EXCHANGE_API_URL } = require('../lib/utilities');
 
 const key = 'Gemini-API-KEY';
 const secret = 'Gemini-API-SECRET';
@@ -433,6 +433,86 @@ suite('AuthenticatedClient', () => {
 
     authClient
       .getActiveOrders()
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
+  test('.getPastTrades()', done => {
+    const symbol = 'btcusd';
+    const limit_trades = 2;
+    const timestamp = 1547220639;
+
+    const request = '/v1/mytrades';
+    const nonce = 1;
+    authClient.nonce = () => nonce;
+
+    const payload = { request, symbol, limit_trades, timestamp, nonce };
+    const response = [
+      {
+        price: '3648.09',
+        amount: '0.0027343246',
+        timestamp: 1547232911,
+        timestampms: 1547232911021,
+        type: 'Buy',
+        aggressor: true,
+        fee_currency: 'USD',
+        fee_amount: '0.024937655575035',
+        tid: 107317526,
+        order_id: '107317524',
+        exchange: 'gemini',
+        is_auction_fill: false,
+      },
+      {
+        price: '3633.00',
+        amount: '0.00423677',
+        timestamp: 1547220640,
+        timestampms: 1547220640195,
+        type: 'Buy',
+        aggressor: false,
+        fee_currency: 'USD',
+        fee_amount: '0.038480463525',
+        tid: 106921823,
+        order_id: '106817811',
+        exchange: 'gemini',
+        is_auction_fill: false,
+      },
+    ];
+    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
+      .post(request)
+      .times(1)
+      .reply(200, response);
+
+    authClient
+      .getPastTrades({ symbol, limit_trades, timestamp })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
+  test('.getPastTrades() (with default symbol)', done => {
+    const symbol = 'zecbtc';
+    const limit_trades = API_LIMIT;
+
+    const client = new AuthenticatedClient({ symbol, key, secret });
+
+    const request = '/v1/mytrades';
+    const nonce = 1;
+    client.nonce = () => nonce;
+
+    const payload = { request, symbol, limit_trades, nonce };
+    const response = [];
+    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
+      .post(request)
+      .times(1)
+      .reply(200, response);
+
+    client
+      .getPastTrades()
       .then(data => {
         assert.deepStrictEqual(data, response);
         done();
