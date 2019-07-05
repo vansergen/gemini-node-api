@@ -166,6 +166,13 @@ const response = await authClient.cancelSession();
 const response = await authClient.cancelAll();
 ```
 
+- [`getOrderStatus`](https://docs.gemini.com/rest-api/#order-status)
+
+```javascript
+const order_id = 44375901;
+const order = await authClient.getOrderStatus({ order_id });
+```
+
 - [`getNotionalVolume`](https://docs.gemini.com/rest-api/#get-notional-volume)
 
 ```javascript
