@@ -432,4 +432,25 @@ suite('AuthenticatedClient', () => {
       })
       .catch(error => assert.fail(error));
   });
+
+  test('.heartbeat()', done => {
+    const request = '/v1/heartbeat';
+    const nonce = 1;
+    authClient.nonce = () => nonce;
+
+    const payload = { request, nonce };
+    const response = { result: 'ok' };
+    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
+      .post(request)
+      .times(1)
+      .reply(200, response);
+
+    authClient
+      .heartbeat()
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
 });
