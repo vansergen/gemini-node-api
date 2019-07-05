@@ -60,6 +60,11 @@ declare module 'gemini-node-api' {
     order_id: number;
   };
 
+  export type PastTradesFilter = {
+    limit_trades?: number;
+    timestamp?: number;
+  } & SymbolFilter;
+
   export type TransferFilter = {
     timestamp?: number;
     limit_transfers?: number;
@@ -192,6 +197,23 @@ declare module 'gemini-node-api' {
       cancelledOrders: number[];
       cancelRejects: number[];
     };
+  };
+
+  export type PastTrade = {
+    price: string;
+    amount: string;
+    timestamp: number;
+    timestampms: number;
+    type: 'Buy' | 'Sell';
+    aggressor: boolean;
+    fee_currency: string;
+    fee_amount: string;
+    tid: number;
+    order_id: string;
+    client_order_id?: string;
+    exchange?: 'gemini';
+    is_auction_fill: boolean;
+    break?: string;
   };
 
   export type NotionalVolume = {
@@ -334,6 +356,8 @@ declare module 'gemini-node-api' {
     getOrderStatus(options: OrderID): Promise<OrderStatus>;
 
     getActiveOrders(): Promise<OrderStatus[]>;
+
+    getPastTrades(options?: PastTradesFilter): Promise<PastTrade[]>;
 
     getNotionalVolume(): Promise<NotionalVolume>;
 
