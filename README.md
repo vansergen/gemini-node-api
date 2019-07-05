@@ -165,6 +165,19 @@ const legacy = true;
 const address = await authClient.getNewAddress({ currency, label, legacy });
 ```
 
+- [`withdrawCrypto`](https://docs.gemini.com/rest-api/#withdraw-crypto-funds-to-whitelisted-address)
+
+```javascript
+const currency = 'btc';
+const address = 'mi98Z9brJ3TgaKsmvXatuRahbFRUFKRUdR';
+const amount = 10;
+const withdrawal = await authClient.withdrawCrypto({
+  currency,
+  address,
+  amount,
+});
+```
+
 - `post`
 
 ```javascript
