@@ -1,5 +1,6 @@
 const assert = require('assert');
 const nock = require('nock');
+const Promise = require('bluebird');
 
 const { PublicClient } = require('../index.js');
 const publicClient = new PublicClient();
@@ -65,6 +66,45 @@ suite('PublicClient', () => {
           done();
         })
         .catch(error => assert.fail(error));
+    });
+
+    test('process 2xx response (with callback)', () => {
+      const symbol = 'btcusd';
+      const uri = 'v1/pubticker/' + symbol;
+      const response = {
+        ask: '977.59',
+        bid: '977.35',
+        last: '977.65',
+        volume: {
+          BTC: '2210.505328803',
+          USD: '2135477.463379586263',
+          timestamp: 1483018200000,
+        },
+      };
+      nock(EXCHANGE_API_URL)
+        .get('/' + uri)
+        .times(2)
+        .reply(200, response);
+
+      const cbreq = new Promise((resolve, reject) => {
+        const callback = (error, data) => {
+          if (error) {
+            reject(error);
+          } else {
+            assert.deepStrictEqual(data, response);
+            resolve(data);
+          }
+        };
+        publicClient.cb('request', callback, { uri });
+      });
+
+      const preq = publicClient
+        .request({ uri })
+        .then(data => {
+          assert.deepStrictEqual(data, response);
+        })
+        .catch(error => assert.fail(error));
+      return Promise.all([cbreq, preq]);
     });
 
     test('handles 3xx response', done => {
