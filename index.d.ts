@@ -9,17 +9,20 @@ declare module 'gemini-node-api' {
 
   export type GetOptions = {
     uri: string;
-    qs?: JSONObject;
-  };
+  } & JSONObject;
 
   export type PostOptions = {
     request: string;
-  };
+  } & JSONObject;
 
   export type RequestOptions = {
     method: 'GET' | 'POST';
     headers?: JSONObject;
   } & GetOptions;
+
+  export type CBOptions = {
+    _method: string;
+  } & JSONObject;
 
   export type SymbolFilter = {
     symbol?: string;
@@ -326,7 +329,7 @@ declare module 'gemini-node-api' {
 
     request(options: RequestOptions): Promise<RequestResponse>;
 
-    cb(method: string, callback: callback<any>, options?: JSONObject);
+    cb(options: CBOptions, callback: callback<any>);
 
     getSymbols(): Promise<string[]>;
 
