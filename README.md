@@ -111,6 +111,8 @@ publicClient
 - `cb`
 
 ```javascript
+const _method = 'getTicker';
+const symbol = 'bchusd';
 const callback = (error, data) => {
   if (error) {
     console.error(error);
@@ -118,7 +120,7 @@ const callback = (error, data) => {
     console.info(data);
   }
 };
-publicClient.cb('getTicker', callback, { symbol: 'bchusd' });
+publicClient.cb({ _method, symbol }, callback);
 ```
 
 ### AuthenticatedClient
@@ -281,6 +283,7 @@ const volume = await authClient.post({ request: '/v1/tradevolume' });
 - `cb`
 
 ```javascript
+const _method = 'getNotionalVolume';
 const callback = (error, data) => {
   if (error) {
     console.error(error);
@@ -288,7 +291,7 @@ const callback = (error, data) => {
     console.info(data);
   }
 };
-authClient.cb('getNotionalVolume', callback);
+authClient.cb({ _method }, callback);
 ```
 
 ### SignRequest
