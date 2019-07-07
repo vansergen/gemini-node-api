@@ -109,7 +109,12 @@ suite('PublicClient', () => {
 
     test('handles 3xx response', done => {
       const uri = 'v1/symbols';
-      const response = { error: 'some error' };
+      const response = {
+        result: 'error',
+        reason: 'BadNonce',
+        message:
+          'Out-of-sequence nonce <1234> precedes previously used nonce <2345>',
+      };
       nock(EXCHANGE_API_URL)
         .get('/' + uri)
         .times(1)
@@ -119,16 +124,21 @@ suite('PublicClient', () => {
         .request({ uri })
         .then(() => assert.fail('Should have thrown an error'))
         .catch(error => {
-          assert.deepStrictEqual(error.message, '302 - {"error":"some error"}');
-          assert.deepStrictEqual(error.statusCode, 302);
-          assert.deepStrictEqual(error.error, response);
+          assert.deepStrictEqual(error.message, response.message);
+          assert.deepStrictEqual(error.reason, response.reason);
+          assert.deepStrictEqual(error.result, response.result);
           done();
         });
     });
 
     test('handles 4xx response', done => {
       const uri = 'v1/symbols';
-      const response = { error: 'some error' };
+      const response = {
+        result: 'error',
+        reason: 'AuctionNotOpen',
+        message:
+          'Failed to place an auction-only order because there is no current auction open for this symbol',
+      };
       nock(EXCHANGE_API_URL)
         .get('/' + uri)
         .times(1)
@@ -138,28 +148,32 @@ suite('PublicClient', () => {
         .request({ uri })
         .then(() => assert.fail('Should have thrown an error'))
         .catch(error => {
-          assert.deepStrictEqual(error.message, '400 - {"error":"some error"}');
-          assert.deepStrictEqual(error.statusCode, 400);
-          assert.deepStrictEqual(error.error, response);
+          assert.deepStrictEqual(error.message, response.message);
+          assert.deepStrictEqual(error.reason, response.reason);
+          assert.deepStrictEqual(error.result, response.result);
           done();
         });
     });
 
     test('handles 5xx response', done => {
       const uri = 'v1/symbols';
-      const response = { error: 'some error' };
+      const response = {
+        result: 'error',
+        reason: 'System',
+        message: 'We are experiencing technical issues',
+      };
       nock(EXCHANGE_API_URL)
         .get('/' + uri)
         .times(1)
-        .reply(504, response);
+        .reply(502, response);
 
       publicClient
         .request({ uri })
         .then(() => assert.fail('Should have thrown an error'))
         .catch(error => {
-          assert.deepStrictEqual(error.message, '504 - {"error":"some error"}');
-          assert.deepStrictEqual(error.statusCode, 504);
-          assert.deepStrictEqual(error.error, response);
+          assert.deepStrictEqual(error.message, response.message);
+          assert.deepStrictEqual(error.reason, response.reason);
+          assert.deepStrictEqual(error.result, response.result);
           done();
         });
     });
