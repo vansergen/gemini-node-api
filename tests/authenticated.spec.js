@@ -115,7 +115,7 @@ suite('AuthenticatedClient', () => {
     const side = 'buy';
     const moc = true;
     const ioc = false;
-    const fok = true;
+    const fok = false;
     const ao = false;
     const ioi = false;
     const type = 'exchange limit';
@@ -133,7 +133,7 @@ suite('AuthenticatedClient', () => {
       price,
       side,
       type,
-      options: ['maker-or-cancel', 'fill-or-kill'],
+      options: ['maker-or-cancel'],
       nonce,
     };
     const response = {
