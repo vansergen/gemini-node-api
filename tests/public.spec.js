@@ -95,7 +95,7 @@ suite('PublicClient', () => {
             resolve(data);
           }
         };
-        publicClient.cb('request', callback, { uri });
+        publicClient.cb({ _method: 'request', uri }, callback);
       });
 
       const preq = publicClient

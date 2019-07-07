@@ -18,9 +18,9 @@ suite('AuthenticatedClient', () => {
     try {
       new AuthenticatedClient({ key });
     } catch (error) {
-      if (error.message === '`options` is missing a required property`') {
-        done();
-      }
+      const message = '`options` is missing a required property: `secret`';
+      assert.deepStrictEqual(error.message, message);
+      done();
     }
     assert.fail();
   });
@@ -94,7 +94,7 @@ suite('AuthenticatedClient', () => {
           resolve(data);
         }
       };
-      authClient.cb('post', callback, payload);
+      authClient.cb({ _method: 'post', ...payload }, callback);
     });
 
     const preq = authClient
