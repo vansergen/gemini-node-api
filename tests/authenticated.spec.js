@@ -115,7 +115,7 @@ suite('AuthenticatedClient', () => {
     const side = 'buy';
     const moc = true;
     const ioc = false;
-    const fok = true;
+    const fok = false;
     const ao = false;
     const ioi = false;
     const type = 'exchange limit';
@@ -133,7 +133,7 @@ suite('AuthenticatedClient', () => {
       price,
       side,
       type,
-      options: ['maker-or-cancel', 'fill-or-kill'],
+      options: ['maker-or-cancel'],
       nonce,
     };
     const response = {
@@ -234,6 +234,160 @@ suite('AuthenticatedClient', () => {
 
     client
       .newOrder({ amount, price, side })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
+  test('.buy() (ignores `side`)', done => {
+    const symbol = 'btcusd';
+    const client_order_id = '20190110-4738721';
+    const amount = 5;
+    const min_amount = 1;
+    const price = 3633.0;
+    const side = 'buy';
+    const moc = true;
+    const ioc = false;
+    const fok = false;
+    const ao = false;
+    const ioi = false;
+    const type = 'exchange limit';
+
+    const request = '/v1/order/new';
+    const nonce = 1;
+    authClient.nonce = () => nonce;
+
+    const payload = {
+      request,
+      client_order_id,
+      symbol,
+      amount,
+      min_amount,
+      price,
+      side,
+      type,
+      options: ['maker-or-cancel'],
+      nonce,
+    };
+    const response = {
+      order_id: '106817811',
+      id: '106817811',
+      symbol: 'btcusd',
+      exchange: 'gemini',
+      avg_execution_price: '3632.8508430064554',
+      side: 'buy',
+      type: 'exchange limit',
+      timestamp: '1547220404',
+      timestampms: 1547220404836,
+      is_live: true,
+      is_cancelled: false,
+      is_hidden: false,
+      was_forced: false,
+      executed_amount: '3.7567928949',
+      remaining_amount: '1.2432071051',
+      client_order_id: '20190110-4738721',
+      options: [],
+      price: '3633.00',
+      original_amount: '5',
+    };
+    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
+      .post(request)
+      .times(1)
+      .reply(200, response);
+
+    authClient
+      .buy({
+        symbol,
+        client_order_id,
+        amount,
+        min_amount,
+        price,
+        side: 'sell',
+        moc,
+        ioc,
+        fok,
+        ao,
+        ioi,
+      })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
+  test('.sell() (ignores `side`)', done => {
+    const symbol = 'btcusd';
+    const client_order_id = '20190110-4738721';
+    const amount = 5;
+    const min_amount = 1;
+    const price = 3633.0;
+    const side = 'sell';
+    const moc = true;
+    const ioc = false;
+    const fok = false;
+    const ao = false;
+    const ioi = false;
+    const type = 'exchange limit';
+
+    const request = '/v1/order/new';
+    const nonce = 1;
+    authClient.nonce = () => nonce;
+
+    const payload = {
+      request,
+      client_order_id,
+      symbol,
+      amount,
+      min_amount,
+      price,
+      side,
+      type,
+      options: ['maker-or-cancel'],
+      nonce,
+    };
+    const response = {
+      order_id: '106817811',
+      id: '106817811',
+      symbol: 'btcusd',
+      exchange: 'gemini',
+      avg_execution_price: '3632.8508430064554',
+      side: 'buy',
+      type: 'exchange limit',
+      timestamp: '1547220404',
+      timestampms: 1547220404836,
+      is_live: true,
+      is_cancelled: false,
+      is_hidden: false,
+      was_forced: false,
+      executed_amount: '3.7567928949',
+      remaining_amount: '1.2432071051',
+      client_order_id: '20190110-4738721',
+      options: [],
+      price: '3633.00',
+      original_amount: '5',
+    };
+    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
+      .post(request)
+      .times(1)
+      .reply(200, response);
+
+    authClient
+      .sell({
+        symbol,
+        client_order_id,
+        amount,
+        min_amount,
+        price,
+        side: 'buy',
+        moc,
+        ioc,
+        fok,
+        ao,
+        ioi,
+      })
       .then(data => {
         assert.deepStrictEqual(data, response);
         done();

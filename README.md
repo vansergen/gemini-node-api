@@ -147,6 +147,24 @@ const order = await authClient.newOrder({
 });
 ```
 
+- [`buy`](https://docs.gemini.com/rest-api/#new-order)
+
+```javascript
+const symbol = 'zecltc';
+const amount = 1;
+const price = 0.9;
+const order = await authClient.buy({ symbol, amount, price });
+```
+
+- [`sell`](https://docs.gemini.com/rest-api/#new-order)
+
+```javascript
+const symbol = 'zecltc';
+const amount = 0.99;
+const price = 0.99;
+const order = await authClient.sell({ symbol, amount, price });
+```
+
 - [`cancelOrder`](https://docs.gemini.com/rest-api/#cancel-order)
 
 ```javascript

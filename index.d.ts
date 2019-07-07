@@ -42,19 +42,22 @@ declare module 'gemini-node-api' {
     include_indicative?: boolean;
   } & SymbolFilter;
 
-  export type OrderOptions = {
+  export type BasicOrderOptions = {
     client_order_id?: string;
     symbol?: string;
     amount: number;
     min_amount?: number;
     price: number;
-    side: 'buy' | 'sell';
     moc?: boolean;
     ioc?: boolean;
     fok?: boolean;
     ao?: boolean;
     ioi?: boolean;
   };
+
+  export type OrderOptions = {
+    side: 'buy' | 'sell';
+  } & BasicOrderOptions;
 
   export type OrderID = {
     order_id: number;
@@ -346,6 +349,10 @@ declare module 'gemini-node-api' {
     post(options: PostOptions): Promise<RequestResponse>;
 
     newOrder(options: OrderOptions): Promise<OrderStatus>;
+
+    buy(options: BasicOrderOptions): Promise<OrderStatus>;
+
+    sell(options: BasicOrderOptions): Promise<OrderStatus>;
 
     cancelOrder(options: OrderID): Promise<OrderStatus>;
 
