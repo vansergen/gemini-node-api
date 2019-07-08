@@ -3,7 +3,7 @@ const nock = require('nock');
 const Promise = require('bluebird');
 
 const { AuthenticatedClient, SignRequest } = require('../index.js');
-const { API_LIMIT, EXCHANGE_API_URL } = require('../lib/utilities');
+const { API_LIMIT, EXCHANGE_API_URL } = require('../lib/utilities.js');
 
 const key = 'Gemini-API-KEY';
 const secret = 'Gemini-API-SECRET';
