@@ -1,4 +1,5 @@
 import * as Promise from 'bluebird';
+import { EventEmitter } from 'events';
 
 declare module 'gemini-node-api' {
   export type callback<T> = (error: any, data: T) => void;
@@ -322,6 +323,14 @@ declare module 'gemini-node-api' {
 
   export type AuthenticatedClientOptions = Auth & PublicClientOptions;
 
+  export type WebsocketClientOptions = {
+    symbol?: string;
+    sandbox?: boolean;
+    api_uri?: string;
+    key?: string;
+    secret?: string;
+  };
+
   export class PublicClient {
     constructor(options?: PublicClientOptions);
 
@@ -384,6 +393,15 @@ declare module 'gemini-node-api' {
     withdrawGUSD(options: WithdrawGUSDFilter): Promise<GUSDWithdrawal>;
 
     heartbeat(): Promise<Heartbeat>;
+  }
+
+  export class WebsocketClient extends EventEmitter {
+    constructor(options?: WebsocketClientOptions);
+
+    on(event: 'message', listener: (data: any, market: any) => void): this;
+    on(event: 'error', listener: (error: any, market: any) => void): this;
+    on(event: 'open', listener: (market: any) => void): this;
+    on(event: 'close', listener: (market: any) => void): this;
   }
 
   export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
