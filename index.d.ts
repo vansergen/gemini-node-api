@@ -94,6 +94,16 @@ declare module 'gemini-node-api' {
     amount: number;
   };
 
+  export type WSMarketOptions = {
+    symbol?: string;
+    heartbeat?: boolean;
+    top_of_book?: boolean;
+    bids?: boolean;
+    offers?: boolean;
+    trades?: boolean;
+    auctions?: boolean;
+  };
+
   export type Auth = {
     key: string;
     secret: string;
@@ -397,6 +407,8 @@ declare module 'gemini-node-api' {
 
   export class WebsocketClient extends EventEmitter {
     constructor(options?: WebsocketClientOptions);
+
+    connectMarket(options?: WSMarketOptions): void;
 
     on(event: 'message', listener: (data: any, market: any) => void): this;
     on(event: 'error', listener: (error: any, market: any) => void): this;
