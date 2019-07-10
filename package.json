@@ -15,7 +15,8 @@
     "@types/bluebird": "^3.5.27",
     "bluebird": "^3.5.5",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "request-promise": "^4.2.4",
+    "ws": "^7.0.1"
   },
   "devDependencies": {
     "eslint": "^6.0.1",
