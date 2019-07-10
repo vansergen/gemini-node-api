@@ -315,6 +315,33 @@ websocket.on('message', (message, market) => {
 });
 ```
 
+- [`connectMarket`](https://docs.gemini.com/websocket-api/#market-data)
+
+```javascript
+const heartbeat = true;
+const top_of_book = false;
+const bids = true;
+const offers = true;
+const trades = true;
+const auctions = false;
+const symbol = 'zecltc';
+websocket.on('message', (message, market) => {
+  if (market === symbol) {
+    console.log('New message:', message);
+  }
+});
+websocket.connectMarket({
+  symbol,
+  heartbeat,
+  top_of_book,
+  bids,
+  offers,
+  trades,
+  auctions,
+});
+websocket.connectMarket({ symbol: 'btcusd' });
+```
+
 ### SignRequest
 
 ```javascript
