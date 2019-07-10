@@ -294,6 +294,27 @@ const callback = (error, data) => {
 authClient.cb({ _method }, callback);
 ```
 
+### WebsocketClient
+
+```javascript
+const { WebsocketClient } = require('gemini-node-api');
+const key = 'gemini-api-key';
+const secret = 'gemini-api-secret';
+const websocket = new WebsocketClient({ key, secret });
+websocket.on('error', (error, market) => {
+  console.error(error);
+});
+websocket.on('open', market => {
+  console.log('Open connection: ', market);
+});
+websocket.on('close', market => {
+  console.log('Closed connection: ', market);
+});
+websocket.on('message', (message, market) => {
+  console.info(message);
+});
+```
+
 ### SignRequest
 
 ```javascript
