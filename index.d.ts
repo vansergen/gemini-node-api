@@ -420,6 +420,8 @@ declare module 'gemini-node-api' {
 
     disconnectMarket(options?: SymbolFilter): void;
 
+    disconnectOrders(): void;
+
     on(event: 'message', listener: (data: any, market: any) => void): this;
     on(event: 'error', listener: (error: any, market: any) => void): this;
     on(event: 'open', listener: (market: any) => void): this;
