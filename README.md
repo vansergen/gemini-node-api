@@ -360,6 +360,17 @@ websocket.on('message', (message, market) => {
 websocket.connectOrders({ symbolFilter, apiSessionFilter, eventTypeFilter });
 ```
 
+- [`disconnectOrders`](https://docs.gemini.com/websocket-api/#order-events)
+
+```javascript
+websocket.once('close', market => {
+  if (market === 'orders') {
+    console.log('Closed');
+  }
+});
+websocket.disconnectOrders();
+```
+
 ### SignRequest
 
 ```javascript
