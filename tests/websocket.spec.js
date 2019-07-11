@@ -173,4 +173,19 @@ suite('WebsocketClient', () => {
     });
     client.connectOrders({ symbolFilter, eventTypeFilter, apiSessionFilter });
   });
+
+  test('disconnectOrders()', done => {
+    const server = wss({ port, key, secret });
+    const client = new WebsocketClient({ api_uri, key, secret });
+    client.once('open', _symbol => {
+      assert.deepStrictEqual(_symbol, 'orders');
+      client.disconnectOrders({ symbol });
+    });
+    client.once('close', _symbol => {
+      assert.deepStrictEqual(_symbol, 'orders');
+      server.close();
+      done();
+    });
+    client.connectOrders();
+  });
 });
