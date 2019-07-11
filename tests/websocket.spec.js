@@ -143,4 +143,34 @@ suite('WebsocketClient', () => {
     });
     client.connectMarket();
   });
+
+  test('connectOrders()', done => {
+    const server = wss({ port, key, secret });
+    const client = new WebsocketClient({ api_uri, key, secret });
+    client.once('message', (message, type) => {
+      assert.deepStrictEqual(message.socket_sequence, 0);
+      assert.deepStrictEqual(type, 'orders');
+      server.close();
+      done();
+    });
+    client.connectOrders();
+  });
+
+  test('connectOrders() (with extra parameters)', done => {
+    const symbolFilter = ['btcusd', 'ethbtc'];
+    const eventTypeFilter = ['initial', 'fill', 'closed'];
+    const apiSessionFilter = ['UI', key];
+    const server = wss({ port, key, secret });
+    const client = new WebsocketClient({ api_uri, key, secret });
+    client.once('message', (message, type) => {
+      assert.deepStrictEqual(message.socket_sequence, 0);
+      assert.deepStrictEqual(type, 'orders');
+      assert.deepStrictEqual(message.symbolFilter, symbolFilter);
+      assert.deepStrictEqual(message.eventTypeFilter, eventTypeFilter);
+      assert.deepStrictEqual(message.apiSessionFilter, apiSessionFilter);
+      server.close();
+      done();
+    });
+    client.connectOrders({ symbolFilter, eventTypeFilter, apiSessionFilter });
+  });
 });
