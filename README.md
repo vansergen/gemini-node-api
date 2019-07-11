@@ -346,6 +346,20 @@ websocket.once('close', market => console.log('Closed:', market));
 websocket.disconnectMarket({ symbol });
 ```
 
+- [`connectOrders`](https://docs.gemini.com/websocket-api/#order-events)
+
+```javascript
+const symbolFilter = 'zecltc';
+const apiSessionFilter = 'UI';
+const eventTypeFilter = ['accepted', 'rejected'];
+websocket.on('message', (message, market) => {
+  if (market === 'orders') {
+    console.log('New message:', message);
+  }
+});
+websocket.connectOrders({ symbolFilter, apiSessionFilter, eventTypeFilter });
+```
+
 ### SignRequest
 
 ```javascript
