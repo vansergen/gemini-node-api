@@ -104,6 +104,12 @@ declare module 'gemini-node-api' {
     auctions?: boolean;
   };
 
+  export type WSOrderOptions = {
+    symbolFilter?: string | string[];
+    apiSessionFilter?: string | string[];
+    eventTypeFilter?: string | string[];
+  };
+
   export type Auth = {
     key: string;
     secret: string;
@@ -409,6 +415,8 @@ declare module 'gemini-node-api' {
     constructor(options?: WebsocketClientOptions);
 
     connectMarket(options?: WSMarketOptions): void;
+
+    connectOrders(options?: WSOrderOptions): void;
 
     disconnectMarket(options?: SymbolFilter): void;
 
