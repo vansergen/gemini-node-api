@@ -325,11 +325,7 @@ const offers = true;
 const trades = true;
 const auctions = false;
 const symbol = 'zecltc';
-websocket.on('message', (message, market) => {
-  if (market === symbol) {
-    console.log('New message:', message);
-  }
-});
+websocket.on('open', market => console.log('Open:', market));
 websocket.connectMarket({
   symbol,
   heartbeat,
@@ -340,6 +336,14 @@ websocket.connectMarket({
   auctions,
 });
 websocket.connectMarket({ symbol: 'btcusd' });
+```
+
+- [`disconnectMarket`](https://docs.gemini.com/websocket-api/#market-data)
+
+```javascript
+const symbol = 'zecltc';
+websocket.once('close', market => console.log('Closed:', market));
+websocket.disconnectMarket({ symbol });
 ```
 
 ### SignRequest

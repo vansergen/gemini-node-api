@@ -113,4 +113,34 @@ suite('WebsocketClient', () => {
     client.connectMarket({ symbol });
     client.connectMarket();
   });
+
+  test('disconnectMarket()', done => {
+    const server = wss({ port });
+    const client = new WebsocketClient({ api_uri });
+    client.once('open', _symbol => {
+      assert.deepStrictEqual(_symbol, symbol);
+      client.disconnectMarket({ symbol });
+    });
+    client.once('close', _symbol => {
+      assert.deepStrictEqual(_symbol, symbol);
+      server.close();
+      done();
+    });
+    client.connectMarket({ symbol });
+  });
+
+  test('disconnectMarket() (with default symbol)', done => {
+    const server = wss({ port });
+    const client = new WebsocketClient({ api_uri, symbol });
+    client.once('open', _symbol => {
+      assert.deepStrictEqual(_symbol, symbol);
+      client.disconnectMarket();
+    });
+    client.once('close', _symbol => {
+      assert.deepStrictEqual(_symbol, symbol);
+      server.close();
+      done();
+    });
+    client.connectMarket();
+  });
 });
