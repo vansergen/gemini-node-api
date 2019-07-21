@@ -36,6 +36,14 @@ const v = 'v2';
 const tickerV2 = await publicClient.getTicker({ symbol, v });
 ```
 
+- [`getCandles`](https://docs.gemini.com/rest-api/#candles)
+
+```javascript
+const symbol = 'zecltc';
+const time_frame = '30m';
+const candles = await publicClient.getCandles({ symbol, time_frame });
+```
+
 - [`getOrderBook`](https://docs.gemini.com/rest-api/#current-order-book)
 
 ```javascript

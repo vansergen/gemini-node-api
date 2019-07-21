@@ -392,6 +392,52 @@ suite('PublicClient', () => {
       })
       .catch(error => assert.fail(error));
   });
+
+  test('.getCandles()', done => {
+    const symbol = 'btcusd';
+    const time_frame = '5m';
+    const uri = '/v2/candles/' + symbol + '/' + time_frame;
+    const response = [
+      [1559755800000, 7781.6, 7820.23, 7776.56, 7819.39, 34.7624802159],
+      [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059],
+    ];
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .times(1)
+      .reply(200, response);
+
+    publicClient
+      .getCandles({ symbol, time_frame })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
+  test('.getCandles() (with default symbol)', done => {
+    const symbol = 'zecbtc';
+    const time_frame = '1day';
+    const uri = '/v2/candles/' + symbol + '/' + time_frame;
+    const response = [
+      [1563720060000, 10442.33, 10442.33, 10424.77, 10424.77, 1.16937638],
+      [1563720000000, 10449.62, 10449.62, 10442.33, 10442.33, 0.00503489],
+    ];
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .times(1)
+      .reply(200, response);
+
+    const client = new PublicClient({ symbol });
+    client
+      .getCandles()
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
   test('.getOrderBook()', done => {
     const symbol = 'btcusd';
     const uri = '/v1/book/' + symbol;
