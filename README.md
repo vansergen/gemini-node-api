@@ -28,6 +28,12 @@ const symbols = await publicClient.getSymbols();
 ```javascript
 const symbol = 'zecltc';
 const ticker = await publicClient.getTicker({ symbol });
+/**
+ * for V2
+ * @see https://docs.gemini.com/rest-api/#ticker-v2
+ */
+const v = 'v2';
+const tickerV2 = await publicClient.getTicker({ symbol, v });
 ```
 
 - [`getOrderBook`](https://docs.gemini.com/rest-api/#current-order-book)

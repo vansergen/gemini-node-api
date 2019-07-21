@@ -124,9 +124,7 @@ suite('PublicClient', () => {
         .request({ uri })
         .then(() => assert.fail('Should have thrown an error'))
         .catch(error => {
-          assert.deepStrictEqual(error.message, response.message);
-          assert.deepStrictEqual(error.reason, response.reason);
-          assert.deepStrictEqual(error.result, response.result);
+          assert.deepStrictEqual(error, response);
           done();
         });
     });
@@ -148,9 +146,7 @@ suite('PublicClient', () => {
         .request({ uri })
         .then(() => assert.fail('Should have thrown an error'))
         .catch(error => {
-          assert.deepStrictEqual(error.message, response.message);
-          assert.deepStrictEqual(error.reason, response.reason);
-          assert.deepStrictEqual(error.result, response.result);
+          assert.deepStrictEqual(error, response);
           done();
         });
     });
@@ -171,9 +167,7 @@ suite('PublicClient', () => {
         .request({ uri })
         .then(() => assert.fail('Should have thrown an error'))
         .catch(error => {
-          assert.deepStrictEqual(error.message, response.message);
-          assert.deepStrictEqual(error.reason, response.reason);
-          assert.deepStrictEqual(error.result, response.result);
+          assert.deepStrictEqual(error, response);
           done();
         });
     });
@@ -181,7 +175,7 @@ suite('PublicClient', () => {
 
   test('.get()', done => {
     const symbol = 'btcusd';
-    const uri = 'v1/auction/' + symbol;
+    const uri = '/v1/auction/' + symbol;
     const response = {
       closed_until_ms: 1474567602895,
       last_auction_price: '629.92',
@@ -192,7 +186,7 @@ suite('PublicClient', () => {
       next_auction_ms: 1474567782895,
     };
     nock(EXCHANGE_API_URL)
-      .get('/' + uri)
+      .get(uri)
       .times(1)
       .reply(200, response);
 
@@ -265,6 +259,58 @@ suite('PublicClient', () => {
       .catch(error => assert.fail(error));
   });
 
+  test('.getTicker() (v2)', done => {
+    const symbol = 'btcusd';
+    const uri = '/v2/ticker/' + symbol;
+    const response = {
+      symbol: 'BTCUSD',
+      open: '9121.76',
+      high: '9440.66',
+      low: '9106.51',
+      close: '9347.66',
+      changes: [
+        '9365.1',
+        '9386.16',
+        '9373.41',
+        '9322.56',
+        '9268.89',
+        '9265.38',
+        '9245',
+        '9231.43',
+        '9235.88',
+        '9265.8',
+        '9295.18',
+        '9295.47',
+        '9310.82',
+        '9335.38',
+        '9344.03',
+        '9261.09',
+        '9265.18',
+        '9282.65',
+        '9260.01',
+        '9225',
+        '9159.5',
+        '9150.81',
+        '9118.6',
+        '9148.01',
+      ],
+      bid: '9345.70',
+      ask: '9347.67',
+    };
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .times(1)
+      .reply(200, response);
+
+    publicClient
+      .getTicker({ symbol, v: 'v2' })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
+
   test('.getTicker() (with default symbol)', done => {
     const symbol = 'zecbtc';
     const uri = '/v1/pubticker/' + symbol;
@@ -294,6 +340,58 @@ suite('PublicClient', () => {
       .catch(error => assert.fail(error));
   });
 
+  test('.getTicker() (v2 with default symbol)', done => {
+    const symbol = 'zecbtc';
+    const uri = '/v2/ticker/' + symbol;
+    const response = {
+      symbol: 'zecbtc',
+      open: '9121.76',
+      high: '9440.66',
+      low: '9106.51',
+      close: '9347.66',
+      changes: [
+        '9365.1',
+        '9386.16',
+        '9373.41',
+        '9322.56',
+        '9268.89',
+        '9265.38',
+        '9245',
+        '9231.43',
+        '9235.88',
+        '9265.8',
+        '9295.18',
+        '9295.47',
+        '9310.82',
+        '9335.38',
+        '9344.03',
+        '9261.09',
+        '9265.18',
+        '9282.65',
+        '9260.01',
+        '9225',
+        '9159.5',
+        '9150.81',
+        '9118.6',
+        '9148.01',
+      ],
+      bid: '9345.70',
+      ask: '9347.67',
+    };
+    nock(EXCHANGE_API_URL)
+      .get(uri)
+      .times(1)
+      .reply(200, response);
+
+    const client = new PublicClient({ symbol });
+    client
+      .getTicker({ v: 'v2' })
+      .then(data => {
+        assert.deepStrictEqual(data, response);
+        done();
+      })
+      .catch(error => assert.fail(error));
+  });
   test('.getOrderBook()', done => {
     const symbol = 'btcusd';
     const uri = '/v1/book/' + symbol;
