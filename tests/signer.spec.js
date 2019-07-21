@@ -21,6 +21,6 @@ suite('SignRequest', () => {
         '51f2d46b8d13add5414bb73d72c1e1e1d3e1f6f8ed411960d860510df3219d0ed3514578d14f18cd1340109bf0c0385b',
     };
     const signtature = signer(auth, options);
-    assert.deepEqual(signtature, expectedSignature);
+    assert.deepStrictEqual(signtature, expectedSignature);
   });
 });
