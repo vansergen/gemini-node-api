@@ -29,6 +29,10 @@ declare module 'gemini-node-api' {
     symbol?: string;
   };
 
+  export type TickerFilter = SymbolFilter & {
+    v?: 'v1' | 'v2';
+  };
+
   export type BookFilter = {
     limit_bids?: number;
     limit_asks?: number;
@@ -121,13 +125,25 @@ declare module 'gemini-node-api' {
     | JSONObject[][]
     | string[];
 
-  export type Ticker = {
+  export type TickerV1 = {
     bid: string;
     ask: string;
     last: string;
     volume: JSONObject;
   };
 
+  export type TickerV2 = {
+    symbol: string;
+    open: string;
+    high: string;
+    low: string;
+    close: string;
+    changes: string[];
+    bid: string;
+    ask: string;
+  };
+
+  export type Ticker = TickerV1 | TickerV2;
   export type BookEntry = {
     price: string;
     amount: string;
@@ -358,7 +374,7 @@ declare module 'gemini-node-api' {
 
     getSymbols(): Promise<string[]>;
 
-    getTicker(options?: SymbolFilter): Promise<Ticker>;
+    getTicker(options?: TickerFilter): Promise<Ticker>;
 
     getOrderBook(options?: BookFilter): Promise<OrderBook>;
 
