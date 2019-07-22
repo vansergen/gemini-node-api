@@ -27,28 +27,37 @@ module.exports = ({ port, key, secret }) => {
   };
 
   const ws = new wss({ port, verifyClient });
+
   ws.on('connection', (socket, req) => {
     const options = {};
-    const [, , type, path] = req.url.split('/');
-    const [symbol, query] = path.split('?');
-    const qs = querystring.parse(query);
-    if (type === 'marketdata') {
-      for (let key of Object.keys(qs)) {
-        qs[key] = qs[key] === 'true' ? true : false;
+    const [, v, type, path] = req.url.split('/');
+
+    if (v === 'v1') {
+      const [symbol, query] = path.split('?');
+      const qs = querystring.parse(query);
+      if (type === 'marketdata') {
+        for (let key of Object.keys(qs)) {
+          qs[key] = qs[key] === 'true' ? true : false;
+        }
       }
+      Object.assign(options, qs);
+      for (let i = 0; i < messageLimit; i++) {
+        socket.send(JSON.stringify({ symbol, socket_sequence: i, ...options }));
+      }
+      socket.send(
+        JSON.stringify({
+          symbol,
+          last: true,
+          socket_sequence: messageLimit,
+          ...options,
+        })
+      );
     }
-    Object.assign(options, qs);
-    for (let i = 0; i < messageLimit; i++) {
-      socket.send(JSON.stringify({ symbol, socket_sequence: i, ...options }));
+
+    if (v === 'v2') {
+      socket.on('message', message => socket.send(message));
     }
-    socket.send(
-      JSON.stringify({
-        symbol,
-        last: true,
-        socket_sequence: messageLimit,
-        ...options,
-      })
-    );
   });
+
   return ws;
 };
