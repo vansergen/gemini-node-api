@@ -118,6 +118,11 @@ declare module 'gemini-node-api' {
     eventTypeFilter?: string | string[];
   };
 
+  export type Subscription = {
+    name: string;
+    symbols?: string[];
+  };
+
   export type Auth = {
     key: string;
     secret: string;
@@ -442,16 +447,24 @@ declare module 'gemini-node-api' {
 
     connectMarket(options?: WSMarketOptions): void;
 
+    connect(): void;
+
     connectOrders(options?: WSOrderOptions): void;
 
     disconnectMarket(options?: SymbolFilter): void;
 
+    disconnect(): void;
+
     disconnectOrders(): void;
 
-    on(event: 'message', listener: (data: any, market: any) => void): this;
-    on(event: 'error', listener: (error: any, market: any) => void): this;
-    on(event: 'open', listener: (market: any) => void): this;
-    on(event: 'close', listener: (market: any) => void): this;
+    subscribe(options: Subscription | Subscription[]): void;
+
+    unsubscribe(options: Subscription | Subscription[]): void;
+
+    on(event: 'message', listener: (data: any, market: string) => void): this;
+    on(event: 'error', listener: (error: any, market: string) => void): this;
+    on(event: 'open', listener: (market: string) => void): this;
+    on(event: 'close', listener: (market: string) => void): this;
   }
 
   export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
