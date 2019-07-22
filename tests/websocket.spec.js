@@ -188,4 +188,66 @@ suite('WebsocketClient', () => {
     });
     client.connectOrders();
   });
+
+  test('connect()', done => {
+    const server = wss({ port });
+    const client = new WebsocketClient({ api_uri });
+    client.once('open', _symbol => {
+      assert.deepStrictEqual(_symbol, 'v2');
+      server.close();
+      done();
+    });
+    client.connect();
+  });
+
+  test('disconnect()', done => {
+    const server = wss({ port });
+    const client = new WebsocketClient({ api_uri });
+    client.once('open', _symbol => {
+      assert.deepStrictEqual(_symbol, 'v2');
+      client.disconnect();
+    });
+    client.once('close', _symbol => {
+      assert.deepStrictEqual(_symbol, 'v2');
+      server.close();
+      done();
+    });
+    client.connect();
+  });
+
+  test('subscribe()', done => {
+    const server = wss({ port });
+    const subscriptions = [{ name: 'candles_1m', symbols: ['BTCUSD'] }];
+    const client = new WebsocketClient({ api_uri });
+    client.once('open', _symbol => {
+      assert.deepStrictEqual(_symbol, 'v2');
+      client.subscribe(subscriptions);
+    });
+    client.on('message', (message, _symbol) => {
+      assert.deepStrictEqual(_symbol, 'v2');
+      assert.deepStrictEqual('subscribe', message.type);
+      assert.deepStrictEqual(subscriptions, message.subscriptions);
+      server.close();
+      done();
+    });
+    client.connect();
+  });
+
+  test('unsubscribe()', done => {
+    const server = wss({ port });
+    const subscriptions = [{ name: 'candles_1m', symbols: ['BTCUSD'] }];
+    const client = new WebsocketClient({ api_uri });
+    client.once('open', _symbol => {
+      assert.deepStrictEqual(_symbol, 'v2');
+      client.unsubscribe(subscriptions);
+    });
+    client.on('message', (message, _symbol) => {
+      assert.deepStrictEqual(_symbol, 'v2');
+      assert.deepStrictEqual('unsubscribe', message.type);
+      assert.deepStrictEqual(subscriptions, message.subscriptions);
+      server.close();
+      done();
+    });
+    client.connect();
+  });
 });

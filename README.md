@@ -360,6 +360,41 @@ websocket.once('close', market => console.log('Closed:', market));
 websocket.disconnectMarket({ symbol });
 ```
 
+- [`connect`](https://docs.gemini.com/websocket-api/#market-data-version-2)
+
+```javascript
+websocket.on('open', market => console.log('Open:', market));
+websocket.connect();
+```
+
+- [`disconnect`](https://docs.gemini.com/websocket-api/#market-data-version-2)
+
+```javascript
+websocket.once('close', market => console.log('Closed:', market));
+websocket.disconnect();
+```
+
+- [`subscribe`](https://docs.gemini.com/websocket-api/#level-2-data)
+
+```javascript
+const subscriptions = [
+  { name: 'l2', symbols: ['BTCUSD', 'ETHUSD'] },
+  { name: 'candles_1m', symbols: ['BTCUSD'] },
+];
+websocket.on('open', market => {
+  if (market === 'v2') {
+    websocket.subscribe(subscriptions);
+  }
+});
+```
+
+- [`unsubscribe`](https://docs.gemini.com/websocket-api/#unsubscribe)
+
+```javascript
+const subscription = { name: 'l2', symbols: ['BTCUSD', 'ETHUSD'] };
+websocket.unsubscribe(subscription);
+```
+
 - [`connectOrders`](https://docs.gemini.com/websocket-api/#order-events)
 
 ```javascript
