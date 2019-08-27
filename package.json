@@ -16,10 +16,10 @@
     "bluebird": "^3.5.5",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "ws": "^7.1.1"
+    "ws": "^7.1.2"
   },
   "devDependencies": {
-    "eslint": "^6.1.0",
+    "eslint": "^6.2.2",
     "jsdoc": "^3.6.3",
     "mocha": "^6.2.0",
     "nock": "^10.0.6",
