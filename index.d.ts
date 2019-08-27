@@ -80,6 +80,15 @@ declare module 'gemini-node-api' {
     timestamp?: number;
   } & SymbolFilter;
 
+  export type ClearingOrderOptions = {
+    symbol?: string;
+    amount: number;
+    price: number;
+    side: 'buy' | 'sell';
+    expires_in_hrs: number;
+    counterparty_id?: string;
+  };
+
   export type TransferFilter = {
     timestamp?: number;
     limit_transfers?: number;
@@ -309,6 +318,11 @@ declare module 'gemini-node-api' {
     sell_taker_count: number;
   };
 
+  export type NewClearingOrderResponse = {
+    result: string;
+    clearing_id: string;
+  };
+
   export type Balance = {
     type: 'exchage';
     currency: string;
@@ -428,6 +442,10 @@ declare module 'gemini-node-api' {
     getNotionalVolume(): Promise<NotionalVolume>;
 
     getTradeVolume(): Promise<TradeVolume[][]>;
+
+    newClearingOrder(
+      options: ClearingOrderOptions
+    ): Promise<NewClearingOrderResponse>;
 
     getAvailableBalances(): Promise<Balance[]>;
 

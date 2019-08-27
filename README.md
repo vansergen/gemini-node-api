@@ -238,6 +238,25 @@ const volume = await authClient.getNotionalVolume();
 const volume = await authClient.getTradeVolume();
 ```
 
+- [`newClearingOrder`](https://docs.gemini.com/rest-api/#new-clearing-order)
+
+```javascript
+const counterparty_id = 'OM9VNL1G';
+const expires_in_hrs = 24;
+const symbol = 'btcusd';
+const amount = 100;
+const price = 9500;
+const side = 'buy';
+const order = await authClient.newClearingOrder({
+  counterparty_id,
+  expires_in_hrs,
+  symbol,
+  amount,
+  price,
+  side,
+});
+```
+
 - [`getAvailableBalances`](https://docs.gemini.com/rest-api/#get-available-balances)
 
 ```javascript
