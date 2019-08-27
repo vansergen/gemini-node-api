@@ -89,6 +89,10 @@ declare module 'gemini-node-api' {
     counterparty_id?: string;
   };
 
+  export type ClearingOrderID = {
+    clearing_id: string;
+  };
+
   export type TransferFilter = {
     timestamp?: number;
     limit_transfers?: number;
@@ -323,6 +327,18 @@ declare module 'gemini-node-api' {
     clearing_id: string;
   };
 
+  export type ClearingOrderStatus = {
+    result: 'ok';
+    status:
+      | 'AwaitConfirm'
+      | 'Confirmed'
+      | 'AttemptSettlement'
+      | 'Settled'
+      | 'Expired'
+      | 'Canceled'
+      | 'Not Found';
+  };
+
   export type Balance = {
     type: 'exchage';
     currency: string;
@@ -446,6 +462,10 @@ declare module 'gemini-node-api' {
     newClearingOrder(
       options: ClearingOrderOptions
     ): Promise<NewClearingOrderResponse>;
+
+    getClearingOrderStatus(
+      options: ClearingOrderID
+    ): Promise<ClearingOrderStatus>;
 
     getAvailableBalances(): Promise<Balance[]>;
 

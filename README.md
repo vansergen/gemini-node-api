@@ -257,6 +257,13 @@ const order = await authClient.newClearingOrder({
 });
 ```
 
+- [`getClearingOrderStatus`](https://docs.gemini.com/rest-api/#clearing-order-status)
+
+```javascript
+const clearing_id = 'OM9VNL1G';
+const order = await authClient.getClearingOrderStatus({ clearing_id });
+```
+
 - [`getAvailableBalances`](https://docs.gemini.com/rest-api/#get-available-balances)
 
 ```javascript
