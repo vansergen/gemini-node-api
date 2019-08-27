@@ -339,6 +339,11 @@ declare module 'gemini-node-api' {
       | 'Not Found';
   };
 
+  export type CancelClearingOrderResponse = {
+    result: 'ok';
+    details: string;
+  };
+
   export type Balance = {
     type: 'exchage';
     currency: string;
@@ -466,6 +471,10 @@ declare module 'gemini-node-api' {
     getClearingOrderStatus(
       options: ClearingOrderID
     ): Promise<ClearingOrderStatus>;
+
+    cancelClearingOrder(
+      options: ClearingOrderID
+    ): Promise<CancelClearingOrderResponse>;
 
     getAvailableBalances(): Promise<Balance[]>;
 
