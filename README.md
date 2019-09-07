@@ -271,6 +271,23 @@ const clearing_id = 'OM9VNL1G';
 const order = await authClient.cancelClearingOrder({ clearing_id });
 ```
 
+- [`confirmClearingOrder`](https://docs.gemini.com/rest-api/#confirm-clearing-order)
+
+```javascript
+const clearing_id = 'OM9VNL1G';
+const symbol = 'btcusd';
+const amount = 100;
+const price = 9500;
+const side = 'sell';
+const order = await authClient.confirmClearingOrder({
+  clearing_id,
+  symbol,
+  amount,
+  price,
+  side,
+});
+```
+
 - [`getAvailableBalances`](https://docs.gemini.com/rest-api/#get-available-balances)
 
 ```javascript
