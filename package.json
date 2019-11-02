@@ -22,7 +22,7 @@
   "devDependencies": {
     "eslint": "^6.3.0",
     "jsdoc": "^3.6.3",
-    "mocha": "^6.2.0",
+    "mocha": "^6.2.2",
     "nock": "^11.3.3",
     "prettier": "^1.18.2"
   },
