@@ -1,6 +1,6 @@
 {
   "name": "gemini-node-api",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Gemini Node.js API",
   "main": "index.js",
   "directories": {
@@ -12,18 +12,18 @@
     "node": ">=10.16.3"
   },
   "dependencies": {
-    "@types/bluebird": "^3.5.27",
-    "@types/node": "^12.7.4",
-    "bluebird": "^3.5.5",
+    "@types/bluebird": "^3.5.28",
+    "@types/node": "^12.12.5",
+    "bluebird": "^3.7.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "ws": "^7.1.2"
+    "ws": "^7.2.0"
   },
   "devDependencies": {
-    "eslint": "^6.3.0",
+    "eslint": "^6.6.0",
     "jsdoc": "^3.6.3",
-    "mocha": "^6.2.0",
-    "nock": "^11.3.3",
+    "mocha": "^6.2.2",
+    "nock": "^11.7.0",
     "prettier": "^1.18.2"
   },
   "scripts": {
