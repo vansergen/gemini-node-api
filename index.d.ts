@@ -1,7 +1,7 @@
-import * as Promise from 'bluebird';
-import { EventEmitter } from 'events';
+import * as Promise from "bluebird";
+import { EventEmitter } from "events";
 
-declare module 'gemini-node-api' {
+declare module "gemini-node-api" {
   export type callback<T> = (error: any, data: T) => void;
 
   export type JSONObject = {
@@ -17,24 +17,20 @@ declare module 'gemini-node-api' {
   } & JSONObject;
 
   export type RequestOptions = {
-    method: 'GET' | 'POST';
+    method: "GET" | "POST";
     headers?: JSONObject;
   } & GetOptions;
-
-  export type CBOptions = {
-    _method: string;
-  } & JSONObject;
 
   export type SymbolFilter = {
     symbol?: string;
   };
 
   export type TickerFilter = SymbolFilter & {
-    v?: 'v1' | 'v2';
+    v?: "v1" | "v2";
   };
 
   export type CandlesFilter = SymbolFilter & {
-    time_frame?: '1m' | '5m' | '15m' | '30m' | '1hr' | '6hr' | '1day';
+    time_frame?: "1m" | "5m" | "15m" | "30m" | "1hr" | "6hr" | "1day";
   };
 
   export type BookFilter = {
@@ -68,7 +64,7 @@ declare module 'gemini-node-api' {
   };
 
   export type OrderOptions = {
-    side: 'buy' | 'sell';
+    side: "buy" | "sell";
   } & BasicOrderOptions;
 
   export type OrderID = {
@@ -84,7 +80,7 @@ declare module 'gemini-node-api' {
     symbol?: string;
     amount: number;
     price: number;
-    side: 'buy' | 'sell';
+    side: "buy" | "sell";
     expires_in_hrs: number;
     counterparty_id?: string;
   };
@@ -98,7 +94,7 @@ declare module 'gemini-node-api' {
     symbol?: string;
     amount: number;
     price: number;
-    side: 'buy' | 'sell';
+    side: "buy" | "sell";
   };
 
   export type TransferFilter = {
@@ -195,8 +191,8 @@ declare module 'gemini-node-api' {
     tid: number;
     price: string;
     amount: string;
-    exchange: 'gemini';
-    type: 'buy' | 'sell' | 'auction' | 'block';
+    exchange: "gemini";
+    type: "buy" | "sell" | "auction" | "block";
     broken?: boolean;
   };
 
@@ -222,8 +218,8 @@ declare module 'gemini-node-api' {
     timestampms: number;
     auction_id: number;
     eid: number;
-    event_type: 'indicative' | 'auction';
-    auction_result: 'success' | 'failure';
+    event_type: "indicative" | "auction";
+    auction_result: "success" | "failure";
     auction_price?: string;
     auction_quantity?: string;
     highest_bid_price?: string;
@@ -241,16 +237,16 @@ declare module 'gemini-node-api' {
     order_id: string;
     client_order_id?: string;
     symbol: string;
-    exchange: 'gemini';
+    exchange: "gemini";
     price?: string;
     avg_execution_price: string;
-    side: 'buy' | 'sell';
+    side: "buy" | "sell";
     type:
-      | 'exchange limit'
-      | 'auction-only exchange limit'
-      | 'market buy'
-      | 'market sell'
-      | 'indication-of-interest';
+      | "exchange limit"
+      | "auction-only exchange limit"
+      | "market buy"
+      | "market sell"
+      | "indication-of-interest";
     options: string[];
     timestamp: string;
     timestampms: number;
@@ -265,7 +261,7 @@ declare module 'gemini-node-api' {
   };
 
   export type CancelOrdersResponse = {
-    result: 'ok';
+    result: "ok";
     details: {
       cancelledOrders: number[];
       cancelRejects: number[];
@@ -277,14 +273,14 @@ declare module 'gemini-node-api' {
     amount: string;
     timestamp: number;
     timestampms: number;
-    type: 'Buy' | 'Sell';
+    type: "Buy" | "Sell";
     aggressor: boolean;
     fee_currency: string;
     fee_amount: string;
     tid: number;
     order_id: string;
     client_order_id?: string;
-    exchange?: 'gemini';
+    exchange?: "gemini";
     is_auction_fill: boolean;
     break?: string;
   };
@@ -336,28 +332,28 @@ declare module 'gemini-node-api' {
   };
 
   export type ClearingOrderStatus = {
-    result: 'ok';
+    result: "ok";
     status:
-      | 'AwaitConfirm'
-      | 'Confirmed'
-      | 'AttemptSettlement'
-      | 'Settled'
-      | 'Expired'
-      | 'Canceled'
-      | 'Not Found';
+      | "AwaitConfirm"
+      | "Confirmed"
+      | "AttemptSettlement"
+      | "Settled"
+      | "Expired"
+      | "Canceled"
+      | "Not Found";
   };
 
   export type CancelClearingOrderResponse = {
-    result: 'ok';
+    result: "ok";
     details: string;
   };
 
   export type ConfirmClearingOptionsResponse = {
-    result: 'confirmed';
+    result: "confirmed";
   };
 
   export type Balance = {
-    type: 'exchage';
+    type: "exchage";
     currency: string;
     amount: string;
     available: string;
@@ -365,13 +361,13 @@ declare module 'gemini-node-api' {
   };
 
   export type Transfer = {
-    type: 'Deposit' | 'Withdrawal';
-    status: 'Advanced' | 'Complete';
+    type: "Deposit" | "Withdrawal";
+    status: "Advanced" | "Complete";
     timestampms: number;
     eid: number;
     currency: string;
     amount: string;
-    method?: 'ACH' | 'Wire';
+    method?: "ACH" | "Wire";
     txHash?: string;
     outputIdx?: number;
     destination?: string;
@@ -398,12 +394,12 @@ declare module 'gemini-node-api' {
     txHash: string;
   };
 
-  export type Heartbeat = { result: 'ok' };
+  export type Heartbeat = { result: "ok" };
 
   export type AuthHeaders = {
-    'X-GEMINI-PAYLOAD': string;
-    'X-GEMINI-SIGNATURE': string;
-    'X-GEMINI-APIKEY': string;
+    "X-GEMINI-PAYLOAD": string;
+    "X-GEMINI-SIGNATURE": string;
+    "X-GEMINI-APIKEY": string;
   };
 
   export type PublicClientOptions = {
@@ -424,13 +420,9 @@ declare module 'gemini-node-api' {
   };
 
   export class PublicClient {
-    constructor(options?: PublicClientOptions);
-
     get(options: GetOptions): Promise<RequestResponse>;
 
     request(options: RequestOptions): Promise<RequestResponse>;
-
-    cb(options: CBOptions, callback: callback<any>);
 
     getSymbols(): Promise<string[]>;
 
@@ -524,10 +516,10 @@ declare module 'gemini-node-api' {
 
     unsubscribe(options: Subscription | Subscription[]): void;
 
-    on(event: 'message', listener: (data: any, market: string) => void): this;
-    on(event: 'error', listener: (error: any, market: string) => void): this;
-    on(event: 'open', listener: (market: string) => void): this;
-    on(event: 'close', listener: (market: string) => void): this;
+    on(event: "message", listener: (data: any, market: string) => void): this;
+    on(event: "error", listener: (error: any, market: string) => void): this;
+    on(event: "open", listener: (market: string) => void): this;
+    on(event: "close", listener: (market: string) => void): this;
   }
 
   export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
