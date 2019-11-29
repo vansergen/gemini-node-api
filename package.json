@@ -25,6 +25,7 @@
     "@typescript-eslint/parser": "^2.9.0",
     "eslint": "^6.7.1",
     "jsdoc": "^3.6.3",
+    "lint-staged": "^9.5.0",
     "mocha": "^6.2.2",
     "nock": "^11.7.0",
     "prettier": "^1.19.1",
@@ -53,5 +54,15 @@
   "bugs": {
     "url": "https://github.com/vansergen/gemini-node-api/issues"
   },
-  "homepage": "https://github.com/vansergen/gemini-node-api#readme"
+  "homepage": "https://github.com/vansergen/gemini-node-api#readme",
+  "lint-staged": {
+    "*.{js,ts,json,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{ts,js}": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
 }
