@@ -25,10 +25,6 @@ declare module "gemini-node-api" {
     symbol?: string;
   };
 
-  export type TickerFilter = SymbolFilter & {
-    v?: "v1" | "v2";
-  };
-
   export type CandlesFilter = SymbolFilter & {
     time_frame?: "1m" | "5m" | "15m" | "30m" | "1hr" | "6hr" | "1day";
   };
@@ -151,26 +147,6 @@ declare module "gemini-node-api" {
     | JSONObject[][]
     | string[]
     | number[][];
-
-  export type TickerV1 = {
-    bid: string;
-    ask: string;
-    last: string;
-    volume: JSONObject;
-  };
-
-  export type TickerV2 = {
-    symbol: string;
-    open: string;
-    high: string;
-    low: string;
-    close: string;
-    changes: string[];
-    bid: string;
-    ask: string;
-  };
-
-  export type Ticker = TickerV1 | TickerV2;
 
   export type Candle = [number, number, number, number, number, number];
 
@@ -423,8 +399,6 @@ declare module "gemini-node-api" {
     get(options: GetOptions): Promise<RequestResponse>;
 
     request(options: RequestOptions): Promise<RequestResponse>;
-
-    getTicker(options?: TickerFilter): Promise<Ticker>;
 
     getCandles(options?: CandlesFilter): Promise<Candle[]>;
 

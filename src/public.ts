@@ -15,6 +15,30 @@ export const Headers = {
   "Cache-Control": "no-cache"
 };
 
+export type SymbolFilter = { symbol?: string };
+
+export type TickerFilter = SymbolFilter & { v?: "v1" | "v2" };
+
+export type TickerV1 = {
+  bid: string;
+  ask: string;
+  last: string;
+  volume: { [key: string]: string | number };
+};
+
+export type TickerV2 = {
+  symbol: string;
+  open: string;
+  high: string;
+  low: string;
+  close: string;
+  changes: string[];
+  bid: string;
+  ask: string;
+};
+
+export type Ticker = TickerV1 | TickerV2;
+
 export type PublicClientOptions = {
   symbol?: string;
   sandbox?: boolean;
@@ -40,5 +64,15 @@ export class PublicClient extends RPC {
    */
   getSymbols(): BPromise<string[]> {
     return this.get({ uri: "v1/symbols" });
+  }
+
+  /**
+   * Get information about recent trading activity for the symbol.
+   */
+  getTicker({ symbol = this.symbol, v = "v1" }: TickerFilter = {}): BPromise<
+    Ticker
+  > {
+    v += v === "v1" ? "/pubticker/" + symbol : "/ticker/" + symbol;
+    return this.get({ uri: v });
   }
 }
