@@ -20,7 +20,7 @@
     "ws": "^7.2.0"
   },
   "devDependencies": {
-    "eslint": "^6.6.0",
+    "eslint": "^6.7.1",
     "jsdoc": "^3.6.3",
     "mocha": "^6.2.2",
     "nock": "^11.7.0",
