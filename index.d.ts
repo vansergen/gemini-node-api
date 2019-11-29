@@ -25,10 +25,6 @@ declare module "gemini-node-api" {
     symbol?: string;
   };
 
-  export type CandlesFilter = SymbolFilter & {
-    time_frame?: "1m" | "5m" | "15m" | "30m" | "1hr" | "6hr" | "1day";
-  };
-
   export type BookFilter = {
     limit_bids?: number;
     limit_asks?: number;
@@ -147,8 +143,6 @@ declare module "gemini-node-api" {
     | JSONObject[][]
     | string[]
     | number[][];
-
-  export type Candle = [number, number, number, number, number, number];
 
   export type BookEntry = {
     price: string;
@@ -399,8 +393,6 @@ declare module "gemini-node-api" {
     get(options: GetOptions): Promise<RequestResponse>;
 
     request(options: RequestOptions): Promise<RequestResponse>;
-
-    getCandles(options?: CandlesFilter): Promise<Candle[]>;
 
     getOrderBook(options?: BookFilter): Promise<OrderBook>;
 

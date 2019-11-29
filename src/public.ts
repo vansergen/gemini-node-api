@@ -19,6 +19,10 @@ export type SymbolFilter = { symbol?: string };
 
 export type TickerFilter = SymbolFilter & { v?: "v1" | "v2" };
 
+export type CandlesFilter = SymbolFilter & {
+  time_frame?: "1m" | "5m" | "15m" | "30m" | "1hr" | "6hr" | "1day";
+};
+
 export type TickerV1 = {
   bid: string;
   ask: string;
@@ -38,6 +42,8 @@ export type TickerV2 = {
 };
 
 export type Ticker = TickerV1 | TickerV2;
+
+export type Candle = [number, number, number, number, number, number];
 
 export type PublicClientOptions = {
   symbol?: string;
@@ -74,5 +80,15 @@ export class PublicClient extends RPC {
   > {
     v += v === "v1" ? "/pubticker/" + symbol : "/ticker/" + symbol;
     return this.get({ uri: v });
+  }
+
+  /**
+   * Get time-intervaled data for the provided symbol.
+   */
+  getCandles({
+    symbol = this.symbol,
+    time_frame = "1day"
+  }: CandlesFilter = {}): BPromise<Candle[]> {
+    return this.get({ uri: "v2/candles/" + symbol + "/" + time_frame });
   }
 }
