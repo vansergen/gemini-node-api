@@ -28,6 +28,12 @@ export type BookFilter = {
   limit_asks?: number;
 } & SymbolFilter;
 
+export type TradeHistoryFilter = SymbolFilter & {
+  timestamp?: number;
+  limit_trades?: number;
+  include_breaks?: boolean;
+};
+
 export type TickerV1 = {
   bid: string;
   ask: string;
@@ -59,6 +65,17 @@ export type BookEntry = {
 export type OrderBook = {
   bids: BookEntry[];
   asks: BookEntry[];
+};
+
+export type Trade = {
+  timestamp: number;
+  timestampms: number;
+  tid: number;
+  price: string;
+  amount: string;
+  exchange: "gemini";
+  type: "buy" | "sell" | "auction" | "block";
+  broken?: boolean;
 };
 
 export type PublicClientOptions = {
@@ -115,5 +132,17 @@ export class PublicClient extends RPC {
     OrderBook
   > {
     return this.get({ uri: "v1/book/" + symbol, qs });
+  }
+
+  /**
+   * Get the trades that have executed since the specified timestamp.
+   */
+  getTradeHistory({
+    symbol = this.symbol,
+    limit_trades = ApiLimit,
+    ...qs
+  }: TradeHistoryFilter = {}): BPromise<Trade[]> {
+    const uri = "v1/trades/" + symbol;
+    return this.get({ uri, qs: { limit_trades, ...qs } });
   }
 }

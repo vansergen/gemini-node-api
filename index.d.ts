@@ -25,12 +25,6 @@ declare module "gemini-node-api" {
     symbol?: string;
   };
 
-  export type TradeHistoryFilter = {
-    since?: number;
-    limit_trades?: number;
-    include_breaks?: boolean;
-  } & SymbolFilter;
-
   export type AuctionHistoryFilter = {
     since?: number;
     limit_auction_results?: number;
@@ -138,17 +132,6 @@ declare module "gemini-node-api" {
     | JSONObject[][]
     | string[]
     | number[][];
-
-  export type Trade = {
-    timestamp: number;
-    timestampms: number;
-    tid: number;
-    price: string;
-    amount: string;
-    exchange: "gemini";
-    type: "buy" | "sell" | "auction" | "block";
-    broken?: boolean;
-  };
 
   export type AuctionInfo = {
     closed_until_ms?: number;
@@ -377,8 +360,6 @@ declare module "gemini-node-api" {
     get(options: GetOptions): Promise<RequestResponse>;
 
     request(options: RequestOptions): Promise<RequestResponse>;
-
-    getTradeHistory(options?: TradeHistoryFilter): Promise<Trade[]>;
 
     getCurrentAuction(options?: SymbolFilter): Promise<AuctionInfo>;
 
