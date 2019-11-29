@@ -424,8 +424,6 @@ declare module "gemini-node-api" {
 
     request(options: RequestOptions): Promise<RequestResponse>;
 
-    getSymbols(): Promise<string[]>;
-
     getTicker(options?: TickerFilter): Promise<Ticker>;
 
     getCandles(options?: CandlesFilter): Promise<Candle[]>;

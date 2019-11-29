@@ -1,4 +1,5 @@
 import { RPC } from "rpc-bluebird";
+import { RequestPromise as BPromise } from "request-promise";
 
 export const ApiLimit = 500;
 export const DefaultSymbol = "btcusd";
@@ -32,5 +33,12 @@ export class PublicClient extends RPC {
   }: PublicClientOptions = {}) {
     super({ json: true, timeout, baseUrl: apiUri, headers: Headers });
     this.symbol = symbol;
+  }
+
+  /**
+   * Get all available symbols for trading.
+   */
+  getSymbols(): BPromise<string[]> {
+    return this.get({ uri: "v1/symbols" });
   }
 }
