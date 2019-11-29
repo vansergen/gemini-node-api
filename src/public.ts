@@ -23,6 +23,11 @@ export type CandlesFilter = SymbolFilter & {
   time_frame?: "1m" | "5m" | "15m" | "30m" | "1hr" | "6hr" | "1day";
 };
 
+export type BookFilter = {
+  limit_bids?: number;
+  limit_asks?: number;
+} & SymbolFilter;
+
 export type TickerV1 = {
   bid: string;
   ask: string;
@@ -44,6 +49,17 @@ export type TickerV2 = {
 export type Ticker = TickerV1 | TickerV2;
 
 export type Candle = [number, number, number, number, number, number];
+
+export type BookEntry = {
+  price: string;
+  amount: string;
+  timestamp: string;
+};
+
+export type OrderBook = {
+  bids: BookEntry[];
+  asks: BookEntry[];
+};
 
 export type PublicClientOptions = {
   symbol?: string;
@@ -90,5 +106,14 @@ export class PublicClient extends RPC {
     time_frame = "1day"
   }: CandlesFilter = {}): BPromise<Candle[]> {
     return this.get({ uri: "v2/candles/" + symbol + "/" + time_frame });
+  }
+
+  /**
+   * Get the current order book.
+   */
+  getOrderBook({ symbol = this.symbol, ...qs }: BookFilter = {}): BPromise<
+    OrderBook
+  > {
+    return this.get({ uri: "v1/book/" + symbol, qs });
   }
 }

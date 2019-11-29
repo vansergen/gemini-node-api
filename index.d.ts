@@ -25,11 +25,6 @@ declare module "gemini-node-api" {
     symbol?: string;
   };
 
-  export type BookFilter = {
-    limit_bids?: number;
-    limit_asks?: number;
-  } & SymbolFilter;
-
   export type TradeHistoryFilter = {
     since?: number;
     limit_trades?: number;
@@ -143,17 +138,6 @@ declare module "gemini-node-api" {
     | JSONObject[][]
     | string[]
     | number[][];
-
-  export type BookEntry = {
-    price: string;
-    amount: string;
-    timestamp: string;
-  };
-
-  export type OrderBook = {
-    bids: BookEntry[];
-    asks: BookEntry[];
-  };
 
   export type Trade = {
     timestamp: number;
@@ -393,8 +377,6 @@ declare module "gemini-node-api" {
     get(options: GetOptions): Promise<RequestResponse>;
 
     request(options: RequestOptions): Promise<RequestResponse>;
-
-    getOrderBook(options?: BookFilter): Promise<OrderBook>;
 
     getTradeHistory(options?: TradeHistoryFilter): Promise<Trade[]>;
 
