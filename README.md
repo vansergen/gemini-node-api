@@ -13,7 +13,7 @@ npm install gemini-node-api
 ### PublicClient
 
 ```javascript
-const { PublicClient } = require('gemini-node-api');
+const { PublicClient } = require("gemini-node-api");
 const publicClient = new PublicClient();
 ```
 
@@ -26,41 +26,41 @@ const symbols = await publicClient.getSymbols();
 - [`getTicker`](https://docs.gemini.com/rest-api/#ticker)
 
 ```javascript
-const symbol = 'zecltc';
+const symbol = "zecltc";
 const ticker = await publicClient.getTicker({ symbol });
 /**
  * for V2
  * @see https://docs.gemini.com/rest-api/#ticker-v2
  */
-const v = 'v2';
+const v = "v2";
 const tickerV2 = await publicClient.getTicker({ symbol, v });
 ```
 
 - [`getCandles`](https://docs.gemini.com/rest-api/#candles)
 
 ```javascript
-const symbol = 'zecltc';
-const time_frame = '30m';
+const symbol = "zecltc";
+const time_frame = "30m";
 const candles = await publicClient.getCandles({ symbol, time_frame });
 ```
 
 - [`getOrderBook`](https://docs.gemini.com/rest-api/#current-order-book)
 
 ```javascript
-const symbol = 'zecltc';
+const symbol = "zecltc";
 const limit_bids = 25;
 const limit_asks = 20;
 const book = await publicClient.getOrderBook({
   symbol,
   limit_bids,
-  limit_asks,
+  limit_asks
 });
 ```
 
 - [`getTradeHistory`](https://docs.gemini.com/rest-api/#trade-history)
 
 ```javascript
-const symbol = 'zecltc';
+const symbol = "zecltc";
 const since = 1547146811;
 const limit_trades = 100;
 const include_breaks = true;
@@ -68,21 +68,21 @@ const trades = await publicClient.getTradeHistory({
   symbol,
   since,
   limit_trades,
-  include_breaks,
+  include_breaks
 });
 ```
 
 - [`getCurrentAuction`](https://docs.gemini.com/rest-api/#current-auction)
 
 ```javascript
-const symbol = 'zecltc';
+const symbol = "zecltc";
 const auction = await publicClient.getCurrentAuction({ symbol });
 ```
 
 - [`getAuctionHistory`](https://docs.gemini.com/rest-api/#auction-history)
 
 ```javascript
-const symbol = 'zecltc';
+const symbol = "zecltc";
 const since = 1547146811;
 const limit_auction_results = 100;
 const include_indicative = true;
@@ -90,59 +90,16 @@ const history = await publicClient.getAuctionHistory({
   symbol,
   since,
   limit_auction_results,
-  include_indicative,
+  include_indicative
 });
-```
-
-- `get`
-
-```javascript
-publicClient
-  .get({ uri: 'v1/auction/zecbtc' })
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => {
-    console.error(error);
-  });
-```
-
-- `request`
-
-```javascript
-const method = 'GET';
-const uri = 'v1/pubticker/zecbtc';
-publicClient
-  .request({ method, uri })
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => {
-    console.error(error);
-  });
-```
-
-- `cb`
-
-```javascript
-const _method = 'getTicker';
-const symbol = 'bchusd';
-const callback = (error, data) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.info(data);
-  }
-};
-publicClient.cb({ _method, symbol }, callback);
 ```
 
 ### AuthenticatedClient
 
 ```javascript
-const { AuthenticatedClient } = require('gemini-node-api');
-const key = 'gemini-api-key';
-const secret = 'gemini-api-secret';
+const { AuthenticatedClient } = require("gemini-node-api");
+const key = "gemini-api-key";
+const secret = "gemini-api-secret";
 const authClient = new AuthenticatedClient({ key, secret });
 ```
 
@@ -150,23 +107,23 @@ const authClient = new AuthenticatedClient({ key, secret });
 
 ```javascript
 const order = await authClient.newOrder({
-  symbol: 'zecltc',
-  client_order_id: 'd0c5340b-6d6c-49d9-b567-48c4bfca13d2',
+  symbol: "zecltc",
+  client_order_id: "d0c5340b-6d6c-49d9-b567-48c4bfca13d2",
   amount: 1,
   price: 0.9,
-  side: 'buy',
+  side: "buy",
   moc: true, // maker-or-cancel
   ioc: false, // immediate-or-cancel
   fok: false, // fill-or-kill
   ao: false, // auction-only
-  ioi: false, // indication-of-interest
+  ioi: false // indication-of-interest
 });
 ```
 
 - [`buy`](https://docs.gemini.com/rest-api/#new-order)
 
 ```javascript
-const symbol = 'zecltc';
+const symbol = "zecltc";
 const amount = 1;
 const price = 0.9;
 const order = await authClient.buy({ symbol, amount, price });
@@ -175,7 +132,7 @@ const order = await authClient.buy({ symbol, amount, price });
 - [`sell`](https://docs.gemini.com/rest-api/#new-order)
 
 ```javascript
-const symbol = 'zecltc';
+const symbol = "zecltc";
 const amount = 0.99;
 const price = 0.99;
 const order = await authClient.sell({ symbol, amount, price });
@@ -216,13 +173,13 @@ const orders = await authClient.getActiveOrders();
 - [`getPastTrades`](https://docs.gemini.com/rest-api/#get-past-trades)
 
 ```javascript
-const symbol = 'bcheth';
+const symbol = "bcheth";
 const limit_trades = 10;
 const timestamp = 1547232911;
 const trades = await authClient.getPastTrades({
   symbol,
   limit_trades,
-  timestamp,
+  timestamp
 });
 ```
 
@@ -241,50 +198,50 @@ const volume = await authClient.getTradeVolume();
 - [`newClearingOrder`](https://docs.gemini.com/rest-api/#new-clearing-order)
 
 ```javascript
-const counterparty_id = 'OM9VNL1G';
+const counterparty_id = "OM9VNL1G";
 const expires_in_hrs = 24;
-const symbol = 'btcusd';
+const symbol = "btcusd";
 const amount = 100;
 const price = 9500;
-const side = 'buy';
+const side = "buy";
 const order = await authClient.newClearingOrder({
   counterparty_id,
   expires_in_hrs,
   symbol,
   amount,
   price,
-  side,
+  side
 });
 ```
 
 - [`getClearingOrderStatus`](https://docs.gemini.com/rest-api/#clearing-order-status)
 
 ```javascript
-const clearing_id = 'OM9VNL1G';
+const clearing_id = "OM9VNL1G";
 const order = await authClient.getClearingOrderStatus({ clearing_id });
 ```
 
 - [`cancelClearingOrder`](https://docs.gemini.com/rest-api/#cancel-clearing-order)
 
 ```javascript
-const clearing_id = 'OM9VNL1G';
+const clearing_id = "OM9VNL1G";
 const order = await authClient.cancelClearingOrder({ clearing_id });
 ```
 
 - [`confirmClearingOrder`](https://docs.gemini.com/rest-api/#confirm-clearing-order)
 
 ```javascript
-const clearing_id = 'OM9VNL1G';
-const symbol = 'btcusd';
+const clearing_id = "OM9VNL1G";
+const symbol = "btcusd";
 const amount = 100;
 const price = 9500;
-const side = 'sell';
+const side = "sell";
 const order = await authClient.confirmClearingOrder({
   clearing_id,
   symbol,
   amount,
   price,
-  side,
+  side
 });
 ```
 
@@ -305,8 +262,8 @@ const transfers = await authClient.getTransfers({ timestamp, limit_transfers });
 - [`getNewAddress`](https://docs.gemini.com/rest-api/#new-deposit-address)
 
 ```javascript
-const currency = 'ltc';
-const label = 'New LTC deposit address';
+const currency = "ltc";
+const label = "New LTC deposit address";
 const legacy = true;
 const address = await authClient.getNewAddress({ currency, label, legacy });
 ```
@@ -314,20 +271,20 @@ const address = await authClient.getNewAddress({ currency, label, legacy });
 - [`withdrawCrypto`](https://docs.gemini.com/rest-api/#withdraw-crypto-funds-to-whitelisted-address)
 
 ```javascript
-const currency = 'btc';
-const address = 'mi98Z9brJ3TgaKsmvXatuRahbFRUFKRUdR';
+const currency = "btc";
+const address = "mi98Z9brJ3TgaKsmvXatuRahbFRUFKRUdR";
 const amount = 10;
 const withdrawal = await authClient.withdrawCrypto({
   currency,
   address,
-  amount,
+  amount
 });
 ```
 
 - [`withdrawGUSD`](https://docs.gemini.com/rest-api/#withdraw-usd-as-gusd)
 
 ```javascript
-const address = '0x0F2B20Acb2fD7EEbC0ABc3AEe0b00d57533b6bD1';
+const address = "0x0F2B20Acb2fD7EEbC0ABc3AEe0b00d57533b6bD1";
 const amount = 500;
 const withdrawal = await authClient.withdrawGUSD({ address, amount });
 ```
@@ -338,43 +295,23 @@ const withdrawal = await authClient.withdrawGUSD({ address, amount });
 const heartbeat = await authClient.heartbeat();
 ```
 
-- `post`
-
-```javascript
-const volume = await authClient.post({ request: '/v1/tradevolume' });
-```
-
-- `cb`
-
-```javascript
-const _method = 'getNotionalVolume';
-const callback = (error, data) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.info(data);
-  }
-};
-authClient.cb({ _method }, callback);
-```
-
 ### WebsocketClient
 
 ```javascript
-const { WebsocketClient } = require('gemini-node-api');
-const key = 'gemini-api-key';
-const secret = 'gemini-api-secret';
+const { WebsocketClient } = require("gemini-node-api");
+const key = "gemini-api-key";
+const secret = "gemini-api-secret";
 const websocket = new WebsocketClient({ key, secret });
-websocket.on('error', (error, market) => {
+websocket.on("error", (error, market) => {
   console.error(error);
 });
-websocket.on('open', market => {
-  console.log('Open connection: ', market);
+websocket.on("open", market => {
+  console.log("Open connection: ", market);
 });
-websocket.on('close', market => {
-  console.log('Closed connection: ', market);
+websocket.on("close", market => {
+  console.log("Closed connection: ", market);
 });
-websocket.on('message', (message, market) => {
+websocket.on("message", (message, market) => {
   console.info(message);
 });
 ```
@@ -388,8 +325,8 @@ const bids = true;
 const offers = true;
 const trades = true;
 const auctions = false;
-const symbol = 'zecltc';
-websocket.on('open', market => console.log('Open:', market));
+const symbol = "zecltc";
+websocket.on("open", market => console.log("Open:", market));
 websocket.connectMarket({
   symbol,
   heartbeat,
@@ -397,30 +334,30 @@ websocket.connectMarket({
   bids,
   offers,
   trades,
-  auctions,
+  auctions
 });
-websocket.connectMarket({ symbol: 'btcusd' });
+websocket.connectMarket({ symbol: "btcusd" });
 ```
 
 - [`disconnectMarket`](https://docs.gemini.com/websocket-api/#market-data)
 
 ```javascript
-const symbol = 'zecltc';
-websocket.once('close', market => console.log('Closed:', market));
+const symbol = "zecltc";
+websocket.once("close", market => console.log("Closed:", market));
 websocket.disconnectMarket({ symbol });
 ```
 
 - [`connect`](https://docs.gemini.com/websocket-api/#market-data-version-2)
 
 ```javascript
-websocket.on('open', market => console.log('Open:', market));
+websocket.on("open", market => console.log("Open:", market));
 websocket.connect();
 ```
 
 - [`disconnect`](https://docs.gemini.com/websocket-api/#market-data-version-2)
 
 ```javascript
-websocket.once('close', market => console.log('Closed:', market));
+websocket.once("close", market => console.log("Closed:", market));
 websocket.disconnect();
 ```
 
@@ -428,11 +365,11 @@ websocket.disconnect();
 
 ```javascript
 const subscriptions = [
-  { name: 'l2', symbols: ['BTCUSD', 'ETHUSD'] },
-  { name: 'candles_1m', symbols: ['BTCUSD'] },
+  { name: "l2", symbols: ["BTCUSD", "ETHUSD"] },
+  { name: "candles_1m", symbols: ["BTCUSD"] }
 ];
-websocket.on('open', market => {
-  if (market === 'v2') {
+websocket.on("open", market => {
+  if (market === "v2") {
     websocket.subscribe(subscriptions);
   }
 });
@@ -441,19 +378,19 @@ websocket.on('open', market => {
 - [`unsubscribe`](https://docs.gemini.com/websocket-api/#unsubscribe)
 
 ```javascript
-const subscription = { name: 'l2', symbols: ['BTCUSD', 'ETHUSD'] };
+const subscription = { name: "l2", symbols: ["BTCUSD", "ETHUSD"] };
 websocket.unsubscribe(subscription);
 ```
 
 - [`connectOrders`](https://docs.gemini.com/websocket-api/#order-events)
 
 ```javascript
-const symbolFilter = 'zecltc';
-const apiSessionFilter = 'UI';
-const eventTypeFilter = ['accepted', 'rejected'];
-websocket.on('message', (message, market) => {
-  if (market === 'orders') {
-    console.log('New message:', message);
+const symbolFilter = "zecltc";
+const apiSessionFilter = "UI";
+const eventTypeFilter = ["accepted", "rejected"];
+websocket.on("message", (message, market) => {
+  if (market === "orders") {
+    console.log("New message:", message);
   }
 });
 websocket.connectOrders({ symbolFilter, apiSessionFilter, eventTypeFilter });
@@ -462,9 +399,9 @@ websocket.connectOrders({ symbolFilter, apiSessionFilter, eventTypeFilter });
 - [`disconnectOrders`](https://docs.gemini.com/websocket-api/#order-events)
 
 ```javascript
-websocket.once('close', market => {
-  if (market === 'orders') {
-    console.log('Closed');
+websocket.once("close", market => {
+  if (market === "orders") {
+    console.log("Closed");
   }
 });
 websocket.disconnectOrders();
