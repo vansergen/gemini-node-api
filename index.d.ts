@@ -133,23 +133,6 @@ declare module "gemini-node-api" {
     | string[]
     | number[][];
 
-  export type AuctionInfo = {
-    closed_until_ms?: number;
-    last_auction_eid?: number;
-    last_auction_price?: string;
-    last_auction_quantity?: string;
-    last_highest_bid_price?: string;
-    last_lowest_ask_price?: string;
-    last_collar_price?: string;
-    most_recent_indicative_price?: string;
-    most_recent_indicative_quantity?: string;
-    most_recent_highest_bid_price?: string;
-    most_recent_lowest_ask_price?: string;
-    most_recent_collar_price?: string;
-    next_update_ms?: number;
-    next_auction_ms?: number;
-  };
-
   export type AuctionHistory = {
     timestamp: number;
     timestampms: number;
@@ -360,8 +343,6 @@ declare module "gemini-node-api" {
     get(options: GetOptions): Promise<RequestResponse>;
 
     request(options: RequestOptions): Promise<RequestResponse>;
-
-    getCurrentAuction(options?: SymbolFilter): Promise<AuctionInfo>;
 
     getAuctionHistory(
       options?: AuctionHistoryFilter
