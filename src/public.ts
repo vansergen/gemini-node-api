@@ -23,15 +23,21 @@ export type CandlesFilter = SymbolFilter & {
   time_frame?: "1m" | "5m" | "15m" | "30m" | "1hr" | "6hr" | "1day";
 };
 
-export type BookFilter = {
+export type BookFilter = SymbolFilter & {
   limit_bids?: number;
   limit_asks?: number;
-} & SymbolFilter;
+};
 
 export type TradeHistoryFilter = SymbolFilter & {
   timestamp?: number;
   limit_trades?: number;
   include_breaks?: boolean;
+};
+
+export type AuctionHistoryFilter = SymbolFilter & {
+  timestamp?: number;
+  limit_auction_results?: number;
+  include_indicative?: boolean;
 };
 
 export type TickerV1 = {
@@ -93,6 +99,21 @@ export type AuctionInfo = {
   most_recent_collar_price?: string;
   next_update_ms?: number;
   next_auction_ms?: number;
+};
+
+export type AuctionHistory = {
+  timestamp: number;
+  timestampms: number;
+  auction_id: number;
+  eid: number;
+  event_type: "indicative" | "auction";
+  auction_result: "success" | "failure";
+  auction_price?: string;
+  auction_quantity?: string;
+  highest_bid_price?: string;
+  lowest_ask_price?: string;
+  collar_price?: string;
+  unmatched_collar_quantity?: string;
 };
 
 export type PublicClientOptions = {
@@ -166,7 +187,21 @@ export class PublicClient extends RPC {
   /**
    * Get current auction information.
    */
-  getCurrentAuction({ symbol = this.symbol }: SymbolFilter = {}) {
+  getCurrentAuction({ symbol = this.symbol }: SymbolFilter = {}): BPromise<
+    AuctionInfo
+  > {
     return this.get({ uri: "v1/auction/" + symbol });
+  }
+
+  /**
+   * Get the auction events.
+   */
+  getAuctionHistory({
+    symbol = this.symbol,
+    limit_auction_results = ApiLimit,
+    ...qs
+  }: AuctionHistoryFilter = {}): BPromise<AuctionHistory[]> {
+    const uri = "v1/auction/" + symbol + "/history";
+    return this.get({ uri, qs: { limit_auction_results, ...qs } });
   }
 }

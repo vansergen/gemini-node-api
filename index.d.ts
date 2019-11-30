@@ -25,12 +25,6 @@ declare module "gemini-node-api" {
     symbol?: string;
   };
 
-  export type AuctionHistoryFilter = {
-    since?: number;
-    limit_auction_results?: number;
-    include_indicative?: boolean;
-  } & SymbolFilter;
-
   export type BasicOrderOptions = {
     client_order_id?: string;
     symbol?: string;
@@ -132,21 +126,6 @@ declare module "gemini-node-api" {
     | JSONObject[][]
     | string[]
     | number[][];
-
-  export type AuctionHistory = {
-    timestamp: number;
-    timestampms: number;
-    auction_id: number;
-    eid: number;
-    event_type: "indicative" | "auction";
-    auction_result: "success" | "failure";
-    auction_price?: string;
-    auction_quantity?: string;
-    highest_bid_price?: string;
-    lowest_ask_price?: string;
-    collar_price?: string;
-    unmatched_collar_quantity?: string;
-  };
 
   export type NotionalOneDay = {
     date: string;
@@ -343,10 +322,6 @@ declare module "gemini-node-api" {
     get(options: GetOptions): Promise<RequestResponse>;
 
     request(options: RequestOptions): Promise<RequestResponse>;
-
-    getAuctionHistory(
-      options?: AuctionHistoryFilter
-    ): Promise<AuctionHistory[]>;
   }
 
   export class AuthenticatedClient extends PublicClient {
