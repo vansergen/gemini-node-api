@@ -295,12 +295,6 @@ declare module "gemini-node-api" {
 
   export type Heartbeat = { result: "ok" };
 
-  export type AuthHeaders = {
-    "X-GEMINI-PAYLOAD": string;
-    "X-GEMINI-SIGNATURE": string;
-    "X-GEMINI-APIKEY": string;
-  };
-
   export type PublicClientOptions = {
     symbol?: string;
     sandbox?: boolean;
@@ -404,6 +398,4 @@ declare module "gemini-node-api" {
     on(event: "open", listener: (market: string) => void): this;
     on(event: "close", listener: (market: string) => void): this;
   }
-
-  export function SignRequest(auth: Auth, payload?: JSONObject): AuthHeaders;
 }
