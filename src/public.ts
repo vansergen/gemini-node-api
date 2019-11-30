@@ -129,7 +129,7 @@ export class PublicClient extends RPC {
   constructor({
     symbol = DefaultSymbol,
     sandbox = false,
-    apiUri = sandbox ? ApiUri : SandboxApiUri,
+    apiUri = sandbox ? SandboxApiUri : ApiUri,
     timeout = DefaulTimeout
   }: PublicClientOptions = {}) {
     super({ json: true, timeout, baseUrl: apiUri, headers: Headers });
