@@ -16,6 +16,12 @@ export type NewAddressFilter = AccountName & {
   legacy?: boolean;
 };
 
+export type WithdrawCryptoFilter = AccountName & {
+  currency: string;
+  address: string;
+  amount: string;
+};
+
 export type Account = { name: string; type?: "exchange" | "custody" };
 
 export type WithdrawGUSDFilter = AccountName & {
@@ -49,6 +55,14 @@ export type NewAddress = {
   currency: string;
   address: string;
   label?: string;
+};
+
+export type Withdrawal = {
+  address: string;
+  amount: string;
+  txHash?: string;
+  withdrawalId?: string;
+  message?: string;
 };
 
 export type AccountInfo = {
@@ -110,6 +124,17 @@ export class AuthenticatedClient extends PublicClient {
    */
   getNewAddress({ currency, ...body }: NewAddressFilter): Promise<NewAddress> {
     const request = "/v1/deposit/" + currency + "/newAddress";
+    return this.post({ body: { request, ...body } });
+  }
+
+  /**
+   * Withdraw cryptocurrency funds to a whitelisted address.
+   */
+  withdrawCrypto({
+    currency,
+    ...body
+  }: WithdrawCryptoFilter): Promise<Withdrawal> {
+    const request = "/v1/withdraw/" + currency;
     return this.post({ body: { request, ...body } });
   }
 

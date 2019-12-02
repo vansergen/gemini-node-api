@@ -282,13 +282,15 @@ const address = await client.getNewAddress({
 
 - [`withdrawCrypto`](https://docs.gemini.com/rest-api/#withdraw-crypto-funds-to-whitelisted-address)
 
-```javascript
+```typescript
 const currency = "btc";
 const address = "mi98Z9brJ3TgaKsmvXatuRahbFRUFKRUdR";
 const amount = 10;
-const withdrawal = await authClient.withdrawCrypto({
+const account = "primary";
+const withdrawal = await client.withdrawCrypto({
   currency,
   address,
+  account,
   amount
 });
 ```

@@ -9,6 +9,7 @@ import {
   Balance,
   Transfer,
   NewAddress,
+  Withdrawal,
   AccountInfo,
   GUSDWithdrawal,
   Heartbeat
@@ -186,6 +187,33 @@ suite("AuthenticatedClient", () => {
       currency,
       label,
       legacy,
+      account
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".withdrawCrypto()", async () => {
+    const currency = "btc";
+    const request = "/v1/withdraw/" + currency;
+    const address = "1KA8QNcgdcVERrAaKF1puKndB7Q7MMg5PR";
+    const amount = "1";
+    const account = "primary";
+    const options = { request, address, amount, account, nonce };
+    const response: Withdrawal = {
+      address: "1EdWhc4RiYqrnSVrdNrbkJ2RYaXd9EfEen",
+      amount: "1",
+      withdrawalId: "02176a83-a6b1-4202-9b85-1c1c92dd25c4",
+      message:
+        "You have requested a transfer of 1 BTC to 1EdWhc4RiYqrnSVrdNrbkJ2RYaXd9EfEen. This withdrawal will be sent to the blockchain within the next 60 seconds."
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.withdrawCrypto({
+      currency,
+      address,
+      amount,
       account
     });
     assert.deepStrictEqual(data, response);

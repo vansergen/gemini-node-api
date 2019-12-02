@@ -72,12 +72,6 @@ declare module "gemini-node-api" {
     side: "buy" | "sell";
   };
 
-  export type WithdrawCryptoFilter = {
-    currency: string;
-    address: string;
-    amount: number;
-  };
-
   export type WSMarketOptions = {
     symbol?: string;
     heartbeat?: boolean;
@@ -235,14 +229,6 @@ declare module "gemini-node-api" {
     result: "confirmed";
   };
 
-  export type Withdrawal = {
-    address: string;
-    amount: string;
-    txHash?: string;
-    withdrawalID?: string;
-    message?: string;
-  };
-
   export type PublicClientOptions = {
     symbol?: string;
     sandbox?: boolean;
@@ -308,8 +294,6 @@ declare module "gemini-node-api" {
     confirmClearingOrder(
       options: ConfirmClearingOptions
     ): Promise<ConfirmClearingOptionsResponse>;
-
-    withdrawCrypto(options: WithdrawCryptoFilter): Promise<Withdrawal>;
   }
 
   export class WebsocketClient extends EventEmitter {
