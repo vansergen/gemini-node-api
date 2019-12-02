@@ -8,6 +8,7 @@ import {
   Account,
   Balance,
   Transfer,
+  NewAddress,
   AccountInfo,
   GUSDWithdrawal,
   Heartbeat
@@ -160,6 +161,31 @@ suite("AuthenticatedClient", () => {
     const data = await client.getTransfers({
       limit_transfers,
       timestamp,
+      account
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getNewAddress()", async () => {
+    const currency = "LTC";
+    const request = "/v1/deposit/" + currency + "/newAddress";
+    const label = "New deposit address";
+    const legacy = false;
+    const account = "primary";
+    const options = { request, label, legacy, account, nonce };
+    const response: NewAddress = {
+      currency,
+      address: "ltc1qdmx34geqhrnmgldcqkr79wwl3yxldsvhhz7t49",
+      label
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.getNewAddress({
+      currency,
+      label,
+      legacy,
       account
     });
     assert.deepStrictEqual(data, response);

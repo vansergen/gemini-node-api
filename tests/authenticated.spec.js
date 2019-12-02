@@ -895,34 +895,6 @@ suite("AuthenticatedClient", () => {
       .catch(error => assert.fail(error));
   });
 
-  test(".getNewAddress()", done => {
-    const currency = "LTC";
-    const request = "/v1/deposit/" + currency + "/newAddress";
-    const label = "New deposit address";
-    const legacy = false;
-    const nonce = 1;
-    authClient.nonce = () => nonce;
-
-    const payload = { request, label, legacy, nonce };
-    const response = {
-      currency,
-      address: "ltc1qdmx34geqhrnmgldcqkr79wwl3yxldsvhhz7t49",
-      label
-    };
-    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
-      .post(request)
-      .times(1)
-      .reply(200, response);
-
-    authClient
-      .getNewAddress({ currency, label, legacy })
-      .then(data => {
-        assert.deepStrictEqual(data, response);
-        done();
-      })
-      .catch(error => assert.fail(error));
-  });
-
   test(".withdrawCrypto()", done => {
     const currency = "btc";
     const request = "/v1/withdraw/" + currency;

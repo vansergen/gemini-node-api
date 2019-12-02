@@ -10,6 +10,12 @@ export type TransferFilter = AccountName & {
   limit_transfers?: number;
 };
 
+export type NewAddressFilter = AccountName & {
+  currency: string;
+  label?: string;
+  legacy?: boolean;
+};
+
 export type Account = { name: string; type?: "exchange" | "custody" };
 
 export type WithdrawGUSDFilter = AccountName & {
@@ -37,6 +43,12 @@ export type Transfer = {
   outputIdx?: number;
   destination?: string;
   purpose?: string;
+};
+
+export type NewAddress = {
+  currency: string;
+  address: string;
+  label?: string;
 };
 
 export type AccountInfo = {
@@ -91,6 +103,14 @@ export class AuthenticatedClient extends PublicClient {
    */
   getTransfers(body?: TransferFilter): Promise<Transfer[]> {
     return this.post({ body: { request: "/v1/transfers", ...body } });
+  }
+
+  /**
+   * Get a new deposit address.
+   */
+  getNewAddress({ currency, ...body }: NewAddressFilter): Promise<NewAddress> {
+    const request = "/v1/deposit/" + currency + "/newAddress";
+    return this.post({ body: { request, ...body } });
   }
 
   /**

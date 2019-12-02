@@ -12,45 +12,45 @@ npm install gemini-node-api
 
 ### PublicClient
 
-```javascript
-const { PublicClient } = require("gemini-node-api");
-const publicClient = new PublicClient();
+```typescript
+import { PublicClient } from "gemini-node-api";
+const client = new PublicClient();
 ```
 
 - [`getSymbols`](https://docs.gemini.com/rest-api/#symbols)
 
-```javascript
-const symbols = await publicClient.getSymbols();
+```typescript
+const symbols = await client.getSymbols();
 ```
 
 - [`getTicker`](https://docs.gemini.com/rest-api/#ticker)
 
-```javascript
+```typescript
 const symbol = "zecltc";
-const ticker = await publicClient.getTicker({ symbol });
+const ticker = await client.getTicker({ symbol });
 /**
  * for V2
  * @see https://docs.gemini.com/rest-api/#ticker-v2
  */
 const v = "v2";
-const tickerV2 = await publicClient.getTicker({ symbol, v });
+const tickerV2 = await client.getTicker({ symbol, v });
 ```
 
 - [`getCandles`](https://docs.gemini.com/rest-api/#candles)
 
-```javascript
+```typescript
 const symbol = "zecltc";
 const time_frame = "30m";
-const candles = await publicClient.getCandles({ symbol, time_frame });
+const candles = await client.getCandles({ symbol, time_frame });
 ```
 
 - [`getOrderBook`](https://docs.gemini.com/rest-api/#current-order-book)
 
-```javascript
+```typescript
 const symbol = "zecltc";
 const limit_bids = 25;
 const limit_asks = 20;
-const book = await publicClient.getOrderBook({
+const book = await client.getOrderBook({
   symbol,
   limit_bids,
   limit_asks
@@ -59,14 +59,14 @@ const book = await publicClient.getOrderBook({
 
 - [`getTradeHistory`](https://docs.gemini.com/rest-api/#trade-history)
 
-```javascript
+```typescript
 const symbol = "zecltc";
-const since = 1547146811;
+const timestamp = 1547146811;
 const limit_trades = 100;
 const include_breaks = true;
-const trades = await publicClient.getTradeHistory({
+const trades = await client.getTradeHistory({
   symbol,
-  since,
+  timestamp,
   limit_trades,
   include_breaks
 });
@@ -74,21 +74,21 @@ const trades = await publicClient.getTradeHistory({
 
 - [`getCurrentAuction`](https://docs.gemini.com/rest-api/#current-auction)
 
-```javascript
+```typescript
 const symbol = "zecltc";
-const auction = await publicClient.getCurrentAuction({ symbol });
+const auction = await client.getCurrentAuction({ symbol });
 ```
 
 - [`getAuctionHistory`](https://docs.gemini.com/rest-api/#auction-history)
 
-```javascript
+```typescript
 const symbol = "zecltc";
-const since = 1547146811;
+const timestamp = 1547146811;
 const limit_auction_results = 100;
 const include_indicative = true;
-const history = await publicClient.getAuctionHistory({
+const history = await client.getAuctionHistory({
   symbol,
-  since,
+  timestamp,
   limit_auction_results,
   include_indicative
 });
@@ -96,11 +96,11 @@ const history = await publicClient.getAuctionHistory({
 
 ### AuthenticatedClient
 
-```javascript
-const { AuthenticatedClient } = require("gemini-node-api");
+```typescript
+import { AuthenticatedClient } from "gemini-node-api";
 const key = "gemini-api-key";
 const secret = "gemini-api-secret";
-const authClient = new AuthenticatedClient({ key, secret });
+const client = new AuthenticatedClient({ key, secret });
 ```
 
 - [`newOrder`](https://docs.gemini.com/rest-api/#new-order)
@@ -267,11 +267,17 @@ const transfers = await client.getTransfers({
 
 - [`getNewAddress`](https://docs.gemini.com/rest-api/#new-deposit-address)
 
-```javascript
+```typescript
 const currency = "ltc";
 const label = "New LTC deposit address";
 const legacy = true;
-const address = await authClient.getNewAddress({ currency, label, legacy });
+const account = "primary";
+const address = await client.getNewAddress({
+  currency,
+  label,
+  legacy,
+  account
+});
 ```
 
 - [`withdrawCrypto`](https://docs.gemini.com/rest-api/#withdraw-crypto-funds-to-whitelisted-address)

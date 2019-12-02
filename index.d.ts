@@ -72,12 +72,6 @@ declare module "gemini-node-api" {
     side: "buy" | "sell";
   };
 
-  export type NewAddressFilter = {
-    currency: string;
-    label?: string;
-    legacy?: boolean;
-  };
-
   export type WithdrawCryptoFilter = {
     currency: string;
     address: string;
@@ -241,12 +235,6 @@ declare module "gemini-node-api" {
     result: "confirmed";
   };
 
-  export type NewAddress = {
-    currency: string;
-    address: string;
-    label?: string;
-  };
-
   export type Withdrawal = {
     address: string;
     amount: string;
@@ -320,8 +308,6 @@ declare module "gemini-node-api" {
     confirmClearingOrder(
       options: ConfirmClearingOptions
     ): Promise<ConfirmClearingOptionsResponse>;
-
-    getNewAddress(options: NewAddressFilter): Promise<NewAddress>;
 
     withdrawCrypto(options: WithdrawCryptoFilter): Promise<Withdrawal>;
   }
