@@ -10,6 +10,7 @@ import {
   Transfer,
   NewAddress,
   Withdrawal,
+  InternalTransferResponse,
   AccountInfo,
   GUSDWithdrawal,
   Heartbeat
@@ -215,6 +216,29 @@ suite("AuthenticatedClient", () => {
       address,
       amount,
       account
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".internalTransfer()", async () => {
+    const currency = "btc";
+    const request = "/v1/account/transfer/" + currency;
+    const sourceAccount = "my-account";
+    const targetAccount = "my-other-account";
+    const amount = "1";
+    const options = { request, sourceAccount, targetAccount, amount, nonce };
+    const response: InternalTransferResponse = {
+      uuid: "9c153d64-83ba-4532-a159-ebe3f6797766"
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.internalTransfer({
+      currency,
+      sourceAccount,
+      targetAccount,
+      amount
     });
     assert.deepStrictEqual(data, response);
   });
