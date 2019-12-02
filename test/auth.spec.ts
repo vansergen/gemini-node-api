@@ -5,7 +5,8 @@ import {
   Headers,
   ApiUri,
   SignRequest,
-  Account
+  Account,
+  AccountInfo
 } from "../index";
 
 const key = "Gemini-API-KEY";
@@ -54,6 +55,40 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.createAccount({ name, type });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getAccounts()", async () => {
+    const request = "/v1/account/list";
+    const options = { request, nonce };
+    const response: AccountInfo[] = [
+      {
+        name: "Primary",
+        account: "primary",
+        type: "exchange",
+        counterparty_id: "counterparty_id1",
+        created: 1494204114215
+      },
+      {
+        name: "test1",
+        account: "test1",
+        type: "custody",
+        counterparty_id: "counterparty_id2",
+        created: 1575291112811
+      },
+      {
+        name: "test2",
+        account: "test2",
+        type: "exchange",
+        counterparty_id: "counterparty_id3",
+        created: 1575293113336
+      }
+    ];
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.getAccounts();
     assert.deepStrictEqual(data, response);
   });
 });
