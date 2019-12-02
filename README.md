@@ -289,6 +289,12 @@ const type = "custody";
 const result = await client.createAccount({ name, type });
 ```
 
+- [`getAccounts`](https://docs.gemini.com/rest-api/#get-accounts-in-master-group)
+
+```typescript
+const accounts = await client.getAccounts();
+```
+
 - [`withdrawGUSD`](https://docs.gemini.com/rest-api/#withdraw-usd-as-gusd)
 
 ```javascript
