@@ -72,11 +72,6 @@ declare module "gemini-node-api" {
     side: "buy" | "sell";
   };
 
-  export type TransferFilter = {
-    timestamp?: number;
-    limit_transfers?: number;
-  };
-
   export type NewAddressFilter = {
     currency: string;
     label?: string;
@@ -246,20 +241,6 @@ declare module "gemini-node-api" {
     result: "confirmed";
   };
 
-  export type Transfer = {
-    type: "Deposit" | "Withdrawal";
-    status: "Advanced" | "Complete";
-    timestampms: number;
-    eid: number;
-    currency: string;
-    amount: string;
-    method?: "ACH" | "Wire";
-    txHash?: string;
-    outputIdx?: number;
-    destination?: string;
-    purpose?: string;
-  };
-
   export type NewAddress = {
     currency: string;
     address: string;
@@ -339,8 +320,6 @@ declare module "gemini-node-api" {
     confirmClearingOrder(
       options: ConfirmClearingOptions
     ): Promise<ConfirmClearingOptionsResponse>;
-
-    getTransfers(options?: TransferFilter): Promise<Transfer[]>;
 
     getNewAddress(options: NewAddressFilter): Promise<NewAddress>;
 

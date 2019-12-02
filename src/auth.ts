@@ -5,6 +5,11 @@ import { SignRequest } from "./signer";
 
 export type AccountName = { account?: string };
 
+export type TransferFilter = AccountName & {
+  timestamp?: number;
+  limit_transfers?: number;
+};
+
 export type Account = { name: string; type?: "exchange" | "custody" };
 
 export type WithdrawGUSDFilter = AccountName & {
@@ -18,6 +23,20 @@ export type Balance = {
   amount: string;
   available: string;
   availableForWithdrawal: string;
+};
+
+export type Transfer = {
+  type: "Deposit" | "Withdrawal";
+  status: "Advanced" | "Complete";
+  timestampms: number;
+  eid: number;
+  currency: string;
+  amount: string;
+  method?: "ACH" | "Wire";
+  txHash?: string;
+  outputIdx?: number;
+  destination?: string;
+  purpose?: string;
 };
 
 export type AccountInfo = {
@@ -65,6 +84,13 @@ export class AuthenticatedClient extends PublicClient {
    */
   getAvailableBalances(body?: AccountName): Promise<Balance[]> {
     return this.post({ body: { request: "/v1/balances", ...body } });
+  }
+
+  /**
+   * Get deposits and withdrawals in the supported currencies.
+   */
+  getTransfers(body?: TransferFilter): Promise<Transfer[]> {
+    return this.post({ body: { request: "/v1/transfers", ...body } });
   }
 
   /**

@@ -254,10 +254,15 @@ const balances = await client.getAvailableBalances({ account });
 
 - [`getTransfers`](https://docs.gemini.com/rest-api/#transfers)
 
-```javascript
+```typescript
 const timestamp = 1495127793;
 const limit_transfers = 12;
-const transfers = await authClient.getTransfers({ timestamp, limit_transfers });
+const account = "primary";
+const transfers = await client.getTransfers({
+  timestamp,
+  limit_transfers,
+  account
+});
 ```
 
 - [`getNewAddress`](https://docs.gemini.com/rest-api/#new-deposit-address)
