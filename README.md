@@ -281,6 +281,14 @@ const withdrawal = await authClient.withdrawCrypto({
 });
 ```
 
+- [`createAccount`](https://docs.gemini.com/rest-api/#create-account)
+
+```typescript
+const name = "My Secondary Account";
+const type = "custody";
+const result = await client.createAccount({ name, type });
+```
+
 - [`withdrawGUSD`](https://docs.gemini.com/rest-api/#withdraw-usd-as-gusd)
 
 ```javascript
