@@ -5,6 +5,14 @@ import { SignRequest } from "./signer";
 
 export type Account = { name: string; type?: "exchange" | "custody" };
 
+export type AccountInfo = {
+  name: string;
+  account: string;
+  type: "exchange" | "custody";
+  counterparty_id: string;
+  created: number;
+};
+
 export type AuthenticatedClientOptions = PublicClientOptions & {
   key: string;
   secret: string;
@@ -34,6 +42,13 @@ export class AuthenticatedClient extends PublicClient {
    */
   createAccount(body: Account): Promise<Account> {
     return this.post({ body: { request: "/v1/account/create", ...body } });
+  }
+
+  /**
+   * Get the accounts within the group.
+   */
+  getAccounts(): Promise<AccountInfo[]> {
+    return this.post({ body: { request: "/v1/account/list" } });
   }
 
   get nonce(): () => number {
