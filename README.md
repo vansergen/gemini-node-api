@@ -407,27 +407,6 @@ websocket.once("close", market => {
 websocket.disconnectOrders();
 ```
 
-### SignRequest
-
-```javascript
-const { SignRequest } = require('gemini-node-api');
-
-const key = 'Gemini-API-KEY';
-const secret = 'Gemini-API-SECRET';
-
-const request = '/v1/deposit/btc/newAddress';
-const nonce = 1;
-const label = 'My first Gemini deposit address';
-
-const headers = SignRequest({ key, secret }, { request, nonce, label });
-// headers
-{
-  'X-GEMINI-PAYLOAD': 'eyJyZXF1ZXN0IjoiL3YxL2RlcG9zaXQvYnRjL25ld0FkZHJlc3MiLCJub25jZSI6MSwibGFiZWwiOiJNeSBmaXJzdCBHZW1pbmkgZGVwb3NpdCBhZGRyZXNzIn0=',
-  'X-GEMINI-SIGNATURE': '1bf000f1de4eb00384e5b9e84f8128cdff86b392c202bc5366cd7df408d592a649999fd22a7d9f7e445cf30e6cbcfbb0',
-  'X-GEMINI-APIKEY': 'Gemini-API-KEY'
-}
-```
-
 ### Test
 
 ```bash

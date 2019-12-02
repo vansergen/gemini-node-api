@@ -124,7 +124,7 @@ export type PublicClientOptions = {
 };
 
 export class PublicClient extends RPC {
-  symbol: string;
+  readonly symbol: string;
 
   constructor({
     symbol = DefaultSymbol,
