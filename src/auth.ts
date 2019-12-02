@@ -22,6 +22,13 @@ export type WithdrawCryptoFilter = AccountName & {
   amount: string;
 };
 
+export type InternalTransferFilter = {
+  currency: string;
+  sourceAccount: string;
+  targetAccount: string;
+  amount: string;
+};
+
 export type Account = { name: string; type?: "exchange" | "custody" };
 
 export type WithdrawGUSDFilter = AccountName & {
@@ -64,6 +71,8 @@ export type Withdrawal = {
   withdrawalId?: string;
   message?: string;
 };
+
+export type InternalTransferResponse = { uuid: string };
 
 export type AccountInfo = {
   name: string;
@@ -135,6 +144,17 @@ export class AuthenticatedClient extends PublicClient {
     ...body
   }: WithdrawCryptoFilter): Promise<Withdrawal> {
     const request = "/v1/withdraw/" + currency;
+    return this.post({ body: { request, ...body } });
+  }
+
+  /**
+   * Make an internal transfer between any two exchange accounts within the Group.
+   */
+  internalTransfer({
+    currency,
+    ...body
+  }: InternalTransferFilter): Promise<InternalTransferResponse> {
+    const request = "/v1/account/transfer/" + currency;
     return this.post({ body: { request, ...body } });
   }
 
