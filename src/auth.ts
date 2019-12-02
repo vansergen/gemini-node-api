@@ -26,6 +26,8 @@ export type GUSDWithdrawal = {
   txHash: string;
 };
 
+export type Heartbeat = { result: "ok" };
+
 export type AuthenticatedClientOptions = PublicClientOptions & {
   key: string;
   secret: string;
@@ -69,6 +71,13 @@ export class AuthenticatedClient extends PublicClient {
    */
   withdrawGUSD(body: WithdrawGUSDFilter): Promise<GUSDWithdrawal> {
     return this.post({ body: { request: "/v1/withdraw/usd", ...body } });
+  }
+
+  /**
+   * Prevent a session from timing out and canceling orders if the require heartbeat flag has been set.
+   */
+  heartbeat(): Promise<Heartbeat> {
+    return this.post({ body: { request: "/v1/heartbeat" } });
   }
 
   get nonce(): () => number {

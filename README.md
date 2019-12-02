@@ -306,8 +306,8 @@ const withdrawal = await client.withdrawGUSD({ address, amount, account });
 
 - [`heartbeat`](https://docs.gemini.com/rest-api/#heartbeat)
 
-```javascript
-const heartbeat = await authClient.heartbeat();
+```typescript
+const heartbeat = await client.heartbeat();
 ```
 
 ### WebsocketClient

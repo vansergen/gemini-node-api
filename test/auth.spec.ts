@@ -7,7 +7,8 @@ import {
   SignRequest,
   Account,
   AccountInfo,
-  GUSDWithdrawal
+  GUSDWithdrawal,
+  Heartbeat
 } from "../index";
 
 const key = "Gemini-API-KEY";
@@ -113,6 +114,18 @@ suite("AuthenticatedClient", () => {
       amount,
       account
     });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".heartbeat()", async () => {
+    const request = "/v1/heartbeat";
+    const options = { request, nonce };
+    const response: Heartbeat = { result: "ok" };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.heartbeat();
     assert.deepStrictEqual(data, response);
   });
 });

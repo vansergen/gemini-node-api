@@ -282,8 +282,6 @@ declare module "gemini-node-api" {
     message?: string;
   };
 
-  export type Heartbeat = { result: "ok" };
-
   export type PublicClientOptions = {
     symbol?: string;
     sandbox?: boolean;
@@ -357,8 +355,6 @@ declare module "gemini-node-api" {
     getNewAddress(options: NewAddressFilter): Promise<NewAddress>;
 
     withdrawCrypto(options: WithdrawCryptoFilter): Promise<Withdrawal>;
-
-    heartbeat(): Promise<Heartbeat>;
   }
 
   export class WebsocketClient extends EventEmitter {
