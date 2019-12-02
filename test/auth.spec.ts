@@ -6,6 +6,7 @@ import {
   ApiUri,
   SignRequest,
   Account,
+  Balance,
   AccountInfo,
   GUSDWithdrawal,
   Heartbeat
@@ -44,6 +45,41 @@ suite("AuthenticatedClient", () => {
     assert.deepStrictEqual(client.key, key);
     assert.deepStrictEqual(client.secret, secret);
     assert.deepStrictEqual(client.nonce, _nonce);
+  });
+
+  test(".getAvailableBalances()", async () => {
+    const request = "/v1/balances";
+    const account = "primary";
+    const options = { request, account, nonce };
+    const response: Balance[] = [
+      {
+        type: "exchange",
+        currency: "BTC",
+        amount: "1154.62034001",
+        available: "1129.10517279",
+        availableForWithdrawal: "1129.10517279"
+      },
+      {
+        type: "exchange",
+        currency: "USD",
+        amount: "18722.79",
+        available: "14481.62",
+        availableForWithdrawal: "14481.62"
+      },
+      {
+        type: "exchange",
+        currency: "ETH",
+        amount: "20124.50369697",
+        available: "20124.50369697",
+        availableForWithdrawal: "20124.50369697"
+      }
+    ];
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.getAvailableBalances({ account });
+    assert.deepStrictEqual(data, response);
   });
 
   test(".createAccount()", async () => {

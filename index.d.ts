@@ -246,14 +246,6 @@ declare module "gemini-node-api" {
     result: "confirmed";
   };
 
-  export type Balance = {
-    type: "exchage";
-    currency: string;
-    amount: string;
-    available: string;
-    availableForWithdrawal: string;
-  };
-
   export type Transfer = {
     type: "Deposit" | "Withdrawal";
     status: "Advanced" | "Complete";
@@ -347,8 +339,6 @@ declare module "gemini-node-api" {
     confirmClearingOrder(
       options: ConfirmClearingOptions
     ): Promise<ConfirmClearingOptionsResponse>;
-
-    getAvailableBalances(): Promise<Balance[]>;
 
     getTransfers(options?: TransferFilter): Promise<Transfer[]>;
 

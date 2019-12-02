@@ -247,8 +247,9 @@ const order = await authClient.confirmClearingOrder({
 
 - [`getAvailableBalances`](https://docs.gemini.com/rest-api/#get-available-balances)
 
-```javascript
-const balances = await authClient.getAvailableBalances();
+```typescript
+const account = "primary";
+const balances = await client.getAvailableBalances({ account });
 ```
 
 - [`getTransfers`](https://docs.gemini.com/rest-api/#transfers)

@@ -12,6 +12,14 @@ export type WithdrawGUSDFilter = AccountName & {
   amount: string;
 };
 
+export type Balance = {
+  type: "exchange";
+  currency: string;
+  amount: string;
+  available: string;
+  availableForWithdrawal: string;
+};
+
 export type AccountInfo = {
   name: string;
   account: string;
@@ -50,6 +58,13 @@ export class AuthenticatedClient extends PublicClient {
     const request = { key: this.key, secret: this.secret, options: body };
     const headers = { ...Headers, ...SignRequest(request) };
     return super.post({ uri, headers });
+  }
+
+  /**
+   * Get the available balances in the supported currencies.
+   */
+  getAvailableBalances(body?: AccountName): Promise<Balance[]> {
+    return this.post({ body: { request: "/v1/balances", ...body } });
   }
 
   /**

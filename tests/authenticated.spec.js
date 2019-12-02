@@ -895,49 +895,6 @@ suite("AuthenticatedClient", () => {
       .catch(error => assert.fail(error));
   });
 
-  test(".getAvailableBalances()", done => {
-    const response = [
-      {
-        type: "exchange",
-        currency: "BTC",
-        amount: "1154.62034001",
-        available: "1129.10517279",
-        availableForWithdrawal: "1129.10517279"
-      },
-      {
-        type: "exchange",
-        currency: "USD",
-        amount: "18722.79",
-        available: "14481.62",
-        availableForWithdrawal: "14481.62"
-      },
-      {
-        type: "exchange",
-        currency: "ETH",
-        amount: "20124.50369697",
-        available: "20124.50369697",
-        availableForWithdrawal: "20124.50369697"
-      }
-    ];
-    const request = "/v1/balances";
-    const nonce = 1;
-    const payload = { request, nonce };
-    authClient.nonce = () => nonce;
-
-    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
-      .post(request)
-      .times(1)
-      .reply(200, response);
-
-    authClient
-      .getAvailableBalances()
-      .then(data => {
-        assert.deepStrictEqual(data, response);
-        done();
-      })
-      .catch(error => assert.fail(error));
-  });
-
   test(".getTransfers()", done => {
     const response = [
       {
