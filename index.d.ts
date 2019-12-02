@@ -89,11 +89,6 @@ declare module "gemini-node-api" {
     amount: number;
   };
 
-  export type WithdrawGUSDFilter = {
-    address: string;
-    amount: number;
-  };
-
   export type WSMarketOptions = {
     symbol?: string;
     heartbeat?: boolean;
@@ -287,12 +282,6 @@ declare module "gemini-node-api" {
     message?: string;
   };
 
-  export type GUSDWithdrawal = {
-    destination: string;
-    amount: string;
-    txHash: string;
-  };
-
   export type Heartbeat = { result: "ok" };
 
   export type PublicClientOptions = {
@@ -368,8 +357,6 @@ declare module "gemini-node-api" {
     getNewAddress(options: NewAddressFilter): Promise<NewAddress>;
 
     withdrawCrypto(options: WithdrawCryptoFilter): Promise<Withdrawal>;
-
-    withdrawGUSD(options: WithdrawGUSDFilter): Promise<GUSDWithdrawal>;
 
     heartbeat(): Promise<Heartbeat>;
   }

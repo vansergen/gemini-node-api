@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { SignRequest } from "../";
+import { SignRequest, AuthHeaders } from "../";
 
 suite("SignRequest", () => {
   test("correct signature", () => {
@@ -11,7 +11,7 @@ suite("SignRequest", () => {
       order_id: 18834
     };
 
-    const expectedSignature = {
+    const expectedSignature: AuthHeaders = {
       "X-GEMINI-APIKEY": "mykey",
       "X-GEMINI-PAYLOAD":
         "eyJyZXF1ZXN0IjoiL3YxL29yZGVyL3N0YXR1cyIsIm5vbmNlIjoxMjM0NTYsIm9yZGVyX2lkIjoxODgzNH0=",

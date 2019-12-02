@@ -297,10 +297,11 @@ const accounts = await client.getAccounts();
 
 - [`withdrawGUSD`](https://docs.gemini.com/rest-api/#withdraw-usd-as-gusd)
 
-```javascript
+```typescript
 const address = "0x0F2B20Acb2fD7EEbC0ABc3AEe0b00d57533b6bD1";
-const amount = 500;
-const withdrawal = await authClient.withdrawGUSD({ address, amount });
+const amount = "500";
+const account = "primary";
+const withdrawal = await client.withdrawGUSD({ address, amount, account });
 ```
 
 - [`heartbeat`](https://docs.gemini.com/rest-api/#heartbeat)

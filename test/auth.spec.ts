@@ -6,7 +6,8 @@ import {
   ApiUri,
   SignRequest,
   Account,
-  AccountInfo
+  AccountInfo,
+  GUSDWithdrawal
 } from "../index";
 
 const key = "Gemini-API-KEY";
@@ -89,6 +90,29 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getAccounts();
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".withdrawGUSD()", async () => {
+    const request = "/v1/withdraw/usd";
+    const address = "0x0F2B20Acb2fD7EEbC0ABc3AEe0b00d57533b6bD1";
+    const amount = "500";
+    const account = "primary";
+    const options = { request, address, amount, account, nonce };
+    const response: GUSDWithdrawal = {
+      destination: "0x0F2B20Acb2fD7EEbC0ABc3AEe0b00d57533b6bD2",
+      amount: "500",
+      txHash: "6b74434ce7b12360e8c2f0321a9d6302d13beff4d707933a943a6aa267267c93"
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.withdrawGUSD({
+      address,
+      amount,
+      account
+    });
     assert.deepStrictEqual(data, response);
   });
 });

@@ -3,7 +3,14 @@ import { RequestPromise as Promise } from "request-promise";
 import { PublicClient, PublicClientOptions, Headers } from "./public";
 import { SignRequest } from "./signer";
 
+export type AccountName = { account?: string };
+
 export type Account = { name: string; type?: "exchange" | "custody" };
+
+export type WithdrawGUSDFilter = AccountName & {
+  address: string;
+  amount: string;
+};
 
 export type AccountInfo = {
   name: string;
@@ -11,6 +18,12 @@ export type AccountInfo = {
   type: "exchange" | "custody";
   counterparty_id: string;
   created: number;
+};
+
+export type GUSDWithdrawal = {
+  destination: string;
+  amount: string;
+  txHash: string;
 };
 
 export type AuthenticatedClientOptions = PublicClientOptions & {
@@ -49,6 +62,13 @@ export class AuthenticatedClient extends PublicClient {
    */
   getAccounts(): Promise<AccountInfo[]> {
     return this.post({ body: { request: "/v1/account/list" } });
+  }
+
+  /**
+   * Withdraw `USD` as `GUSD`.
+   */
+  withdrawGUSD(body: WithdrawGUSDFilter): Promise<GUSDWithdrawal> {
+    return this.post({ body: { request: "/v1/withdraw/usd", ...body } });
   }
 
   get nonce(): () => number {

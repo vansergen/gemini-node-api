@@ -1082,33 +1082,6 @@ suite("AuthenticatedClient", () => {
       .catch(error => assert.fail(error));
   });
 
-  test(".withdrawGUSD()", done => {
-    const request = "/v1/withdraw/usd";
-    const address = "0x943a6C7e15FEc0555528266a44D573a6E1A21DBD";
-    const amount = 50000;
-    const nonce = 1;
-    authClient.nonce = () => nonce;
-
-    const payload = { request, address, amount, nonce };
-    const response = {
-      destination: address,
-      amount,
-      txHash: "6b74434ce7b12360e8c2f0321a9d6302d13beff4d707933a943a6aa267267c93"
-    };
-    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
-      .post(request)
-      .times(1)
-      .reply(200, response);
-
-    authClient
-      .withdrawGUSD({ address, amount })
-      .then(data => {
-        assert.deepStrictEqual(data, response);
-        done();
-      })
-      .catch(error => assert.fail(error));
-  });
-
   test(".heartbeat()", done => {
     const request = "/v1/heartbeat";
     const nonce = 1;
