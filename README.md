@@ -295,6 +295,21 @@ const withdrawal = await client.withdrawCrypto({
 });
 ```
 
+- [`internalTransfer`](https://docs.gemini.com/rest-api/#internal-transfers)
+
+```typescript
+const currency = "btc";
+const sourceAccount = "primary";
+const targetAccount = "secondary";
+const amount = "100";
+const transfer = await client.internalTransfer({
+  currency,
+  sourceAccount,
+  targetAccount,
+  amount
+});
+```
+
 - [`createAccount`](https://docs.gemini.com/rest-api/#create-account)
 
 ```typescript
