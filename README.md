@@ -228,6 +228,27 @@ const order = await client.newClearingOrder({
 });
 ```
 
+- [`newBrokerOrder`](https://docs.gemini.com/rest-api/#new-broker-order)
+
+```typescript
+const source_counterparty_id = "R485E04Q";
+const target_counterparty_id = "Z4929ZDY";
+const expires_in_hrs = 1;
+const symbol = "ethusd";
+const amount = 175;
+const price = 200;
+const side = "sell";
+const order = await client.newBrokerOrder({
+  source_counterparty_id,
+  target_counterparty_id,
+  expires_in_hrs,
+  symbol,
+  amount,
+  price,
+  side
+});
+```
+
 - [`getClearingOrderStatus`](https://docs.gemini.com/rest-api/#clearing-order-status)
 
 ```javascript
