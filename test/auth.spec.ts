@@ -9,6 +9,7 @@ import {
   OrderStatus,
   CancelOrdersResponse,
   PastTrade,
+  NotionalVolume,
   Account,
   Balance,
   Transfer,
@@ -431,6 +432,44 @@ suite("AuthenticatedClient", () => {
       symbol,
       limit_trades
     });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getNotionalVolume()", async () => {
+    const request = "/v1/notionalvolume";
+    const account = "primary";
+    const options = { request, account, nonce };
+    const response: NotionalVolume = {
+      web_maker_fee_bps: 25,
+      web_taker_fee_bps: 35,
+      web_auction_fee_bps: 25,
+      api_maker_fee_bps: 10,
+      api_taker_fee_bps: 35,
+      api_auction_fee_bps: 20,
+      fix_maker_fee_bps: 10,
+      fix_taker_fee_bps: 35,
+      fix_auction_fee_bps: 20,
+      block_maker_fee_bps: 0,
+      block_taker_fee_bps: 50,
+      notional_30d_volume: 150.0,
+      last_updated_ms: 1551371446000,
+      date: "2019-02-28",
+      notional_1d_volume: [
+        {
+          date: "2019-02-22",
+          notional_volume: 75.0
+        },
+        {
+          date: "2019-02-14",
+          notional_volume: 75.0
+        }
+      ]
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.getNotionalVolume({ account });
     assert.deepStrictEqual(data, response);
   });
 

@@ -198,8 +198,9 @@ const trades = await client.getPastTrades({
 
 - [`getNotionalVolume`](https://docs.gemini.com/rest-api/#get-notional-volume)
 
-```javascript
-const volume = await authClient.getNotionalVolume();
+```typescript
+const account = "primary";
+const volume = await client.getNotionalVolume({ account });
 ```
 
 - [`getTradeVolume`](https://docs.gemini.com/rest-api/#get-trade-volume)

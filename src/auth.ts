@@ -123,6 +123,28 @@ export type PastTrade = {
   break?: string;
 };
 
+export type NotionalVolume = {
+  account_id?: number;
+  date: string;
+  last_updated_ms: number;
+  web_maker_fee_bps: number;
+  web_taker_fee_bps: number;
+  web_auction_fee_bps: number;
+  api_maker_fee_bps: number;
+  api_taker_fee_bps: number;
+  api_auction_fee_bps: number;
+  fix_maker_fee_bps: number;
+  fix_taker_fee_bps: number;
+  fix_auction_fee_bps: number;
+  block_maker_fee_bps: number;
+  block_taker_fee_bps: number;
+  notional_30d_volume: number;
+  notional_1d_volume: {
+    date: string;
+    notional_volume: number;
+  }[];
+};
+
 export type Balance = {
   type: "exchange";
   currency: string;
@@ -279,6 +301,13 @@ export class AuthenticatedClient extends PublicClient {
   }: PastTradesFilter = {}): Promise<PastTrade[]> {
     const request = "/v1/mytrades";
     return this.post({ body: { request, symbol, limit_trades, ...body } });
+  }
+
+  /**
+   * Get the volume in price currency that has been traded across all pairs over a period of 30 days.
+   */
+  getNotionalVolume(body?: AccountName): Promise<NotionalVolume> {
+    return this.post({ body: { request: "/v1/notionalvolume", ...body } });
   }
 
   /**
