@@ -5,6 +5,7 @@ import {
   Headers,
   ApiUri,
   SignRequest,
+  OrderStatus,
   Account,
   Balance,
   Transfer,
@@ -49,6 +50,63 @@ suite("AuthenticatedClient", () => {
     assert.deepStrictEqual(client.key, key);
     assert.deepStrictEqual(client.secret, secret);
     assert.deepStrictEqual(client.nonce, _nonce);
+  });
+
+  test(".newOrder()", async () => {
+    const request = "/v1/order/new";
+    const account = "primary";
+    const amount = 0.1;
+    const client_order_id = "470135";
+    const price = 10500;
+    const symbol = "btcusd";
+    const type = "exchange stop limit";
+    const side = "buy";
+    const stop_price = 10000;
+    const options = {
+      request,
+      symbol,
+      account,
+      amount,
+      client_order_id,
+      price,
+      type,
+      side,
+      stop_price,
+      nonce
+    };
+    const response: OrderStatus = {
+      order_id: "107317752",
+      id: "107317752",
+      symbol: "ethusd",
+      exchange: "gemini",
+      avg_execution_price: "126.25",
+      side: "buy",
+      type: "market buy",
+      timestamp: "1547236481",
+      timestampms: 1547236481910,
+      is_live: false,
+      is_cancelled: false,
+      is_hidden: false,
+      was_forced: false,
+      executed_amount: "0.54517172",
+      remaining_amount: "0",
+      options: []
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.newOrder({
+      account,
+      amount,
+      client_order_id,
+      price,
+      symbol,
+      type,
+      side,
+      stop_price
+    });
+    assert.deepStrictEqual(data, response);
   });
 
   test(".getAvailableBalances()", async () => {
@@ -197,7 +255,7 @@ suite("AuthenticatedClient", () => {
     const currency = "btc";
     const request = "/v1/withdraw/" + currency;
     const address = "1KA8QNcgdcVERrAaKF1puKndB7Q7MMg5PR";
-    const amount = "1";
+    const amount = 1;
     const account = "primary";
     const options = { request, address, amount, account, nonce };
     const response: Withdrawal = {
@@ -225,7 +283,7 @@ suite("AuthenticatedClient", () => {
     const request = "/v1/account/transfer/" + currency;
     const sourceAccount = "my-account";
     const targetAccount = "my-other-account";
-    const amount = "1";
+    const amount = 1;
     const options = { request, sourceAccount, targetAccount, amount, nonce };
     const response: InternalTransferResponse = {
       uuid: "9c153d64-83ba-4532-a159-ebe3f6797766"
@@ -294,7 +352,7 @@ suite("AuthenticatedClient", () => {
   test(".withdrawGUSD()", async () => {
     const request = "/v1/withdraw/usd";
     const address = "0x0F2B20Acb2fD7EEbC0ABc3AEe0b00d57533b6bD1";
-    const amount = "500";
+    const amount = 500;
     const account = "primary";
     const options = { request, address, amount, account, nonce };
     const response: GUSDWithdrawal = {

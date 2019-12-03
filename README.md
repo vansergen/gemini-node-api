@@ -105,18 +105,20 @@ const client = new AuthenticatedClient({ key, secret });
 
 - [`newOrder`](https://docs.gemini.com/rest-api/#new-order)
 
-```javascript
-const order = await authClient.newOrder({
-  symbol: "zecltc",
-  client_order_id: "d0c5340b-6d6c-49d9-b567-48c4bfca13d2",
-  amount: 1,
-  price: 0.9,
-  side: "buy",
-  moc: true, // maker-or-cancel
-  ioc: false, // immediate-or-cancel
-  fok: false, // fill-or-kill
-  ao: false, // auction-only
-  ioi: false // indication-of-interest
+```typescript
+const symbol = "zecltc";
+const client_order_id = "d0c5340b-6d6c-49d9-b567-48c4bfca13d2";
+const amount = 1;
+const price = 0.9;
+const side = "buy";
+const options = ["maker-or-cancel"];
+const order = await client.newOrder({
+  symbol,
+  client_order_id,
+  amount,
+  price,
+  side,
+  options
 });
 ```
 

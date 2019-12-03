@@ -5,6 +5,26 @@ import { SignRequest } from "./signer";
 
 export type AccountName = { account?: string };
 
+export type OrderEexecutionOptions =
+  | "maker-or-cancel"
+  | "immediate-or-cancel"
+  | "fill-or-kill"
+  | "auction-only"
+  | "indication-of-interest";
+
+export type BasicOrderOptions = AccountName & {
+  client_order_id?: string;
+  symbol?: string;
+  amount: number;
+  min_amount?: number;
+  price: number;
+  type: "exchange limit" | "exchange stop limit";
+  options?: [OrderEexecutionOptions];
+  stop_price?: number;
+};
+
+export type OrderOptions = BasicOrderOptions & { side: "buy" | "sell" };
+
 export type TransferFilter = AccountName & {
   timestamp?: number;
   limit_transfers?: number;
@@ -19,21 +39,49 @@ export type NewAddressFilter = AccountName & {
 export type WithdrawCryptoFilter = AccountName & {
   currency: string;
   address: string;
-  amount: string;
+  amount: number;
 };
 
 export type InternalTransferFilter = {
   currency: string;
   sourceAccount: string;
   targetAccount: string;
-  amount: string;
+  amount: number;
 };
 
 export type Account = { name: string; type?: "exchange" | "custody" };
 
 export type WithdrawGUSDFilter = AccountName & {
   address: string;
-  amount: string;
+  amount: number;
+};
+
+export type OrderStatus = {
+  order_id: string;
+  id: string;
+  client_order_id?: string;
+  symbol: string;
+  exchange: "gemini";
+  price?: string;
+  avg_execution_price: string;
+  side: "buy" | "sell";
+  type:
+    | "exchange limit"
+    | "auction-only exchange limit"
+    | "market buy"
+    | "market sell"
+    | "indication-of-interest";
+  options: [OrderEexecutionOptions];
+  timestamp: string;
+  timestampms: number;
+  is_live: boolean;
+  is_cancelled: boolean;
+  is_hidden: boolean;
+  reason?: string;
+  was_forced: false;
+  executed_amount: string;
+  remaining_amount: string;
+  original_amount?: string;
 };
 
 export type Balance = {
@@ -112,6 +160,13 @@ export class AuthenticatedClient extends PublicClient {
     const request = { key: this.key, secret: this.secret, options: body };
     const headers = { ...Headers, ...SignRequest(request) };
     return super.post({ uri, headers });
+  }
+
+  /**
+   * Submit a new order.
+   */
+  newOrder({ symbol = this.symbol, ...body }: OrderOptions) {
+    return this.post({ body: { request: "/v1/order/new", symbol, ...body } });
   }
 
   /**
