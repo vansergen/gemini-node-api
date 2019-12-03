@@ -37,12 +37,20 @@ export type PastTradesFilter = SymbolFilter & {
   timestamp?: number;
 } & AccountName;
 
-export type ClearingOrderOptions = SymbolFilter & {
+export type BaseClearingOrder = SymbolFilter & {
   amount: number;
   price: number;
   side: "buy" | "sell";
   expires_in_hrs: number;
+};
+
+export type ClearingOrderOptions = BaseClearingOrder & {
   counterparty_id?: string;
+};
+
+export type BrokerOrderOptions = BaseClearingOrder & {
+  target_counterparty_id: string;
+  source_counterparty_id: string;
 };
 
 export type TransferFilter = AccountName & {
@@ -360,6 +368,17 @@ export class AuthenticatedClient extends PublicClient {
     ...body
   }: ClearingOrderOptions): Promise<NewClearingOrderResponse> {
     const request = "/v1/clearing/new";
+    return this.post({ body: { request, symbol, ...body } });
+  }
+
+  /**
+   * Submit a new broker clearing order.
+   */
+  newBrokerOrder({
+    symbol = this.symbol,
+    ...body
+  }: BrokerOrderOptions): Promise<NewClearingOrderResponse> {
+    const request = "/v1/clearing/broker/new";
     return this.post({ body: { request, symbol, ...body } });
   }
 
