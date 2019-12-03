@@ -168,9 +168,10 @@ const response = await client.cancelAll({ account });
 
 - [`getOrderStatus`](https://docs.gemini.com/rest-api/#order-status)
 
-```javascript
+```typescript
 const order_id = 44375901;
-const order = await authClient.getOrderStatus({ order_id });
+const account = "primary";
+const order = await client.getOrderStatus({ order_id, account });
 ```
 
 - [`getActiveOrders`](https://docs.gemini.com/rest-api/#get-active-orders)

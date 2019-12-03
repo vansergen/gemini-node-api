@@ -37,46 +37,6 @@ suite("AuthenticatedClient", () => {
       .catch(error => assert.fail(error));
   });
 
-  test(".getOrderStatus()", done => {
-    const order_id = 44375901;
-
-    const request = "/v1/order/status";
-    const nonce = 1;
-    authClient.nonce = () => nonce;
-
-    const payload = { request, order_id, nonce };
-    const response = {
-      order_id: "107317752",
-      id: "107317752",
-      symbol: "ethusd",
-      exchange: "gemini",
-      avg_execution_price: "126.25",
-      side: "buy",
-      type: "market buy",
-      timestamp: "1547236481",
-      timestampms: 1547236481910,
-      is_live: "False",
-      is_cancelled: "False",
-      is_hidden: "False",
-      was_forced: "False",
-      executed_amount: "0.54517172",
-      remaining_amount: "0",
-      options: []
-    };
-    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
-      .post(request)
-      .times(1)
-      .reply(200, response);
-
-    authClient
-      .getOrderStatus({ order_id })
-      .then(data => {
-        assert.deepStrictEqual(data, response);
-        done();
-      })
-      .catch(error => assert.fail(error));
-  });
-
   test(".getActiveOrders()", done => {
     const response = [
       {

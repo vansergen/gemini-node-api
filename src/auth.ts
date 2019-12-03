@@ -229,6 +229,13 @@ export class AuthenticatedClient extends PublicClient {
   }
 
   /**
+   * Get an order status.
+   */
+  getOrderStatus(body: OrderID): Promise<OrderStatus> {
+    return this.post({ body: { request: "/v1/order/status", ...body } });
+  }
+
+  /**
    * Get the available balances in the supported currencies.
    */
   getAvailableBalances(body?: AccountName): Promise<Balance[]> {

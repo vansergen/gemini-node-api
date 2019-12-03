@@ -25,10 +25,6 @@ declare module "gemini-node-api" {
     symbol?: string;
   };
 
-  export type OrderID = {
-    order_id: number;
-  };
-
   export type PastTradesFilter = {
     limit_trades?: number;
     timestamp?: number;
@@ -231,8 +227,6 @@ declare module "gemini-node-api" {
     constructor(options: AuthenticatedClientOptions);
 
     post(options: PostOptions): Promise<RequestResponse>;
-
-    getOrderStatus(options: OrderID): Promise<OrderStatus>;
 
     getActiveOrders(): Promise<OrderStatus[]>;
 
