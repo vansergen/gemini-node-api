@@ -37,35 +37,6 @@ suite("AuthenticatedClient", () => {
       .catch(error => assert.fail(error));
   });
 
-  test(".cancelClearingOrder()", done => {
-    const response = {
-      result: "ok",
-      details: "P0521QDV order canceled"
-    };
-    const request = "/v1/clearing/cancel";
-    const nonce = 1;
-    const clearing_id = "P0521QDV";
-    const payload = {
-      request,
-      clearing_id,
-      nonce
-    };
-    authClient.nonce = () => nonce;
-
-    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
-      .post(request)
-      .times(1)
-      .reply(200, response);
-
-    authClient
-      .cancelClearingOrder({ clearing_id })
-      .then(data => {
-        assert.deepStrictEqual(data, response);
-        done();
-      })
-      .catch(error => assert.fail(error));
-  });
-
   test(".confirmClearingOrder()", done => {
     const response = {
       result: "confirmed"

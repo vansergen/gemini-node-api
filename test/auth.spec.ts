@@ -13,6 +13,7 @@ import {
   TradeVolume,
   NewClearingOrderResponse,
   ClearingOrderStatus,
+  CancelClearingOrderResponse,
   Account,
   Balance,
   Transfer,
@@ -622,6 +623,22 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getClearingOrderStatus({ clearing_id });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".cancelClearingOrder()", async () => {
+    const request = "/v1/clearing/cancel";
+    const clearing_id = "OM9VNL1G";
+    const options = { request, clearing_id, nonce };
+    const response: CancelClearingOrderResponse = {
+      result: "ok",
+      details: "P0521QDV order canceled"
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.cancelClearingOrder({ clearing_id });
     assert.deepStrictEqual(data, response);
   });
 

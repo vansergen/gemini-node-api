@@ -207,6 +207,11 @@ export type ClearingOrderStatus = {
     | "Not Found";
 };
 
+export type CancelClearingOrderResponse = {
+  result: "ok" | "failed";
+  details: string;
+};
+
 export type Balance = {
   type: "exchange";
   currency: string;
@@ -406,6 +411,15 @@ export class AuthenticatedClient extends PublicClient {
    */
   getClearingOrderStatus(body: ClearingOrderID): Promise<ClearingOrderStatus> {
     return this.post({ body: { request: "/v1/clearing/status", ...body } });
+  }
+
+  /**
+   * Cancel a clearing order.
+   */
+  cancelClearingOrder(
+    body: ClearingOrderID
+  ): Promise<CancelClearingOrderResponse> {
+    return this.post({ body: { request: "/v1/clearing/cancel", ...body } });
   }
 
   /**

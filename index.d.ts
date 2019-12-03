@@ -25,10 +25,6 @@ declare module "gemini-node-api" {
     symbol?: string;
   };
 
-  export type ClearingOrderID = {
-    clearing_id: string;
-  };
-
   export type ConfirmClearingOptions = {
     clearing_id: string;
     symbol?: string;
@@ -70,11 +66,6 @@ declare module "gemini-node-api" {
     | string[]
     | number[][];
 
-  export type CancelClearingOrderResponse = {
-    result: "ok";
-    details: string;
-  };
-
   export type ConfirmClearingOptionsResponse = {
     result: "confirmed";
   };
@@ -106,10 +97,6 @@ declare module "gemini-node-api" {
     constructor(options: AuthenticatedClientOptions);
 
     post(options: PostOptions): Promise<RequestResponse>;
-
-    cancelClearingOrder(
-      options: ClearingOrderID
-    ): Promise<CancelClearingOrderResponse>;
 
     confirmClearingOrder(
       options: ConfirmClearingOptions

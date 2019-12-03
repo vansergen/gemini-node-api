@@ -258,9 +258,9 @@ const order = await client.getClearingOrderStatus({ clearing_id });
 
 - [`cancelClearingOrder`](https://docs.gemini.com/rest-api/#cancel-clearing-order)
 
-```javascript
+```typescript
 const clearing_id = "OM9VNL1G";
-const order = await authClient.cancelClearingOrder({ clearing_id });
+const order = await client.cancelClearingOrder({ clearing_id });
 ```
 
 - [`confirmClearingOrder`](https://docs.gemini.com/rest-api/#confirm-clearing-order)
