@@ -10,6 +10,7 @@ import {
   CancelOrdersResponse,
   PastTrade,
   NotionalVolume,
+  TradeVolume,
   Account,
   Balance,
   Transfer,
@@ -470,6 +471,62 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getNotionalVolume({ account });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getTradeVolume()", async () => {
+    const request = "/v1/tradevolume";
+    const account = "primary";
+    const options = { request, account, nonce };
+    const response: TradeVolume[][] = [
+      [
+        {
+          symbol: "btcusd",
+          base_currency: "BTC",
+          notional_currency: "USD",
+          data_date: "2019-01-10",
+          total_volume_base: 8.06021756,
+          maker_buy_sell_ratio: 1,
+          buy_maker_base: 6.06021756,
+          buy_maker_notional: 23461.3515203844,
+          buy_maker_count: 34,
+          sell_maker_base: 0,
+          sell_maker_notional: 0,
+          sell_maker_count: 0,
+          buy_taker_base: 0,
+          buy_taker_notional: 0,
+          buy_taker_count: 0,
+          sell_taker_base: 2,
+          sell_taker_notional: 7935.66,
+          sell_taker_count: 2
+        },
+        {
+          symbol: "ltcusd",
+          base_currency: "LTC",
+          notional_currency: "USD",
+          data_date: "2019-01-11",
+          total_volume_base: 3,
+          maker_buy_sell_ratio: 0,
+          buy_maker_base: 0,
+          buy_maker_notional: 0,
+          buy_maker_count: 0,
+          sell_maker_base: 0,
+          sell_maker_notional: 0,
+          sell_maker_count: 0,
+          buy_taker_base: 3,
+          buy_taker_notional: 98.22,
+          buy_taker_count: 3,
+          sell_taker_base: 0,
+          sell_taker_notional: 0,
+          sell_taker_count: 0
+        }
+      ]
+    ];
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.getTradeVolume({ account });
     assert.deepStrictEqual(data, response);
   });
 

@@ -205,8 +205,8 @@ const volume = await client.getNotionalVolume({ account });
 
 - [`getTradeVolume`](https://docs.gemini.com/rest-api/#get-trade-volume)
 
-```javascript
-const volume = await authClient.getTradeVolume();
+```typescript
+const volume = await client.getTradeVolume();
 ```
 
 - [`newClearingOrder`](https://docs.gemini.com/rest-api/#new-clearing-order)

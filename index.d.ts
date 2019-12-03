@@ -79,28 +79,6 @@ declare module "gemini-node-api" {
     | string[]
     | number[][];
 
-  export type TradeVolume = {
-    account_id: number;
-    symbol: string;
-    base_currency: string;
-    notional_currency: string;
-    data_date: string;
-    total_volume_base: number;
-    maker_buy_sell_ratio: number;
-    buy_maker_base: number;
-    buy_maker_notional: number;
-    buy_maker_count: number;
-    sell_maker_base: number;
-    sell_maker_notional: number;
-    sell_maker_count: number;
-    buy_taker_base: number;
-    buy_taker_notional: number;
-    buy_taker_count: number;
-    sell_taker_base: number;
-    sell_taker_notional: number;
-    sell_taker_count: number;
-  };
-
   export type NewClearingOrderResponse = {
     result: string;
     clearing_id: string;
@@ -154,8 +132,6 @@ declare module "gemini-node-api" {
     constructor(options: AuthenticatedClientOptions);
 
     post(options: PostOptions): Promise<RequestResponse>;
-
-    getTradeVolume(): Promise<TradeVolume[][]>;
 
     newClearingOrder(
       options: ClearingOrderOptions

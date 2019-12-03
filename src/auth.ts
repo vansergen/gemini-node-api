@@ -145,6 +145,28 @@ export type NotionalVolume = {
   }[];
 };
 
+export type TradeVolume = {
+  account_id?: number;
+  symbol: string;
+  base_currency: string;
+  notional_currency: string;
+  data_date: string;
+  total_volume_base: number;
+  maker_buy_sell_ratio: number;
+  buy_maker_base: number;
+  buy_maker_notional: number;
+  buy_maker_count: number;
+  sell_maker_base: number;
+  sell_maker_notional: number;
+  sell_maker_count: number;
+  buy_taker_base: number;
+  buy_taker_notional: number;
+  buy_taker_count: number;
+  sell_taker_base: number;
+  sell_taker_notional: number;
+  sell_taker_count: number;
+};
+
 export type Balance = {
   type: "exchange";
   currency: string;
@@ -308,6 +330,13 @@ export class AuthenticatedClient extends PublicClient {
    */
   getNotionalVolume(body?: AccountName): Promise<NotionalVolume> {
     return this.post({ body: { request: "/v1/notionalvolume", ...body } });
+  }
+
+  /**
+   * Get the trade volume for each symbol.
+   */
+  getTradeVolume(body?: AccountName): Promise<TradeVolume[][]> {
+    return this.post({ body: { request: "/v1/tradevolume", ...body } });
   }
 
   /**
