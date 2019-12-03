@@ -568,6 +568,46 @@ suite("AuthenticatedClient", () => {
     assert.deepStrictEqual(data, response);
   });
 
+  test(".newBrokerOrder()", async () => {
+    const request = "/v1/clearing/broker/new";
+    const source_counterparty_id = "R485E04Q";
+    const target_counterparty_id = "Z4929ZDY";
+    const expires_in_hrs = 1;
+    const symbol = "ethusd";
+    const amount = 175;
+    const price = 200;
+    const side = "sell";
+    const options = {
+      request,
+      symbol,
+      source_counterparty_id,
+      target_counterparty_id,
+      expires_in_hrs,
+      amount,
+      price,
+      side,
+      nonce
+    };
+    const response: NewClearingOrderResponse = {
+      result: "AwaitConfirm",
+      clearing_id: "0OQGOZXW"
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.newBrokerOrder({
+      source_counterparty_id,
+      target_counterparty_id,
+      expires_in_hrs,
+      amount,
+      price,
+      side,
+      symbol
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
   test(".getAvailableBalances()", async () => {
     const request = "/v1/balances";
     const account = "primary";
