@@ -1,6 +1,12 @@
 import { RPCOptions } from "rpc-bluebird";
 import { RequestPromise as Promise } from "request-promise";
-import { PublicClient, PublicClientOptions, Headers } from "./public";
+import {
+  PublicClient,
+  PublicClientOptions,
+  Headers,
+  SymbolFilter,
+  ApiLimit
+} from "./public";
 import { SignRequest } from "./signer";
 
 export type AccountName = { account?: string };
@@ -14,18 +20,22 @@ export type OrderEexecutionOptions =
 
 export type BasicOrderOptions = AccountName & {
   client_order_id?: string;
-  symbol?: string;
   amount: number;
   min_amount?: number;
   price: number;
   type: "exchange limit" | "exchange stop limit";
   options?: [OrderEexecutionOptions];
   stop_price?: number;
-};
+} & SymbolFilter;
 
 export type OrderOptions = BasicOrderOptions & { side: "buy" | "sell" };
 
 export type OrderID = AccountName & { order_id: number };
+
+export type PastTradesFilter = SymbolFilter & {
+  limit_trades?: number;
+  timestamp?: number;
+} & AccountName;
 
 export type TransferFilter = AccountName & {
   timestamp?: number;
@@ -94,6 +104,23 @@ export type CancelOrdersResponse = {
     cancelledOrders: number[];
     cancelRejects: number[];
   };
+};
+
+export type PastTrade = {
+  price: string;
+  amount: string;
+  timestamp: number;
+  timestampms: number;
+  type: "Buy" | "Sell";
+  aggressor: boolean;
+  fee_currency: string;
+  fee_amount: string;
+  tid: number;
+  order_id: string;
+  client_order_id?: string;
+  exchange?: "gemini";
+  is_auction_fill: boolean;
+  break?: string;
 };
 
 export type Balance = {
@@ -240,6 +267,18 @@ export class AuthenticatedClient extends PublicClient {
    */
   getActiveOrders(body?: AccountName): Promise<OrderStatus[]> {
     return this.post({ body: { request: "/v1/orders", ...body } });
+  }
+
+  /**
+   * Get your past trades.
+   */
+  getPastTrades({
+    symbol = this.symbol,
+    limit_trades = ApiLimit,
+    ...body
+  }: PastTradesFilter = {}): Promise<PastTrade[]> {
+    const request = "/v1/mytrades";
+    return this.post({ body: { request, symbol, limit_trades, ...body } });
   }
 
   /**

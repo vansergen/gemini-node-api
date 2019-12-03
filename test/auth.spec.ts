@@ -8,6 +8,7 @@ import {
   DefaultSymbol,
   OrderStatus,
   CancelOrdersResponse,
+  PastTrade,
   Account,
   Balance,
   Transfer,
@@ -373,6 +374,63 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getActiveOrders({ account });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getPastTrades()", async () => {
+    const request = "/v1/mytrades";
+    const account = "primary";
+    const symbol = "bcheth";
+    const timestamp = 1547220640194;
+    const limit_trades = 2;
+    const options = {
+      request,
+      symbol,
+      limit_trades,
+      timestamp,
+      account,
+      nonce
+    };
+    const response: PastTrade[] = [
+      {
+        price: "3648.09",
+        amount: "0.0027343246",
+        timestamp: 1547232911,
+        timestampms: 1547232911021,
+        type: "Buy",
+        aggressor: true,
+        fee_currency: "USD",
+        fee_amount: "0.024937655575035",
+        tid: 107317526,
+        order_id: "107317524",
+        exchange: "gemini",
+        is_auction_fill: false
+      },
+      {
+        price: "3633.00",
+        amount: "0.00423677",
+        timestamp: 1547220640,
+        timestampms: 1547220640195,
+        type: "Buy",
+        aggressor: false,
+        fee_currency: "USD",
+        fee_amount: "0.038480463525",
+        tid: 106921823,
+        order_id: "106817811",
+        exchange: "gemini",
+        is_auction_fill: false
+      }
+    ];
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.getPastTrades({
+      timestamp,
+      account,
+      symbol,
+      limit_trades
+    });
     assert.deepStrictEqual(data, response);
   });
 

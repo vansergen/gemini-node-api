@@ -25,11 +25,6 @@ declare module "gemini-node-api" {
     symbol?: string;
   };
 
-  export type PastTradesFilter = {
-    limit_trades?: number;
-    timestamp?: number;
-  } & SymbolFilter;
-
   export type ClearingOrderOptions = {
     symbol?: string;
     amount: number;
@@ -87,23 +82,6 @@ declare module "gemini-node-api" {
   export type NotionalOneDay = {
     date: string;
     notional_volume: number;
-  };
-
-  export type PastTrade = {
-    price: string;
-    amount: string;
-    timestamp: number;
-    timestampms: number;
-    type: "Buy" | "Sell";
-    aggressor: boolean;
-    fee_currency: string;
-    fee_amount: string;
-    tid: number;
-    order_id: string;
-    client_order_id?: string;
-    exchange?: "gemini";
-    is_auction_fill: boolean;
-    break?: string;
   };
 
   export type NotionalVolume = {
@@ -200,8 +178,6 @@ declare module "gemini-node-api" {
     constructor(options: AuthenticatedClientOptions);
 
     post(options: PostOptions): Promise<RequestResponse>;
-
-    getPastTrades(options?: PastTradesFilter): Promise<PastTrade[]>;
 
     getNotionalVolume(): Promise<NotionalVolume>;
 

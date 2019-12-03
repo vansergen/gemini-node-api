@@ -183,14 +183,16 @@ const orders = await client.getActiveOrders({ account });
 
 - [`getPastTrades`](https://docs.gemini.com/rest-api/#get-past-trades)
 
-```javascript
+```typescript
 const symbol = "bcheth";
 const limit_trades = 10;
 const timestamp = 1547232911;
-const trades = await authClient.getPastTrades({
+const account = "primary";
+const trades = await client.getPastTrades({
   symbol,
   limit_trades,
-  timestamp
+  timestamp,
+  account
 });
 ```
 
