@@ -7,6 +7,7 @@ import {
   SignRequest,
   DefaultSymbol,
   OrderStatus,
+  CancelOrdersResponse,
   Account,
   Balance,
   Transfer,
@@ -247,6 +248,25 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.cancelOrder({ order_id, account });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".cancelSession()", async () => {
+    const request = "/v1/order/cancel/session";
+    const account = "primary";
+    const options = { request, account, nonce };
+    const response: CancelOrdersResponse = {
+      result: "ok",
+      details: {
+        cancelledOrders: [330429345],
+        cancelRejects: []
+      }
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.cancelSession({ account });
     assert.deepStrictEqual(data, response);
   });
 

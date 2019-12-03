@@ -154,8 +154,9 @@ const order = await client.cancelOrder({ order_id, account });
 
 - [`cancelSession`](https://docs.gemini.com/rest-api/#cancel-all-session-orders)
 
-```javascript
-const response = await authClient.cancelSession();
+```typescript
+const account = "primary";
+const response = await client.cancelSession({ account });
 ```
 
 - [`cancelAll`](https://docs.gemini.com/rest-api/#cancel-all-active-orders)

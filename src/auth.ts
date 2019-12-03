@@ -88,6 +88,14 @@ export type OrderStatus = {
   original_amount?: string;
 };
 
+export type CancelOrdersResponse = {
+  result: "ok";
+  details: {
+    cancelledOrders: number[];
+    cancelRejects: number[];
+  };
+};
+
 export type Balance = {
   type: "exchange";
   currency: string;
@@ -203,6 +211,14 @@ export class AuthenticatedClient extends PublicClient {
    */
   cancelOrder(body: OrderID): Promise<OrderStatus> {
     return this.post({ body: { request: "/v1/order/cancel", ...body } });
+  }
+
+  /**
+   * Cancel all orders opened by this session.
+   */
+  cancelSession(body?: AccountName): Promise<CancelOrdersResponse> {
+    const request = "/v1/order/cancel/session";
+    return this.post({ body: { request, ...body } });
   }
 
   /**
