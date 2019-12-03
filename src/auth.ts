@@ -222,6 +222,13 @@ export class AuthenticatedClient extends PublicClient {
   }
 
   /**
+   * Cancel all outstanding orders created by all sessions owned by this account.
+   */
+  cancelAll(body?: AccountName): Promise<CancelOrdersResponse> {
+    return this.post({ body: { request: "/v1/order/cancel/all", ...body } });
+  }
+
+  /**
    * Get the available balances in the supported currencies.
    */
   getAvailableBalances(body?: AccountName): Promise<Balance[]> {

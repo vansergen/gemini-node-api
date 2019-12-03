@@ -270,6 +270,25 @@ suite("AuthenticatedClient", () => {
     assert.deepStrictEqual(data, response);
   });
 
+  test(".cancelAll()", async () => {
+    const request = "/v1/order/cancel/all";
+    const account = "primary";
+    const options = { request, account, nonce };
+    const response: CancelOrdersResponse = {
+      result: "ok",
+      details: {
+        cancelRejects: [],
+        cancelledOrders: [330429106, 330429079, 330429082]
+      }
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.cancelAll({ account });
+    assert.deepStrictEqual(data, response);
+  });
+
   test(".getAvailableBalances()", async () => {
     const request = "/v1/balances";
     const account = "primary";

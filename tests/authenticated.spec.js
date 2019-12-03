@@ -37,33 +37,6 @@ suite("AuthenticatedClient", () => {
       .catch(error => assert.fail(error));
   });
 
-  test(".cancelAll()", done => {
-    const request = "/v1/order/cancel/all";
-    const nonce = 1;
-    authClient.nonce = () => nonce;
-
-    const payload = { request, nonce };
-    const response = {
-      result: "ok",
-      details: {
-        cancelRejects: [],
-        cancelledOrders: [330429106, 330429079, 330429082]
-      }
-    };
-    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
-      .post(request)
-      .times(1)
-      .reply(200, response);
-
-    authClient
-      .cancelAll()
-      .then(data => {
-        assert.deepStrictEqual(data, response);
-        done();
-      })
-      .catch(error => assert.fail(error));
-  });
-
   test(".getOrderStatus()", done => {
     const order_id = 44375901;
 

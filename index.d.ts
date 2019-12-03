@@ -120,14 +120,6 @@ declare module "gemini-node-api" {
     original_amount?: string;
   };
 
-  export type CancelOrdersResponse = {
-    result: "ok";
-    details: {
-      cancelledOrders: number[];
-      cancelRejects: number[];
-    };
-  };
-
   export type PastTrade = {
     price: string;
     amount: string;
@@ -239,8 +231,6 @@ declare module "gemini-node-api" {
     constructor(options: AuthenticatedClientOptions);
 
     post(options: PostOptions): Promise<RequestResponse>;
-
-    cancelAll(): Promise<CancelOrdersResponse>;
 
     getOrderStatus(options: OrderID): Promise<OrderStatus>;
 
