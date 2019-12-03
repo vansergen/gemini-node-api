@@ -70,18 +70,6 @@ declare module "gemini-node-api" {
     | string[]
     | number[][];
 
-  export type ClearingOrderStatus = {
-    result: "ok";
-    status:
-      | "AwaitConfirm"
-      | "Confirmed"
-      | "AttemptSettlement"
-      | "Settled"
-      | "Expired"
-      | "Canceled"
-      | "Not Found";
-  };
-
   export type CancelClearingOrderResponse = {
     result: "ok";
     details: string;
@@ -118,10 +106,6 @@ declare module "gemini-node-api" {
     constructor(options: AuthenticatedClientOptions);
 
     post(options: PostOptions): Promise<RequestResponse>;
-
-    getClearingOrderStatus(
-      options: ClearingOrderID
-    ): Promise<ClearingOrderStatus>;
 
     cancelClearingOrder(
       options: ClearingOrderID

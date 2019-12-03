@@ -53,6 +53,10 @@ export type BrokerOrderOptions = BaseClearingOrder & {
   source_counterparty_id: string;
 };
 
+export type ClearingOrderID = {
+  clearing_id: string;
+};
+
 export type TransferFilter = AccountName & {
   timestamp?: number;
   limit_transfers?: number;
@@ -186,6 +190,21 @@ export type TradeVolume = {
 export type NewClearingOrderResponse = {
   result: string;
   clearing_id: string;
+};
+
+export type ClearingOrderStatus = {
+  result: "ok";
+  status:
+    | "AwaitConfirm"
+    | "AwaitSourceTargetConfirm"
+    | "AwaitTargetConfirm"
+    | "AwaitSourceConfirm"
+    | "Confirmed"
+    | "AttemptSettlement"
+    | "Settled"
+    | "Expired"
+    | "Canceled"
+    | "Not Found";
 };
 
 export type Balance = {
@@ -380,6 +399,13 @@ export class AuthenticatedClient extends PublicClient {
   }: BrokerOrderOptions): Promise<NewClearingOrderResponse> {
     const request = "/v1/clearing/broker/new";
     return this.post({ body: { request, symbol, ...body } });
+  }
+
+  /**
+   * Get a clearing order status.
+   */
+  getClearingOrderStatus(body: ClearingOrderID): Promise<ClearingOrderStatus> {
+    return this.post({ body: { request: "/v1/clearing/status", ...body } });
   }
 
   /**

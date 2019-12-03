@@ -12,6 +12,7 @@ import {
   NotionalVolume,
   TradeVolume,
   NewClearingOrderResponse,
+  ClearingOrderStatus,
   Account,
   Balance,
   Transfer,
@@ -605,6 +606,22 @@ suite("AuthenticatedClient", () => {
       side,
       symbol
     });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getClearingOrderStatus()", async () => {
+    const request = "/v1/clearing/status";
+    const clearing_id = "OM9VNL1G";
+    const options = { request, clearing_id, nonce };
+    const response: ClearingOrderStatus = {
+      result: "ok",
+      status: "AwaitTargetConfirm"
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.getClearingOrderStatus({ clearing_id });
     assert.deepStrictEqual(data, response);
   });
 
