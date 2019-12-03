@@ -89,33 +89,6 @@ declare module "gemini-node-api" {
     notional_volume: number;
   };
 
-  export type OrderStatus = {
-    order_id: string;
-    client_order_id?: string;
-    symbol: string;
-    exchange: "gemini";
-    price?: string;
-    avg_execution_price: string;
-    side: "buy" | "sell";
-    type:
-      | "exchange limit"
-      | "auction-only exchange limit"
-      | "market buy"
-      | "market sell"
-      | "indication-of-interest";
-    options: string[];
-    timestamp: string;
-    timestampms: number;
-    is_live: boolean;
-    is_cancelled: boolean;
-    is_hidden: boolean;
-    reason?: string;
-    was_forced: boolean;
-    executed_amount: string;
-    remaining_amount: string;
-    original_amount?: string;
-  };
-
   export type PastTrade = {
     price: string;
     amount: string;
@@ -227,8 +200,6 @@ declare module "gemini-node-api" {
     constructor(options: AuthenticatedClientOptions);
 
     post(options: PostOptions): Promise<RequestResponse>;
-
-    getActiveOrders(): Promise<OrderStatus[]>;
 
     getPastTrades(options?: PastTradesFilter): Promise<PastTrade[]>;
 

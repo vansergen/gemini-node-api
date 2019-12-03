@@ -176,8 +176,9 @@ const order = await client.getOrderStatus({ order_id, account });
 
 - [`getActiveOrders`](https://docs.gemini.com/rest-api/#get-active-orders)
 
-```javascript
-const orders = await authClient.getActiveOrders();
+```typescript
+const account = "primary";
+const orders = await client.getActiveOrders({ account });
 ```
 
 - [`getPastTrades`](https://docs.gemini.com/rest-api/#get-past-trades)

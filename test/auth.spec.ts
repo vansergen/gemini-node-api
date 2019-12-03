@@ -322,6 +322,60 @@ suite("AuthenticatedClient", () => {
     assert.deepStrictEqual(data, response);
   });
 
+  test(".getActiveOrders()", async () => {
+    const request = "/v1/orders";
+    const account = "primary";
+    const options = { request, account, nonce };
+    const response: OrderStatus[] = [
+      {
+        order_id: "107421210",
+        id: "107421210",
+        symbol: "ethusd",
+        exchange: "gemini",
+        avg_execution_price: "0.00",
+        side: "sell",
+        type: "exchange limit",
+        timestamp: "1547241628",
+        timestampms: 1547241628042,
+        is_live: true,
+        is_cancelled: false,
+        is_hidden: false,
+        was_forced: false,
+        executed_amount: "0",
+        remaining_amount: "1",
+        options: [],
+        price: "125.51",
+        original_amount: "1"
+      },
+      {
+        order_id: "107421205",
+        id: "107421205",
+        symbol: "ethusd",
+        exchange: "gemini",
+        avg_execution_price: "125.41",
+        side: "buy",
+        type: "exchange limit",
+        timestamp: "1547241626",
+        timestampms: 1547241626991,
+        is_live: true,
+        is_cancelled: false,
+        is_hidden: false,
+        was_forced: false,
+        executed_amount: "0.029147",
+        remaining_amount: "0.970853",
+        options: [],
+        price: "125.42",
+        original_amount: "1"
+      }
+    ];
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.getActiveOrders({ account });
+    assert.deepStrictEqual(data, response);
+  });
+
   test(".getAvailableBalances()", async () => {
     const request = "/v1/balances";
     const account = "primary";
