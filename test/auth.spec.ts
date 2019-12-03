@@ -216,6 +216,40 @@ suite("AuthenticatedClient", () => {
     assert.deepStrictEqual(data, response);
   });
 
+  test(".cancelOrder()", async () => {
+    const request = "/v1/order/cancel";
+    const account = "primary";
+    const order_id = 106817811;
+    const options = { request, order_id, account, nonce };
+    const response: OrderStatus = {
+      order_id: "106817811",
+      id: "106817811",
+      symbol: "btcusd",
+      exchange: "gemini",
+      avg_execution_price: "3632.85101103",
+      side: "buy",
+      type: "exchange limit",
+      timestamp: "1547220404",
+      timestampms: 1547220404836,
+      is_live: false,
+      is_cancelled: false,
+      is_hidden: false,
+      was_forced: false,
+      executed_amount: "3.7610296649",
+      remaining_amount: "1.2389703351",
+      reason: "Requested",
+      options: [],
+      price: "3633.00",
+      original_amount: "5"
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.cancelOrder({ order_id, account });
+    assert.deepStrictEqual(data, response);
+  });
+
   test(".getAvailableBalances()", async () => {
     const request = "/v1/balances";
     const account = "primary";

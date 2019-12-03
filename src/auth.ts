@@ -25,6 +25,8 @@ export type BasicOrderOptions = AccountName & {
 
 export type OrderOptions = BasicOrderOptions & { side: "buy" | "sell" };
 
+export type OrderID = AccountName & { order_id: number };
+
 export type TransferFilter = AccountName & {
   timestamp?: number;
   limit_transfers?: number;
@@ -194,6 +196,13 @@ export class AuthenticatedClient extends PublicClient {
   }: BasicOrderOptions): Promise<OrderStatus> {
     const request = "/v1/order/new";
     return this.post({ body: { request, symbol, ...body, side: "sell" } });
+  }
+
+  /**
+   * Cancel an order.
+   */
+  cancelOrder(body: OrderID): Promise<OrderStatus> {
+    return this.post({ body: { request: "/v1/order/cancel", ...body } });
   }
 
   /**

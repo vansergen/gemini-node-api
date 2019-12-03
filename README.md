@@ -146,9 +146,10 @@ const order = await client.sell({ symbol, amount, price, stop_price, type });
 
 - [`cancelOrder`](https://docs.gemini.com/rest-api/#cancel-order)
 
-```javascript
+```typescript
 const order_id = 106817811;
-const order = await authClient.cancelOrder({ order_id });
+const account = "primary";
+const order = await client.cancelOrder({ order_id, account });
 ```
 
 - [`cancelSession`](https://docs.gemini.com/rest-api/#cancel-all-session-orders)

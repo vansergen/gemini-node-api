@@ -240,8 +240,6 @@ declare module "gemini-node-api" {
 
     post(options: PostOptions): Promise<RequestResponse>;
 
-    cancelOrder(options: OrderID): Promise<OrderStatus>;
-
     cancelSession(): Promise<CancelOrdersResponse>;
 
     cancelAll(): Promise<CancelOrdersResponse>;
