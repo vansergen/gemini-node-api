@@ -37,52 +37,6 @@ suite("AuthenticatedClient", () => {
       .catch(error => assert.fail(error));
   });
 
-  test(".newClearingOrder()", done => {
-    const response = {
-      result: "AwaitConfirm",
-      clearing_id: "0OQGOZXW"
-    };
-    const request = "/v1/clearing/new";
-    const nonce = 1;
-    const counterparty_id = "OM9VNL1G";
-    const expires_in_hrs = 24;
-    const symbol = "btcusd";
-    const amount = 100;
-    const price = 9500;
-    const side = "buy";
-    const payload = {
-      request,
-      symbol,
-      amount,
-      price,
-      side,
-      expires_in_hrs,
-      counterparty_id,
-      nonce
-    };
-    authClient.nonce = () => nonce;
-
-    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
-      .post(request)
-      .times(1)
-      .reply(200, response);
-
-    authClient
-      .newClearingOrder({
-        symbol,
-        amount,
-        price,
-        side,
-        expires_in_hrs,
-        counterparty_id
-      })
-      .then(data => {
-        assert.deepStrictEqual(data, response);
-        done();
-      })
-      .catch(error => assert.fail(error));
-  });
-
   test(".getClearingOrderStatus()", done => {
     const response = {
       result: "ok",

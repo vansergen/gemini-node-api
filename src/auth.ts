@@ -37,6 +37,14 @@ export type PastTradesFilter = SymbolFilter & {
   timestamp?: number;
 } & AccountName;
 
+export type ClearingOrderOptions = SymbolFilter & {
+  amount: number;
+  price: number;
+  side: "buy" | "sell";
+  expires_in_hrs: number;
+  counterparty_id?: string;
+};
+
 export type TransferFilter = AccountName & {
   timestamp?: number;
   limit_transfers?: number;
@@ -165,6 +173,11 @@ export type TradeVolume = {
   sell_taker_base: number;
   sell_taker_notional: number;
   sell_taker_count: number;
+};
+
+export type NewClearingOrderResponse = {
+  result: string;
+  clearing_id: string;
 };
 
 export type Balance = {
@@ -337,6 +350,17 @@ export class AuthenticatedClient extends PublicClient {
    */
   getTradeVolume(body?: AccountName): Promise<TradeVolume[][]> {
     return this.post({ body: { request: "/v1/tradevolume", ...body } });
+  }
+
+  /**
+   * Submit a new clearing order.
+   */
+  newClearingOrder({
+    symbol = this.symbol,
+    ...body
+  }: ClearingOrderOptions): Promise<NewClearingOrderResponse> {
+    const request = "/v1/clearing/new";
+    return this.post({ body: { request, symbol, ...body } });
   }
 
   /**

@@ -25,15 +25,6 @@ declare module "gemini-node-api" {
     symbol?: string;
   };
 
-  export type ClearingOrderOptions = {
-    symbol?: string;
-    amount: number;
-    price: number;
-    side: "buy" | "sell";
-    expires_in_hrs: number;
-    counterparty_id?: string;
-  };
-
   export type ClearingOrderID = {
     clearing_id: string;
   };
@@ -78,11 +69,6 @@ declare module "gemini-node-api" {
     | JSONObject[][]
     | string[]
     | number[][];
-
-  export type NewClearingOrderResponse = {
-    result: string;
-    clearing_id: string;
-  };
 
   export type ClearingOrderStatus = {
     result: "ok";
@@ -132,10 +118,6 @@ declare module "gemini-node-api" {
     constructor(options: AuthenticatedClientOptions);
 
     post(options: PostOptions): Promise<RequestResponse>;
-
-    newClearingOrder(
-      options: ClearingOrderOptions
-    ): Promise<NewClearingOrderResponse>;
 
     getClearingOrderStatus(
       options: ClearingOrderID

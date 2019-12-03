@@ -11,6 +11,7 @@ import {
   PastTrade,
   NotionalVolume,
   TradeVolume,
+  NewClearingOrderResponse,
   Account,
   Balance,
   Transfer,
@@ -527,6 +528,43 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getTradeVolume({ account });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".newClearingOrder()", async () => {
+    const request = "/v1/clearing/new";
+    const counterparty_id = "OM9VNL1G";
+    const expires_in_hrs = 24;
+    const symbol = "ethusd";
+    const amount = 100;
+    const price = 200;
+    const side = "buy";
+    const options = {
+      request,
+      symbol,
+      counterparty_id,
+      expires_in_hrs,
+      amount,
+      price,
+      side,
+      nonce
+    };
+    const response: NewClearingOrderResponse = {
+      result: "AwaitConfirm",
+      clearing_id: "0OQGOZXW"
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.newClearingOrder({
+      counterparty_id,
+      expires_in_hrs,
+      amount,
+      price,
+      side,
+      symbol
+    });
     assert.deepStrictEqual(data, response);
   });
 

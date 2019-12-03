@@ -211,14 +211,14 @@ const volume = await client.getTradeVolume();
 
 - [`newClearingOrder`](https://docs.gemini.com/rest-api/#new-clearing-order)
 
-```javascript
+```typescript
 const counterparty_id = "OM9VNL1G";
 const expires_in_hrs = 24;
 const symbol = "btcusd";
 const amount = 100;
 const price = 9500;
 const side = "buy";
-const order = await authClient.newClearingOrder({
+const order = await client.newClearingOrder({
   counterparty_id,
   expires_in_hrs,
   symbol,
