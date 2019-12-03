@@ -265,13 +265,13 @@ const order = await client.cancelClearingOrder({ clearing_id });
 
 - [`confirmClearingOrder`](https://docs.gemini.com/rest-api/#confirm-clearing-order)
 
-```javascript
+```typescript
 const clearing_id = "OM9VNL1G";
 const symbol = "btcusd";
 const amount = 100;
 const price = 9500;
 const side = "sell";
-const order = await authClient.confirmClearingOrder({
+const order = await client.confirmClearingOrder({
   clearing_id,
   symbol,
   amount,

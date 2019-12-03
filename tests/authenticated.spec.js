@@ -36,46 +36,4 @@ suite("AuthenticatedClient", () => {
       })
       .catch(error => assert.fail(error));
   });
-
-  test(".confirmClearingOrder()", done => {
-    const response = {
-      result: "confirmed"
-    };
-    const request = "/v1/clearing/confirm";
-    const nonce = 1;
-    const clearing_id = "OM9VNL1G";
-    const symbol = "btcusd";
-    const amount = 100;
-    const price = 9500;
-    const side = "sell";
-    const payload = {
-      request,
-      symbol,
-      clearing_id,
-      amount,
-      price,
-      side,
-      nonce
-    };
-    authClient.nonce = () => nonce;
-
-    nock(EXCHANGE_API_URL, { reqheaders: SignRequest(auth, payload) })
-      .post(request)
-      .times(1)
-      .reply(200, response);
-
-    authClient
-      .confirmClearingOrder({
-        clearing_id,
-        symbol,
-        amount,
-        price,
-        side
-      })
-      .then(data => {
-        assert.deepStrictEqual(data, response);
-        done();
-      })
-      .catch(error => assert.fail(error));
-  });
 });

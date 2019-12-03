@@ -14,6 +14,7 @@ import {
   NewClearingOrderResponse,
   ClearingOrderStatus,
   CancelClearingOrderResponse,
+  ConfirmClearingOptionsResponse,
   Account,
   Balance,
   Transfer,
@@ -639,6 +640,39 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.cancelClearingOrder({ clearing_id });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".confirmClearingOrder()", async () => {
+    const request = "/v1/clearing/confirm";
+    const symbol = "ethusd";
+    const clearing_id = "OM9VNL1G";
+    const amount = 100;
+    const price = 200;
+    const side = "buy";
+    const options = {
+      request,
+      symbol,
+      amount,
+      price,
+      side,
+      clearing_id,
+      nonce
+    };
+    const response: ConfirmClearingOptionsResponse = {
+      result: "confirmed"
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.confirmClearingOrder({
+      amount,
+      price,
+      side,
+      clearing_id,
+      symbol
+    });
     assert.deepStrictEqual(data, response);
   });
 

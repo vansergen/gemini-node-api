@@ -25,14 +25,6 @@ declare module "gemini-node-api" {
     symbol?: string;
   };
 
-  export type ConfirmClearingOptions = {
-    clearing_id: string;
-    symbol?: string;
-    amount: number;
-    price: number;
-    side: "buy" | "sell";
-  };
-
   export type WSMarketOptions = {
     symbol?: string;
     heartbeat?: boolean;
@@ -66,10 +58,6 @@ declare module "gemini-node-api" {
     | string[]
     | number[][];
 
-  export type ConfirmClearingOptionsResponse = {
-    result: "confirmed";
-  };
-
   export type PublicClientOptions = {
     symbol?: string;
     sandbox?: boolean;
@@ -97,10 +85,6 @@ declare module "gemini-node-api" {
     constructor(options: AuthenticatedClientOptions);
 
     post(options: PostOptions): Promise<RequestResponse>;
-
-    confirmClearingOrder(
-      options: ConfirmClearingOptions
-    ): Promise<ConfirmClearingOptionsResponse>;
   }
 
   export class WebsocketClient extends EventEmitter {

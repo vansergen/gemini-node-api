@@ -57,6 +57,14 @@ export type ClearingOrderID = {
   clearing_id: string;
 };
 
+export type ConfirmClearingOptions = {
+  clearing_id: string;
+  symbol?: string;
+  amount: number;
+  price: number;
+  side: "buy" | "sell";
+};
+
 export type TransferFilter = AccountName & {
   timestamp?: number;
   limit_transfers?: number;
@@ -210,6 +218,12 @@ export type ClearingOrderStatus = {
 export type CancelClearingOrderResponse = {
   result: "ok" | "failed";
   details: string;
+};
+
+export type ConfirmClearingOptionsResponse = {
+  result: "confirmed" | "error";
+  reason?: string;
+  message?: string;
 };
 
 export type Balance = {
@@ -420,6 +434,17 @@ export class AuthenticatedClient extends PublicClient {
     body: ClearingOrderID
   ): Promise<CancelClearingOrderResponse> {
     return this.post({ body: { request: "/v1/clearing/cancel", ...body } });
+  }
+
+  /**
+   * Confirm a clearing order.
+   */
+  confirmClearingOrder({
+    symbol = this.symbol,
+    ...body
+  }: ConfirmClearingOptions): Promise<ConfirmClearingOptionsResponse> {
+    const request = "/v1/clearing/confirm";
+    return this.post({ body: { request, symbol, ...body } });
   }
 
   /**
