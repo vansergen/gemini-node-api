@@ -2,25 +2,6 @@ import * as Promise from "bluebird";
 import { EventEmitter } from "events";
 
 declare module "gemini-node-api" {
-  export type callback<T> = (error: any, data: T) => void;
-
-  export type JSONObject = {
-    [key: string]: any;
-  };
-
-  export type GetOptions = {
-    uri: string;
-  } & JSONObject;
-
-  export type PostOptions = {
-    request: string;
-  } & JSONObject;
-
-  export type RequestOptions = {
-    method: "GET" | "POST";
-    headers?: JSONObject;
-  } & GetOptions;
-
   export type SymbolFilter = {
     symbol?: string;
   };
@@ -46,27 +27,6 @@ declare module "gemini-node-api" {
     symbols?: string[];
   };
 
-  export type Auth = {
-    key: string;
-    secret: string;
-  };
-
-  export type RequestResponse =
-    | JSONObject
-    | JSONObject[]
-    | JSONObject[][]
-    | string[]
-    | number[][];
-
-  export type PublicClientOptions = {
-    symbol?: string;
-    sandbox?: boolean;
-    api_uri?: string;
-    timeout?: number;
-  };
-
-  export type AuthenticatedClientOptions = Auth & PublicClientOptions;
-
   export type WebsocketClientOptions = {
     symbol?: string;
     sandbox?: boolean;
@@ -74,18 +34,6 @@ declare module "gemini-node-api" {
     key?: string;
     secret?: string;
   };
-
-  export class PublicClient {
-    get(options: GetOptions): Promise<RequestResponse>;
-
-    request(options: RequestOptions): Promise<RequestResponse>;
-  }
-
-  export class AuthenticatedClient extends PublicClient {
-    constructor(options: AuthenticatedClientOptions);
-
-    post(options: PostOptions): Promise<RequestResponse>;
-  }
 
   export class WebsocketClient extends EventEmitter {
     constructor(options?: WebsocketClientOptions);
