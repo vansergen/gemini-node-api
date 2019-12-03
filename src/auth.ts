@@ -67,11 +67,12 @@ export type OrderStatus = {
   side: "buy" | "sell";
   type:
     | "exchange limit"
+    | "stop-limit"
     | "auction-only exchange limit"
     | "market buy"
     | "market sell"
     | "indication-of-interest";
-  options: [OrderEexecutionOptions];
+  options: [OrderEexecutionOptions] | [];
   timestamp: string;
   timestampms: number;
   is_live: boolean;
@@ -79,8 +80,9 @@ export type OrderStatus = {
   is_hidden: boolean;
   reason?: string;
   was_forced: false;
+  stop_price?: string;
   executed_amount: string;
-  remaining_amount: string;
+  remaining_amount?: string;
   original_amount?: string;
 };
 
@@ -165,8 +167,33 @@ export class AuthenticatedClient extends PublicClient {
   /**
    * Submit a new order.
    */
-  newOrder({ symbol = this.symbol, ...body }: OrderOptions) {
+  newOrder({
+    symbol = this.symbol,
+    ...body
+  }: OrderOptions): Promise<OrderStatus> {
     return this.post({ body: { request: "/v1/order/new", symbol, ...body } });
+  }
+
+  /**
+   * Submit a new buy order.
+   */
+  buy({
+    symbol = this.symbol,
+    ...body
+  }: BasicOrderOptions): Promise<OrderStatus> {
+    const request = "/v1/order/new";
+    return this.post({ body: { request, symbol, ...body, side: "buy" } });
+  }
+
+  /**
+   * Submit a new sell order.
+   */
+  sell({
+    symbol = this.symbol,
+    ...body
+  }: BasicOrderOptions): Promise<OrderStatus> {
+    const request = "/v1/order/new";
+    return this.post({ body: { request, symbol, ...body, side: "sell" } });
   }
 
   /**

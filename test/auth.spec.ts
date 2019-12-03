@@ -5,6 +5,7 @@ import {
   Headers,
   ApiUri,
   SignRequest,
+  DefaultSymbol,
   OrderStatus,
   Account,
   Balance,
@@ -104,6 +105,112 @@ suite("AuthenticatedClient", () => {
       symbol,
       type,
       side,
+      stop_price
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".buy() (using the default `symbol`)", async () => {
+    const request = "/v1/order/new";
+    const account = "primary";
+    const amount = 0.1;
+    const client_order_id = "470135";
+    const price = 10500;
+    const type = "exchange stop limit";
+    const stop_price = 10000;
+    const options = {
+      request,
+      symbol: DefaultSymbol,
+      account,
+      amount,
+      client_order_id,
+      price,
+      type,
+      stop_price,
+      side: "buy",
+      nonce
+    };
+    const response: OrderStatus = {
+      order_id: "107317752",
+      id: "107317752",
+      symbol: "ethusd",
+      exchange: "gemini",
+      avg_execution_price: "126.25",
+      side: "buy",
+      type: "market buy",
+      timestamp: "1547236481",
+      timestampms: 1547236481910,
+      is_live: false,
+      is_cancelled: false,
+      is_hidden: false,
+      was_forced: false,
+      executed_amount: "0.54517172",
+      remaining_amount: "0",
+      options: []
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.buy({
+      account,
+      amount,
+      client_order_id,
+      price,
+      type,
+      stop_price
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".sell() (using the default `symbol`)", async () => {
+    const request = "/v1/order/new";
+    const account = "primary";
+    const amount = 0.1;
+    const client_order_id = "470135";
+    const price = 10500;
+    const type = "exchange stop limit";
+    const stop_price = 10000;
+    const options = {
+      request,
+      symbol: DefaultSymbol,
+      account,
+      amount,
+      client_order_id,
+      price,
+      type,
+      stop_price,
+      side: "sell",
+      nonce
+    };
+    const response: OrderStatus = {
+      order_id: "107317752",
+      id: "107317752",
+      symbol: "ethusd",
+      exchange: "gemini",
+      avg_execution_price: "126.25",
+      side: "sell",
+      type: "market buy",
+      timestamp: "1547236481",
+      timestampms: 1547236481910,
+      is_live: false,
+      is_cancelled: false,
+      is_hidden: false,
+      was_forced: false,
+      executed_amount: "0.54517172",
+      remaining_amount: "0",
+      options: []
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.sell({
+      account,
+      amount,
+      client_order_id,
+      price,
+      type,
       stop_price
     });
     assert.deepStrictEqual(data, response);

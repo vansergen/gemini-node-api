@@ -25,19 +25,6 @@ declare module "gemini-node-api" {
     symbol?: string;
   };
 
-  export type BasicOrderOptions = {
-    client_order_id?: string;
-    symbol?: string;
-    amount: number;
-    min_amount?: number;
-    price: number;
-    moc?: boolean;
-    ioc?: boolean;
-    fok?: boolean;
-    ao?: boolean;
-    ioi?: boolean;
-  };
-
   export type OrderID = {
     order_id: number;
   };
@@ -252,10 +239,6 @@ declare module "gemini-node-api" {
     constructor(options: AuthenticatedClientOptions);
 
     post(options: PostOptions): Promise<RequestResponse>;
-
-    buy(options: BasicOrderOptions): Promise<OrderStatus>;
-
-    sell(options: BasicOrderOptions): Promise<OrderStatus>;
 
     cancelOrder(options: OrderID): Promise<OrderStatus>;
 

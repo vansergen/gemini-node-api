@@ -124,20 +124,24 @@ const order = await client.newOrder({
 
 - [`buy`](https://docs.gemini.com/rest-api/#new-order)
 
-```javascript
+```typescript
 const symbol = "zecltc";
 const amount = 1;
 const price = 0.9;
-const order = await authClient.buy({ symbol, amount, price });
+const account = "primary";
+const type = "exchange limit";
+const order = await client.buy({ symbol, amount, price, account, type });
 ```
 
 - [`sell`](https://docs.gemini.com/rest-api/#new-order)
 
-```javascript
+```typescript
 const symbol = "zecltc";
 const amount = 0.99;
 const price = 0.99;
-const order = await authClient.sell({ symbol, amount, price });
+const stop_price = 1;
+const type = "exchange stop limit";
+const order = await client.sell({ symbol, amount, price, stop_price, type });
 ```
 
 - [`cancelOrder`](https://docs.gemini.com/rest-api/#cancel-order)
