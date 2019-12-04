@@ -2,14 +2,15 @@
   "name": "gemini-node-api",
   "version": "0.3.5",
   "description": "Gemini Node.js API",
-  "main": "index.js",
+  "main": "build/index.js",
   "directories": {
-    "lib": "lib",
-    "test": "tests"
+    "lib": "build/src",
+    "test": "test"
   },
-  "types": "index.d.ts",
+  "type": "commonjs",
+  "types": "build/index.d.ts",
   "engines": {
-    "node": ">=10.16.3"
+    "node": ">=8.16.2"
   },
   "dependencies": {
     "@types/ws": "^6.0.4",
@@ -31,11 +32,15 @@
     "typescript": "^3.7.2"
   },
   "scripts": {
-    "lint": "eslint --ext .js ./",
-    "prettier": "prettier -l *.{js,md,ts,json} **/*.{js,md,ts,json}",
+    "build": "tsc",
+    "prepublishOnly": "npm run prettier && npm run lint && npm run build && npm run prettier-write && npm run lint-fix",
+    "postpublish": "rm -fr build",
+    "lint": "eslint --ext .ts,.js ./",
+    "lint-fix": "npm run lint -- --fix",
+    "prettier": "prettier -c **/*.{js,md,ts,json}",
     "prettier-write": "npm run prettier -- --write",
     "generate-docs": "jsdoc ./ -c jsdoc.json",
-    "test": "mocha --full-trace --ui tdd --bail --reporter spec tests/*.js"
+    "test": "mocha -r ts-node/register --full-trace --ui tdd --bail --extension ts"
   },
   "repository": {
     "type": "git",
@@ -67,5 +72,9 @@
       "eslint --fix",
       "git add"
     ]
+  },
+  "funding": {
+    "type": "Coinbase Commerce",
+    "url": "https://commerce.coinbase.com/checkout/04a40393-21f0-44aa-b11b-726b67f08c5a"
   }
 }
