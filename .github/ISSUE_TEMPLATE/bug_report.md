@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: '[BUG]'
+title: "[BUG]"
 labels: bug
 assignees: vansergen
 ---
@@ -12,8 +12,8 @@ A clear and concise description of what the bug is.
 **To Reproduce**
 Steps to reproduce the behavior (add some code):
 
-```javascript
-const Gemini = require('gemini-node-api');
+```typescript
+import * as Gemini from "gemini-node-api";
 // more code
 ```
 
