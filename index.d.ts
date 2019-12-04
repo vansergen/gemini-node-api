@@ -1,4 +1,3 @@
-import * as Promise from "bluebird";
 import { EventEmitter } from "events";
 
 declare module "gemini-node-api" {
@@ -53,10 +52,5 @@ declare module "gemini-node-api" {
     subscribe(options: Subscription | Subscription[]): void;
 
     unsubscribe(options: Subscription | Subscription[]): void;
-
-    on(event: "message", listener: (data: any, market: string) => void): this;
-    on(event: "error", listener: (error: any, market: string) => void): this;
-    on(event: "open", listener: (market: string) => void): this;
-    on(event: "close", listener: (market: string) => void): this;
   }
 }

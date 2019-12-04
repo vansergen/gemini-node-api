@@ -96,34 +96,39 @@ export type WithdrawGUSDFilter = AccountName & {
   amount: number;
 };
 
-export type OrderStatus = {
-  order_id: string;
-  id: string;
-  client_order_id?: string;
-  symbol: string;
-  exchange: "gemini";
-  price?: string;
-  avg_execution_price: string;
+export type OrderType =
+  | "exchange limit"
+  | "stop-limit"
+  | "auction-only exchange limit"
+  | "market buy"
+  | "market sell"
+  | "indication-of-interest";
+
+export type BaseOrder = {
   side: "buy" | "sell";
-  type:
-    | "exchange limit"
-    | "stop-limit"
-    | "auction-only exchange limit"
-    | "market buy"
-    | "market sell"
-    | "indication-of-interest";
-  options: [OrderEexecutionOptions] | [];
+  price?: string;
+  symbol: string;
+  order_id: string;
+  client_order_id?: string;
   timestamp: string;
   timestampms: number;
   is_live: boolean;
   is_cancelled: boolean;
   is_hidden: boolean;
-  reason?: string;
-  was_forced: false;
-  stop_price?: string;
-  executed_amount: string;
   remaining_amount?: string;
   original_amount?: string;
+  executed_amount?: string;
+};
+
+export type OrderStatus = BaseOrder & {
+  id: string;
+  exchange: "gemini";
+  avg_execution_price: string;
+  type: OrderType;
+  options: [OrderEexecutionOptions] | [];
+  reason?: string;
+  was_forced: boolean;
+  stop_price?: string;
 };
 
 export type CancelOrdersResponse = {
