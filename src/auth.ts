@@ -528,7 +528,7 @@ export class AuthenticatedClient extends PublicClient {
     if (this._nonce) {
       return this._nonce;
     }
-    return () => Date.now();
+    return (): number => Date.now();
   }
 
   set nonce(nonce: () => number) {

@@ -350,7 +350,7 @@ export class WebsocketClient extends EventEmitter {
   /**
    * Disconnect from the private API.
    */
-  disconnectOrders() {
+  disconnectOrders(): void {
     this.checkDisconnection(this.sockets.orders);
     this.sockets.orders.close();
   }
@@ -449,7 +449,7 @@ export class WebsocketClient extends EventEmitter {
     if (this._nonce) {
       return this._nonce;
     }
-    return () => Date.now();
+    return (): number => Date.now();
   }
 
   set nonce(nonce: () => number) {

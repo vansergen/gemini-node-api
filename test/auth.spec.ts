@@ -31,7 +31,7 @@ const secret = "Gemini-API-SECRET";
 
 const client = new AuthenticatedClient({ key, secret });
 const nonce = Date.now();
-const _nonce = () => nonce;
+const _nonce = (): number => nonce;
 client.nonce = _nonce;
 
 suite("AuthenticatedClient", () => {
