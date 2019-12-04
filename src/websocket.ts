@@ -38,6 +38,11 @@ export type Subscriptions = {
   symbols: string[];
 }[];
 
+export type MessageV2 = {
+  type: "subscribe" | "unsubscribe";
+  subscriptions: Subscriptions;
+};
+
 export type ChangeEvent = {
   type: "change";
   price: string;
@@ -381,7 +386,7 @@ export class WebsocketClient extends EventEmitter {
     this.sendMessage({ type: "unsubscribe", subscriptions });
   }
 
-  private sendMessage(message: any): void {
+  private sendMessage(message: MessageV2): void {
     this.checkDisconnection(this.sockets.v2);
     this.sockets.v2.send(JSON.stringify(message));
   }

@@ -374,10 +374,10 @@ const withdrawal = await client.withdrawGUSD({ address, amount, account });
 const heartbeat = await client.heartbeat();
 ```
 
-### WebsocketClient
+### [WebsocketClient](https://docs.gemini.com/websocket-api/)
 
-```javascript
-const { WebsocketClient } = require("gemini-node-api");
+```typescript
+import { WebsocketClient } from "gemini-node-api";
 const key = "gemini-api-key";
 const secret = "gemini-api-secret";
 const websocket = new WebsocketClient({ key, secret });
@@ -385,19 +385,20 @@ websocket.on("error", (error, market) => {
   console.error(error);
 });
 websocket.on("open", market => {
-  console.log("Open connection: ", market);
+  console.log("The connection is open", market);
 });
 websocket.on("close", market => {
-  console.log("Closed connection: ", market);
+  console.log("The connection is closed", market);
 });
 websocket.on("message", (message, market) => {
+  console.info("New message from", market);
   console.info(message);
 });
 ```
 
 - [`connectMarket`](https://docs.gemini.com/websocket-api/#market-data)
 
-```javascript
+```typescript
 const heartbeat = true;
 const top_of_book = false;
 const bids = true;
@@ -420,7 +421,7 @@ websocket.connectMarket({ symbol: "btcusd" });
 
 - [`disconnectMarket`](https://docs.gemini.com/websocket-api/#market-data)
 
-```javascript
+```typescript
 const symbol = "zecltc";
 websocket.once("close", market => console.log("Closed:", market));
 websocket.disconnectMarket({ symbol });
@@ -428,21 +429,21 @@ websocket.disconnectMarket({ symbol });
 
 - [`connect`](https://docs.gemini.com/websocket-api/#market-data-version-2)
 
-```javascript
+```typescript
 websocket.on("open", market => console.log("Open:", market));
 websocket.connect();
 ```
 
 - [`disconnect`](https://docs.gemini.com/websocket-api/#market-data-version-2)
 
-```javascript
+```typescript
 websocket.once("close", market => console.log("Closed:", market));
 websocket.disconnect();
 ```
 
 - [`subscribe`](https://docs.gemini.com/websocket-api/#level-2-data)
 
-```javascript
+```typescript
 const subscriptions = [
   { name: "l2", symbols: ["BTCUSD", "ETHUSD"] },
   { name: "candles_1m", symbols: ["BTCUSD"] }
@@ -456,28 +457,34 @@ websocket.on("open", market => {
 
 - [`unsubscribe`](https://docs.gemini.com/websocket-api/#unsubscribe)
 
-```javascript
-const subscription = { name: "l2", symbols: ["BTCUSD", "ETHUSD"] };
-websocket.unsubscribe(subscription);
+```typescript
+const subscriptions = [{ name: "l2", symbols: ["BTCUSD", "ETHUSD"] }];
+websocket.unsubscribe(subscriptions);
 ```
 
 - [`connectOrders`](https://docs.gemini.com/websocket-api/#order-events)
 
-```javascript
+```typescript
 const symbolFilter = "zecltc";
 const apiSessionFilter = "UI";
 const eventTypeFilter = ["accepted", "rejected"];
+const account = "primary";
 websocket.on("message", (message, market) => {
   if (market === "orders") {
     console.log("New message:", message);
   }
 });
-websocket.connectOrders({ symbolFilter, apiSessionFilter, eventTypeFilter });
+websocket.connectOrders({
+  account,
+  symbolFilter,
+  apiSessionFilter,
+  eventTypeFilter
+});
 ```
 
 - [`disconnectOrders`](https://docs.gemini.com/websocket-api/#order-events)
 
-```javascript
+```typescript
 websocket.once("close", market => {
   if (market === "orders") {
     console.log("Closed");
