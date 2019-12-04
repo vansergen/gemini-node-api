@@ -1,4 +1,42 @@
-import { BaseOrder, OrderType } from "./auth";
+import { EventEmitter } from "events";
+import * as Websocket from "ws";
+import { DefaultSymbol, SymbolFilter } from "./public";
+import { AccountName, BaseOrder, OrderType } from "./auth";
+import { SignRequest } from "./signer";
+import { stringify, ParsedUrlQueryInput } from "querystring";
+
+export const WsUri = "wss://api.gemini.com";
+export const SandboxWsUri = "wss://api.sandbox.gemini.com";
+
+export type WSMarketQS = {
+  heartbeat?: boolean;
+  top_of_book?: boolean;
+  bids?: boolean;
+  offers?: boolean;
+  trades?: boolean;
+  auctions?: boolean;
+};
+
+export type WSMarket = SymbolFilter & WSMarketQS;
+
+export type WSOrderQS = {
+  symbolFilter?: string | string[];
+  apiSessionFilter?: string | string[];
+  eventTypeFilter?: string | string[];
+};
+
+export type WSOrderOptions = WSOrderQS & AccountName;
+
+export type WSSignerOptions = {
+  request: string;
+  nonce: number;
+  account?: string;
+};
+
+export type Subscriptions = {
+  name: string;
+  symbols: string[];
+}[];
 
 export type ChangeEvent = {
   type: "change";
@@ -211,6 +249,13 @@ export type MarketV2Message = L2Message | CandlesUpdate | HeartbeatMarketV2;
 
 export type WSMessage = MarketDataMessage | OrdersMessage | MarketV2Message;
 
+export type WebsocketClientOptions = SymbolFilter & {
+  sandbox?: boolean;
+  wsUri?: string;
+  key?: string;
+  secret?: string;
+};
+
 export declare interface WebsocketClient {
   on(event: "open", eventListener: (market: string) => void): this;
   on(event: "close", eventListener: (market: string) => void): this;
@@ -230,4 +275,179 @@ export declare interface WebsocketClient {
     event: "error",
     eventListener: (error: any, market: string) => void
   ): this;
+}
+
+export class WebsocketClient extends EventEmitter {
+  readonly wsUri: string;
+  readonly symbol: string;
+  readonly key?: string;
+  readonly secret?: string;
+  private sockets: { [socket: string]: Websocket };
+  _nonce?: () => number;
+
+  constructor({
+    symbol = DefaultSymbol,
+    sandbox = false,
+    wsUri = sandbox ? SandboxWsUri : WsUri,
+    key,
+    secret
+  }: WebsocketClientOptions = {}) {
+    super();
+    this.wsUri = wsUri;
+    this.symbol = symbol;
+    this.sockets = {};
+    if (key && secret) {
+      this.key = key;
+      this.secret = secret;
+    }
+  }
+
+  /**
+   * Connect to the public API (V1) that streams all the market data on a given symbol.
+   */
+  connectMarket({ symbol = this.symbol, ...qs }: WSMarket = {}): void {
+    this.checkConnection(this.sockets[symbol]);
+    const query = stringify(qs as ParsedUrlQueryInput);
+    const uri = this.wsUri + "/v1/marketdata/" + symbol + "?" + query;
+    this.addListeners((this.sockets[symbol] = new Websocket(uri)), symbol);
+  }
+
+  /**
+   * Disconnect from the public API (V1).
+   */
+  disconnectMarket({ symbol = this.symbol }: SymbolFilter = {}): void {
+    this.checkDisconnection(this.sockets[symbol]);
+    this.sockets[symbol].close();
+  }
+
+  /**
+   * Connect to the private API that gives you information about your orders in real time.
+   */
+  connectOrders({ account, ...qs }: WSOrderOptions = {}): void {
+    if (!this.key || !this.secret) {
+      throw new Error("`connectOrders` requires both `key` and `secret`");
+    }
+
+    this.checkConnection(this.sockets.orders);
+    const query = stringify(qs as ParsedUrlQueryInput);
+    const auth = { key: this.key, secret: this.secret };
+    const request = "/v1/order/events";
+    const options: WSSignerOptions = { request, nonce: this.nonce() };
+    if (account) {
+      options.account = account;
+    }
+    const headers = SignRequest({ ...auth, options });
+    const uri = this.wsUri + request + "?" + query;
+    this.sockets.orders = new Websocket(uri, { headers });
+    this.addListeners(this.sockets.orders, "orders");
+  }
+
+  /**
+   * Disconnect from the private API.
+   */
+  disconnectOrders() {
+    this.checkDisconnection(this.sockets.orders);
+    this.sockets.orders.close();
+  }
+
+  /**
+   * Connect to the public API (V2) that can stream all market and candle data across books.
+   */
+  connect(): void {
+    this.checkConnection(this.sockets.v2);
+    this.sockets.v2 = new Websocket(this.wsUri + "/v2/marketdata");
+    this.addListeners(this.sockets.v2, "v2");
+  }
+
+  /**
+   * Disconnect from the public API (V2).
+   */
+  disconnect(): void {
+    this.checkDisconnection(this.sockets.v2);
+    this.sockets.v2.close();
+  }
+
+  /**
+   * Subscribe from data feeds (V2).
+   */
+  subscribe(subscriptions: Subscriptions): void {
+    this.sendMessage({ type: "subscribe", subscriptions });
+  }
+
+  /**
+   * Unsubscribe from data feeds (V2).
+   */
+  unsubscribe(subscriptions: Subscriptions): void {
+    this.sendMessage({ type: "unsubscribe", subscriptions });
+  }
+
+  private sendMessage(message: any): void {
+    this.checkDisconnection(this.sockets.v2);
+    this.sockets.v2.send(JSON.stringify(message));
+  }
+
+  private addListeners(socket: Websocket, symbol: string): void {
+    socket.on("message", this.onMessage.bind(this, symbol));
+    socket.on("open", this.onOpen.bind(this, symbol));
+    socket.on("close", this.onClose.bind(this, symbol));
+    socket.on("error", this.onError.bind(this, symbol));
+  }
+
+  private onMessage(symbol: string, data: any): void {
+    try {
+      const message = JSON.parse(data);
+      this.emit("message", message, symbol);
+    } catch (error) {
+      this.onError(symbol, error);
+    }
+  }
+
+  private onOpen(symbol: string): void {
+    this.emit("open", symbol);
+  }
+
+  private onClose(symbol: string): void {
+    this.emit("close", symbol);
+  }
+
+  private onError(symbol: string, error: any): void {
+    if (!error) {
+      return;
+    }
+    this.emit("error", error, symbol);
+  }
+
+  private checkConnection(socket: Websocket | undefined): void {
+    if (socket) {
+      switch (socket.readyState) {
+        case Websocket.OPEN:
+        case Websocket.CLOSING:
+        case Websocket.CONNECTING:
+          throw new Error("Could not connect. State: " + socket.readyState);
+      }
+    }
+  }
+
+  private checkDisconnection(socket: Websocket | undefined): void {
+    if (!socket) {
+      throw new Error("Socket was not initialized");
+    }
+    switch (socket.readyState) {
+      case Websocket.CLOSED:
+      case Websocket.CLOSING:
+      case Websocket.CONNECTING:
+        throw new Error("Socket state: " + socket.readyState);
+    }
+  }
+
+  get nonce(): () => number {
+    if (this._nonce) {
+      return this._nonce;
+    }
+    return () => Date.now();
+  }
+
+  set nonce(nonce: () => number) {
+    this._nonce = nonce;
+  }
 }
