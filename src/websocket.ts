@@ -1,6 +1,6 @@
 import { EventEmitter } from "events";
 import * as Websocket from "ws";
-import { DefaultSymbol, SymbolFilter } from "./public";
+import { DefaultSymbol, SymbolFilter, Candle } from "./public";
 import { AccountName, BaseOrder, OrderType } from "./auth";
 import { SignRequest } from "./signer";
 import { stringify, ParsedUrlQueryInput } from "querystring";
@@ -247,7 +247,7 @@ export type CandlesType =
 export type CandlesUpdate = {
   type: CandlesType;
   symbol: string;
-  changes: [number, number, number, number, number, number][];
+  changes: Candle[];
 };
 
 export type MarketV2Message = L2Message | CandlesUpdate | HeartbeatMarketV2;
