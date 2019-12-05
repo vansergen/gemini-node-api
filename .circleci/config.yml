@@ -9,6 +9,9 @@ shared: &shared
         name: npm version
         command: npm -v
     - checkout
+    - run:
+        name: Update npm (<6.0.0)
+        command: npmv=$(echo $(npm -v)); if [ "$npmv" -lt "6" ]; then sudo npm i -g npm; else echo "NPM version is greater than 6. Skipping the update"; fi
     - run: npm ci
     - run: npm run lint
     - run: npm run prettier
