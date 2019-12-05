@@ -13,6 +13,12 @@ shared: &shared
     - run: npm run lint
     - run: npm run prettier
     - run: npm test
+    - run:
+        name: npm prebublish
+        command: npm run prepublishOnly
+    - run:
+        name: npm postpublish
+        command: npm run postpublish
 
 jobs:
   node-8:
