@@ -1,0 +1,7 @@
+{
+  "out": "doc",
+  "mode": "modules",
+  "name": "gemini-node-api",
+  "exclude": "test/",
+  "hideGenerator": true
+}

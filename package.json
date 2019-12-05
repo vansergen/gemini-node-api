@@ -39,7 +39,7 @@
     "lint-fix": "npm run lint -- --fix",
     "prettier": "prettier -c **/*.{js,md,ts,json}",
     "prettier-write": "npm run prettier -- --write",
-    "generate-docs": "jsdoc ./ -c jsdoc.json",
+    "generate-docs": "typedoc",
     "test": "mocha -r ts-node/register --full-trace --ui tdd --bail --extension ts"
   },
   "repository": {
