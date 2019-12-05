@@ -1,33 +1,61 @@
-version: 2.0
+version: 2.1
 
 shared: &shared
   steps:
     - run:
         name: Node.js version
-        command: 'echo "node: $(node -v)"'
+        command: node -v
     - run:
         name: npm version
-        command: 'echo "npm: v$(npm -v)"'
+        command: npm -v
     - checkout
-    - run: npm install
+    - run:
+        name: Update npm (<6.0.0)
+        command: npmv=$(echo $(npm -v) | head -c 1); if [ "$npmv" -lt "6" ]; then sudo npm i -g npm; else echo "NPM version is greater than 6. Skipping the update"; fi
+    - run: npm ci
     - run: npm run lint
     - run: npm run prettier
     - run: npm test
+    - run:
+        name: npm prebublish
+        command: npm run prepublishOnly
+    - run:
+        name: npm postpublish
+        command: npm run postpublish
 
 jobs:
+  node-8:
+    <<: *shared
+    docker:
+      - image: circleci/node:8
+  node-9:
+    <<: *shared
+    docker:
+      - image: circleci/node:9
   node-10:
     <<: *shared
     docker:
       - image: circleci/node:10
-
-  node-latest:
+  node-11:
     <<: *shared
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:11
+  node-12:
+    <<: *shared
+    docker:
+      - image: circleci/node:12
+  node-13:
+    <<: *shared
+    docker:
+      - image: circleci/node:13
 
 workflows:
-  version: 2
+  version: 2.1
   build:
     jobs:
+      - node-8
+      - node-9
       - node-10
-      - node-latest
+      - node-11
+      - node-12
+      - node-13

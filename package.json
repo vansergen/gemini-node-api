@@ -2,36 +2,45 @@
   "name": "gemini-node-api",
   "version": "0.3.5",
   "description": "Gemini Node.js API",
-  "main": "index.js",
+  "main": "build/index.js",
   "directories": {
-    "lib": "lib",
-    "test": "tests"
+    "lib": "build/src",
+    "test": "test"
   },
-  "types": "index.d.ts",
+  "type": "commonjs",
+  "types": "build/index.d.ts",
   "engines": {
-    "node": ">=10.16.3"
+    "node": ">=8.16.2"
   },
   "dependencies": {
-    "@types/bluebird": "^3.5.28",
-    "@types/node": "^12.12.5",
-    "bluebird": "^3.7.1",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.5",
+    "@types/ws": "^6.0.4",
+    "rpc-bluebird": "^1.0.4",
     "ws": "^7.2.0"
   },
   "devDependencies": {
-    "eslint": "^6.6.0",
-    "jsdoc": "^3.6.3",
+    "@types/mocha": "^5.2.7",
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
+    "eslint": "^6.7.2",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
     "mocha": "^6.2.2",
     "nock": "^11.7.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.19.1",
+    "ts-node": "^8.5.4",
+    "typedoc": "^0.15.3",
+    "typescript": "^3.7.3"
   },
   "scripts": {
-    "lint": "eslint --ext .js ./",
-    "prettier": "prettier -l *.{js,md,ts,json} **/*.{js,md,ts,json}",
+    "build": "tsc",
+    "prepublishOnly": "npm run prettier && npm run lint && npm run build && npm run prettier-write && npm run lint-fix",
+    "postpublish": "rm -fr build",
+    "lint": "eslint --ext .ts,.js ./",
+    "lint-fix": "npm run lint -- --fix",
+    "prettier": "prettier -c **/*.{js,md,ts,json}",
     "prettier-write": "npm run prettier -- --write",
-    "generate-docs": "jsdoc ./ -c jsdoc.json",
-    "test": "mocha --full-trace --ui tdd --bail --reporter spec tests/*.js"
+    "generate-docs": "typedoc",
+    "test": "mocha -r ts-node/register --full-trace --ui tdd --bail --extension ts"
   },
   "repository": {
     "type": "git",
@@ -48,5 +57,24 @@
   "bugs": {
     "url": "https://github.com/vansergen/gemini-node-api/issues"
   },
-  "homepage": "https://github.com/vansergen/gemini-node-api#readme"
+  "homepage": "https://github.com/vansergen/gemini-node-api#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,json,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{ts,js}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "funding": {
+    "type": "Coinbase Commerce",
+    "url": "https://commerce.coinbase.com/checkout/04a40393-21f0-44aa-b11b-726b67f08c5a"
+  }
 }

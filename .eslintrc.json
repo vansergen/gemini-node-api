@@ -1,21 +1,40 @@
 {
-  "extends": "eslint:recommended",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    },
+    {
+      "files": ["./build/index.js"],
+      "rules": {
+        "no-prototype-builtins": "off"
+      }
+    }
+  ],
   "env": {
-    "es6": true,
-    "node": true
+    "node": true,
+    "es2020": true
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 2019
+    "sourceType": "module"
   },
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "curly": "error",
     "eqeqeq": "error",
-    "func-names": "error",
     "linebreak-style": "error",
     "no-console": "error",
-    "quotes": ["error", "single"],
+    "quotes": "error",
     "prefer-destructuring": "error",
-    "semi": "error"
+    "semi": "error",
+    "@typescript-eslint/camelcase": "off"
   }
 }
