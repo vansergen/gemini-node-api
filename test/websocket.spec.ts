@@ -41,7 +41,7 @@ suite("WebsocketClient", () => {
   });
 
   test(".connectMarket()", done => {
-    const wss = WSS({ port, key, secret });
+    const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     const queryParams = { heartbeat: true, bids: true };
     wss.on("connection", (socket, req) => {
@@ -60,7 +60,7 @@ suite("WebsocketClient", () => {
   });
 
   test(".connectMarket() (connects to different markets)", done => {
-    const wss = WSS({ port, key, secret });
+    const wss = WSS({ port });
     const heartbeat = true;
     const _symbol = "btcusd";
     const client = new WebsocketClient({ wsUri, symbol });
@@ -76,7 +76,7 @@ suite("WebsocketClient", () => {
   });
 
   test(".disconnectMarket()", done => {
-    const wss = WSS({ port, key, secret });
+    const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connectMarket({ symbol });
     client.once("close", market => {
@@ -114,7 +114,7 @@ suite("WebsocketClient", () => {
   });
 
   test(".connect()", done => {
-    const wss = WSS({ port, key, secret });
+    const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connect();
     client.once("open", market => {
@@ -124,7 +124,7 @@ suite("WebsocketClient", () => {
   });
 
   test(".disconnect()", done => {
-    const wss = WSS({ port, key, secret });
+    const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connect();
     client.once("close", market => {
@@ -138,7 +138,7 @@ suite("WebsocketClient", () => {
   });
 
   test(".subscribe()", done => {
-    const wss = WSS({ port, key, secret });
+    const wss = WSS({ port });
     const subscriptions: Subscriptions = [
       { name: "l2", symbols: ["BTCUSD", "ETHUSD", "ETHBTC"] }
     ];
@@ -158,7 +158,7 @@ suite("WebsocketClient", () => {
   });
 
   test(".unsubscribe()", done => {
-    const wss = WSS({ port, key, secret });
+    const wss = WSS({ port });
     const subscriptions: Subscriptions = [
       { name: "l2", symbols: ["BTCUSD", "ETHUSD", "ETHBTC"] }
     ];

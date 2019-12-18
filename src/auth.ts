@@ -53,9 +53,7 @@ export type BrokerOrderOptions = BaseClearingOrder & {
   source_counterparty_id: string;
 };
 
-export type ClearingOrderID = {
-  clearing_id: string;
-};
+export type ClearingOrderID = { clearing_id: string };
 
 export type ConfirmClearingOptions = {
   clearing_id: string;
@@ -133,10 +131,7 @@ export type OrderStatus = BaseOrder & {
 
 export type CancelOrdersResponse = {
   result: "ok";
-  details: {
-    cancelledOrders: number[];
-    cancelRejects: number[];
-  };
+  details: { cancelledOrders: number[]; cancelRejects: number[] };
 };
 
 export type PastTrade = {
@@ -172,10 +167,7 @@ export type NotionalVolume = {
   block_maker_fee_bps: number;
   block_taker_fee_bps: number;
   notional_30d_volume: number;
-  notional_1d_volume: {
-    date: string;
-    notional_volume: number;
-  }[];
+  notional_1d_volume: { date: string; notional_volume: number }[];
 };
 
 export type TradeVolume = {
@@ -200,10 +192,7 @@ export type TradeVolume = {
   sell_taker_count: number;
 };
 
-export type NewClearingOrderResponse = {
-  result: string;
-  clearing_id: string;
-};
+export type NewClearingOrderResponse = { result: string; clearing_id: string };
 
 export type ClearingOrderStatus = {
   result: "ok";
@@ -253,11 +242,7 @@ export type Transfer = {
   purpose?: string;
 };
 
-export type NewAddress = {
-  currency: string;
-  address: string;
-  label?: string;
-};
+export type NewAddress = { currency: string; address: string; label?: string };
 
 export type Withdrawal = {
   address: string;
@@ -293,7 +278,7 @@ export type AuthenticatedClientOptions = PublicClientOptions & {
 export class AuthenticatedClient extends PublicClient {
   readonly key: string;
   readonly secret: string;
-  _nonce?: () => number;
+  private _nonce?: () => number;
 
   constructor({ key, secret, ...rest }: AuthenticatedClientOptions) {
     super(rest);
