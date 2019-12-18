@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { SignRequest, AuthHeaders } from "../";
+import { SignRequest, AuthHeaders } from "../index";
 
 suite("SignRequest", () => {
   test("correct signature", () => {

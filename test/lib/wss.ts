@@ -29,19 +29,15 @@ export function WSS({ port, key, secret }: WSSOptions): Server {
     }
     const [symbol, query] = path.split("?");
     const qs = parse(query);
-    if (type === "marketdata") {
-      if (v === "v1") {
-        return VerifyProps(qs, [
-          "heartbeat",
-          "trades",
-          "bids",
-          "offers",
-          "top_of_book",
-          "auctions"
-        ]);
-      } else {
-        return false;
-      }
+    if (v === "v1" && type === "marketdata") {
+      return VerifyProps(qs, [
+        "heartbeat",
+        "trades",
+        "bids",
+        "offers",
+        "top_of_book",
+        "auctions"
+      ]);
     } else if (type === "order" && symbol === "events" && v === "v1") {
       if (!key || !secret) {
         return false;
@@ -69,13 +65,11 @@ export function WSS({ port, key, secret }: WSSOptions): Server {
         "apiSessionFilter",
         "eventTypeFilter"
       ]);
-      if (
+      return (
         providedSignature === requiredSignature &&
         providedKey === key &&
         checkQS
-      ) {
-        return true;
-      }
+      );
     }
     return false;
   };
