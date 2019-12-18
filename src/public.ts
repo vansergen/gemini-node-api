@@ -1,5 +1,5 @@
 import { RPC } from "rpc-bluebird";
-import { RequestPromise as BPromise } from "request-promise";
+import { RequestPromise as Promise } from "request-promise";
 
 export const ApiLimit = 500;
 export const DefaultSymbol = "btcusd";
@@ -68,10 +68,7 @@ export type BookEntry = {
   timestamp: string;
 };
 
-export type OrderBook = {
-  bids: BookEntry[];
-  asks: BookEntry[];
-};
+export type OrderBook = { bids: BookEntry[]; asks: BookEntry[] };
 
 export type Trade = {
   timestamp: number;
@@ -139,14 +136,14 @@ export class PublicClient extends RPC {
   /**
    * Get all available symbols for trading.
    */
-  getSymbols(): BPromise<string[]> {
+  getSymbols(): Promise<string[]> {
     return this.get({ uri: "v1/symbols" });
   }
 
   /**
    * Get information about recent trading activity for the symbol.
    */
-  getTicker({ symbol = this.symbol, v = "v1" }: TickerFilter = {}): BPromise<
+  getTicker({ symbol = this.symbol, v = "v1" }: TickerFilter = {}): Promise<
     Ticker
   > {
     v += v === "v1" ? "/pubticker/" + symbol : "/ticker/" + symbol;
@@ -159,14 +156,14 @@ export class PublicClient extends RPC {
   getCandles({
     symbol = this.symbol,
     time_frame = "1day"
-  }: CandlesFilter = {}): BPromise<Candle[]> {
+  }: CandlesFilter = {}): Promise<Candle[]> {
     return this.get({ uri: "v2/candles/" + symbol + "/" + time_frame });
   }
 
   /**
    * Get the current order book.
    */
-  getOrderBook({ symbol = this.symbol, ...qs }: BookFilter = {}): BPromise<
+  getOrderBook({ symbol = this.symbol, ...qs }: BookFilter = {}): Promise<
     OrderBook
   > {
     return this.get({ uri: "v1/book/" + symbol, qs });
@@ -179,7 +176,7 @@ export class PublicClient extends RPC {
     symbol = this.symbol,
     limit_trades = ApiLimit,
     ...qs
-  }: TradeHistoryFilter = {}): BPromise<Trade[]> {
+  }: TradeHistoryFilter = {}): Promise<Trade[]> {
     const uri = "v1/trades/" + symbol;
     return this.get({ uri, qs: { limit_trades, ...qs } });
   }
@@ -187,7 +184,7 @@ export class PublicClient extends RPC {
   /**
    * Get current auction information.
    */
-  getCurrentAuction({ symbol = this.symbol }: SymbolFilter = {}): BPromise<
+  getCurrentAuction({ symbol = this.symbol }: SymbolFilter = {}): Promise<
     AuctionInfo
   > {
     return this.get({ uri: "v1/auction/" + symbol });
@@ -200,7 +197,7 @@ export class PublicClient extends RPC {
     symbol = this.symbol,
     limit_auction_results = ApiLimit,
     ...qs
-  }: AuctionHistoryFilter = {}): BPromise<AuctionHistory[]> {
+  }: AuctionHistoryFilter = {}): Promise<AuctionHistory[]> {
     const uri = "v1/auction/" + symbol + "/history";
     return this.get({ uri, qs: { limit_auction_results, ...qs } });
   }

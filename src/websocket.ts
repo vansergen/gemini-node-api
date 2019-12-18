@@ -288,7 +288,7 @@ export class WebsocketClient extends EventEmitter {
   readonly key?: string;
   readonly secret?: string;
   private sockets: { [socket: string]: Websocket };
-  _nonce?: () => number;
+  private _nonce?: () => number;
 
   constructor({
     symbol = DefaultSymbol,
