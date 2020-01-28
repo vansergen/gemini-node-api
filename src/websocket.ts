@@ -287,7 +287,7 @@ export class WebsocketClient extends EventEmitter {
   readonly symbol: string;
   readonly key?: string;
   readonly secret?: string;
-  private sockets: { [socket: string]: Websocket };
+  readonly sockets: { [socket: string]: Websocket };
   private _nonce?: () => number;
 
   constructor({
@@ -445,14 +445,11 @@ export class WebsocketClient extends EventEmitter {
     }
   }
 
-  get nonce(): () => number {
-    if (this._nonce) {
-      return this._nonce;
-    }
-    return (): number => Date.now();
-  }
-
   set nonce(nonce: () => number) {
     this._nonce = nonce;
+  }
+
+  get nonce(): () => number {
+    return this._nonce ? this._nonce : (): number => Date.now();
   }
 }
