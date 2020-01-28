@@ -286,6 +286,7 @@ export class AuthenticatedClient extends PublicClient {
     this.secret = secret;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   post({ body }: RPCOptions): Promise<any> {
     body.nonce = this.nonce();
     const uri = body.request;

@@ -4,6 +4,7 @@ import { parse } from "querystring";
 
 type WSSOptions = { port: number; key?: string; secret?: string };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function VerifyProps(qs: { [key: string]: any }, allowed: string[]): boolean {
   for (const prop in qs) {
     const check = allowed.find(
