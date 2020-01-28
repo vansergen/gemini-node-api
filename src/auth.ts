@@ -1,5 +1,5 @@
 import { RPCOptions } from "rpc-bluebird";
-import { RequestPromise as Promise } from "request-promise";
+import * as Promise from "bluebird";
 import {
   PublicClient,
   PublicClientOptions,
@@ -509,14 +509,11 @@ export class AuthenticatedClient extends PublicClient {
     return this.post({ body: { request: "/v1/heartbeat" } });
   }
 
-  get nonce(): () => number {
-    if (this._nonce) {
-      return this._nonce;
-    }
-    return (): number => Date.now();
-  }
-
   set nonce(nonce: () => number) {
     this._nonce = nonce;
+  }
+
+  get nonce(): () => number {
+    return this._nonce ? this._nonce : (): number => Date.now();
   }
 }
