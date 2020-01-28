@@ -268,6 +268,7 @@ export declare interface WebsocketClient {
     event: "message",
     eventListener: (data: WSMessage, market: string) => void
   ): this;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   on(event: "error", eventListener: (error: any, market: string) => void): this;
 
   once(event: "open", eventListener: (market: string) => void): this;
@@ -278,6 +279,7 @@ export declare interface WebsocketClient {
   ): this;
   once(
     event: "error",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     eventListener: (error: any, market: string) => void
   ): this;
 }
@@ -287,7 +289,7 @@ export class WebsocketClient extends EventEmitter {
   readonly symbol: string;
   readonly key?: string;
   readonly secret?: string;
-  private sockets: { [socket: string]: Websocket };
+  readonly sockets: { [socket: string]: Websocket };
   private _nonce?: () => number;
 
   constructor({
@@ -398,6 +400,7 @@ export class WebsocketClient extends EventEmitter {
     socket.on("error", this.onError.bind(this, symbol));
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private onMessage(symbol: string, data: any): void {
     try {
       const message = JSON.parse(data);
@@ -415,6 +418,7 @@ export class WebsocketClient extends EventEmitter {
     this.emit("close", symbol);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private onError(symbol: string, error: any): void {
     if (!error) {
       return;
@@ -445,14 +449,11 @@ export class WebsocketClient extends EventEmitter {
     }
   }
 
-  get nonce(): () => number {
-    if (this._nonce) {
-      return this._nonce;
-    }
-    return (): number => Date.now();
-  }
-
   set nonce(nonce: () => number) {
     this._nonce = nonce;
+  }
+
+  get nonce(): () => number {
+    return this._nonce ? this._nonce : (): number => Date.now();
   }
 }

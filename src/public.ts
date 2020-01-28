@@ -1,5 +1,5 @@
 import { RPC } from "rpc-bluebird";
-import { RequestPromise as Promise } from "request-promise";
+import * as Promise from "bluebird";
 
 export const ApiLimit = 500;
 export const DefaultSymbol = "btcusd";

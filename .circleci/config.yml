@@ -9,9 +9,6 @@ shared: &shared
         name: npm version
         command: npm -v
     - checkout
-    - run:
-        name: Update npm (<6.0.0)
-        command: npmv=$(echo $(npm -v) | head -c 1); if [ "$npmv" -lt "6" ]; then sudo npm i -g npm; else echo "NPM version is greater than 6. Skipping the update"; fi
     - run: npm ci
     - run: npm run lint
     - run: npm run prettier
@@ -22,16 +19,11 @@ shared: &shared
     - run:
         name: npm postpublish
         command: npm run postpublish
+    - run:
+        name: Coveralls
+        command: npm run coverage-ci
 
 jobs:
-  node-8:
-    <<: *shared
-    docker:
-      - image: circleci/node:8
-  node-9:
-    <<: *shared
-    docker:
-      - image: circleci/node:9
   node-10:
     <<: *shared
     docker:
@@ -48,14 +40,25 @@ jobs:
     <<: *shared
     docker:
       - image: circleci/node:13
+  coverage:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - run:
+          name: Notify webhook
+          command: curl "https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN" -d "payload[build_num]=$CIRCLE_PREVIOUS_BUILD_NUM&payload[status]=done"
 
 workflows:
   version: 2.1
   build:
     jobs:
-      - node-8
-      - node-9
       - node-10
       - node-11
       - node-12
       - node-13
+      - coverage:
+          requires:
+            - node-10
+            - node-11
+            - node-12
+            - node-13

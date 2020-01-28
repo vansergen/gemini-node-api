@@ -1,6 +1,7 @@
 import * as assert from "assert";
 import * as nock from "nock";
 import {
+  ApiLimit,
   AuthenticatedClient,
   Headers,
   ApiUri,
@@ -118,7 +119,63 @@ suite("AuthenticatedClient", () => {
     assert.deepStrictEqual(data, response);
   });
 
-  test(".buy() (using the default `symbol`)", async () => {
+  test(".newOrder() (with no `symbol`)", async () => {
+    const request = "/v1/order/new";
+    const account = "primary";
+    const amount = 0.1;
+    const client_order_id = "470135";
+    const price = 10500;
+    const symbol = DefaultSymbol;
+    const type = "exchange stop limit";
+    const side = "buy";
+    const stop_price = 10000;
+    const options = {
+      request,
+      symbol,
+      account,
+      amount,
+      client_order_id,
+      price,
+      type,
+      side,
+      stop_price,
+      nonce
+    };
+    const response: OrderStatus = {
+      order_id: "107317752",
+      id: "107317752",
+      symbol: "ethusd",
+      exchange: "gemini",
+      avg_execution_price: "126.25",
+      side: "buy",
+      type: "market buy",
+      timestamp: "1547236481",
+      timestampms: 1547236481910,
+      is_live: false,
+      is_cancelled: false,
+      is_hidden: false,
+      was_forced: false,
+      executed_amount: "0.54517172",
+      remaining_amount: "0",
+      options: []
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.newOrder({
+      account,
+      amount,
+      client_order_id,
+      price,
+      type,
+      side,
+      stop_price
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".buy() (with no `symbol`)", async () => {
     const request = "/v1/order/new";
     const account = "primary";
     const amount = 0.1;
@@ -171,7 +228,7 @@ suite("AuthenticatedClient", () => {
     assert.deepStrictEqual(data, response);
   });
 
-  test(".sell() (using the default `symbol`)", async () => {
+  test(".sell() (with no `symbol`)", async () => {
     const request = "/v1/order/new";
     const account = "primary";
     const amount = 0.1;
@@ -440,6 +497,166 @@ suite("AuthenticatedClient", () => {
     assert.deepStrictEqual(data, response);
   });
 
+  test(".getPastTrades() (with no `symbol`)", async () => {
+    const request = "/v1/mytrades";
+    const account = "primary";
+    const symbol = DefaultSymbol;
+    const timestamp = 1547220640194;
+    const limit_trades = 2;
+    const options = {
+      request,
+      symbol,
+      limit_trades,
+      timestamp,
+      account,
+      nonce
+    };
+    const response: PastTrade[] = [
+      {
+        price: "3648.09",
+        amount: "0.0027343246",
+        timestamp: 1547232911,
+        timestampms: 1547232911021,
+        type: "Buy",
+        aggressor: true,
+        fee_currency: "USD",
+        fee_amount: "0.024937655575035",
+        tid: 107317526,
+        order_id: "107317524",
+        exchange: "gemini",
+        is_auction_fill: false
+      },
+      {
+        price: "3633.00",
+        amount: "0.00423677",
+        timestamp: 1547220640,
+        timestampms: 1547220640195,
+        type: "Buy",
+        aggressor: false,
+        fee_currency: "USD",
+        fee_amount: "0.038480463525",
+        tid: 106921823,
+        order_id: "106817811",
+        exchange: "gemini",
+        is_auction_fill: false
+      }
+    ];
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.getPastTrades({
+      timestamp,
+      account,
+      limit_trades
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getPastTrades() (with no `limit_trades`)", async () => {
+    const request = "/v1/mytrades";
+    const account = "primary";
+    const symbol = "bcheth";
+    const timestamp = 1547220640194;
+    const limit_trades = ApiLimit;
+    const options = {
+      request,
+      symbol,
+      limit_trades,
+      timestamp,
+      account,
+      nonce
+    };
+    const response: PastTrade[] = [
+      {
+        price: "3648.09",
+        amount: "0.0027343246",
+        timestamp: 1547232911,
+        timestampms: 1547232911021,
+        type: "Buy",
+        aggressor: true,
+        fee_currency: "USD",
+        fee_amount: "0.024937655575035",
+        tid: 107317526,
+        order_id: "107317524",
+        exchange: "gemini",
+        is_auction_fill: false
+      },
+      {
+        price: "3633.00",
+        amount: "0.00423677",
+        timestamp: 1547220640,
+        timestampms: 1547220640195,
+        type: "Buy",
+        aggressor: false,
+        fee_currency: "USD",
+        fee_amount: "0.038480463525",
+        tid: 106921823,
+        order_id: "106817811",
+        exchange: "gemini",
+        is_auction_fill: false
+      }
+    ];
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.getPastTrades({
+      timestamp,
+      account,
+      symbol
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getPastTrades() (with no arguments)", async () => {
+    const request = "/v1/mytrades";
+    const symbol = DefaultSymbol;
+    const limit_trades = ApiLimit;
+    const options = {
+      request,
+      symbol,
+      limit_trades,
+      nonce
+    };
+    const response: PastTrade[] = [
+      {
+        price: "3648.09",
+        amount: "0.0027343246",
+        timestamp: 1547232911,
+        timestampms: 1547232911021,
+        type: "Buy",
+        aggressor: true,
+        fee_currency: "USD",
+        fee_amount: "0.024937655575035",
+        tid: 107317526,
+        order_id: "107317524",
+        exchange: "gemini",
+        is_auction_fill: false
+      },
+      {
+        price: "3633.00",
+        amount: "0.00423677",
+        timestamp: 1547220640,
+        timestampms: 1547220640195,
+        type: "Buy",
+        aggressor: false,
+        fee_currency: "USD",
+        fee_amount: "0.038480463525",
+        tid: 106921823,
+        order_id: "106817811",
+        exchange: "gemini",
+        is_auction_fill: false
+      }
+    ];
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.getPastTrades();
+    assert.deepStrictEqual(data, response);
+  });
+
   test(".getNotionalVolume()", async () => {
     const request = "/v1/notionalvolume";
     const account = "primary";
@@ -571,6 +788,42 @@ suite("AuthenticatedClient", () => {
     assert.deepStrictEqual(data, response);
   });
 
+  test(".newClearingOrder() (with no `symbol`)", async () => {
+    const request = "/v1/clearing/new";
+    const counterparty_id = "OM9VNL1G";
+    const expires_in_hrs = 24;
+    const symbol = DefaultSymbol;
+    const amount = 100;
+    const price = 200;
+    const side = "buy";
+    const options = {
+      request,
+      symbol,
+      counterparty_id,
+      expires_in_hrs,
+      amount,
+      price,
+      side,
+      nonce
+    };
+    const response: NewClearingOrderResponse = {
+      result: "AwaitConfirm",
+      clearing_id: "0OQGOZXW"
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.newClearingOrder({
+      counterparty_id,
+      expires_in_hrs,
+      amount,
+      price,
+      side
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
   test(".newBrokerOrder()", async () => {
     const request = "/v1/clearing/broker/new";
     const source_counterparty_id = "R485E04Q";
@@ -607,6 +860,45 @@ suite("AuthenticatedClient", () => {
       price,
       side,
       symbol
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".newBrokerOrder() (with no `symbol`)", async () => {
+    const request = "/v1/clearing/broker/new";
+    const source_counterparty_id = "R485E04Q";
+    const target_counterparty_id = "Z4929ZDY";
+    const expires_in_hrs = 1;
+    const symbol = DefaultSymbol;
+    const amount = 175;
+    const price = 200;
+    const side = "sell";
+    const options = {
+      request,
+      symbol,
+      source_counterparty_id,
+      target_counterparty_id,
+      expires_in_hrs,
+      amount,
+      price,
+      side,
+      nonce
+    };
+    const response: NewClearingOrderResponse = {
+      result: "AwaitConfirm",
+      clearing_id: "0OQGOZXW"
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.newBrokerOrder({
+      source_counterparty_id,
+      target_counterparty_id,
+      expires_in_hrs,
+      amount,
+      price,
+      side
     });
     assert.deepStrictEqual(data, response);
   });
@@ -672,6 +964,38 @@ suite("AuthenticatedClient", () => {
       side,
       clearing_id,
       symbol
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".confirmClearingOrder() (with no `symbol`)", async () => {
+    const request = "/v1/clearing/confirm";
+    const symbol = DefaultSymbol;
+    const clearing_id = "OM9VNL1G";
+    const amount = 100;
+    const price = 200;
+    const side = "buy";
+    const options = {
+      request,
+      symbol,
+      amount,
+      price,
+      side,
+      clearing_id,
+      nonce
+    };
+    const response: ConfirmClearingOptionsResponse = {
+      result: "confirmed"
+    };
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.confirmClearingOrder({
+      amount,
+      price,
+      side,
+      clearing_id
     });
     assert.deepStrictEqual(data, response);
   });
@@ -949,5 +1273,11 @@ suite("AuthenticatedClient", () => {
 
     const data = await client.heartbeat();
     assert.deepStrictEqual(data, response);
+  });
+
+  test(".nonce()", () => {
+    const client = new AuthenticatedClient({ key, secret });
+    const nonce = client.nonce();
+    assert.deepStrictEqual(typeof nonce, "number");
   });
 });
