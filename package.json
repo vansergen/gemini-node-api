@@ -35,9 +35,12 @@
     "build": "tsc",
     "prepublishOnly": "npm run prettier && npm run lint && npm run build && npm run prettier-write && npm run lint-fix",
     "postpublish": "rm -fr build",
+    "coverage": "nyc npm test && nyc report --reporter=lcov",
+    "coverage-ci": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "fresh-install": "rm -fr node_modules && rm -f package-lock.json && npm install",
     "lint": "eslint --ext .ts,.js ./",
     "lint-fix": "npm run lint -- --fix",
-    "prettier": "prettier -c **/*.{js,md,ts,json}",
+    "prettier": "prettier -c \"**/*.{js,md,ts,json}\"",
     "prettier-write": "npm run prettier -- --write",
     "generate-docs": "typedoc",
     "test": "mocha -r ts-node/register --full-trace --ui tdd --bail --extension ts"
