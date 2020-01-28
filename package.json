@@ -10,7 +10,7 @@
   "type": "commonjs",
   "types": "build/index.d.ts",
   "engines": {
-    "node": ">=8.16.2"
+    "node": ">=10.18.1"
   },
   "dependencies": {
     "@types/ws": "^6.0.4",
