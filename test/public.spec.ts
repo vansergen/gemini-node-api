@@ -1,6 +1,7 @@
 import * as assert from "assert";
 import * as nock from "nock";
 import {
+  ApiLimit,
   PublicClient,
   ApiUri,
   SandboxApiUri,
@@ -102,6 +103,27 @@ suite("PublicClient", () => {
     assert.deepStrictEqual(data, response);
   });
 
+  test(".getTicker() (with no `symbol`)", async () => {
+    const symbol = DefaultSymbol;
+    const uri = "/v1/pubticker/" + symbol;
+    const response: Ticker = {
+      ask: "977.59",
+      bid: "977.35",
+      last: "977.65",
+      volume: {
+        BTC: "2210.505328803",
+        USD: "2135477.463379586263",
+        timestamp: 1483018200000
+      }
+    };
+    nock(ApiUri)
+      .get(uri)
+      .reply(200, response);
+
+    const data = await client.getTicker({});
+    assert.deepStrictEqual(data, response);
+  });
+
   test(".getTicker() (v2)", async () => {
     const symbol = "btcusd";
     const uri = "/v2/ticker/" + symbol;
@@ -148,6 +170,27 @@ suite("PublicClient", () => {
     assert.deepStrictEqual(data, response);
   });
 
+  test(".getTicker() (with no arguments)", async () => {
+    const symbol = DefaultSymbol;
+    const uri = "/v1/pubticker/" + symbol;
+    const response: Ticker = {
+      ask: "977.59",
+      bid: "977.35",
+      last: "977.65",
+      volume: {
+        BTC: "2210.505328803",
+        USD: "2135477.463379586263",
+        timestamp: 1483018200000
+      }
+    };
+    nock(ApiUri)
+      .get(uri)
+      .reply(200, response);
+
+    const data = await client.getTicker();
+    assert.deepStrictEqual(data, response);
+  });
+
   test(".getCandles()", async () => {
     const symbol = "btcusd";
     const time_frame = "5m";
@@ -161,6 +204,54 @@ suite("PublicClient", () => {
       .reply(200, response);
 
     const data = await client.getCandles({ symbol, time_frame });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getCandles() (with no `symbol`)", async () => {
+    const symbol = DefaultSymbol;
+    const time_frame = "5m";
+    const uri = "/v2/candles/" + symbol + "/" + time_frame;
+    const response: Candle[] = [
+      [1559755800000, 7781.6, 7820.23, 7776.56, 7819.39, 34.7624802159],
+      [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059]
+    ];
+    nock(ApiUri)
+      .get(uri)
+      .reply(200, response);
+
+    const data = await client.getCandles({ time_frame });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getCandles() (with no `time_frame`)", async () => {
+    const symbol = "btcusd";
+    const time_frame = "1day";
+    const uri = "/v2/candles/" + symbol + "/" + time_frame;
+    const response: Candle[] = [
+      [1559755800000, 7781.6, 7820.23, 7776.56, 7819.39, 34.7624802159],
+      [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059]
+    ];
+    nock(ApiUri)
+      .get(uri)
+      .reply(200, response);
+
+    const data = await client.getCandles({ symbol });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getCandles() (with no arguments)", async () => {
+    const symbol = DefaultSymbol;
+    const time_frame = "1day";
+    const uri = "/v2/candles/" + symbol + "/" + time_frame;
+    const response: Candle[] = [
+      [1559755800000, 7781.6, 7820.23, 7776.56, 7819.39, 34.7624802159],
+      [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059]
+    ];
+    nock(ApiUri)
+      .get(uri)
+      .reply(200, response);
+
+    const data = await client.getCandles();
     assert.deepStrictEqual(data, response);
   });
 
@@ -191,6 +282,63 @@ suite("PublicClient", () => {
       .reply(200, response);
 
     const data = await client.getOrderBook({ symbol, limit_bids, limit_asks });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getOrderBook() (with no `symbol`)", async () => {
+    const symbol = DefaultSymbol;
+    const uri = "/v1/book/" + symbol;
+    const limit_bids = 1;
+    const limit_asks = 1;
+    const response: OrderBook = {
+      bids: [
+        {
+          price: "3607.85",
+          amount: "6.643373",
+          timestamp: "1547147541"
+        }
+      ],
+      asks: [
+        {
+          price: "3607.86",
+          amount: "14.68205084",
+          timestamp: "1547147541"
+        }
+      ]
+    };
+    nock(ApiUri)
+      .get(uri)
+      .query({ limit_asks, limit_bids })
+      .reply(200, response);
+
+    const data = await client.getOrderBook({ limit_bids, limit_asks });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getOrderBook() (with no arguments)", async () => {
+    const symbol = DefaultSymbol;
+    const uri = "/v1/book/" + symbol;
+    const response: OrderBook = {
+      bids: [
+        {
+          price: "3607.85",
+          amount: "6.643373",
+          timestamp: "1547147541"
+        }
+      ],
+      asks: [
+        {
+          price: "3607.86",
+          amount: "14.68205084",
+          timestamp: "1547147541"
+        }
+      ]
+    };
+    nock(ApiUri)
+      .get(uri)
+      .reply(200, response);
+
+    const data = await client.getOrderBook();
     assert.deepStrictEqual(data, response);
   });
 
@@ -225,6 +373,90 @@ suite("PublicClient", () => {
     assert.deepStrictEqual(data, response);
   });
 
+  test(".getTradeHistory() (with no `symbol`)", async () => {
+    const symbol = DefaultSymbol;
+    const uri = "/v1/trades/" + symbol;
+    const limit_trades = 1;
+    const include_breaks = true;
+    const timestamp = 2;
+    const response: Trade[] = [
+      {
+        timestamp: 1547146811,
+        timestampms: 1547146811357,
+        tid: 5335307668,
+        price: "3610.85",
+        amount: "0.27413495",
+        exchange: "gemini",
+        type: "buy"
+      }
+    ];
+    nock(ApiUri)
+      .get(uri)
+      .query({ limit_trades, include_breaks, timestamp })
+      .reply(200, response);
+
+    const data = await client.getTradeHistory({
+      limit_trades,
+      include_breaks,
+      timestamp
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getTradeHistory() (with no `limit_trades`)", async () => {
+    const symbol = "btcusd";
+    const uri = "/v1/trades/" + symbol;
+    const limit_trades = ApiLimit;
+    const include_breaks = true;
+    const timestamp = 2;
+    const response: Trade[] = [
+      {
+        timestamp: 1547146811,
+        timestampms: 1547146811357,
+        tid: 5335307668,
+        price: "3610.85",
+        amount: "0.27413495",
+        exchange: "gemini",
+        type: "buy"
+      }
+    ];
+    nock(ApiUri)
+      .get(uri)
+      .query({ limit_trades, include_breaks, timestamp })
+      .reply(200, response);
+
+    const data = await client.getTradeHistory({
+      symbol,
+      include_breaks,
+      timestamp
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getTradeHistory() (with no arguments)", async () => {
+    const symbol = DefaultSymbol;
+    const uri = "/v1/trades/" + symbol;
+    const limit_trades = ApiLimit;
+    const response: Trade[] = [
+      {
+        timestamp: 1547146811,
+        timestampms: 1547146811357,
+        tid: 5335307668,
+        price: "3610.85",
+        amount: "0.27413495",
+        exchange: "gemini",
+        type: "buy"
+      }
+    ];
+    nock(ApiUri)
+      .get(uri)
+      .query({ limit_trades })
+      .reply(200, response);
+
+    const data = await client.getTradeHistory();
+    assert.deepStrictEqual(data, response);
+  });
+
   test(".getCurrentAuction()", async () => {
     const symbol = "btcusd";
     const uri = "/v1/auction/" + symbol;
@@ -243,6 +475,48 @@ suite("PublicClient", () => {
       .reply(200, response);
 
     const data = await client.getCurrentAuction({ symbol });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getCurrentAuction() (with no `symbol`)", async () => {
+    const symbol = DefaultSymbol;
+    const uri = "/v1/auction/" + symbol;
+    const response: AuctionInfo = {
+      last_auction_eid: 109929,
+      last_auction_price: "629.92",
+      last_auction_quantity: "430.12917506",
+      last_highest_bid_price: "630.10",
+      last_lowest_ask_price: "632.44",
+      last_collar_price: "631.27",
+      next_auction_ms: 1474567782895,
+      next_update_ms: 1474567662895
+    };
+    nock(ApiUri)
+      .get(uri)
+      .reply(200, response);
+
+    const data = await client.getCurrentAuction({});
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getCurrentAuction() (with no arguments)", async () => {
+    const symbol = DefaultSymbol;
+    const uri = "/v1/auction/" + symbol;
+    const response: AuctionInfo = {
+      last_auction_eid: 109929,
+      last_auction_price: "629.92",
+      last_auction_quantity: "430.12917506",
+      last_highest_bid_price: "630.10",
+      last_lowest_ask_price: "632.44",
+      last_collar_price: "631.27",
+      next_auction_ms: 1474567782895,
+      next_update_ms: 1474567662895
+    };
+    nock(ApiUri)
+      .get(uri)
+      .reply(200, response);
+
+    const data = await client.getCurrentAuction();
     assert.deepStrictEqual(data, response);
   });
 
@@ -291,6 +565,141 @@ suite("PublicClient", () => {
       include_indicative,
       timestamp
     });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getAuctionHistory() (with no `symbol`)", async () => {
+    const symbol = DefaultSymbol;
+    const uri = "/v1/auction/" + symbol + "/history";
+    const limit_auction_results = 2;
+    const include_indicative = true;
+    const timestamp = 2;
+    const response: AuctionHistory[] = [
+      {
+        auction_id: 3,
+        auction_price: "628.775",
+        auction_quantity: "66.32225622",
+        eid: 4066,
+        highest_bid_price: "628.82",
+        lowest_ask_price: "629.48",
+        collar_price: "629.15",
+        auction_result: "success",
+        timestamp: 1471902531,
+        timestampms: 1471902531225,
+        event_type: "auction"
+      },
+      {
+        auction_id: 3,
+        auction_price: "628.865",
+        auction_quantity: "89.22776435",
+        eid: 3920,
+        highest_bid_price: "629.59",
+        lowest_ask_price: "629.77",
+        collar_price: "629.68",
+        auction_result: "success",
+        timestamp: 1471902471,
+        timestampms: 1471902471225,
+        event_type: "indicative"
+      }
+    ];
+    nock(ApiUri)
+      .get(uri)
+      .query({ limit_auction_results, include_indicative, timestamp })
+      .reply(200, response);
+
+    const data = await client.getAuctionHistory({
+      limit_auction_results,
+      include_indicative,
+      timestamp
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getAuctionHistory() (with no `limit_auction_results`)", async () => {
+    const symbol = "btcusd";
+    const uri = "/v1/auction/" + symbol + "/history";
+    const limit_auction_results = ApiLimit;
+    const include_indicative = true;
+    const timestamp = 2;
+    const response: AuctionHistory[] = [
+      {
+        auction_id: 3,
+        auction_price: "628.775",
+        auction_quantity: "66.32225622",
+        eid: 4066,
+        highest_bid_price: "628.82",
+        lowest_ask_price: "629.48",
+        collar_price: "629.15",
+        auction_result: "success",
+        timestamp: 1471902531,
+        timestampms: 1471902531225,
+        event_type: "auction"
+      },
+      {
+        auction_id: 3,
+        auction_price: "628.865",
+        auction_quantity: "89.22776435",
+        eid: 3920,
+        highest_bid_price: "629.59",
+        lowest_ask_price: "629.77",
+        collar_price: "629.68",
+        auction_result: "success",
+        timestamp: 1471902471,
+        timestampms: 1471902471225,
+        event_type: "indicative"
+      }
+    ];
+    nock(ApiUri)
+      .get(uri)
+      .query({ limit_auction_results, include_indicative, timestamp })
+      .reply(200, response);
+
+    const data = await client.getAuctionHistory({
+      symbol,
+      include_indicative,
+      timestamp
+    });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getAuctionHistory() (with no arguments)", async () => {
+    const symbol = DefaultSymbol;
+    const uri = "/v1/auction/" + symbol + "/history";
+    const limit_auction_results = ApiLimit;
+    const response: AuctionHistory[] = [
+      {
+        auction_id: 3,
+        auction_price: "628.775",
+        auction_quantity: "66.32225622",
+        eid: 4066,
+        highest_bid_price: "628.82",
+        lowest_ask_price: "629.48",
+        collar_price: "629.15",
+        auction_result: "success",
+        timestamp: 1471902531,
+        timestampms: 1471902531225,
+        event_type: "auction"
+      },
+      {
+        auction_id: 3,
+        auction_price: "628.865",
+        auction_quantity: "89.22776435",
+        eid: 3920,
+        highest_bid_price: "629.59",
+        lowest_ask_price: "629.77",
+        collar_price: "629.68",
+        auction_result: "success",
+        timestamp: 1471902471,
+        timestampms: 1471902471225,
+        event_type: "indicative"
+      }
+    ];
+    nock(ApiUri)
+      .get(uri)
+      .query({ limit_auction_results })
+      .reply(200, response);
+
+    const data = await client.getAuctionHistory();
     assert.deepStrictEqual(data, response);
   });
 });
