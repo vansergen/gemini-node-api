@@ -1,6 +1,6 @@
 {
   "name": "gemini-node-api",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Gemini Node.js API",
   "main": "build/index.js",
   "directories": {
@@ -34,7 +34,7 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "rm -fr build && tsc",
     "prepublishOnly": "npm run prettier && npm run lint && npm run build && npm run prettier-write && npm run lint-fix",
     "postpublish": "rm -fr build",
     "coverage": "nyc npm test && nyc report --reporter=lcov",
