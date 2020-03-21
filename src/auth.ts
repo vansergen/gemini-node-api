@@ -230,6 +230,16 @@ export type Balance = {
   availableForWithdrawal: string;
 };
 
+export type NotionalBalance = {
+  currency: string;
+  amount: string;
+  amountNotional: string;
+  available: string;
+  availableNotional: string;
+  availableForWithdrawal: string;
+  availableForWithdrawalNotional: string;
+};
+
 export type Transfer = {
   type: "Deposit" | "Withdrawal";
   status: "Advanced" | "Complete";
@@ -451,6 +461,14 @@ export class AuthenticatedClient extends PublicClient {
    */
   getAvailableBalances(body?: AccountName): Promise<Balance[]> {
     return this.post({ body: { request: "/v1/balances", ...body } });
+  }
+
+  /**
+   * Get the available balances in the supported currencies as well as in notional USD.
+   */
+  getNotionalBalances(body?: AccountName): Promise<NotionalBalance[]> {
+    const request = "/v1/notionalbalances/usd";
+    return this.post({ body: { request, ...body } });
   }
 
   /**
