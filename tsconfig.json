@@ -3,16 +3,17 @@
     "target": "esnext",
     "module": "commonjs",
     "declaration": true,
-    "declarationMap": true,
     "outDir": "./build",
     "newLine": "lf",
-    "sourceMap": true,
     "strict": true,
+    "noImplicitAny": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "removeComments": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["node_modules", "test"]
+  "exclude": ["test"]
 }
