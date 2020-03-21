@@ -68,6 +68,8 @@ export type TransferFilter = AccountName & {
   limit_transfers?: number;
 };
 
+export type DepositAddressesFilter = AccountName & { network: string };
+
 export type NewAddressFilter = AccountName & {
   currency: string;
   label?: string;
@@ -240,6 +242,12 @@ export type Transfer = {
   outputIdx?: number;
   destination?: string;
   purpose?: string;
+};
+
+export type DepositAddress = {
+  address: string;
+  timestamp: number;
+  label?: string;
 };
 
 export type NewAddress = { currency: string; address: string; label?: string };
@@ -450,6 +458,17 @@ export class AuthenticatedClient extends PublicClient {
    */
   getTransfers(body?: TransferFilter): Promise<Transfer[]> {
     return this.post({ body: { request: "/v1/transfers", ...body } });
+  }
+
+  /**
+   * Get deposit addresses.
+   */
+  getDepositAddresses({
+    network,
+    ...body
+  }: DepositAddressesFilter): Promise<DepositAddress[]> {
+    const request = "/v1/addresses/" + network;
+    return this.post({ body: { request, ...body } });
   }
 
   /**

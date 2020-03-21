@@ -306,6 +306,14 @@ const transfers = await client.getTransfers({
 });
 ```
 
+- [`getDepositAddresses`](https://docs.gemini.com/rest-api/#get-deposit-addresses)
+
+```typescript
+const network = "bitcoincash";
+const account = "primary";
+const addresses = await client.getDepositAddresses({ network, account });
+```
+
 - [`getNewAddress`](https://docs.gemini.com/rest-api/#new-deposit-address)
 
 ```typescript
