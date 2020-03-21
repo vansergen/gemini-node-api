@@ -293,6 +293,13 @@ const account = "primary";
 const balances = await client.getAvailableBalances({ account });
 ```
 
+- [`getNotionalBalances`](https://docs.gemini.com/rest-api/#get-notional-balances)
+
+```typescript
+const account = "primary";
+const balances = await client.getNotionalBalances({ account });
+```
+
 - [`getTransfers`](https://docs.gemini.com/rest-api/#transfers)
 
 ```typescript
