@@ -19,6 +19,7 @@ import {
   Account,
   Balance,
   Transfer,
+  DepositAddress,
   NewAddress,
   Withdrawal,
   InternalTransferResponse,
@@ -1114,6 +1115,25 @@ suite("AuthenticatedClient", () => {
       timestamp,
       account
     });
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getDepositAddresses()", async () => {
+    const network = "bitcoin";
+    const request = "/v1/addresses/" + network;
+    const account = "primary";
+    const options = { request, account, nonce };
+    const response: DepositAddress[] = [
+      {
+        address: "1KA8QNcgdcVERrAaKF1puKndB7Q7MMg5PR",
+        timestamp: 1575304806373
+      }
+    ];
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+      .post(request, {})
+      .reply(200, response);
+
+    const data = await client.getDepositAddresses({ network, account });
     assert.deepStrictEqual(data, response);
   });
 
