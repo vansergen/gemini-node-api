@@ -13,7 +13,8 @@ import {
   OrderBook,
   Trade,
   AuctionInfo,
-  AuctionHistory
+  AuctionHistory,
+  PriceFeedItem
 } from "../index";
 
 const client = new PublicClient();
@@ -700,6 +701,33 @@ suite("PublicClient", () => {
       .reply(200, response);
 
     const data = await client.getAuctionHistory();
+    assert.deepStrictEqual(data, response);
+  });
+
+  test(".getPriceFeed()", async () => {
+    const uri = "/v1/pricefeed";
+    const response: PriceFeedItem[] = [
+      { pair: "LTCETH", price: "0.2905", percentChange24h: "-0.0027" },
+      { pair: "LTCBCH", price: "0.1773", percentChange24h: "-0.0599" },
+      { pair: "BTCUSD", price: "6198.36", percentChange24h: "-0.0424" },
+      { pair: "LTCUSD", price: "38.4", percentChange24h: "-0.0504" },
+      { pair: "ZECBTC", price: "0.00526", percentChange24h: "0.0648" },
+      { pair: "BCHUSD", price: "217.05", percentChange24h: "-0.0415" },
+      { pair: "ZECUSD", price: "33.66", percentChange24h: "0.0457" },
+      { pair: "ETHBTC", price: "0.02138", percentChange24h: "-0.0028" },
+      { pair: "BCHBTC", price: "0.03509", percentChange24h: "-0.0293" },
+      { pair: "ETHUSD", price: "132.63", percentChange24h: "-0.0434" },
+      { pair: "ZECBCH", price: "0", percentChange24h: "0.0000" },
+      { pair: "ZECETH", price: "0.249", percentChange24h: "0.0600" },
+      { pair: "LTCBTC", price: "0.00624", percentChange24h: "-0.0016" },
+      { pair: "BCHETH", price: "1.614", percentChange24h: "0.0000" },
+      { pair: "ZECLTC", price: "0.861", percentChange24h: "0.0630" }
+    ];
+    nock(ApiUri)
+      .get(uri)
+      .reply(200, response);
+
+    const data = await client.getPriceFeed();
     assert.deepStrictEqual(data, response);
   });
 });
