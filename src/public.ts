@@ -113,6 +113,12 @@ export type AuctionHistory = {
   unmatched_collar_quantity?: string;
 };
 
+export type PriceFeedItem = {
+  pair: string;
+  price: string;
+  percentChange24h: string;
+};
+
 export type PublicClientOptions = {
   symbol?: string;
   sandbox?: boolean;
@@ -200,5 +206,12 @@ export class PublicClient extends RPC {
   }: AuctionHistoryFilter = {}): Promise<AuctionHistory[]> {
     const uri = "v1/auction/" + symbol + "/history";
     return this.get({ uri, qs: { limit_auction_results, ...qs } });
+  }
+
+  /**
+   * Get the price feed.
+   */
+  getPriceFeed(): Promise<PriceFeedItem[]> {
+    return this.get({ uri: "v1/pricefeed" });
   }
 }
