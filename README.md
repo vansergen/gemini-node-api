@@ -94,6 +94,12 @@ const history = await client.getAuctionHistory({
 });
 ```
 
+- [`getPriceFeed`](https://docs.gemini.com/rest-api/#price-feed)
+
+```typescript
+const priceFeed = await client.getPriceFeed();
+```
+
 ### AuthenticatedClient
 
 ```typescript
