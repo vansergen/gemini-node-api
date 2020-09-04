@@ -1,0 +1,9 @@
+.circleci/
+.github/
+src/
+test/
+.eslintrc.json
+CODE_OF_CONDUCT.md
+index.ts
+tsconfig.json
+typedoc.json

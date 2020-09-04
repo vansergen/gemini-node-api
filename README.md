@@ -94,6 +94,12 @@ const history = await client.getAuctionHistory({
 });
 ```
 
+- [`getPriceFeed`](https://docs.gemini.com/rest-api/#price-feed)
+
+```typescript
+const priceFeed = await client.getPriceFeed();
+```
+
 ### AuthenticatedClient
 
 ```typescript
@@ -287,6 +293,13 @@ const account = "primary";
 const balances = await client.getAvailableBalances({ account });
 ```
 
+- [`getNotionalBalances`](https://docs.gemini.com/rest-api/#get-notional-balances)
+
+```typescript
+const account = "primary";
+const balances = await client.getNotionalBalances({ account });
+```
+
 - [`getTransfers`](https://docs.gemini.com/rest-api/#transfers)
 
 ```typescript
@@ -298,6 +311,14 @@ const transfers = await client.getTransfers({
   limit_transfers,
   account
 });
+```
+
+- [`getDepositAddresses`](https://docs.gemini.com/rest-api/#get-deposit-addresses)
+
+```typescript
+const network = "bitcoincash";
+const account = "primary";
+const addresses = await client.getDepositAddresses({ network, account });
 ```
 
 - [`getNewAddress`](https://docs.gemini.com/rest-api/#new-deposit-address)
