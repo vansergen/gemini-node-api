@@ -16,7 +16,7 @@
     "@types/ws": "^7.2.3",
     "rpc-bluebird": "^2.0.3",
     "ws": "^7.2.5",
-    "snyk": "^1.352.1"
+    "snyk": "^1.388.0"
   },
   "devDependencies": {
     "@types/mocha": "^7.0.2",
