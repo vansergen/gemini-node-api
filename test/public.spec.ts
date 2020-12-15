@@ -83,7 +83,7 @@ suite("PublicClient", () => {
 
   test(".getTicker()", async () => {
     const symbol = "btcusd";
-    const uri = "/v1/pubticker/" + symbol;
+    const uri = `/v1/pubticker/${symbol}`;
     const response: Ticker = {
       ask: "977.59",
       bid: "977.35",
@@ -102,7 +102,7 @@ suite("PublicClient", () => {
 
   test(".getTicker() (with no `symbol`)", async () => {
     const symbol = DefaultSymbol;
-    const uri = "/v1/pubticker/" + symbol;
+    const uri = `/v1/pubticker/${symbol}`;
     const response: Ticker = {
       ask: "977.59",
       bid: "977.35",
@@ -121,7 +121,7 @@ suite("PublicClient", () => {
 
   test(".getTicker() (v2)", async () => {
     const symbol = "btcusd";
-    const uri = "/v2/ticker/" + symbol;
+    const uri = `/v2/ticker/${symbol}`;
     const response: Ticker = {
       symbol: "BTCUSD",
       open: "9121.76",
@@ -165,7 +165,7 @@ suite("PublicClient", () => {
 
   test(".getTicker() (with no arguments)", async () => {
     const symbol = DefaultSymbol;
-    const uri = "/v1/pubticker/" + symbol;
+    const uri = `/v1/pubticker/${symbol}`;
     const response: Ticker = {
       ask: "977.59",
       bid: "977.35",
@@ -185,7 +185,7 @@ suite("PublicClient", () => {
   test(".getCandles()", async () => {
     const symbol = "btcusd";
     const time_frame = "5m";
-    const uri = "/v2/candles/" + symbol + "/" + time_frame;
+    const uri = `/v2/candles/${symbol}/${time_frame}`;
     const response: Candle[] = [
       [1559755800000, 7781.6, 7820.23, 7776.56, 7819.39, 34.7624802159],
       [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059],
@@ -199,7 +199,7 @@ suite("PublicClient", () => {
   test(".getCandles() (with no `symbol`)", async () => {
     const symbol = DefaultSymbol;
     const time_frame = "5m";
-    const uri = "/v2/candles/" + symbol + "/" + time_frame;
+    const uri = `/v2/candles/${symbol}/${time_frame}`;
     const response: Candle[] = [
       [1559755800000, 7781.6, 7820.23, 7776.56, 7819.39, 34.7624802159],
       [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059],
@@ -213,7 +213,7 @@ suite("PublicClient", () => {
   test(".getCandles() (with no `time_frame`)", async () => {
     const symbol = "btcusd";
     const time_frame = "1day";
-    const uri = "/v2/candles/" + symbol + "/" + time_frame;
+    const uri = `/v2/candles/${symbol}/${time_frame}`;
     const response: Candle[] = [
       [1559755800000, 7781.6, 7820.23, 7776.56, 7819.39, 34.7624802159],
       [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059],
@@ -227,7 +227,7 @@ suite("PublicClient", () => {
   test(".getCandles() (with no arguments)", async () => {
     const symbol = DefaultSymbol;
     const time_frame = "1day";
-    const uri = "/v2/candles/" + symbol + "/" + time_frame;
+    const uri = `/v2/candles/${symbol}/${time_frame}`;
     const response: Candle[] = [
       [1559755800000, 7781.6, 7820.23, 7776.56, 7819.39, 34.7624802159],
       [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059],
@@ -240,7 +240,7 @@ suite("PublicClient", () => {
 
   test(".getOrderBook()", async () => {
     const symbol = "btcusd";
-    const uri = "/v1/book/" + symbol;
+    const uri = `/v1/book/${symbol}`;
     const limit_bids = 1;
     const limit_asks = 1;
     const response: OrderBook = {
@@ -270,7 +270,7 @@ suite("PublicClient", () => {
 
   test(".getOrderBook() (with no `symbol`)", async () => {
     const symbol = DefaultSymbol;
-    const uri = "/v1/book/" + symbol;
+    const uri = `/v1/book/${symbol}`;
     const limit_bids = 1;
     const limit_asks = 1;
     const response: OrderBook = {
@@ -300,7 +300,7 @@ suite("PublicClient", () => {
 
   test(".getOrderBook() (with no arguments)", async () => {
     const symbol = DefaultSymbol;
-    const uri = "/v1/book/" + symbol;
+    const uri = `/v1/book/${symbol}`;
     const response: OrderBook = {
       bids: [
         {
@@ -325,7 +325,7 @@ suite("PublicClient", () => {
 
   test(".getTradeHistory()", async () => {
     const symbol = "btcusd";
-    const uri = "/v1/trades/" + symbol;
+    const uri = `/v1/trades/${symbol}`;
     const limit_trades = 1;
     const include_breaks = true;
     const timestamp = 2;
@@ -356,7 +356,7 @@ suite("PublicClient", () => {
 
   test(".getTradeHistory() (with no `symbol`)", async () => {
     const symbol = DefaultSymbol;
-    const uri = "/v1/trades/" + symbol;
+    const uri = `/v1/trades/${symbol}`;
     const limit_trades = 1;
     const include_breaks = true;
     const timestamp = 2;
@@ -386,7 +386,7 @@ suite("PublicClient", () => {
 
   test(".getTradeHistory() (with no `limit_trades`)", async () => {
     const symbol = "btcusd";
-    const uri = "/v1/trades/" + symbol;
+    const uri = `/v1/trades/${symbol}`;
     const limit_trades = ApiLimit;
     const include_breaks = true;
     const timestamp = 2;
@@ -416,7 +416,7 @@ suite("PublicClient", () => {
 
   test(".getTradeHistory() (with no arguments)", async () => {
     const symbol = DefaultSymbol;
-    const uri = "/v1/trades/" + symbol;
+    const uri = `/v1/trades/${symbol}`;
     const limit_trades = ApiLimit;
     const response: Trade[] = [
       {
@@ -437,7 +437,7 @@ suite("PublicClient", () => {
 
   test(".getCurrentAuction()", async () => {
     const symbol = "btcusd";
-    const uri = "/v1/auction/" + symbol;
+    const uri = `/v1/auction/${symbol}`;
     const response: AuctionInfo = {
       last_auction_eid: 109929,
       last_auction_price: "629.92",
@@ -456,7 +456,7 @@ suite("PublicClient", () => {
 
   test(".getCurrentAuction() (with no `symbol`)", async () => {
     const symbol = DefaultSymbol;
-    const uri = "/v1/auction/" + symbol;
+    const uri = `/v1/auction/${symbol}`;
     const response: AuctionInfo = {
       last_auction_eid: 109929,
       last_auction_price: "629.92",
@@ -475,7 +475,7 @@ suite("PublicClient", () => {
 
   test(".getCurrentAuction() (with no arguments)", async () => {
     const symbol = DefaultSymbol;
-    const uri = "/v1/auction/" + symbol;
+    const uri = `/v1/auction/${symbol}`;
     const response: AuctionInfo = {
       last_auction_eid: 109929,
       last_auction_price: "629.92",
@@ -494,7 +494,7 @@ suite("PublicClient", () => {
 
   test(".getAuctionHistory()", async () => {
     const symbol = "btcusd";
-    const uri = "/v1/auction/" + symbol + "/history";
+    const uri = `/v1/auction/${symbol}/history`;
     const limit_auction_results = 2;
     const include_indicative = true;
     const timestamp = 2;
@@ -542,7 +542,7 @@ suite("PublicClient", () => {
 
   test(".getAuctionHistory() (with no `symbol`)", async () => {
     const symbol = DefaultSymbol;
-    const uri = "/v1/auction/" + symbol + "/history";
+    const uri = `/v1/auction/${symbol}/history`;
     const limit_auction_results = 2;
     const include_indicative = true;
     const timestamp = 2;
@@ -589,7 +589,7 @@ suite("PublicClient", () => {
 
   test(".getAuctionHistory() (with no `limit_auction_results`)", async () => {
     const symbol = "btcusd";
-    const uri = "/v1/auction/" + symbol + "/history";
+    const uri = `/v1/auction/${symbol}/history`;
     const limit_auction_results = ApiLimit;
     const include_indicative = true;
     const timestamp = 2;
@@ -636,7 +636,7 @@ suite("PublicClient", () => {
 
   test(".getAuctionHistory() (with no arguments)", async () => {
     const symbol = DefaultSymbol;
-    const uri = "/v1/auction/" + symbol + "/history";
+    const uri = `/v1/auction/${symbol}/history`;
     const limit_auction_results = ApiLimit;
     const response: AuctionHistory[] = [
       {

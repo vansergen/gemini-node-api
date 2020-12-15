@@ -1153,7 +1153,7 @@ suite("AuthenticatedClient", () => {
 
   test(".getDepositAddresses()", async () => {
     const network = "bitcoin";
-    const request = "/v1/addresses/" + network;
+    const request = `/v1/addresses/${network}`;
     const account = "primary";
     const options = { request, account, nonce };
     const response: DepositAddress[] = [
@@ -1172,7 +1172,7 @@ suite("AuthenticatedClient", () => {
 
   test(".getNewAddress()", async () => {
     const currency = "LTC";
-    const request = "/v1/deposit/" + currency + "/newAddress";
+    const request = `/v1/deposit/${currency}/newAddress`;
     const label = "New deposit address";
     const legacy = false;
     const account = "primary";
@@ -1197,7 +1197,7 @@ suite("AuthenticatedClient", () => {
 
   test(".withdrawCrypto()", async () => {
     const currency = "btc";
-    const request = "/v1/withdraw/" + currency;
+    const request = `/v1/withdraw/${currency}`;
     const address = "1KA8QNcgdcVERrAaKF1puKndB7Q7MMg5PR";
     const amount = 1;
     const account = "primary";
@@ -1224,7 +1224,7 @@ suite("AuthenticatedClient", () => {
 
   test(".internalTransfer()", async () => {
     const currency = "btc";
-    const request = "/v1/account/transfer/" + currency;
+    const request = `/v1/account/transfer/${currency}`;
     const sourceAccount = "my-account";
     const targetAccount = "my-other-account";
     const amount = 1;

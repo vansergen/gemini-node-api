@@ -1,6 +1,10 @@
 import * as crypto from "crypto";
 
-export type SignerOptions = { key: string; secret: string; options: object };
+export type SignerOptions = {
+  key: string;
+  secret: string;
+  options: Record<string, unknown>;
+};
 
 export type AuthHeaders = {
   "X-GEMINI-PAYLOAD": string;

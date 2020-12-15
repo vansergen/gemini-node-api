@@ -485,7 +485,7 @@ export class AuthenticatedClient extends PublicClient {
     network,
     ...body
   }: DepositAddressesFilter): Promise<DepositAddress[]> {
-    const request = "/v1/addresses/" + network;
+    const request = `/v1/addresses/${network}`;
     return this.post({ body: { request, ...body } });
   }
 
@@ -493,7 +493,7 @@ export class AuthenticatedClient extends PublicClient {
    * Get a new deposit address.
    */
   getNewAddress({ currency, ...body }: NewAddressFilter): Promise<NewAddress> {
-    const request = "/v1/deposit/" + currency + "/newAddress";
+    const request = `/v1/deposit/${currency}/newAddress`;
     return this.post({ body: { request, ...body } });
   }
 
@@ -504,7 +504,7 @@ export class AuthenticatedClient extends PublicClient {
     currency,
     ...body
   }: WithdrawCryptoFilter): Promise<Withdrawal> {
-    const request = "/v1/withdraw/" + currency;
+    const request = `/v1/withdraw/${currency}`;
     return this.post({ body: { request, ...body } });
   }
 
@@ -515,7 +515,7 @@ export class AuthenticatedClient extends PublicClient {
     currency,
     ...body
   }: InternalTransferFilter): Promise<InternalTransferResponse> {
-    const request = "/v1/account/transfer/" + currency;
+    const request = `/v1/account/transfer/${currency}`;
     return this.post({ body: { request, ...body } });
   }
 

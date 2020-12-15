@@ -153,7 +153,7 @@ export class PublicClient extends RPC {
     symbol = this.symbol,
     v = "v1",
   }: TickerFilter = {}): Promise<Ticker> {
-    v += v === "v1" ? "/pubticker/" + symbol : "/ticker/" + symbol;
+    v += v === "v1" ? `/pubticker/${symbol}` : `/ticker/${symbol}`;
     return this.get({ uri: v });
   }
 
@@ -164,7 +164,7 @@ export class PublicClient extends RPC {
     symbol = this.symbol,
     time_frame = "1day",
   }: CandlesFilter = {}): Promise<Candle[]> {
-    return this.get({ uri: "v2/candles/" + symbol + "/" + time_frame });
+    return this.get({ uri: `v2/candles/${symbol}/${time_frame}` });
   }
 
   /**
@@ -174,7 +174,7 @@ export class PublicClient extends RPC {
     symbol = this.symbol,
     ...qs
   }: BookFilter = {}): Promise<OrderBook> {
-    return this.get({ uri: "v1/book/" + symbol, qs });
+    return this.get({ uri: `v1/book/${symbol}`, qs });
   }
 
   /**
@@ -185,7 +185,7 @@ export class PublicClient extends RPC {
     limit_trades = ApiLimit,
     ...qs
   }: TradeHistoryFilter = {}): Promise<Trade[]> {
-    const uri = "v1/trades/" + symbol;
+    const uri = `v1/trades/${symbol}`;
     return this.get({ uri, qs: { limit_trades, ...qs } });
   }
 
@@ -195,7 +195,7 @@ export class PublicClient extends RPC {
   getCurrentAuction({
     symbol = this.symbol,
   }: SymbolFilter = {}): Promise<AuctionInfo> {
-    return this.get({ uri: "v1/auction/" + symbol });
+    return this.get({ uri: `v1/auction/${symbol}` });
   }
 
   /**
@@ -206,7 +206,7 @@ export class PublicClient extends RPC {
     limit_auction_results = ApiLimit,
     ...qs
   }: AuctionHistoryFilter = {}): Promise<AuctionHistory[]> {
-    const uri = "v1/auction/" + symbol + "/history";
+    const uri = `v1/auction/${symbol}/history`;
     return this.get({ uri, qs: { limit_auction_results, ...qs } });
   }
 

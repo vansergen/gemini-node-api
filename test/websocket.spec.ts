@@ -14,7 +14,7 @@ const secret = "Gemini-API-SECRET";
 
 const symbol = "zecbtc";
 const port = 30000;
-const wsUri = "ws://localhost:" + port;
+const wsUri = `ws://localhost:${port}`;
 
 suite("WebsocketClient", () => {
   test("constructor", () => {
@@ -170,7 +170,7 @@ suite("WebsocketClient", () => {
     };
     const account = "primary";
     wss.on("connection", (ws, req) => {
-      assert.deepStrictEqual(req.url, url + "?" + query);
+      assert.deepStrictEqual(req.url, `${url}?${query}`);
       const providedSignature = req.headers["x-gemini-signature"];
       const providedKey = req.headers["x-gemini-apikey"];
       const providedPayload = req.headers["x-gemini-payload"] as string;
@@ -227,7 +227,7 @@ suite("WebsocketClient", () => {
     client.connect();
     client.once("open", (market) => {
       assert.deepStrictEqual(market, "v2");
-      const error = new Error("Could not connect. State: " + OPEN);
+      const error = new Error(`Could not connect. State: ${OPEN}`);
       assert.throws(() => client.connect(), error);
       wss.close(done);
     });
@@ -240,7 +240,7 @@ suite("WebsocketClient", () => {
     client.once("open", (market) => {
       assert.deepStrictEqual(market, "v2");
       client.disconnect();
-      const error = new Error("Could not connect. State: " + CLOSING);
+      const error = new Error(`Could not connect. State: ${CLOSING}`);
       assert.throws(() => client.connect(), error);
       wss.close(done);
     });
@@ -250,7 +250,7 @@ suite("WebsocketClient", () => {
     const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connect();
-    const error = new Error("Could not connect. State: " + CONNECTING);
+    const error = new Error(`Could not connect. State: ${CONNECTING}`);
     assert.throws(() => client.connect(), error);
     client.once("open", () => wss.close(done));
   });
@@ -282,7 +282,7 @@ suite("WebsocketClient", () => {
     client.connect();
     client.once("close", (market) => {
       assert.deepStrictEqual(market, "v2");
-      const error = new Error("Socket state: " + CLOSED);
+      const error = new Error(`Socket state: ${CLOSED}`);
       assert.throws(() => client.disconnect(), error);
       wss.close(done);
     });
@@ -299,7 +299,7 @@ suite("WebsocketClient", () => {
     client.once("open", (market) => {
       assert.deepStrictEqual(market, "v2");
       client.disconnect();
-      const error = new Error("Socket state: " + CLOSING);
+      const error = new Error(`Socket state: ${CLOSING}`);
       assert.throws(() => client.disconnect(), error);
       wss.close(done);
     });
@@ -309,7 +309,7 @@ suite("WebsocketClient", () => {
     const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connect();
-    const error = new Error("Socket state: " + CONNECTING);
+    const error = new Error(`Socket state: ${CONNECTING}`);
     assert.throws(() => client.disconnect(), error);
     client.on("open", () => wss.close(done));
   });
@@ -365,7 +365,7 @@ suite("WebsocketClient", () => {
             assert.deepStrictEqual(_market, "v2");
             wss.close(done);
           });
-          client.sockets["v2"].emit("open");
+          client.sockets.v2.emit("open");
         });
         client.connect();
       });
@@ -381,7 +381,7 @@ suite("WebsocketClient", () => {
             assert.deepStrictEqual(_market, "v2");
             wss.close(done);
           });
-          client.sockets["v2"].emit("close");
+          client.sockets.v2.emit("close");
         });
         client.once("open", (market) => {
           assert.deepStrictEqual(market, "v2");
@@ -403,7 +403,7 @@ suite("WebsocketClient", () => {
         });
         client.once("open", (market) => {
           assert.deepStrictEqual(market, "v2");
-          client.sockets["v2"].emit("error", error);
+          client.sockets.v2.emit("error", error);
         });
         client.connect();
       });
@@ -414,7 +414,7 @@ suite("WebsocketClient", () => {
         client.once("error", () => assert.fail("Should not emit errors"));
         client.once("open", (market) => {
           assert.deepStrictEqual(market, "v2");
-          client.sockets["v2"].emit("error");
+          client.sockets.v2.emit("error");
           setTimeout(() => wss.close(done), 10);
         });
         client.connect();

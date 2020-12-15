@@ -315,7 +315,7 @@ export class WebsocketClient extends EventEmitter {
   connectMarket({ symbol = this.symbol, ...qs }: WSMarket = {}): void {
     this.checkConnection(this.sockets[symbol]);
     const query = stringify(qs as ParsedUrlQueryInput);
-    const uri = this.wsUri + "/v1/marketdata/" + symbol + "?" + query;
+    const uri = `${this.wsUri}/v1/marketdata/${symbol}?${query}`;
     this.addListeners((this.sockets[symbol] = new Websocket(uri)), symbol);
   }
 
@@ -344,7 +344,7 @@ export class WebsocketClient extends EventEmitter {
       options.account = account;
     }
     const headers = SignRequest({ ...auth, options });
-    const uri = this.wsUri + request + "?" + query;
+    const uri = `${this.wsUri + request}?${query}`;
     this.sockets.orders = new Websocket(uri, { headers });
     this.addListeners(this.sockets.orders, "orders");
   }
@@ -362,7 +362,7 @@ export class WebsocketClient extends EventEmitter {
    */
   connect(): void {
     this.checkConnection(this.sockets.v2);
-    this.sockets.v2 = new Websocket(this.wsUri + "/v2/marketdata");
+    this.sockets.v2 = new Websocket(`${this.wsUri}/v2/marketdata`);
     this.addListeners(this.sockets.v2, "v2");
   }
 
@@ -432,7 +432,7 @@ export class WebsocketClient extends EventEmitter {
         case Websocket.OPEN:
         case Websocket.CLOSING:
         case Websocket.CONNECTING:
-          throw new Error("Could not connect. State: " + socket.readyState);
+          throw new Error(`Could not connect. State: ${socket.readyState}`);
       }
     }
   }
@@ -445,7 +445,7 @@ export class WebsocketClient extends EventEmitter {
       case Websocket.CLOSED:
       case Websocket.CLOSING:
       case Websocket.CONNECTING:
-        throw new Error("Socket state: " + socket.readyState);
+        throw new Error(`Socket state: ${socket.readyState}`);
     }
   }
 
