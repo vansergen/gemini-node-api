@@ -12,7 +12,7 @@ export const Headers = {
   Accept: "application/json",
   "X-Requested-With": "XMLHttpRequest",
   "Content-Length": 0,
-  "Cache-Control": "no-cache"
+  "Cache-Control": "no-cache",
 };
 
 export type SymbolFilter = { symbol?: string };
@@ -133,7 +133,7 @@ export class PublicClient extends RPC {
     symbol = DefaultSymbol,
     sandbox = false,
     apiUri = sandbox ? SandboxApiUri : ApiUri,
-    timeout = DefaulTimeout
+    timeout = DefaulTimeout,
   }: PublicClientOptions = {}) {
     super({ json: true, timeout, baseUrl: apiUri, headers: Headers });
     this.symbol = symbol;
@@ -149,9 +149,10 @@ export class PublicClient extends RPC {
   /**
    * Get information about recent trading activity for the symbol.
    */
-  getTicker({ symbol = this.symbol, v = "v1" }: TickerFilter = {}): Promise<
-    Ticker
-  > {
+  getTicker({
+    symbol = this.symbol,
+    v = "v1",
+  }: TickerFilter = {}): Promise<Ticker> {
     v += v === "v1" ? "/pubticker/" + symbol : "/ticker/" + symbol;
     return this.get({ uri: v });
   }
@@ -161,7 +162,7 @@ export class PublicClient extends RPC {
    */
   getCandles({
     symbol = this.symbol,
-    time_frame = "1day"
+    time_frame = "1day",
   }: CandlesFilter = {}): Promise<Candle[]> {
     return this.get({ uri: "v2/candles/" + symbol + "/" + time_frame });
   }
@@ -169,9 +170,10 @@ export class PublicClient extends RPC {
   /**
    * Get the current order book.
    */
-  getOrderBook({ symbol = this.symbol, ...qs }: BookFilter = {}): Promise<
-    OrderBook
-  > {
+  getOrderBook({
+    symbol = this.symbol,
+    ...qs
+  }: BookFilter = {}): Promise<OrderBook> {
     return this.get({ uri: "v1/book/" + symbol, qs });
   }
 
@@ -190,9 +192,9 @@ export class PublicClient extends RPC {
   /**
    * Get current auction information.
    */
-  getCurrentAuction({ symbol = this.symbol }: SymbolFilter = {}): Promise<
-    AuctionInfo
-  > {
+  getCurrentAuction({
+    symbol = this.symbol,
+  }: SymbolFilter = {}): Promise<AuctionInfo> {
     return this.get({ uri: "v1/auction/" + symbol });
   }
 

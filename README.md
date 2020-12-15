@@ -53,7 +53,7 @@ const limit_asks = 20;
 const book = await client.getOrderBook({
   symbol,
   limit_bids,
-  limit_asks
+  limit_asks,
 });
 ```
 
@@ -68,7 +68,7 @@ const trades = await client.getTradeHistory({
   symbol,
   timestamp,
   limit_trades,
-  include_breaks
+  include_breaks,
 });
 ```
 
@@ -90,7 +90,7 @@ const history = await client.getAuctionHistory({
   symbol,
   timestamp,
   limit_auction_results,
-  include_indicative
+  include_indicative,
 });
 ```
 
@@ -124,7 +124,7 @@ const order = await client.newOrder({
   amount,
   price,
   side,
-  options
+  options,
 });
 ```
 
@@ -198,7 +198,7 @@ const trades = await client.getPastTrades({
   symbol,
   limit_trades,
   timestamp,
-  account
+  account,
 });
 ```
 
@@ -230,7 +230,7 @@ const order = await client.newClearingOrder({
   symbol,
   amount,
   price,
-  side
+  side,
 });
 ```
 
@@ -251,7 +251,7 @@ const order = await client.newBrokerOrder({
   symbol,
   amount,
   price,
-  side
+  side,
 });
 ```
 
@@ -282,7 +282,7 @@ const order = await client.confirmClearingOrder({
   symbol,
   amount,
   price,
-  side
+  side,
 });
 ```
 
@@ -309,7 +309,7 @@ const account = "primary";
 const transfers = await client.getTransfers({
   timestamp,
   limit_transfers,
-  account
+  account,
 });
 ```
 
@@ -332,7 +332,7 @@ const address = await client.getNewAddress({
   currency,
   label,
   legacy,
-  account
+  account,
 });
 ```
 
@@ -347,7 +347,7 @@ const withdrawal = await client.withdrawCrypto({
   currency,
   address,
   account,
-  amount
+  amount,
 });
 ```
 
@@ -362,7 +362,7 @@ const transfer = await client.internalTransfer({
   currency,
   sourceAccount,
   targetAccount,
-  amount
+  amount,
 });
 ```
 
@@ -405,10 +405,10 @@ const websocket = new WebsocketClient({ key, secret });
 websocket.on("error", (error, market) => {
   console.error(error);
 });
-websocket.on("open", market => {
+websocket.on("open", (market) => {
   console.log("The connection is open", market);
 });
-websocket.on("close", market => {
+websocket.on("close", (market) => {
   console.log("The connection is closed", market);
 });
 websocket.on("message", (message, market) => {
@@ -427,7 +427,7 @@ const offers = true;
 const trades = true;
 const auctions = false;
 const symbol = "zecltc";
-websocket.on("open", market => console.log("Open:", market));
+websocket.on("open", (market) => console.log("Open:", market));
 websocket.connectMarket({
   symbol,
   heartbeat,
@@ -435,7 +435,7 @@ websocket.connectMarket({
   bids,
   offers,
   trades,
-  auctions
+  auctions,
 });
 websocket.connectMarket({ symbol: "btcusd" });
 ```
@@ -444,21 +444,21 @@ websocket.connectMarket({ symbol: "btcusd" });
 
 ```typescript
 const symbol = "zecltc";
-websocket.once("close", market => console.log("Closed:", market));
+websocket.once("close", (market) => console.log("Closed:", market));
 websocket.disconnectMarket({ symbol });
 ```
 
 - [`connect`](https://docs.gemini.com/websocket-api/#market-data-version-2)
 
 ```typescript
-websocket.on("open", market => console.log("Open:", market));
+websocket.on("open", (market) => console.log("Open:", market));
 websocket.connect();
 ```
 
 - [`disconnect`](https://docs.gemini.com/websocket-api/#market-data-version-2)
 
 ```typescript
-websocket.once("close", market => console.log("Closed:", market));
+websocket.once("close", (market) => console.log("Closed:", market));
 websocket.disconnect();
 ```
 
@@ -467,9 +467,9 @@ websocket.disconnect();
 ```typescript
 const subscriptions = [
   { name: "l2", symbols: ["BTCUSD", "ETHUSD"] },
-  { name: "candles_1m", symbols: ["BTCUSD"] }
+  { name: "candles_1m", symbols: ["BTCUSD"] },
 ];
-websocket.on("open", market => {
+websocket.on("open", (market) => {
   if (market === "v2") {
     websocket.subscribe(subscriptions);
   }
@@ -499,14 +499,14 @@ websocket.connectOrders({
   account,
   symbolFilter,
   apiSessionFilter,
-  eventTypeFilter
+  eventTypeFilter,
 });
 ```
 
 - [`disconnectOrders`](https://docs.gemini.com/websocket-api/#order-events)
 
 ```typescript
-websocket.once("close", market => {
+websocket.once("close", (market) => {
   if (market === "orders") {
     console.log("Closed");
   }

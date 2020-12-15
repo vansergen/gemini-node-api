@@ -5,7 +5,7 @@ import {
   PublicClientOptions,
   Headers,
   SymbolFilter,
-  ApiLimit
+  ApiLimit,
 } from "./public";
 import { SignRequest } from "./signer";
 

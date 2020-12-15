@@ -11,7 +11,7 @@ export type AuthHeaders = {
 export function SignRequest({
   key,
   secret,
-  options
+  options,
 }: SignerOptions): AuthHeaders {
   const payload = Buffer.from(JSON.stringify(options)).toString("base64");
   return {
@@ -20,6 +20,6 @@ export function SignRequest({
       .createHmac("sha384", secret)
       .update(payload)
       .digest("hex"),
-    "X-GEMINI-APIKEY": key
+    "X-GEMINI-APIKEY": key,
   };
 }

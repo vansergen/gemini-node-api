@@ -5,7 +5,7 @@ import {
   WsUri,
   SandboxWsUri,
   DefaultSymbol,
-  Subscriptions
+  Subscriptions,
 } from "../index";
 import { Server, OPEN, CLOSING, CONNECTING, CLOSED } from "ws";
 import { WSS } from "./lib/wss";
@@ -49,7 +49,7 @@ suite("WebsocketClient", () => {
     assert.deepStrictEqual(client.secret, secret);
   });
 
-  test(".connectMarket()", done => {
+  test(".connectMarket()", (done) => {
     const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     const queryParams = { heartbeat: true, bids: true };
@@ -62,101 +62,101 @@ suite("WebsocketClient", () => {
       }
     });
     client.connectMarket({ symbol, ...queryParams });
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, symbol);
       wss.close(done);
     });
   });
 
-  test(".connectMarket() (with no arguments)", done => {
+  test(".connectMarket() (with no arguments)", (done) => {
     const wss = WSS({ port });
     const symbol = "ethusd";
     const client = new WebsocketClient({ wsUri, symbol });
     client.connectMarket();
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, symbol);
       wss.close(done);
     });
   });
 
-  test(".connectMarket() (connects to different markets)", done => {
+  test(".connectMarket() (connects to different markets)", (done) => {
     const wss = WSS({ port });
     const heartbeat = true;
     const _symbol = "btcusd";
     const client = new WebsocketClient({ wsUri, symbol });
     client.connectMarket({ symbol: _symbol });
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, _symbol);
       client.connectMarket({ heartbeat });
-      client.once("open", market => {
+      client.once("open", (market) => {
         assert.deepStrictEqual(market, symbol);
         wss.close(done);
       });
     });
   });
 
-  test(".disconnectMarket()", done => {
+  test(".disconnectMarket()", (done) => {
     const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connectMarket({ symbol });
-    client.once("close", market => {
+    client.once("close", (market) => {
       assert.deepStrictEqual(market, symbol);
       wss.close(done);
     });
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, symbol);
       client.disconnectMarket({ symbol });
     });
   });
 
-  test(".disconnectMarket() (with no `symbol`)", done => {
+  test(".disconnectMarket() (with no `symbol`)", (done) => {
     const wss = WSS({ port });
     const symbol = "ethusd";
     const client = new WebsocketClient({ wsUri, symbol });
-    client.once("close", market => {
+    client.once("close", (market) => {
       assert.deepStrictEqual(market, symbol);
       wss.close(done);
     });
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, symbol);
       client.disconnectMarket({});
     });
     client.connectMarket({});
   });
 
-  test(".disconnectMarket() (with no arguments)", done => {
+  test(".disconnectMarket() (with no arguments)", (done) => {
     const wss = WSS({ port });
     const symbol = "ethusd";
     const client = new WebsocketClient({ wsUri, symbol });
-    client.once("close", market => {
+    client.once("close", (market) => {
       assert.deepStrictEqual(market, symbol);
       wss.close(done);
     });
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, symbol);
       client.disconnectMarket();
     });
     client.connectMarket();
   });
 
-  test(".connectOrders()", done => {
+  test(".connectOrders()", (done) => {
     const wss = WSS({ port, key, secret });
     const client = new WebsocketClient({ wsUri, key, secret });
     client.connectOrders();
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, "orders");
       wss.close(done);
     });
   });
 
-  test(".connectOrders() (with no api key)", done => {
+  test(".connectOrders() (with no api key)", (done) => {
     const client = new WebsocketClient({ wsUri, secret });
     const error = new Error("`connectOrders` requires both `key` and `secret`");
     assert.throws(() => client.connectOrders(), error);
     done();
   });
 
-  test(".connectOrders() (with `account`)", done => {
+  test(".connectOrders() (with `account`)", (done) => {
     const wss = new Server({ port });
     const url = "/v1/order/events";
     const nonce = 1;
@@ -166,7 +166,7 @@ suite("WebsocketClient", () => {
     const qs = {
       eventTypeFilter: ["initial", "fill", "closed"],
       symbolFilter: ["btcusd", "ethbtc"],
-      apiSessionFilter: ["t14phVqvAAJlK4YiXmBM"]
+      apiSessionFilter: ["t14phVqvAAJlK4YiXmBM"],
     };
     const account = "primary";
     wss.on("connection", (ws, req) => {
@@ -190,42 +190,42 @@ suite("WebsocketClient", () => {
     const client = new WebsocketClient({ wsUri, key, secret });
     client.nonce = _nonce;
     client.connectOrders({ account, ...qs });
-    client.once("open", market => assert.deepStrictEqual(market, "orders"));
-    client.on("close", market => {
+    client.once("open", (market) => assert.deepStrictEqual(market, "orders"));
+    client.on("close", (market) => {
       assert.deepStrictEqual(market, "orders");
       wss.close(done);
     });
   });
 
-  test(".disconnectOrders()", done => {
+  test(".disconnectOrders()", (done) => {
     const wss = WSS({ port, key, secret });
     const client = new WebsocketClient({ wsUri, key, secret });
     client.connectOrders();
-    client.once("close", market => {
+    client.once("close", (market) => {
       assert.deepStrictEqual(market, "orders");
       wss.close(done);
     });
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, "orders");
       client.disconnectOrders();
     });
   });
 
-  test(".connect()", done => {
+  test(".connect()", (done) => {
     const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connect();
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, "v2");
       wss.close(done);
     });
   });
 
-  test(".connect() (when `readyState` is OPEN)", done => {
+  test(".connect() (when `readyState` is OPEN)", (done) => {
     const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connect();
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, "v2");
       const error = new Error("Could not connect. State: " + OPEN);
       assert.throws(() => client.connect(), error);
@@ -233,11 +233,11 @@ suite("WebsocketClient", () => {
     });
   });
 
-  test(".connect() (when `readyState` is CLOSING)", done => {
+  test(".connect() (when `readyState` is CLOSING)", (done) => {
     const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connect();
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, "v2");
       client.disconnect();
       const error = new Error("Could not connect. State: " + CLOSING);
@@ -246,7 +246,7 @@ suite("WebsocketClient", () => {
     });
   });
 
-  test(".connect() (when `readyState` is CONNECTING)", done => {
+  test(".connect() (when `readyState` is CONNECTING)", (done) => {
     const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connect();
@@ -255,48 +255,48 @@ suite("WebsocketClient", () => {
     client.once("open", () => wss.close(done));
   });
 
-  test(".disconnect()", done => {
+  test(".disconnect()", (done) => {
     const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connect();
-    client.once("close", market => {
+    client.once("close", (market) => {
       assert.deepStrictEqual(market, "v2");
       wss.close(done);
     });
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, "v2");
       client.disconnect();
     });
   });
 
-  test(".disconnect() (when `socket` is not initialized)", done => {
+  test(".disconnect() (when `socket` is not initialized)", (done) => {
     const client = new WebsocketClient({ wsUri });
     const error = new Error("Socket was not initialized");
     assert.throws(() => client.disconnect(), error);
     done();
   });
 
-  test(".disconnect() (when `readyState` is CLOSED)", done => {
+  test(".disconnect() (when `readyState` is CLOSED)", (done) => {
     const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connect();
-    client.once("close", market => {
+    client.once("close", (market) => {
       assert.deepStrictEqual(market, "v2");
       const error = new Error("Socket state: " + CLOSED);
       assert.throws(() => client.disconnect(), error);
       wss.close(done);
     });
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, "v2");
       client.disconnect();
     });
   });
 
-  test(".disconnect() (when `readyState` is CLOSING)", done => {
+  test(".disconnect() (when `readyState` is CLOSING)", (done) => {
     const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connect();
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, "v2");
       client.disconnect();
       const error = new Error("Socket state: " + CLOSING);
@@ -305,7 +305,7 @@ suite("WebsocketClient", () => {
     });
   });
 
-  test(".disconnect() (when `readyState` is CONNECTING)", done => {
+  test(".disconnect() (when `readyState` is CONNECTING)", (done) => {
     const wss = WSS({ port });
     const client = new WebsocketClient({ wsUri });
     client.connect();
@@ -314,41 +314,41 @@ suite("WebsocketClient", () => {
     client.on("open", () => wss.close(done));
   });
 
-  test(".subscribe()", done => {
+  test(".subscribe()", (done) => {
     const wss = WSS({ port });
     const subscriptions: Subscriptions = [
-      { name: "l2", symbols: ["BTCUSD", "ETHUSD", "ETHBTC"] }
+      { name: "l2", symbols: ["BTCUSD", "ETHUSD", "ETHBTC"] },
     ];
     const client = new WebsocketClient({ wsUri });
-    wss.on("connection", socket => {
-      socket.once("message", message => {
+    wss.on("connection", (socket) => {
+      socket.once("message", (message) => {
         const msg = JSON.parse(message);
         assert.deepStrictEqual(msg, { type: "subscribe", subscriptions });
         wss.close(done);
       });
     });
     client.connect();
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, "v2");
       client.subscribe(subscriptions);
     });
   });
 
-  test(".unsubscribe()", done => {
+  test(".unsubscribe()", (done) => {
     const wss = WSS({ port });
     const subscriptions: Subscriptions = [
-      { name: "l2", symbols: ["BTCUSD", "ETHUSD", "ETHBTC"] }
+      { name: "l2", symbols: ["BTCUSD", "ETHUSD", "ETHBTC"] },
     ];
     const client = new WebsocketClient({ wsUri });
-    wss.on("connection", socket => {
-      socket.once("message", message => {
+    wss.on("connection", (socket) => {
+      socket.once("message", (message) => {
         const msg = JSON.parse(message);
         assert.deepStrictEqual(msg, { type: "unsubscribe", subscriptions });
         wss.close(done);
       });
     });
     client.connect();
-    client.once("open", market => {
+    client.once("open", (market) => {
       assert.deepStrictEqual(market, "v2");
       client.unsubscribe(subscriptions);
     });
@@ -356,12 +356,12 @@ suite("WebsocketClient", () => {
 
   suite(".socket listeners", () => {
     suite(".onOpen()", () => {
-      test("emits `open`", done => {
+      test("emits `open`", (done) => {
         const wss = new Server({ port });
         const client = new WebsocketClient({ wsUri });
-        client.once("open", market => {
+        client.once("open", (market) => {
           assert.deepStrictEqual(market, "v2");
-          client.once("open", _market => {
+          client.once("open", (_market) => {
             assert.deepStrictEqual(_market, "v2");
             wss.close(done);
           });
@@ -372,18 +372,18 @@ suite("WebsocketClient", () => {
     });
 
     suite(".onClose()", () => {
-      test("emits `close`", done => {
+      test("emits `close`", (done) => {
         const wss = new Server({ port });
         const client = new WebsocketClient({ wsUri });
-        client.once("close", market => {
+        client.once("close", (market) => {
           assert.deepStrictEqual(market, "v2");
-          client.once("close", _market => {
+          client.once("close", (_market) => {
             assert.deepStrictEqual(_market, "v2");
             wss.close(done);
           });
           client.sockets["v2"].emit("close");
         });
-        client.once("open", market => {
+        client.once("open", (market) => {
           assert.deepStrictEqual(market, "v2");
           client.disconnect();
         });
@@ -392,7 +392,7 @@ suite("WebsocketClient", () => {
     });
 
     suite(".onError()", () => {
-      test("emits `error`", done => {
+      test("emits `error`", (done) => {
         const wss = new Server({ port });
         const client = new WebsocketClient({ wsUri });
         const error = new Error("Something bad happened");
@@ -401,18 +401,18 @@ suite("WebsocketClient", () => {
           assert.deepStrictEqual(err, error);
           wss.close(done);
         });
-        client.once("open", market => {
+        client.once("open", (market) => {
           assert.deepStrictEqual(market, "v2");
           client.sockets["v2"].emit("error", error);
         });
         client.connect();
       });
 
-      test("does not emit `error` with no argumets", done => {
+      test("does not emit `error` with no argumets", (done) => {
         const wss = new Server({ port });
         const client = new WebsocketClient({ wsUri });
         client.once("error", () => assert.fail("Should not emit errors"));
-        client.once("open", market => {
+        client.once("open", (market) => {
           assert.deepStrictEqual(market, "v2");
           client.sockets["v2"].emit("error");
           setTimeout(() => wss.close(done), 10);
@@ -422,22 +422,22 @@ suite("WebsocketClient", () => {
     });
 
     suite(".onMessage()", () => {
-      test("emits `error` on bad JSON", done => {
+      test("emits `error` on bad JSON", (done) => {
         const wss = new Server({ port });
         const client = new WebsocketClient({ wsUri });
-        wss.on("connection", ws => ws.send("BADJSON!"));
+        wss.on("connection", (ws) => ws.send("BADJSON!"));
         client.once("error", (error, market) => {
           assert.deepStrictEqual(market, "v2");
           assert.ok(error instanceof SyntaxError);
           wss.close(done);
         });
-        client.once("open", market => {
+        client.once("open", (market) => {
           assert.deepStrictEqual(market, "v2");
         });
         client.connect();
       });
 
-      test("emits `message`", done => {
+      test("emits `message`", (done) => {
         const wss = new Server({ port });
         const client = new WebsocketClient({ wsUri });
         const message = {
@@ -445,16 +445,16 @@ suite("WebsocketClient", () => {
           symbol: "BTCUSD",
           changes: [
             [1561054500000, 9350.18, 9358.35, 9350.18, 9355.51, 2.07],
-            [1561053600000, 9357.33, 9357.33, 9350.18, 9350.18, 1.5900161]
-          ]
+            [1561053600000, 9357.33, 9357.33, 9350.18, 9350.18, 1.5900161],
+          ],
         };
-        wss.once("connection", ws => ws.send(JSON.stringify(message)));
+        wss.once("connection", (ws) => ws.send(JSON.stringify(message)));
         client.once("message", (data, market) => {
           assert.deepStrictEqual(market, "v2");
           assert.deepStrictEqual(data, message);
           wss.close(done);
         });
-        client.once("open", market => {
+        client.once("open", (market) => {
           assert.deepStrictEqual(market, "v2");
         });
         client.connect();

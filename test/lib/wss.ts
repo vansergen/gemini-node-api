@@ -8,7 +8,7 @@ type WSSOptions = { port: number; key?: string; secret?: string };
 function VerifyProps(qs: { [key: string]: any }, allowed: string[]): boolean {
   for (const prop in qs) {
     const check = allowed.find(
-      o =>
+      (o) =>
         prop === o &&
         (qs[prop] === "true" || qs[prop] === "false" || qs[prop] === "")
     );
@@ -37,7 +37,7 @@ export function WSS({ port, key, secret }: WSSOptions): Server {
         "bids",
         "offers",
         "top_of_book",
-        "auctions"
+        "auctions",
       ]);
     } else if (type === "order" && symbol === "events" && v === "v1") {
       if (!key || !secret) {
@@ -64,7 +64,7 @@ export function WSS({ port, key, secret }: WSSOptions): Server {
       const checkQS = VerifyProps(qs, [
         "symbolFilter",
         "apiSessionFilter",
-        "eventTypeFilter"
+        "eventTypeFilter",
       ]);
       return (
         providedSignature === requiredSignature &&

@@ -14,7 +14,7 @@ import {
   Trade,
   AuctionInfo,
   AuctionHistory,
-  PriceFeedItem
+  PriceFeedItem,
 } from "../index";
 
 const client = new PublicClient();
@@ -25,7 +25,7 @@ suite("PublicClient", () => {
       json: true,
       timeout: DefaulTimeout,
       baseUrl: ApiUri,
-      headers: Headers
+      headers: Headers,
     });
     assert.deepStrictEqual(client.symbol, DefaultSymbol);
   });
@@ -36,7 +36,7 @@ suite("PublicClient", () => {
       json: true,
       timeout: DefaulTimeout,
       baseUrl: SandboxApiUri,
-      headers: Headers
+      headers: Headers,
     });
     assert.deepStrictEqual(client.symbol, DefaultSymbol);
   });
@@ -51,7 +51,7 @@ suite("PublicClient", () => {
       json: true,
       timeout,
       baseUrl: apiUri,
-      headers: Headers
+      headers: Headers,
     });
     assert.deepStrictEqual(client.symbol, symbol);
   });
@@ -73,11 +73,9 @@ suite("PublicClient", () => {
       "zecbtc",
       "zeceth",
       "zecbch",
-      "zecltc"
+      "zecltc",
     ];
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getSymbols();
     assert.deepStrictEqual(data, response);
@@ -93,12 +91,10 @@ suite("PublicClient", () => {
       volume: {
         BTC: "2210.505328803",
         USD: "2135477.463379586263",
-        timestamp: 1483018200000
-      }
+        timestamp: 1483018200000,
+      },
     };
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getTicker({ symbol });
     assert.deepStrictEqual(data, response);
@@ -114,12 +110,10 @@ suite("PublicClient", () => {
       volume: {
         BTC: "2210.505328803",
         USD: "2135477.463379586263",
-        timestamp: 1483018200000
-      }
+        timestamp: 1483018200000,
+      },
     };
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getTicker({});
     assert.deepStrictEqual(data, response);
@@ -158,14 +152,12 @@ suite("PublicClient", () => {
         "9159.5",
         "9150.81",
         "9118.6",
-        "9148.01"
+        "9148.01",
       ],
       bid: "9345.70",
-      ask: "9347.67"
+      ask: "9347.67",
     };
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getTicker({ symbol, v: "v2" });
     assert.deepStrictEqual(data, response);
@@ -181,12 +173,10 @@ suite("PublicClient", () => {
       volume: {
         BTC: "2210.505328803",
         USD: "2135477.463379586263",
-        timestamp: 1483018200000
-      }
+        timestamp: 1483018200000,
+      },
     };
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getTicker();
     assert.deepStrictEqual(data, response);
@@ -198,11 +188,9 @@ suite("PublicClient", () => {
     const uri = "/v2/candles/" + symbol + "/" + time_frame;
     const response: Candle[] = [
       [1559755800000, 7781.6, 7820.23, 7776.56, 7819.39, 34.7624802159],
-      [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059]
+      [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059],
     ];
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCandles({ symbol, time_frame });
     assert.deepStrictEqual(data, response);
@@ -214,11 +202,9 @@ suite("PublicClient", () => {
     const uri = "/v2/candles/" + symbol + "/" + time_frame;
     const response: Candle[] = [
       [1559755800000, 7781.6, 7820.23, 7776.56, 7819.39, 34.7624802159],
-      [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059]
+      [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059],
     ];
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCandles({ time_frame });
     assert.deepStrictEqual(data, response);
@@ -230,11 +216,9 @@ suite("PublicClient", () => {
     const uri = "/v2/candles/" + symbol + "/" + time_frame;
     const response: Candle[] = [
       [1559755800000, 7781.6, 7820.23, 7776.56, 7819.39, 34.7624802159],
-      [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059]
+      [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059],
     ];
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCandles({ symbol });
     assert.deepStrictEqual(data, response);
@@ -246,11 +230,9 @@ suite("PublicClient", () => {
     const uri = "/v2/candles/" + symbol + "/" + time_frame;
     const response: Candle[] = [
       [1559755800000, 7781.6, 7820.23, 7776.56, 7819.39, 34.7624802159],
-      [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059]
+      [1559755800000, 7781.6, 7829.46, 7776.56, 7817.28, 43.4228281059],
     ];
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCandles();
     assert.deepStrictEqual(data, response);
@@ -266,16 +248,16 @@ suite("PublicClient", () => {
         {
           price: "3607.85",
           amount: "6.643373",
-          timestamp: "1547147541"
-        }
+          timestamp: "1547147541",
+        },
       ],
       asks: [
         {
           price: "3607.86",
           amount: "14.68205084",
-          timestamp: "1547147541"
-        }
-      ]
+          timestamp: "1547147541",
+        },
+      ],
     };
     nock(ApiUri)
       .get(uri)
@@ -296,16 +278,16 @@ suite("PublicClient", () => {
         {
           price: "3607.85",
           amount: "6.643373",
-          timestamp: "1547147541"
-        }
+          timestamp: "1547147541",
+        },
       ],
       asks: [
         {
           price: "3607.86",
           amount: "14.68205084",
-          timestamp: "1547147541"
-        }
-      ]
+          timestamp: "1547147541",
+        },
+      ],
     };
     nock(ApiUri)
       .get(uri)
@@ -324,20 +306,18 @@ suite("PublicClient", () => {
         {
           price: "3607.85",
           amount: "6.643373",
-          timestamp: "1547147541"
-        }
+          timestamp: "1547147541",
+        },
       ],
       asks: [
         {
           price: "3607.86",
           amount: "14.68205084",
-          timestamp: "1547147541"
-        }
-      ]
+          timestamp: "1547147541",
+        },
+      ],
     };
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getOrderBook();
     assert.deepStrictEqual(data, response);
@@ -357,8 +337,8 @@ suite("PublicClient", () => {
         price: "3610.85",
         amount: "0.27413495",
         exchange: "gemini",
-        type: "buy"
-      }
+        type: "buy",
+      },
     ];
     nock(ApiUri)
       .get(uri)
@@ -369,7 +349,7 @@ suite("PublicClient", () => {
       symbol,
       limit_trades,
       include_breaks,
-      timestamp
+      timestamp,
     });
     assert.deepStrictEqual(data, response);
   });
@@ -388,8 +368,8 @@ suite("PublicClient", () => {
         price: "3610.85",
         amount: "0.27413495",
         exchange: "gemini",
-        type: "buy"
-      }
+        type: "buy",
+      },
     ];
     nock(ApiUri)
       .get(uri)
@@ -399,7 +379,7 @@ suite("PublicClient", () => {
     const data = await client.getTradeHistory({
       limit_trades,
       include_breaks,
-      timestamp
+      timestamp,
     });
     assert.deepStrictEqual(data, response);
   });
@@ -418,8 +398,8 @@ suite("PublicClient", () => {
         price: "3610.85",
         amount: "0.27413495",
         exchange: "gemini",
-        type: "buy"
-      }
+        type: "buy",
+      },
     ];
     nock(ApiUri)
       .get(uri)
@@ -429,7 +409,7 @@ suite("PublicClient", () => {
     const data = await client.getTradeHistory({
       symbol,
       include_breaks,
-      timestamp
+      timestamp,
     });
     assert.deepStrictEqual(data, response);
   });
@@ -446,13 +426,10 @@ suite("PublicClient", () => {
         price: "3610.85",
         amount: "0.27413495",
         exchange: "gemini",
-        type: "buy"
-      }
+        type: "buy",
+      },
     ];
-    nock(ApiUri)
-      .get(uri)
-      .query({ limit_trades })
-      .reply(200, response);
+    nock(ApiUri).get(uri).query({ limit_trades }).reply(200, response);
 
     const data = await client.getTradeHistory();
     assert.deepStrictEqual(data, response);
@@ -469,11 +446,9 @@ suite("PublicClient", () => {
       last_lowest_ask_price: "632.44",
       last_collar_price: "631.27",
       next_auction_ms: 1474567782895,
-      next_update_ms: 1474567662895
+      next_update_ms: 1474567662895,
     };
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCurrentAuction({ symbol });
     assert.deepStrictEqual(data, response);
@@ -490,11 +465,9 @@ suite("PublicClient", () => {
       last_lowest_ask_price: "632.44",
       last_collar_price: "631.27",
       next_auction_ms: 1474567782895,
-      next_update_ms: 1474567662895
+      next_update_ms: 1474567662895,
     };
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCurrentAuction({});
     assert.deepStrictEqual(data, response);
@@ -511,11 +484,9 @@ suite("PublicClient", () => {
       last_lowest_ask_price: "632.44",
       last_collar_price: "631.27",
       next_auction_ms: 1474567782895,
-      next_update_ms: 1474567662895
+      next_update_ms: 1474567662895,
     };
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCurrentAuction();
     assert.deepStrictEqual(data, response);
@@ -539,7 +510,7 @@ suite("PublicClient", () => {
         auction_result: "success",
         timestamp: 1471902531,
         timestampms: 1471902531225,
-        event_type: "auction"
+        event_type: "auction",
       },
       {
         auction_id: 3,
@@ -552,8 +523,8 @@ suite("PublicClient", () => {
         auction_result: "success",
         timestamp: 1471902471,
         timestampms: 1471902471225,
-        event_type: "indicative"
-      }
+        event_type: "indicative",
+      },
     ];
     nock(ApiUri)
       .get(uri)
@@ -564,7 +535,7 @@ suite("PublicClient", () => {
       symbol,
       limit_auction_results,
       include_indicative,
-      timestamp
+      timestamp,
     });
     assert.deepStrictEqual(data, response);
   });
@@ -587,7 +558,7 @@ suite("PublicClient", () => {
         auction_result: "success",
         timestamp: 1471902531,
         timestampms: 1471902531225,
-        event_type: "auction"
+        event_type: "auction",
       },
       {
         auction_id: 3,
@@ -600,8 +571,8 @@ suite("PublicClient", () => {
         auction_result: "success",
         timestamp: 1471902471,
         timestampms: 1471902471225,
-        event_type: "indicative"
-      }
+        event_type: "indicative",
+      },
     ];
     nock(ApiUri)
       .get(uri)
@@ -611,7 +582,7 @@ suite("PublicClient", () => {
     const data = await client.getAuctionHistory({
       limit_auction_results,
       include_indicative,
-      timestamp
+      timestamp,
     });
     assert.deepStrictEqual(data, response);
   });
@@ -634,7 +605,7 @@ suite("PublicClient", () => {
         auction_result: "success",
         timestamp: 1471902531,
         timestampms: 1471902531225,
-        event_type: "auction"
+        event_type: "auction",
       },
       {
         auction_id: 3,
@@ -647,8 +618,8 @@ suite("PublicClient", () => {
         auction_result: "success",
         timestamp: 1471902471,
         timestampms: 1471902471225,
-        event_type: "indicative"
-      }
+        event_type: "indicative",
+      },
     ];
     nock(ApiUri)
       .get(uri)
@@ -658,7 +629,7 @@ suite("PublicClient", () => {
     const data = await client.getAuctionHistory({
       symbol,
       include_indicative,
-      timestamp
+      timestamp,
     });
     assert.deepStrictEqual(data, response);
   });
@@ -679,7 +650,7 @@ suite("PublicClient", () => {
         auction_result: "success",
         timestamp: 1471902531,
         timestampms: 1471902531225,
-        event_type: "auction"
+        event_type: "auction",
       },
       {
         auction_id: 3,
@@ -692,13 +663,10 @@ suite("PublicClient", () => {
         auction_result: "success",
         timestamp: 1471902471,
         timestampms: 1471902471225,
-        event_type: "indicative"
-      }
+        event_type: "indicative",
+      },
     ];
-    nock(ApiUri)
-      .get(uri)
-      .query({ limit_auction_results })
-      .reply(200, response);
+    nock(ApiUri).get(uri).query({ limit_auction_results }).reply(200, response);
 
     const data = await client.getAuctionHistory();
     assert.deepStrictEqual(data, response);
@@ -721,11 +689,9 @@ suite("PublicClient", () => {
       { pair: "ZECETH", price: "0.249", percentChange24h: "0.0600" },
       { pair: "LTCBTC", price: "0.00624", percentChange24h: "-0.0016" },
       { pair: "BCHETH", price: "1.614", percentChange24h: "0.0000" },
-      { pair: "ZECLTC", price: "0.861", percentChange24h: "0.0630" }
+      { pair: "ZECLTC", price: "0.861", percentChange24h: "0.0630" },
     ];
-    nock(ApiUri)
-      .get(uri)
-      .reply(200, response);
+    nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getPriceFeed();
     assert.deepStrictEqual(data, response);

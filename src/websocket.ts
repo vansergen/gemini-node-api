@@ -297,7 +297,7 @@ export class WebsocketClient extends EventEmitter {
     sandbox = false,
     wsUri = sandbox ? SandboxWsUri : WsUri,
     key,
-    secret
+    secret,
   }: WebsocketClientOptions = {}) {
     super();
     this.wsUri = wsUri;
