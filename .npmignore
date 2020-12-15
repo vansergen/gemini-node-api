@@ -1,9 +1,50 @@
-.circleci/
+# nyc test coverage
+.nyc_output
+
+# Coverage directory used by nyc
+coverage
+
+# GitHub folder
 .github/
-src/
+
+# Tests
 test/
+build/test/
+
+# Documentation
+docs/
+
+# Commitlint config - https://commitlint.js.org/
+.commitlintrc.json
+
+# ESLint config - https://eslint.org/
 .eslintrc.json
-CODE_OF_CONDUCT.md
-index.ts
+
+# ESLint ignore - https://eslint.org/docs/user-guide/configuring#eslintignore
+.eslintignore
+
+# husky config - https://github.com/typicode/husky
+.huskyrc.json
+
+# lint-staged config - https://github.com/okonet/lint-staged
+.lintstagedrc.json
+
+# Prettier ignore
+.prettierignore
+.prettierignore_docs
+
+# semantic-release config - https://semantic-release.gitbook.io/semantic-release/
+.releaserc.json
+
+# TypeScript config - https://www.typescriptlang.org/tsconfig
 tsconfig.json
+
+# TypeDoc config - https://typedoc.org/
 typedoc.json
+
+# Code of Conduct
+CODE_OF_CONDUCT.md
+
+# Source files
+src/
+index.ts
