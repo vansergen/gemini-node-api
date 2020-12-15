@@ -24,7 +24,7 @@
     "commitlint-config-b2broker": "^1.0.0",
     "coveralls": "^3.1.0",
     "eslint": "^7.15.0",
-    "husky": "^4.2.3",
+    "husky": "^4.3.6",
     "lint-staged": "^10.5.3",
     "mocha": "^8.2.1",
     "nock": "^13.0.5",
@@ -72,11 +72,6 @@
     "url": "https://github.com/vansergen/gemini-node-api/issues"
   },
   "homepage": "https://github.com/vansergen/gemini-node-api#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "funding": {
     "type": "Coinbase Commerce",
     "url": "https://commerce.coinbase.com/checkout/04a40393-21f0-44aa-b11b-726b67f08c5a"
