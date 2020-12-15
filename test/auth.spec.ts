@@ -105,7 +105,7 @@ suite("AuthenticatedClient", () => {
       options: [],
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.newOrder({
@@ -162,7 +162,7 @@ suite("AuthenticatedClient", () => {
       options: [],
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.newOrder({
@@ -216,7 +216,7 @@ suite("AuthenticatedClient", () => {
       options: [],
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.buy({
@@ -269,7 +269,7 @@ suite("AuthenticatedClient", () => {
       options: [],
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.sell({
@@ -310,7 +310,7 @@ suite("AuthenticatedClient", () => {
       original_amount: "5",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.cancelOrder({ order_id, account });
@@ -329,7 +329,7 @@ suite("AuthenticatedClient", () => {
       },
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.cancelSession({ account });
@@ -348,7 +348,7 @@ suite("AuthenticatedClient", () => {
       },
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.cancelAll({ account });
@@ -381,7 +381,7 @@ suite("AuthenticatedClient", () => {
       original_amount: "3",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getOrderStatus({ order_id, account });
@@ -435,7 +435,7 @@ suite("AuthenticatedClient", () => {
       },
     ];
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getActiveOrders({ account });
@@ -487,7 +487,7 @@ suite("AuthenticatedClient", () => {
       },
     ];
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getPastTrades({
@@ -544,7 +544,7 @@ suite("AuthenticatedClient", () => {
       },
     ];
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getPastTrades({
@@ -600,7 +600,7 @@ suite("AuthenticatedClient", () => {
       },
     ];
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getPastTrades({
@@ -652,7 +652,7 @@ suite("AuthenticatedClient", () => {
       },
     ];
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getPastTrades();
@@ -690,7 +690,7 @@ suite("AuthenticatedClient", () => {
       ],
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getNotionalVolume({ account });
@@ -746,7 +746,7 @@ suite("AuthenticatedClient", () => {
       ],
     ];
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getTradeVolume({ account });
@@ -776,7 +776,7 @@ suite("AuthenticatedClient", () => {
       clearing_id: "0OQGOZXW",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.newClearingOrder({
@@ -813,7 +813,7 @@ suite("AuthenticatedClient", () => {
       clearing_id: "0OQGOZXW",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.newClearingOrder({
@@ -851,7 +851,7 @@ suite("AuthenticatedClient", () => {
       clearing_id: "0OQGOZXW",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.newBrokerOrder({
@@ -891,7 +891,7 @@ suite("AuthenticatedClient", () => {
       clearing_id: "0OQGOZXW",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.newBrokerOrder({
@@ -914,7 +914,7 @@ suite("AuthenticatedClient", () => {
       status: "AwaitTargetConfirm",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getClearingOrderStatus({ clearing_id });
@@ -930,7 +930,7 @@ suite("AuthenticatedClient", () => {
       details: "P0521QDV order canceled",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.cancelClearingOrder({ clearing_id });
@@ -957,7 +957,7 @@ suite("AuthenticatedClient", () => {
       result: "confirmed",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.confirmClearingOrder({
@@ -990,7 +990,7 @@ suite("AuthenticatedClient", () => {
       result: "confirmed",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.confirmClearingOrder({
@@ -1030,7 +1030,7 @@ suite("AuthenticatedClient", () => {
       },
     ];
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getAvailableBalances({ account });
@@ -1062,7 +1062,7 @@ suite("AuthenticatedClient", () => {
       },
     ];
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getNotionalBalances({ account });
@@ -1140,7 +1140,7 @@ suite("AuthenticatedClient", () => {
       },
     ];
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getTransfers({
@@ -1163,7 +1163,7 @@ suite("AuthenticatedClient", () => {
       },
     ];
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getDepositAddresses({ network, account });
@@ -1183,7 +1183,7 @@ suite("AuthenticatedClient", () => {
       label,
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getNewAddress({
@@ -1210,7 +1210,7 @@ suite("AuthenticatedClient", () => {
         "You have requested a transfer of 1 BTC to 1EdWhc4RiYqrnSVrdNrbkJ2RYaXd9EfEen. This withdrawal will be sent to the blockchain within the next 60 seconds.",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.withdrawCrypto({
@@ -1233,7 +1233,7 @@ suite("AuthenticatedClient", () => {
       uuid: "9c153d64-83ba-4532-a159-ebe3f6797766",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.internalTransfer({
@@ -1252,7 +1252,7 @@ suite("AuthenticatedClient", () => {
     const options = { request, name, type, nonce };
     const response: Account = { name, type };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.createAccount({ name, type });
@@ -1286,7 +1286,7 @@ suite("AuthenticatedClient", () => {
       },
     ];
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.getAccounts();
@@ -1306,7 +1306,7 @@ suite("AuthenticatedClient", () => {
         "6b74434ce7b12360e8c2f0321a9d6302d13beff4d707933a943a6aa267267c93",
     };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.withdrawGUSD({
@@ -1322,7 +1322,7 @@ suite("AuthenticatedClient", () => {
     const options = { request, nonce };
     const response: Heartbeat = { result: "ok" };
     nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
-      .post(request, {})
+      .post(request)
       .reply(200, response);
 
     const data = await client.heartbeat();
