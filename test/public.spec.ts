@@ -1,13 +1,11 @@
-import * as assert from "assert";
-import * as nock from "nock";
+import assert from "assert";
+import nock from "nock";
 import {
   ApiLimit,
   PublicClient,
   ApiUri,
   SandboxApiUri,
-  DefaulTimeout,
   DefaultSymbol,
-  Headers,
   Ticker,
   Candle,
   OrderBook,
@@ -16,44 +14,97 @@ import {
   AuctionHistory,
   PriceFeedItem,
 } from "../index";
+import http from "http";
+import { FetchError } from "node-fetch";
 
 const client = new PublicClient();
 
 suite("PublicClient", () => {
   test(".constructor()", () => {
-    assert.deepStrictEqual(client._rpoptions, {
-      json: true,
-      timeout: DefaulTimeout,
-      baseUrl: ApiUri,
-      headers: Headers,
-    });
+    assert.deepStrictEqual(client.apiUri, ApiUri);
     assert.deepStrictEqual(client.symbol, DefaultSymbol);
   });
 
   test(".constructor() (with sandbox flag)", () => {
-    const client = new PublicClient({ sandbox: true });
-    assert.deepStrictEqual(client._rpoptions, {
-      json: true,
-      timeout: DefaulTimeout,
-      baseUrl: SandboxApiUri,
-      headers: Headers,
-    });
-    assert.deepStrictEqual(client.symbol, DefaultSymbol);
+    const otherClient = new PublicClient({ sandbox: true });
+    assert.deepStrictEqual(otherClient.apiUri, SandboxApiUri);
+    assert.deepStrictEqual(otherClient.symbol, DefaultSymbol);
   });
 
-  test(".constructor() (with custom options)", () => {
+  test(".constructor() (with custom apiUri)", () => {
     const sandbox = true;
     const apiUri = "https://new-gemini-api-uri.com";
-    const timeout = 9000;
     const symbol = "zecbtc";
-    const client = new PublicClient({ sandbox, apiUri, timeout, symbol });
-    assert.deepStrictEqual(client._rpoptions, {
-      json: true,
-      timeout,
-      baseUrl: apiUri,
-      headers: Headers,
+    const otherClient = new PublicClient({ sandbox, apiUri, symbol });
+    assert.deepStrictEqual(otherClient.apiUri, apiUri);
+    assert.deepStrictEqual(otherClient.symbol, symbol);
+  });
+
+  test(".get() (reject non 2xx responses)", async () => {
+    const uri = "/v1/symbols";
+    const response = {
+      result: "error",
+      reason: "RateLimit",
+      message: "Requests were made too frequently",
+    };
+    nock(ApiUri).get(uri).delay(1).reply(429, response);
+
+    await assert.rejects(client.get(uri), new Error(response.message));
+  });
+
+  test(".get() (reject non 2xx responses when no message is provided) ", async () => {
+    const uri = "/v1/symbols";
+    const response = {
+      result: "error",
+      reason: "RateLimit",
+    };
+    nock(ApiUri).get(uri).delay(1).reply(429, response);
+
+    await assert.rejects(client.get(uri), new Error(response.reason));
+  });
+
+  test(".get() (reject non 2xx responses with invalid JSON response) ", async () => {
+    const uri = "/v1/symbols";
+    const response = "Not valid JSON";
+    nock(ApiUri).get(uri).delay(1).reply(429, response);
+
+    await assert.rejects(
+      client.get(uri),
+      new SyntaxError("Unexpected token N in JSON at position 0")
+    );
+  });
+
+  test(".get() (reject on errors)", async () => {
+    const port = 28080;
+    const apiUri = `http://127.0.0.1:${port}`;
+    const server = await new Promise<http.Server>((resolve) => {
+      const _server = new http.Server((_request, response) => {
+        response.destroy();
+      });
+      _server
+        .on("listening", () => {
+          resolve(_server);
+        })
+        .listen(port);
     });
-    assert.deepStrictEqual(client.symbol, symbol);
+
+    const otherClient = new PublicClient({ apiUri });
+    const uri = "/v1/symbols";
+    try {
+      await otherClient.get(uri);
+      assert.fail("Should throw an error");
+    } catch (error) {
+      assert.ok(error instanceof FetchError);
+    }
+    await new Promise<void>((resolve, reject) => {
+      server.close((error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
   });
 
   test(".getSymbols()", async () => {
@@ -272,7 +323,7 @@ suite("PublicClient", () => {
     const symbol = DefaultSymbol;
     const uri = `/v1/book/${symbol}`;
     const limit_bids = 1;
-    const limit_asks = 1;
+    let limit_asks: undefined;
     const response: OrderBook = {
       bids: [
         {
@@ -289,10 +340,7 @@ suite("PublicClient", () => {
         },
       ],
     };
-    nock(ApiUri)
-      .get(uri)
-      .query({ limit_asks, limit_bids })
-      .reply(200, response);
+    nock(ApiUri).get(uri).query({ limit_bids }).reply(200, response);
 
     const data = await client.getOrderBook({ limit_bids, limit_asks });
     assert.deepStrictEqual(data, response);
