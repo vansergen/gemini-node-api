@@ -1,53 +1,55 @@
-import { RPC } from "rpc-bluebird";
-import * as Promise from "bluebird";
+import { FetchClient, UnsuccessfulFetch } from "rpc-bluebird";
+import Bluebird from "bluebird";
 
 export const ApiLimit = 500;
 export const DefaultSymbol = "btcusd";
-export const DefaulTimeout = 30000;
 export const ApiUri = "https://api.gemini.com";
 export const SandboxApiUri = "https://api.sandbox.gemini.com";
 export const Headers = {
-  "User-Agent": "gemini-node-api-client",
-  "Content-Type": "application/json",
+  "User-Agent": "gemini-node-api",
+  "Content-Type": "text/plain",
   Accept: "application/json",
-  "X-Requested-With": "XMLHttpRequest",
-  "Content-Length": 0,
+  "Content-Length": "0",
   "Cache-Control": "no-cache",
 };
 
-export type SymbolFilter = { symbol?: string };
+export interface SymbolFilter {
+  symbol?: string;
+}
 
-export type TickerFilter = SymbolFilter & { v?: "v1" | "v2" };
+export interface TickerFilter extends SymbolFilter {
+  v?: "v1" | "v2";
+}
 
-export type CandlesFilter = SymbolFilter & {
+export interface CandlesFilter extends SymbolFilter {
   time_frame?: "1m" | "5m" | "15m" | "30m" | "1hr" | "6hr" | "1day";
-};
+}
 
-export type BookFilter = SymbolFilter & {
+export interface BookFilter extends SymbolFilter {
   limit_bids?: number;
   limit_asks?: number;
-};
+}
 
-export type TradeHistoryFilter = SymbolFilter & {
+export interface TradeHistoryFilter extends SymbolFilter {
   timestamp?: number;
   limit_trades?: number;
   include_breaks?: boolean;
-};
+}
 
-export type AuctionHistoryFilter = SymbolFilter & {
+export interface AuctionHistoryFilter extends SymbolFilter {
   timestamp?: number;
   limit_auction_results?: number;
   include_indicative?: boolean;
-};
+}
 
-export type TickerV1 = {
+export interface TickerV1 {
   bid: string;
   ask: string;
   last: string;
   volume: { [key: string]: string | number };
-};
+}
 
-export type TickerV2 = {
+export interface TickerV2 {
   symbol: string;
   open: string;
   high: string;
@@ -56,21 +58,24 @@ export type TickerV2 = {
   changes: string[];
   bid: string;
   ask: string;
-};
+}
 
 export type Ticker = TickerV1 | TickerV2;
 
 export type Candle = [number, number, number, number, number, number];
 
-export type BookEntry = {
+export interface BookEntry {
   price: string;
   amount: string;
   timestamp: string;
-};
+}
 
-export type OrderBook = { bids: BookEntry[]; asks: BookEntry[] };
+export interface OrderBook {
+  bids: BookEntry[];
+  asks: BookEntry[];
+}
 
-export type Trade = {
+export interface Trade {
   timestamp: number;
   timestampms: number;
   tid: number;
@@ -79,9 +84,9 @@ export type Trade = {
   exchange: "gemini";
   type: "buy" | "sell" | "auction" | "block";
   broken?: boolean;
-};
+}
 
-export type AuctionInfo = {
+export interface AuctionInfo {
   closed_until_ms?: number;
   last_auction_eid?: number;
   last_auction_price?: string;
@@ -96,9 +101,9 @@ export type AuctionInfo = {
   most_recent_collar_price?: string;
   next_update_ms?: number;
   next_auction_ms?: number;
-};
+}
 
-export type AuctionHistory = {
+export interface AuctionHistory {
   timestamp: number;
   timestampms: number;
   auction_id: number;
@@ -111,109 +116,157 @@ export type AuctionHistory = {
   lowest_ask_price?: string;
   collar_price?: string;
   unmatched_collar_quantity?: string;
-};
+}
 
-export type PriceFeedItem = {
+export interface PriceFeedItem {
   pair: string;
   price: string;
   percentChange24h: string;
-};
+}
 
-export type PublicClientOptions = {
+export interface PublicClientOptions {
   symbol?: string;
   sandbox?: boolean;
   apiUri?: string;
-  timeout?: number;
-};
+}
 
-export class PublicClient extends RPC {
-  readonly symbol: string;
+export class PublicClient extends FetchClient<unknown> {
+  public readonly symbol: string;
+  public readonly apiUri: string;
 
-  constructor({
+  public constructor({
     symbol = DefaultSymbol,
     sandbox = false,
     apiUri = sandbox ? SandboxApiUri : ApiUri,
-    timeout = DefaulTimeout,
   }: PublicClientOptions = {}) {
-    super({ json: true, timeout, baseUrl: apiUri, headers: Headers });
+    super({ headers: { ...Headers } }, { transform: "json", baseUrl: apiUri });
+    this.apiUri = apiUri;
     this.symbol = symbol;
+  }
+
+  public get(path: string): Bluebird<unknown> {
+    return new Bluebird<unknown>((resolve, reject) => {
+      super
+        .get(path)
+        .then(resolve)
+        .catch((error) => {
+          if (error instanceof UnsuccessfulFetch) {
+            error.response
+              .json()
+              .then((data) => {
+                const { reason, message } = data as {
+                  reason: string;
+                  message?: string;
+                };
+                reject(new Error(message ?? reason));
+              })
+              .catch(reject);
+          } else {
+            reject(error);
+          }
+        })
+        .catch(reject);
+    });
   }
 
   /**
    * Get all available symbols for trading.
    */
-  getSymbols(): Promise<string[]> {
-    return this.get({ uri: "v1/symbols" });
+  public getSymbols(): Bluebird<string[]> {
+    return this.get("v1/symbols") as Bluebird<string[]>;
   }
 
   /**
    * Get information about recent trading activity for the symbol.
    */
-  getTicker({
+  public getTicker(options: { symbol?: string; v: "v2" }): Bluebird<TickerV2>;
+  public getTicker(options?: { symbol?: string; v?: "v1" }): Bluebird<TickerV1>;
+  public getTicker({
     symbol = this.symbol,
     v = "v1",
-  }: TickerFilter = {}): Promise<Ticker> {
-    v += v === "v1" ? `/pubticker/${symbol}` : `/ticker/${symbol}`;
-    return this.get({ uri: v });
+  }: TickerFilter = {}): Bluebird<Ticker> {
+    if (v === "v2") {
+      return this.get(`/${v}/ticker/${symbol}`) as Bluebird<TickerV2>;
+    } 
+      return this.get(`/${v}/pubticker/${symbol}`) as Bluebird<TickerV1>;
+    
   }
 
   /**
    * Get time-intervaled data for the provided symbol.
    */
-  getCandles({
+  public getCandles({
     symbol = this.symbol,
     time_frame = "1day",
-  }: CandlesFilter = {}): Promise<Candle[]> {
-    return this.get({ uri: `v2/candles/${symbol}/${time_frame}` });
+  }: CandlesFilter = {}): Bluebird<Candle[]> {
+    return this.get(`/v2/candles/${symbol}/${time_frame}`) as Bluebird<
+      Candle[]
+    >;
   }
 
   /**
    * Get the current order book.
    */
-  getOrderBook({
+  public getOrderBook({
     symbol = this.symbol,
     ...qs
-  }: BookFilter = {}): Promise<OrderBook> {
-    return this.get({ uri: `v1/book/${symbol}`, qs });
+  }: BookFilter = {}): Bluebird<OrderBook> {
+    const url = new URL(`/v1/book/${symbol}`, this.apiUri);
+    PublicClient.addOptions(url, { ...qs });
+    return this.get(url.toString()) as Bluebird<OrderBook>;
   }
 
   /**
    * Get the trades that have executed since the specified timestamp.
    */
-  getTradeHistory({
+  public getTradeHistory({
     symbol = this.symbol,
     limit_trades = ApiLimit,
     ...qs
-  }: TradeHistoryFilter = {}): Promise<Trade[]> {
-    const uri = `v1/trades/${symbol}`;
-    return this.get({ uri, qs: { limit_trades, ...qs } });
+  }: TradeHistoryFilter = {}): Bluebird<Trade[]> {
+    const url = new URL(`/v1/trades/${symbol}`, this.apiUri);
+    PublicClient.addOptions(url, { limit_trades, ...qs });
+    return this.get(url.toString()) as Bluebird<Trade[]>;
   }
 
   /**
    * Get current auction information.
    */
-  getCurrentAuction({
+  public getCurrentAuction({
     symbol = this.symbol,
-  }: SymbolFilter = {}): Promise<AuctionInfo> {
-    return this.get({ uri: `v1/auction/${symbol}` });
+  }: SymbolFilter = {}): Bluebird<AuctionInfo> {
+    return this.get(`v1/auction/${symbol}`) as Bluebird<AuctionInfo>;
   }
 
   /**
    * Get the auction events.
    */
-  getAuctionHistory({
+  public getAuctionHistory({
     symbol = this.symbol,
     limit_auction_results = ApiLimit,
     ...qs
-  }: AuctionHistoryFilter = {}): Promise<AuctionHistory[]> {
-    const uri = `v1/auction/${symbol}/history`;
-    return this.get({ uri, qs: { limit_auction_results, ...qs } });
+  }: AuctionHistoryFilter = {}): Bluebird<AuctionHistory[]> {
+    const url = new URL(`/v1/auction/${symbol}/history`, this.apiUri);
+    PublicClient.addOptions(url, { limit_auction_results, ...qs });
+    return this.get(url.toString()) as Bluebird<AuctionHistory[]>;
   }
 
   /**
    * Get the price feed.
    */
-  getPriceFeed(): Promise<PriceFeedItem[]> {
-    return this.get({ uri: "v1/pricefeed" });
+  public getPriceFeed(): Bluebird<PriceFeedItem[]> {
+    return this.get("v1/pricefeed") as Bluebird<PriceFeedItem[]>;
+  }
+
+  private static addOptions(
+    target: URL,
+    data: Record<string, string | number | boolean | undefined>
+  ): void {
+    for (const key in data) {
+      const value = data[key];
+      if (typeof value !== "undefined") {
+        target.searchParams.append(key, value.toString());
+      }
+    }
   }
 }
