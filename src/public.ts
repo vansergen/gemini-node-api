@@ -187,9 +187,8 @@ export class PublicClient extends FetchClient<unknown> {
   }: TickerFilter = {}): Bluebird<Ticker> {
     if (v === "v2") {
       return this.get(`/${v}/ticker/${symbol}`) as Bluebird<TickerV2>;
-    } 
-      return this.get(`/${v}/pubticker/${symbol}`) as Bluebird<TickerV1>;
-    
+    }
+    return this.get(`/${v}/pubticker/${symbol}`) as Bluebird<TickerV1>;
   }
 
   /**
