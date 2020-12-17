@@ -1,4 +1,4 @@
-# Gemini Node.js API [![CircleCI](https://circleci.com/gh/vansergen/gemini-node-api.svg?style=svg)](https://circleci.com/gh/vansergen/gemini-node-api) [![GitHub version](https://badge.fury.io/gh/vansergen%2Fgemini-node-api.svg)](https://github.com/vansergen/gemini-node-api/releases/latest) [![Known Vulnerabilities](https://snyk.io/test/github/vansergen/gemini-node-api/badge.svg)](https://snyk.io/test/github/vansergen/gemini-node-api) [![Coverage Status](https://coveralls.io/repos/github/vansergen/gemini-node-api/badge.svg?branch=master)](https://coveralls.io/github/vansergen/gemini-node-api?branch=master) [![languages](https://img.shields.io/github/languages/top/vansergen/gemini-node-api.svg)](https://github.com/vansergen/gemini-node-api) ![node](https://img.shields.io/node/v/gemini-node-api) [![npm downloads](https://img.shields.io/npm/dt/gemini-node-api.svg)](https://www.npmjs.com/package/gemini-node-api) [![license](https://img.shields.io/github/license/vansergen/gemini-node-api.svg)](https://github.com/vansergen/gemini-node-api/blob/master/LICENSE)
+# Gemini Node.js API ![CI Status](https://github.com/vansergen/gemini-node-api/workflows/CI/badge.svg) ![npm](https://img.shields.io/npm/v/gemini-node-api) [![Coverage Status](https://coveralls.io/repos/github/vansergen/gemini-node-api/badge.svg?branch=master)](https://coveralls.io/github/vansergen/gemini-node-api?branch=master) [![Known Vulnerabilities](https://snyk.io/test/github/vansergen/gemini-node-api/badge.svg)](https://snyk.io/test/github/vansergen/gemini-node-api) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) ![NPM license](https://img.shields.io/npm/l/gemini-node-api) ![node version](https://img.shields.io/node/v/gemini-node-api) ![npm downloads](https://img.shields.io/npm/dt/gemini-node-api) ![GitHub top language](https://img.shields.io/github/languages/top/vansergen/gemini-node-api)
 
 Node.js library for [Gemini](https://docs.gemini.com/).
 
@@ -428,7 +428,7 @@ const trades = true;
 const auctions = false;
 const symbol = "zecltc";
 websocket.on("open", (market) => console.log("Open:", market));
-websocket.connectMarket({
+await websocket.connectMarket({
   symbol,
   heartbeat,
   top_of_book,
@@ -437,7 +437,7 @@ websocket.connectMarket({
   trades,
   auctions,
 });
-websocket.connectMarket({ symbol: "btcusd" });
+await websocket.connectMarket({ symbol: "btcusd" });
 ```
 
 - [`disconnectMarket`](https://docs.gemini.com/websocket-api/#market-data)
@@ -445,21 +445,21 @@ websocket.connectMarket({ symbol: "btcusd" });
 ```typescript
 const symbol = "zecltc";
 websocket.once("close", (market) => console.log("Closed:", market));
-websocket.disconnectMarket({ symbol });
+await websocket.disconnectMarket({ symbol });
 ```
 
 - [`connect`](https://docs.gemini.com/websocket-api/#market-data-version-2)
 
 ```typescript
 websocket.on("open", (market) => console.log("Open:", market));
-websocket.connect();
+await websocket.connect();
 ```
 
 - [`disconnect`](https://docs.gemini.com/websocket-api/#market-data-version-2)
 
 ```typescript
 websocket.once("close", (market) => console.log("Closed:", market));
-websocket.disconnect();
+await websocket.disconnect();
 ```
 
 - [`subscribe`](https://docs.gemini.com/websocket-api/#level-2-data)
@@ -469,18 +469,15 @@ const subscriptions = [
   { name: "l2", symbols: ["BTCUSD", "ETHUSD"] },
   { name: "candles_1m", symbols: ["BTCUSD"] },
 ];
-websocket.on("open", (market) => {
-  if (market === "v2") {
-    websocket.subscribe(subscriptions);
-  }
-});
+await websocket.connect();
+await websocket.subscribe(subscriptions);
 ```
 
 - [`unsubscribe`](https://docs.gemini.com/websocket-api/#unsubscribe)
 
 ```typescript
 const subscriptions = [{ name: "l2", symbols: ["BTCUSD", "ETHUSD"] }];
-websocket.unsubscribe(subscriptions);
+await websocket.unsubscribe(subscriptions);
 ```
 
 - [`connectOrders`](https://docs.gemini.com/websocket-api/#order-events)
@@ -495,7 +492,7 @@ websocket.on("message", (message, market) => {
     console.log("New message:", message);
   }
 });
-websocket.connectOrders({
+await websocket.connectOrders({
   account,
   symbolFilter,
   apiSessionFilter,
@@ -511,7 +508,7 @@ websocket.once("close", (market) => {
     console.log("Closed");
   }
 });
-websocket.disconnectOrders();
+await websocket.disconnectOrders();
 ```
 
 ### Test
