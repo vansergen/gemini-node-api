@@ -1,9 +1,8 @@
-import * as assert from "assert";
-import * as nock from "nock";
+import assert from "assert";
+import nock from "nock";
 import {
   ApiLimit,
   AuthenticatedClient,
-  Headers,
   ApiUri,
   SignRequest,
   DefaultSymbol,
@@ -28,6 +27,8 @@ import {
   GUSDWithdrawal,
   Heartbeat,
 } from "../index";
+import { FetchError } from "node-fetch";
+import http from "http";
 
 const key = "Gemini-API-KEY";
 const secret = "Gemini-API-SECRET";
@@ -41,27 +42,88 @@ suite("AuthenticatedClient", () => {
   test("constructor", () => {
     const sandbox = true;
     const apiUri = "https://new-gemini-api-uri.com";
-    const timeout = 9000;
     const symbol = "zecbtc";
-    const client = new AuthenticatedClient({
+    const otherClient = new AuthenticatedClient({
       sandbox,
       apiUri,
-      timeout,
       symbol,
       key,
       secret,
     });
-    client.nonce = _nonce;
-    assert.deepStrictEqual(client._rpoptions, {
-      timeout,
-      baseUrl: apiUri,
-      json: true,
-      headers: Headers,
+    otherClient.nonce = _nonce;
+    assert.deepStrictEqual(otherClient.apiUri, apiUri);
+    assert.deepStrictEqual(otherClient.symbol, symbol);
+    assert.deepStrictEqual(otherClient.nonce, _nonce);
+  });
+
+  test(".post() (reject non 2xx responses)", async () => {
+    const uri = "/v1/symbols";
+    const response = {
+      result: "error",
+      reason: "RateLimit",
+      message: "Requests were made too frequently",
+    };
+
+    nock(ApiUri).post(uri).delay(1).reply(429, response);
+
+    await assert.rejects(client.post(uri, {}), new Error(response.message));
+  });
+
+  test(".post() (reject non 2xx responses when no message is provided) ", async () => {
+    const uri = "/v1/symbols";
+    const response = {
+      result: "error",
+      reason: "RateLimit",
+    };
+
+    nock(ApiUri).post(uri).delay(1).reply(429, response);
+
+    await assert.rejects(client.post(uri, {}), new Error(response.reason));
+  });
+
+  test(".post() (reject non 2xx responses with invalid JSON response) ", async () => {
+    const response = "Not valid JSON";
+    nock(ApiUri).post("/").delay(1).reply(429, response);
+
+    let path: undefined;
+
+    await assert.rejects(
+      client.post(path, {}),
+      new SyntaxError("Unexpected token N in JSON at position 0")
+    );
+  });
+
+  test(".post() (reject on errors)", async () => {
+    const port = 28080;
+    const apiUri = `http://127.0.0.1:${port}`;
+    const server = await new Promise<http.Server>((resolve) => {
+      const _server = new http.Server((_request, response) => {
+        response.destroy();
+      });
+      _server
+        .on("listening", () => {
+          resolve(_server);
+        })
+        .listen(port);
     });
-    assert.deepStrictEqual(client.symbol, symbol);
-    assert.deepStrictEqual(client.key, key);
-    assert.deepStrictEqual(client.secret, secret);
-    assert.deepStrictEqual(client.nonce, _nonce);
+
+    const otherClient = new AuthenticatedClient({ apiUri, key, secret });
+    const uri = "/v1/symbols";
+    try {
+      await otherClient.post(uri, {});
+      assert.fail("Should throw an error");
+    } catch (error) {
+      assert.ok(error instanceof FetchError);
+    }
+    await new Promise<void>((resolve, reject) => {
+      server.close((error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
   });
 
   test(".newOrder()", async () => {
@@ -104,7 +166,9 @@ suite("AuthenticatedClient", () => {
       remaining_amount: "0",
       options: [],
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -161,7 +225,9 @@ suite("AuthenticatedClient", () => {
       remaining_amount: "0",
       options: [],
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -215,7 +281,9 @@ suite("AuthenticatedClient", () => {
       remaining_amount: "0",
       options: [],
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -268,7 +336,9 @@ suite("AuthenticatedClient", () => {
       remaining_amount: "0",
       options: [],
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -309,7 +379,9 @@ suite("AuthenticatedClient", () => {
       price: "3633.00",
       original_amount: "5",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -328,7 +400,9 @@ suite("AuthenticatedClient", () => {
         cancelRejects: [],
       },
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -347,7 +421,9 @@ suite("AuthenticatedClient", () => {
         cancelledOrders: [330429106, 330429079, 330429082],
       },
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -380,7 +456,9 @@ suite("AuthenticatedClient", () => {
       price: "400.00",
       original_amount: "3",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -434,7 +512,9 @@ suite("AuthenticatedClient", () => {
         original_amount: "1",
       },
     ];
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -486,7 +566,9 @@ suite("AuthenticatedClient", () => {
         is_auction_fill: false,
       },
     ];
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -543,7 +625,9 @@ suite("AuthenticatedClient", () => {
         is_auction_fill: false,
       },
     ];
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -599,7 +683,9 @@ suite("AuthenticatedClient", () => {
         is_auction_fill: false,
       },
     ];
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -651,7 +737,9 @@ suite("AuthenticatedClient", () => {
         is_auction_fill: false,
       },
     ];
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -689,7 +777,9 @@ suite("AuthenticatedClient", () => {
         },
       ],
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -745,7 +835,9 @@ suite("AuthenticatedClient", () => {
         },
       ],
     ];
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -775,7 +867,9 @@ suite("AuthenticatedClient", () => {
       result: "AwaitConfirm",
       clearing_id: "0OQGOZXW",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -812,7 +906,9 @@ suite("AuthenticatedClient", () => {
       result: "AwaitConfirm",
       clearing_id: "0OQGOZXW",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -850,7 +946,9 @@ suite("AuthenticatedClient", () => {
       result: "AwaitConfirm",
       clearing_id: "0OQGOZXW",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -890,7 +988,9 @@ suite("AuthenticatedClient", () => {
       result: "AwaitConfirm",
       clearing_id: "0OQGOZXW",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -913,7 +1013,9 @@ suite("AuthenticatedClient", () => {
       result: "ok",
       status: "AwaitTargetConfirm",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -929,7 +1031,9 @@ suite("AuthenticatedClient", () => {
       result: "ok",
       details: "P0521QDV order canceled",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -956,7 +1060,9 @@ suite("AuthenticatedClient", () => {
     const response: ConfirmClearingOptionsResponse = {
       result: "confirmed",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -989,7 +1095,9 @@ suite("AuthenticatedClient", () => {
     const response: ConfirmClearingOptionsResponse = {
       result: "confirmed",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -1029,7 +1137,9 @@ suite("AuthenticatedClient", () => {
         availableForWithdrawal: "20124.50369697",
       },
     ];
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -1061,7 +1171,9 @@ suite("AuthenticatedClient", () => {
         availableForWithdrawalNotional: "69.05169",
       },
     ];
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -1074,7 +1186,13 @@ suite("AuthenticatedClient", () => {
     const account = "primary";
     const timestamp = 1;
     const limit_transfers = 10;
-    const options = { request, limit_transfers, timestamp, account, nonce };
+    const options = {
+      request,
+      limit_transfers,
+      timestamp,
+      account,
+      nonce,
+    };
     const response: Transfer[] = [
       {
         type: "Deposit",
@@ -1139,7 +1257,9 @@ suite("AuthenticatedClient", () => {
         destination: "0xd24400ae8BfEBb18cA49Be86258a3C749cf46853",
       },
     ];
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -1162,7 +1282,9 @@ suite("AuthenticatedClient", () => {
         timestamp: 1575304806373,
       },
     ];
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -1182,7 +1304,9 @@ suite("AuthenticatedClient", () => {
       address: "ltc1qdmx34geqhrnmgldcqkr79wwl3yxldsvhhz7t49",
       label,
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -1209,7 +1333,9 @@ suite("AuthenticatedClient", () => {
       message:
         "You have requested a transfer of 1 BTC to 1EdWhc4RiYqrnSVrdNrbkJ2RYaXd9EfEen. This withdrawal will be sent to the blockchain within the next 60 seconds.",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -1228,11 +1354,19 @@ suite("AuthenticatedClient", () => {
     const sourceAccount = "my-account";
     const targetAccount = "my-other-account";
     const amount = 1;
-    const options = { request, sourceAccount, targetAccount, amount, nonce };
+    const options = {
+      request,
+      sourceAccount,
+      targetAccount,
+      amount,
+      nonce,
+    };
     const response: InternalTransferResponse = {
       uuid: "9c153d64-83ba-4532-a159-ebe3f6797766",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -1251,7 +1385,9 @@ suite("AuthenticatedClient", () => {
     const type = "custody";
     const options = { request, name, type, nonce };
     const response: Account = { name, type };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -1285,7 +1421,9 @@ suite("AuthenticatedClient", () => {
         created: 1575293113336,
       },
     ];
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -1305,7 +1443,9 @@ suite("AuthenticatedClient", () => {
       txHash:
         "6b74434ce7b12360e8c2f0321a9d6302d13beff4d707933a943a6aa267267c93",
     };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -1321,7 +1461,9 @@ suite("AuthenticatedClient", () => {
     const request = "/v1/heartbeat";
     const options = { request, nonce };
     const response: Heartbeat = { result: "ok" };
-    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, options }) } })
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
       .post(request)
       .reply(200, response);
 
@@ -1330,8 +1472,8 @@ suite("AuthenticatedClient", () => {
   });
 
   test(".nonce()", () => {
-    const client = new AuthenticatedClient({ key, secret });
-    const nonce = client.nonce();
-    assert.deepStrictEqual(typeof nonce, "number");
+    const otherClient = new AuthenticatedClient({ key, secret });
+    const otherNonce = otherClient.nonce();
+    assert.deepStrictEqual(typeof otherNonce, "number");
   });
 });
