@@ -18,6 +18,9 @@
   },
   "devDependencies": {
     "@b2broker/tsconfig": "^1.0.3",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
     "@types/mocha": "^8.2.0",
     "commitlint-config-b2broker": "^1.0.0",
     "coveralls": "^3.1.0",
@@ -28,6 +31,7 @@
     "nock": "^13.0.5",
     "nyc": "^15.1.0",
     "prettier": "^2.2.1",
+    "semantic-release": "^17.3.0",
     "ts-node": "^9.1.1",
     "typedoc": "^0.19.2"
   },
@@ -63,7 +67,7 @@
     "exchange",
     "API"
   ],
-  "author": "Sergey Bakulin",
+  "author": "Sergey Bakulin <sergey.bakulin.github@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/vansergen/gemini-node-api/issues"
