@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html class="default no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>gemini-node-api - v3.0.0</title>
+    <meta
+      name="description"
+      content="Documentation for gemini-node-api - v3.0.0"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body>
+    <header>
+      <div class="tsd-page-toolbar">
+        <div class="container">
+          <div class="table-wrap">
+            <div
+              class="table-cell"
+              id="tsd-search"
+              data-index="assets/js/search.json"
+              data-base="."
+            >
+              <div class="field">
+                <label
+                  for="tsd-search-field"
+                  class="tsd-widget search no-caption"
+                  >Search</label
+                >
+                <input id="tsd-search-field" type="text" />
+              </div>
+              <ul class="results">
+                <li class="state loading">Preparing search index...</li>
+                <li class="state failure">The search index is not available</li>
+              </ul>
+              <a href="index.html" class="title">gemini-node-api - v3.0.0</a>
+            </div>
+            <div class="table-cell" id="tsd-widgets">
+              <div id="tsd-filter">
+                <a
+                  href="#"
+                  class="tsd-widget options no-caption"
+                  data-toggle="options"
+                  >Options</a
+                >
+                <div class="tsd-filter-group">
+                  <div class="tsd-select" id="tsd-filter-visibility">
+                    <span class="tsd-select-label">All</span>
+                    <ul class="tsd-select-list">
+                      <li data-value="public">Public</li>
+                      <li data-value="protected">Public/Protected</li>
+                      <li data-value="private" class="selected">All</li>
+                    </ul>
+                  </div>
+                  <input type="checkbox" id="tsd-filter-inherited" checked />
+                  <label class="tsd-widget" for="tsd-filter-inherited"
+                    >Inherited</label
+                  >
+                  <input type="checkbox" id="tsd-filter-externals" checked />
+                  <label class="tsd-widget" for="tsd-filter-externals"
+                    >Externals</label
+                  >
+                  <input type="checkbox" id="tsd-filter-only-exported" />
+                  <label class="tsd-widget" for="tsd-filter-only-exported"
+                    >Only exported</label
+                  >
+                </div>
+              </div>
+              <a href="#" class="tsd-widget menu no-caption" data-toggle="menu"
+                >Menu</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tsd-page-title">
+        <div class="container">
+          <ul class="tsd-breadcrumb">
+            <li>
+              <a href="globals.html">Globals</a>
+            </li>
+          </ul>
+          <h1>gemini-node-api - v3.0.0</h1>
+        </div>
+      </div>
+    </header>
+    <div class="container container-main">
+      <div class="row">
+        <div class="col-8 col-content">
+          <div class="tsd-panel tsd-typography">
+            <a
+              href="#gemini-nodejs-api-----------"
+              id="gemini-nodejs-api-----------"
+              style="color: inherit; text-decoration: none"
+            >
+              <h1>
+                Gemini Node.js API
+                <img
+                  src="https://github.com/vansergen/gemini-node-api/workflows/CI/badge.svg"
+                  alt="CI Status"
+                />
+                <img
+                  src="https://img.shields.io/npm/v/gemini-node-api"
+                  alt="npm"
+                />
+                <a
+                  href="https://coveralls.io/github/vansergen/gemini-node-api?branch=master"
+                  ><img
+                    src="https://coveralls.io/repos/github/vansergen/gemini-node-api/badge.svg?branch=master"
+                    alt="Coverage Status"
+                /></a>
+                <a href="https://snyk.io/test/github/vansergen/gemini-node-api"
+                  ><img
+                    src="https://snyk.io/test/github/vansergen/gemini-node-api/badge.svg"
+                    alt="Known Vulnerabilities"
+                /></a>
+                <a href="https://github.com/prettier/prettier"
+                  ><img
+                    src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg"
+                    alt="code style: prettier"
+                /></a>
+                <a href="https://github.com/semantic-release/semantic-release"
+                  ><img
+                    src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg"
+                    alt="semantic-release"
+                /></a>
+                <a href="https://conventionalcommits.org"
+                  ><img
+                    src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg"
+                    alt="Conventional Commits"
+                /></a>
+                <img
+                  src="https://img.shields.io/npm/l/gemini-node-api"
+                  alt="NPM license"
+                />
+                <img
+                  src="https://img.shields.io/node/v/gemini-node-api"
+                  alt="node version"
+                />
+                <img
+                  src="https://img.shields.io/npm/dt/gemini-node-api"
+                  alt="npm downloads"
+                />
+                <img
+                  src="https://img.shields.io/github/languages/top/vansergen/gemini-node-api"
+                  alt="GitHub top language"
+                />
+              </h1>
+            </a>
+            <p>
+              Node.js library for <a href="https://docs.gemini.com/">Gemini</a>.
+            </p>
+            <a
+              href="#installation"
+              id="installation"
+              style="color: inherit; text-decoration: none"
+            >
+              <h2>Installation</h2>
+            </a>
+            <pre><code class="language-bash">npm install gemini-node-api</code></pre>
+            <a
+              href="#usage"
+              id="usage"
+              style="color: inherit; text-decoration: none"
+            >
+              <h2>Usage</h2>
+            </a>
+            <a
+              href="#publicclient"
+              id="publicclient"
+              style="color: inherit; text-decoration: none"
+            >
+              <h3>PublicClient</h3>
+            </a>
+            <pre><code class="language-typescript"><span class="hljs-keyword">import</span> { PublicClient } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gemini-node-api&quot;</span>;
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> PublicClient();</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#symbols"
+                  ><code>getSymbols</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbols = <span class="hljs-keyword">await</span> client.getSymbols();</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#ticker"
+                  ><code>getTicker</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
+<span class="hljs-keyword">const</span> ticker = <span class="hljs-keyword">await</span> client.getTicker({ symbol });
+<span class="hljs-comment">/**
+ * for V2
+ * <span class="hljs-doctag">@see </span>https://docs.gemini.com/rest-api/#ticker-v2
+ */</span>
+<span class="hljs-keyword">const</span> v = <span class="hljs-string">&quot;v2&quot;</span>;
+<span class="hljs-keyword">const</span> tickerV2 = <span class="hljs-keyword">await</span> client.getTicker({ symbol, v });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#candles"
+                  ><code>getCandles</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
+<span class="hljs-keyword">const</span> time_frame = <span class="hljs-string">&quot;30m&quot;</span>;
+<span class="hljs-keyword">const</span> candles = <span class="hljs-keyword">await</span> client.getCandles({ symbol, time_frame });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#current-order-book"
+                  ><code>getOrderBook</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
+<span class="hljs-keyword">const</span> limit_bids = <span class="hljs-number">25</span>;
+<span class="hljs-keyword">const</span> limit_asks = <span class="hljs-number">20</span>;
+<span class="hljs-keyword">const</span> book = <span class="hljs-keyword">await</span> client.getOrderBook({
+  symbol,
+  limit_bids,
+  limit_asks,
+});</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#trade-history"
+                  ><code>getTradeHistory</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
+<span class="hljs-keyword">const</span> timestamp = <span class="hljs-number">1547146811</span>;
+<span class="hljs-keyword">const</span> limit_trades = <span class="hljs-number">100</span>;
+<span class="hljs-keyword">const</span> include_breaks = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">const</span> trades = <span class="hljs-keyword">await</span> client.getTradeHistory({
+  symbol,
+  timestamp,
+  limit_trades,
+  include_breaks,
+});</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#current-auction"
+                  ><code>getCurrentAuction</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
+<span class="hljs-keyword">const</span> auction = <span class="hljs-keyword">await</span> client.getCurrentAuction({ symbol });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#auction-history"
+                  ><code>getAuctionHistory</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
+<span class="hljs-keyword">const</span> timestamp = <span class="hljs-number">1547146811</span>;
+<span class="hljs-keyword">const</span> limit_auction_results = <span class="hljs-number">100</span>;
+<span class="hljs-keyword">const</span> include_indicative = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">const</span> history = <span class="hljs-keyword">await</span> client.getAuctionHistory({
+  symbol,
+  timestamp,
+  limit_auction_results,
+  include_indicative,
+});</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#price-feed"
+                  ><code>getPriceFeed</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> priceFeed = <span class="hljs-keyword">await</span> client.getPriceFeed();</code></pre>
+            <a
+              href="#authenticatedclient"
+              id="authenticatedclient"
+              style="color: inherit; text-decoration: none"
+            >
+              <h3>AuthenticatedClient</h3>
+            </a>
+            <pre><code class="language-typescript"><span class="hljs-keyword">import</span> { AuthenticatedClient } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gemini-node-api&quot;</span>;
+<span class="hljs-keyword">const</span> key = <span class="hljs-string">&quot;gemini-api-key&quot;</span>;
+<span class="hljs-keyword">const</span> secret = <span class="hljs-string">&quot;gemini-api-secret&quot;</span>;
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> AuthenticatedClient({ key, secret });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#new-order"
+                  ><code>newOrder</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
+<span class="hljs-keyword">const</span> client_order_id = <span class="hljs-string">&quot;d0c5340b-6d6c-49d9-b567-48c4bfca13d2&quot;</span>;
+<span class="hljs-keyword">const</span> amount = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">const</span> price = <span class="hljs-number">0.9</span>;
+<span class="hljs-keyword">const</span> side = <span class="hljs-string">&quot;buy&quot;</span>;
+<span class="hljs-keyword">const</span> options = [<span class="hljs-string">&quot;maker-or-cancel&quot;</span>];
+<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.newOrder({
+  symbol,
+  client_order_id,
+  amount,
+  price,
+  side,
+  options,
+});</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#new-order"
+                  ><code>buy</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
+<span class="hljs-keyword">const</span> amount = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">const</span> price = <span class="hljs-number">0.9</span>;
+<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">type</span> = <span class="hljs-string">&quot;exchange limit&quot;</span>;
+<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.buy({ symbol, amount, price, account, <span class="hljs-keyword">type</span> });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#new-order"
+                  ><code>sell</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
+<span class="hljs-keyword">const</span> amount = <span class="hljs-number">0.99</span>;
+<span class="hljs-keyword">const</span> price = <span class="hljs-number">0.99</span>;
+<span class="hljs-keyword">const</span> stop_price = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">type</span> = <span class="hljs-string">&quot;exchange stop limit&quot;</span>;
+<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.sell({ symbol, amount, price, stop_price, <span class="hljs-keyword">type</span> });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#cancel-order"
+                  ><code>cancelOrder</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> order_id = <span class="hljs-number">106817811</span>;
+<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.cancelOrder({ order_id, account });</code></pre>
+            <ul>
+              <li>
+                <a
+                  href="https://docs.gemini.com/rest-api/#cancel-all-session-orders"
+                  ><code>cancelSession</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> client.cancelSession({ account });</code></pre>
+            <ul>
+              <li>
+                <a
+                  href="https://docs.gemini.com/rest-api/#cancel-all-active-orders"
+                  ><code>cancelAll</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> client.cancelAll({ account });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#order-status"
+                  ><code>getOrderStatus</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> order_id = <span class="hljs-number">44375901</span>;
+<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.getOrderStatus({ order_id, account });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#get-active-orders"
+                  ><code>getActiveOrders</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> orders = <span class="hljs-keyword">await</span> client.getActiveOrders({ account });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#get-past-trades"
+                  ><code>getPastTrades</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;bcheth&quot;</span>;
+<span class="hljs-keyword">const</span> limit_trades = <span class="hljs-number">10</span>;
+<span class="hljs-keyword">const</span> timestamp = <span class="hljs-number">1547232911</span>;
+<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> trades = <span class="hljs-keyword">await</span> client.getPastTrades({
+  symbol,
+  limit_trades,
+  timestamp,
+  account,
+});</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#get-notional-volume"
+                  ><code>getNotionalVolume</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> volume = <span class="hljs-keyword">await</span> client.getNotionalVolume({ account });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#get-trade-volume"
+                  ><code>getTradeVolume</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> volume = <span class="hljs-keyword">await</span> client.getTradeVolume();</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#new-clearing-order"
+                  ><code>newClearingOrder</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> counterparty_id = <span class="hljs-string">&quot;OM9VNL1G&quot;</span>;
+<span class="hljs-keyword">const</span> expires_in_hrs = <span class="hljs-number">24</span>;
+<span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;btcusd&quot;</span>;
+<span class="hljs-keyword">const</span> amount = <span class="hljs-number">100</span>;
+<span class="hljs-keyword">const</span> price = <span class="hljs-number">9500</span>;
+<span class="hljs-keyword">const</span> side = <span class="hljs-string">&quot;buy&quot;</span>;
+<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.newClearingOrder({
+  counterparty_id,
+  expires_in_hrs,
+  symbol,
+  amount,
+  price,
+  side,
+});</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#new-broker-order"
+                  ><code>newBrokerOrder</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> source_counterparty_id = <span class="hljs-string">&quot;R485E04Q&quot;</span>;
+<span class="hljs-keyword">const</span> target_counterparty_id = <span class="hljs-string">&quot;Z4929ZDY&quot;</span>;
+<span class="hljs-keyword">const</span> expires_in_hrs = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;ethusd&quot;</span>;
+<span class="hljs-keyword">const</span> amount = <span class="hljs-number">175</span>;
+<span class="hljs-keyword">const</span> price = <span class="hljs-number">200</span>;
+<span class="hljs-keyword">const</span> side = <span class="hljs-string">&quot;sell&quot;</span>;
+<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.newBrokerOrder({
+  source_counterparty_id,
+  target_counterparty_id,
+  expires_in_hrs,
+  symbol,
+  amount,
+  price,
+  side,
+});</code></pre>
+            <ul>
+              <li>
+                <a
+                  href="https://docs.gemini.com/rest-api/#clearing-order-status"
+                  ><code>getClearingOrderStatus</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> clearing_id = <span class="hljs-string">&quot;OM9VNL1G&quot;</span>;
+<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.getClearingOrderStatus({ clearing_id });</code></pre>
+            <ul>
+              <li>
+                <a
+                  href="https://docs.gemini.com/rest-api/#cancel-clearing-order"
+                  ><code>cancelClearingOrder</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> clearing_id = <span class="hljs-string">&quot;OM9VNL1G&quot;</span>;
+<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.cancelClearingOrder({ clearing_id });</code></pre>
+            <ul>
+              <li>
+                <a
+                  href="https://docs.gemini.com/rest-api/#confirm-clearing-order"
+                  ><code>confirmClearingOrder</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> clearing_id = <span class="hljs-string">&quot;OM9VNL1G&quot;</span>;
+<span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;btcusd&quot;</span>;
+<span class="hljs-keyword">const</span> amount = <span class="hljs-number">100</span>;
+<span class="hljs-keyword">const</span> price = <span class="hljs-number">9500</span>;
+<span class="hljs-keyword">const</span> side = <span class="hljs-string">&quot;sell&quot;</span>;
+<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.confirmClearingOrder({
+  clearing_id,
+  symbol,
+  amount,
+  price,
+  side,
+});</code></pre>
+            <ul>
+              <li>
+                <a
+                  href="https://docs.gemini.com/rest-api/#get-available-balances"
+                  ><code>getAvailableBalances</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> balances = <span class="hljs-keyword">await</span> client.getAvailableBalances({ account });</code></pre>
+            <ul>
+              <li>
+                <a
+                  href="https://docs.gemini.com/rest-api/#get-notional-balances"
+                  ><code>getNotionalBalances</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> balances = <span class="hljs-keyword">await</span> client.getNotionalBalances({ account });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#transfers"
+                  ><code>getTransfers</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> timestamp = <span class="hljs-number">1495127793</span>;
+<span class="hljs-keyword">const</span> limit_transfers = <span class="hljs-number">12</span>;
+<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> transfers = <span class="hljs-keyword">await</span> client.getTransfers({
+  timestamp,
+  limit_transfers,
+  account,
+});</code></pre>
+            <ul>
+              <li>
+                <a
+                  href="https://docs.gemini.com/rest-api/#get-deposit-addresses"
+                  ><code>getDepositAddresses</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> network = <span class="hljs-string">&quot;bitcoincash&quot;</span>;
+<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> addresses = <span class="hljs-keyword">await</span> client.getDepositAddresses({ network, account });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#new-deposit-address"
+                  ><code>getNewAddress</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> currency = <span class="hljs-string">&quot;ltc&quot;</span>;
+<span class="hljs-keyword">const</span> label = <span class="hljs-string">&quot;New LTC deposit address&quot;</span>;
+<span class="hljs-keyword">const</span> legacy = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.getNewAddress({
+  currency,
+  label,
+  legacy,
+  account,
+});</code></pre>
+            <ul>
+              <li>
+                <a
+                  href="https://docs.gemini.com/rest-api/#withdraw-crypto-funds-to-whitelisted-address"
+                  ><code>withdrawCrypto</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> currency = <span class="hljs-string">&quot;btc&quot;</span>;
+<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;mi98Z9brJ3TgaKsmvXatuRahbFRUFKRUdR&quot;</span>;
+<span class="hljs-keyword">const</span> amount = <span class="hljs-number">10</span>;
+<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> withdrawal = <span class="hljs-keyword">await</span> client.withdrawCrypto({
+  currency,
+  address,
+  account,
+  amount,
+});</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#internal-transfers"
+                  ><code>internalTransfer</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> currency = <span class="hljs-string">&quot;btc&quot;</span>;
+<span class="hljs-keyword">const</span> sourceAccount = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> targetAccount = <span class="hljs-string">&quot;secondary&quot;</span>;
+<span class="hljs-keyword">const</span> amount = <span class="hljs-string">&quot;100&quot;</span>;
+<span class="hljs-keyword">const</span> transfer = <span class="hljs-keyword">await</span> client.internalTransfer({
+  currency,
+  sourceAccount,
+  targetAccount,
+  amount,
+});</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#create-account"
+                  ><code>createAccount</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> name = <span class="hljs-string">&quot;My Secondary Account&quot;</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">type</span> = <span class="hljs-string">&quot;custody&quot;</span>;
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.createAccount({ name, <span class="hljs-keyword">type</span> });</code></pre>
+            <ul>
+              <li>
+                <a
+                  href="https://docs.gemini.com/rest-api/#get-accounts-in-master-group"
+                  ><code>getAccounts</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> accounts = <span class="hljs-keyword">await</span> client.getAccounts();</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#withdraw-usd-as-gusd"
+                  ><code>withdrawGUSD</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;0x0F2B20Acb2fD7EEbC0ABc3AEe0b00d57533b6bD1&quot;</span>;
+<span class="hljs-keyword">const</span> amount = <span class="hljs-string">&quot;500&quot;</span>;
+<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+<span class="hljs-keyword">const</span> withdrawal = <span class="hljs-keyword">await</span> client.withdrawGUSD({ address, amount, account });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#heartbeat"
+                  ><code>heartbeat</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> heartbeat = <span class="hljs-keyword">await</span> client.heartbeat();</code></pre>
+            <a
+              href="#websocketclient"
+              id="websocketclient"
+              style="color: inherit; text-decoration: none"
+            >
+              <h3>
+                <a href="https://docs.gemini.com/websocket-api/"
+                  >WebsocketClient</a
+                >
+              </h3>
+            </a>
+            <pre><code class="language-typescript"><span class="hljs-keyword">import</span> { WebsocketClient } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gemini-node-api&quot;</span>;
+<span class="hljs-keyword">const</span> key = <span class="hljs-string">&quot;gemini-api-key&quot;</span>;
+<span class="hljs-keyword">const</span> secret = <span class="hljs-string">&quot;gemini-api-secret&quot;</span>;
+<span class="hljs-keyword">const</span> websocket = <span class="hljs-keyword">new</span> WebsocketClient({ key, secret });
+websocket.on(<span class="hljs-string">&quot;error&quot;</span>, <span class="hljs-function">(<span class="hljs-params">error, market</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.error(error);
+});
+websocket.on(<span class="hljs-string">&quot;open&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;The connection is open&quot;</span>, market);
+});
+websocket.on(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;The connection is closed&quot;</span>, market);
+});
+websocket.on(<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-function">(<span class="hljs-params">message, market</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.info(<span class="hljs-string">&quot;New message from&quot;</span>, market);
+  <span class="hljs-built_in">console</span>.info(message);
+});</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/websocket-api/#market-data"
+                  ><code>connectMarket</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> heartbeat = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">const</span> top_of_book = <span class="hljs-literal">false</span>;
+<span class="hljs-keyword">const</span> bids = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">const</span> offers = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">const</span> trades = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">const</span> auctions = <span class="hljs-literal">false</span>;
+<span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
+websocket.on(<span class="hljs-string">&quot;open&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Open:&quot;</span>, market));
+<span class="hljs-keyword">await</span> websocket.connectMarket({
+  symbol,
+  heartbeat,
+  top_of_book,
+  bids,
+  offers,
+  trades,
+  auctions,
+});
+<span class="hljs-keyword">await</span> websocket.connectMarket({ <span class="hljs-attr">symbol</span>: <span class="hljs-string">&quot;btcusd&quot;</span> });</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/websocket-api/#market-data"
+                  ><code>disconnectMarket</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
+websocket.once(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Closed:&quot;</span>, market));
+<span class="hljs-keyword">await</span> websocket.disconnectMarket({ symbol });</code></pre>
+            <ul>
+              <li>
+                <a
+                  href="https://docs.gemini.com/websocket-api/#market-data-version-2"
+                  ><code>connect</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript">websocket.on(<span class="hljs-string">&quot;open&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Open:&quot;</span>, market));
+<span class="hljs-keyword">await</span> websocket.connect();</code></pre>
+            <ul>
+              <li>
+                <a
+                  href="https://docs.gemini.com/websocket-api/#market-data-version-2"
+                  ><code>disconnect</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript">websocket.once(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Closed:&quot;</span>, market));
+<span class="hljs-keyword">await</span> websocket.disconnect();</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/websocket-api/#level-2-data"
+                  ><code>subscribe</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> subscriptions = [
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;l2&quot;</span>, <span class="hljs-attr">symbols</span>: [<span class="hljs-string">&quot;BTCUSD&quot;</span>, <span class="hljs-string">&quot;ETHUSD&quot;</span>] },
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;candles_1m&quot;</span>, <span class="hljs-attr">symbols</span>: [<span class="hljs-string">&quot;BTCUSD&quot;</span>] },
+];
+<span class="hljs-keyword">await</span> websocket.connect();
+<span class="hljs-keyword">await</span> websocket.subscribe(subscriptions);</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/websocket-api/#unsubscribe"
+                  ><code>unsubscribe</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> subscriptions = [{ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;l2&quot;</span>, <span class="hljs-attr">symbols</span>: [<span class="hljs-string">&quot;BTCUSD&quot;</span>, <span class="hljs-string">&quot;ETHUSD&quot;</span>] }];
+<span class="hljs-keyword">await</span> websocket.unsubscribe(subscriptions);</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/websocket-api/#order-events"
+                  ><code>connectOrders</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbolFilter = <span class="hljs-string">&quot;zecltc&quot;</span>;
+<span class="hljs-keyword">const</span> apiSessionFilter = <span class="hljs-string">&quot;UI&quot;</span>;
+<span class="hljs-keyword">const</span> eventTypeFilter = [<span class="hljs-string">&quot;accepted&quot;</span>, <span class="hljs-string">&quot;rejected&quot;</span>];
+<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
+websocket.on(<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-function">(<span class="hljs-params">message, market</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (market === <span class="hljs-string">&quot;orders&quot;</span>) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;New message:&quot;</span>, message);
+  }
+});
+<span class="hljs-keyword">await</span> websocket.connectOrders({
+  account,
+  symbolFilter,
+  apiSessionFilter,
+  eventTypeFilter,
+});</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/websocket-api/#order-events"
+                  ><code>disconnectOrders</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript">websocket.once(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (market === <span class="hljs-string">&quot;orders&quot;</span>) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Closed&quot;</span>);
+  }
+});
+<span class="hljs-keyword">await</span> websocket.disconnectOrders();</code></pre>
+            <a
+              href="#test"
+              id="test"
+              style="color: inherit; text-decoration: none"
+            >
+              <h3>Test</h3>
+            </a>
+            <pre><code class="language-bash">npm <span class="hljs-built_in">test</span></code></pre>
+          </div>
+        </div>
+        <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+          <nav class="tsd-navigation primary">
+            <ul>
+              <li class="globals">
+                <a href="globals.html"><em>Globals</em></a>
+              </li>
+            </ul>
+          </nav>
+          <nav class="tsd-navigation secondary menu-sticky">
+            <ul class="before-current">
+              <li class="tsd-kind-class">
+                <a href="classes/authenticatedclient.html" class="tsd-kind-icon"
+                  >Authenticated<wbr />Client</a
+                >
+              </li>
+              <li class="tsd-kind-class">
+                <a href="classes/publicclient.html" class="tsd-kind-icon"
+                  >Public<wbr />Client</a
+                >
+              </li>
+              <li class="tsd-kind-class">
+                <a href="classes/websocketclient.html" class="tsd-kind-icon"
+                  >Websocket<wbr />Client</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/acceptedorder.html" class="tsd-kind-icon"
+                  >Accepted<wbr />Order</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/account.html" class="tsd-kind-icon"
+                  >Account</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/accountinfo.html" class="tsd-kind-icon"
+                  >Account<wbr />Info</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/accountname.html" class="tsd-kind-icon"
+                  >Account<wbr />Name</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/activeorder.html" class="tsd-kind-icon"
+                  >Active<wbr />Order</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/auctionhistory.html" class="tsd-kind-icon"
+                  >Auction<wbr />History</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/auctionhistoryfilter.html"
+                  class="tsd-kind-icon"
+                  >Auction<wbr />History<wbr />Filter</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/auctionindicativeevent.html"
+                  class="tsd-kind-icon"
+                  >Auction<wbr />Indicative<wbr />Event</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/auctioninfo.html" class="tsd-kind-icon"
+                  >Auction<wbr />Info</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/auctionopenevent.html" class="tsd-kind-icon"
+                  >Auction<wbr />Open<wbr />Event</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/auctionresultevent.html"
+                  class="tsd-kind-icon"
+                  >Auction<wbr />Result<wbr />Event</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/authheaders.html" class="tsd-kind-icon"
+                  >Auth<wbr />Headers</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/authenticatedclientoptions.html"
+                  class="tsd-kind-icon"
+                  >Authenticated<wbr />Client<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/balance.html" class="tsd-kind-icon"
+                  >Balance</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/baseclearingorder.html"
+                  class="tsd-kind-icon"
+                  >Base<wbr />Clearing<wbr />Order</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/baseorder.html" class="tsd-kind-icon"
+                  >Base<wbr />Order</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/basewsorder.html" class="tsd-kind-icon"
+                  >BaseWSOrder</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/blocktradeevent.html" class="tsd-kind-icon"
+                  >Block<wbr />Trade<wbr />Event</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/bookentry.html" class="tsd-kind-icon"
+                  >Book<wbr />Entry</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/bookfilter.html" class="tsd-kind-icon"
+                  >Book<wbr />Filter</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/bookedorder.html" class="tsd-kind-icon"
+                  >Booked<wbr />Order</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/brokerorderoptions.html"
+                  class="tsd-kind-icon"
+                  >Broker<wbr />Order<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/cancelclearingorderresponse.html"
+                  class="tsd-kind-icon"
+                  >Cancel<wbr />Clearing<wbr />Order<wbr />Response</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/cancelordersresponse.html"
+                  class="tsd-kind-icon"
+                  >Cancel<wbr />Orders<wbr />Response</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/cancelrejectedorder.html"
+                  class="tsd-kind-icon"
+                  >Cancel<wbr />Rejected<wbr />Order</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/cancelledorder.html" class="tsd-kind-icon"
+                  >Cancelled<wbr />Order</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/candlesfilter.html" class="tsd-kind-icon"
+                  >Candles<wbr />Filter</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/candlesupdate.html" class="tsd-kind-icon"
+                  >Candles<wbr />Update</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/changeevent.html" class="tsd-kind-icon"
+                  >Change<wbr />Event</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/clearingorderid.html" class="tsd-kind-icon"
+                  >Clearing<wbr />OrderID</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/clearingorderoptions.html"
+                  class="tsd-kind-icon"
+                  >Clearing<wbr />Order<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/clearingorderstatus.html"
+                  class="tsd-kind-icon"
+                  >Clearing<wbr />Order<wbr />Status</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/closedorder.html" class="tsd-kind-icon"
+                  >Closed<wbr />Order</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/confirmclearingoptions.html"
+                  class="tsd-kind-icon"
+                  >Confirm<wbr />Clearing<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/confirmclearingoptionsresponse.html"
+                  class="tsd-kind-icon"
+                  >Confirm<wbr />Clearing<wbr />Options<wbr />Response</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/depositaddress.html" class="tsd-kind-icon"
+                  >Deposit<wbr />Address</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/depositaddressesfilter.html"
+                  class="tsd-kind-icon"
+                  >Deposit<wbr />Addresses<wbr />Filter</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/filledorder.html" class="tsd-kind-icon"
+                  >Filled<wbr />Order</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/gusdwithdrawal.html" class="tsd-kind-icon"
+                  >GUSDWithdrawal</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/heartbeat.html" class="tsd-kind-icon"
+                  >Heartbeat</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/heartbeatmarketmessage.html"
+                  class="tsd-kind-icon"
+                  >Heartbeat<wbr />Market<wbr />Message</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/heartbeatmarketv2.html"
+                  class="tsd-kind-icon"
+                  >Heartbeat<wbr />Market<wbr />V2</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/heartbeatordersmessage.html"
+                  class="tsd-kind-icon"
+                  >Heartbeat<wbr />Orders<wbr />Message</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/initialupdate.html" class="tsd-kind-icon"
+                  >Initial<wbr />Update</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/internaltransferfilter.html"
+                  class="tsd-kind-icon"
+                  >Internal<wbr />Transfer<wbr />Filter</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/internaltransferresponse.html"
+                  class="tsd-kind-icon"
+                  >Internal<wbr />Transfer<wbr />Response</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/l2auction.html" class="tsd-kind-icon"
+                  >L2<wbr />Auction</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/l2initialresponse.html"
+                  class="tsd-kind-icon"
+                  >L2<wbr />Initial<wbr />Response</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/l2trade.html" class="tsd-kind-icon"
+                  >L2<wbr />Trade</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/l2update.html" class="tsd-kind-icon"
+                  >L2<wbr />Update</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/messagev2.html" class="tsd-kind-icon"
+                  >Message<wbr />V2</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/newaddress.html" class="tsd-kind-icon"
+                  >New<wbr />Address</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/newaddressfilter.html" class="tsd-kind-icon"
+                  >New<wbr />Address<wbr />Filter</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/newclearingorderresponse.html"
+                  class="tsd-kind-icon"
+                  >New<wbr />Clearing<wbr />Order<wbr />Response</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/notionalbalance.html" class="tsd-kind-icon"
+                  >Notional<wbr />Balance</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/notionalvolume.html" class="tsd-kind-icon"
+                  >Notional<wbr />Volume</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/orderbook.html" class="tsd-kind-icon"
+                  >Order<wbr />Book</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/orderid.html" class="tsd-kind-icon"
+                  >OrderID</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/orderoptions.html" class="tsd-kind-icon"
+                  >Order<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/orderstatus.html" class="tsd-kind-icon"
+                  >Order<wbr />Status</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/pasttrade.html" class="tsd-kind-icon"
+                  >Past<wbr />Trade</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/pricefeeditem.html" class="tsd-kind-icon"
+                  >Price<wbr />Feed<wbr />Item</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/publicclientoptions.html"
+                  class="tsd-kind-icon"
+                  >Public<wbr />Client<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/rejectedorder.html" class="tsd-kind-icon"
+                  >Rejected<wbr />Order</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/signeroptions.html" class="tsd-kind-icon"
+                  >Signer<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/subscriptionack.html" class="tsd-kind-icon"
+                  >Subscription<wbr />Ack</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/symbolfilter.html" class="tsd-kind-icon"
+                  >Symbol<wbr />Filter</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/tickerfilter.html" class="tsd-kind-icon"
+                  >Ticker<wbr />Filter</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/tickerv1.html" class="tsd-kind-icon"
+                  >Ticker<wbr />V1</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/tickerv2.html" class="tsd-kind-icon"
+                  >Ticker<wbr />V2</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/trade.html" class="tsd-kind-icon">Trade</a>
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/tradeevent.html" class="tsd-kind-icon"
+                  >Trade<wbr />Event</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/tradehistoryfilter.html"
+                  class="tsd-kind-icon"
+                  >Trade<wbr />History<wbr />Filter</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/tradevolume.html" class="tsd-kind-icon"
+                  >Trade<wbr />Volume</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/transfer.html" class="tsd-kind-icon"
+                  >Transfer</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/transferfilter.html" class="tsd-kind-icon"
+                  >Transfer<wbr />Filter</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/update.html" class="tsd-kind-icon"
+                  >Update</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/wsmarketqs.html" class="tsd-kind-icon"
+                  >WSMarketQS</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/wsorderqs.html" class="tsd-kind-icon"
+                  >WSOrderQS</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/wssigneroptions.html" class="tsd-kind-icon"
+                  >WSSigner<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/websocketclientoptions.html"
+                  class="tsd-kind-icon"
+                  >Websocket<wbr />Client<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/withdrawcryptofilter.html"
+                  class="tsd-kind-icon"
+                  >Withdraw<wbr />Crypto<wbr />Filter</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/withdrawgusdfilter.html"
+                  class="tsd-kind-icon"
+                  >WithdrawGUSDFilter</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/withdrawal.html" class="tsd-kind-icon"
+                  >Withdrawal</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#basicorderoptions" class="tsd-kind-icon"
+                  >Basic<wbr />Order<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#candle" class="tsd-kind-icon">Candle</a>
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#candlestype" class="tsd-kind-icon"
+                  >Candles<wbr />Type</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#l2message" class="tsd-kind-icon"
+                  >L2<wbr />Message</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#marketdataevent" class="tsd-kind-icon"
+                  >Market<wbr />Data<wbr />Event</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#marketdatamessage" class="tsd-kind-icon"
+                  >Market<wbr />Data<wbr />Message</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#marketv2message" class="tsd-kind-icon"
+                  >Market<wbr />V2Message</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#order" class="tsd-kind-icon">Order</a>
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a
+                  href="globals.html#ordereexecutionoptions"
+                  class="tsd-kind-icon"
+                  >Order<wbr />Eexecution<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#ordertype" class="tsd-kind-icon"
+                  >Order<wbr />Type</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#ordersmessage" class="tsd-kind-icon"
+                  >Orders<wbr />Message</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#pasttradesfilter" class="tsd-kind-icon"
+                  >Past<wbr />Trades<wbr />Filter</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#subscriptions" class="tsd-kind-icon"
+                  >Subscriptions</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#ticker" class="tsd-kind-icon">Ticker</a>
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#wsmarket" class="tsd-kind-icon"
+                  >WSMarket</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#wsmessage" class="tsd-kind-icon"
+                  >WSMessage</a
+                >
+              </li>
+              <li class="tsd-kind-type-alias">
+                <a href="globals.html#wsorderoptions" class="tsd-kind-icon"
+                  >WSOrder<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-variable">
+                <a href="globals.html#apilimit" class="tsd-kind-icon"
+                  >Api<wbr />Limit</a
+                >
+              </li>
+              <li class="tsd-kind-variable">
+                <a href="globals.html#apiuri" class="tsd-kind-icon"
+                  >Api<wbr />Uri</a
+                >
+              </li>
+              <li class="tsd-kind-variable">
+                <a href="globals.html#defaultsymbol" class="tsd-kind-icon"
+                  >Default<wbr />Symbol</a
+                >
+              </li>
+              <li class="tsd-kind-variable">
+                <a href="globals.html#sandboxapiuri" class="tsd-kind-icon"
+                  >Sandbox<wbr />Api<wbr />Uri</a
+                >
+              </li>
+              <li class="tsd-kind-variable">
+                <a href="globals.html#sandboxwsuri" class="tsd-kind-icon"
+                  >Sandbox<wbr />WsUri</a
+                >
+              </li>
+              <li class="tsd-kind-variable">
+                <a href="globals.html#wsuri" class="tsd-kind-icon"
+                  >Ws<wbr />Uri</a
+                >
+              </li>
+              <li class="tsd-kind-function">
+                <a href="globals.html#signrequest" class="tsd-kind-icon"
+                  >Sign<wbr />Request</a
+                >
+              </li>
+              <li class="tsd-kind-object-literal">
+                <a href="globals.html#headers" class="tsd-kind-icon">Headers</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="container">
+        <h2>Legend</h2>
+        <div class="tsd-legend-group">
+          <ul class="tsd-legend">
+            <li class="tsd-kind-constructor tsd-parent-kind-class">
+              <span class="tsd-kind-icon">Constructor</span>
+            </li>
+            <li class="tsd-kind-property tsd-parent-kind-class">
+              <span class="tsd-kind-icon">Property</span>
+            </li>
+            <li class="tsd-kind-method tsd-parent-kind-class">
+              <span class="tsd-kind-icon">Method</span>
+            </li>
+            <li class="tsd-kind-accessor tsd-parent-kind-class">
+              <span class="tsd-kind-icon">Accessor</span>
+            </li>
+          </ul>
+          <ul class="tsd-legend">
+            <li
+              class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"
+            >
+              <span class="tsd-kind-icon">Inherited property</span>
+            </li>
+            <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+              <span class="tsd-kind-icon">Inherited method</span>
+            </li>
+            <li
+              class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"
+            >
+              <span class="tsd-kind-icon">Inherited accessor</span>
+            </li>
+          </ul>
+          <ul class="tsd-legend">
+            <li class="tsd-kind-property tsd-parent-kind-class tsd-is-private">
+              <span class="tsd-kind-icon">Private property</span>
+            </li>
+            <li class="tsd-kind-method tsd-parent-kind-class tsd-is-private">
+              <span class="tsd-kind-icon">Private method</span>
+            </li>
+          </ul>
+          <ul class="tsd-legend">
+            <li class="tsd-kind-property tsd-parent-kind-interface">
+              <span class="tsd-kind-icon">Property</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <div class="overlay"></div>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
