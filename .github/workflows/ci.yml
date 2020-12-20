@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12, 13, 14]
+        node-version: [14, 15]
 
     container: node:${{ matrix.node-version }}-buster
 
@@ -48,7 +48,9 @@ jobs:
         run: npm run publish:test
 
       - name: Docs
-        run: npm run docs:test
+        run: |
+          rm -rf docs
+          npm run docs:test
 
       - name: npm vulnerabilities
         run: npm audit --production
