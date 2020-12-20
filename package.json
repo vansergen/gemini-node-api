@@ -4,51 +4,58 @@
   "description": "Gemini Node.js API",
   "main": "build/index.js",
   "directories": {
-    "lib": "build/src",
     "test": "test"
   },
   "type": "commonjs",
   "types": "build/index.d.ts",
   "engines": {
-    "node": ">=10.18.1"
+    "node": ">=14.15.3"
   },
   "dependencies": {
-    "@types/ws": "^7.2.6",
-    "rpc-bluebird": "^2.0.3",
-    "ws": "^7.3.1",
-    "snyk": "^1.388.0"
+    "@types/ws": "^7.4.0",
+    "rpc-bluebird": "^3.0.0",
+    "ws": "^7.4.1"
   },
   "devDependencies": {
-    "@types/mocha": "^7.0.2",
-    "@typescript-eslint/eslint-plugin": "^2.24.0",
-    "@typescript-eslint/parser": "^2.24.0",
-    "coveralls": "^3.0.11",
-    "eslint": "^6.8.0",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.0.8",
-    "mocha": "^7.1.1",
-    "nock": "^12.0.3",
-    "nyc": "^15.0.0",
-    "prettier": "^1.19.1",
-    "ts-node": "^8.7.0",
-    "typedoc": "^0.17.1",
-    "typescript": "^3.8.3"
+    "@b2broker/tsconfig": "^1.0.3",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "@types/mocha": "^8.2.0",
+    "commitlint-config-b2broker": "^1.0.0",
+    "coveralls": "^3.1.0",
+    "eslint-config-b2broker-ts": "^1.0.0",
+    "husky": "^4.3.6",
+    "lint-staged": "^10.5.3",
+    "mocha": "^8.2.1",
+    "nock": "^13.0.5",
+    "nyc": "^15.1.0",
+    "prettier": "^2.2.1",
+    "semantic-release": "^17.3.0",
+    "ts-node": "^9.1.1",
+    "typedoc": "^0.19.2"
   },
   "scripts": {
-    "build": "rm -fr build && tsc",
-    "prepublishOnly": "npm run prettier && npm run lint && npm run build && npm run prettier-write && npm run lint-fix",
-    "postpublish": "rm -fr build",
+    "build": "npm run build:remove && tsc",
+    "build:remove": "rm -rf ./build",
+    "build:test": "npm run build && npm run build:remove",
+    "commitlint": "commitlint --verbose",
+    "commitlint:all": "npm run commitlint -- --from=fe44f0a9370553a77f73fbe4383697956c91c65f",
     "coverage": "nyc npm test && nyc report --reporter=lcov",
-    "coverage-ci": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "fresh-install": "rm -fr node_modules && rm -f package-lock.json && npm install",
-    "lint": "eslint --ext .ts,.js ./",
-    "lint-fix": "npm run lint -- --fix",
-    "prettier": "prettier -c \"**/*.{js,md,ts,json}\"",
-    "prettier-write": "npm run prettier -- --write",
-    "generate-docs": "typedoc",
-    "test": "mocha -r ts-node/register --full-trace --ui tdd --bail --extension ts",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "docs:build": "npm run docs:remove && typedoc && npm run lint:fix && npm run prettier:write -- --ignore-path .prettierignore_docs",
+    "docs:remove": "rm -rf ./docs",
+    "docs:test": "npm run docs:build && npm run docs:remove",
+    "install:clean": "rm -fr node_modules && rm -f package-lock.json && npm install",
+    "lint": "eslint --ext .ts ./",
+    "lint:fix": "npm run lint -- --fix",
+    "postpublish": "npm run build:remove",
+    "prepublishOnly": "npm run build && npm run lint:fix && npm run prettier:write",
+    "prettier": "prettier -c .",
+    "prettier:write": "npm run prettier -- --write",
+    "publish:test": "npm run prepublishOnly && npm pack --dry-run && npm run postpublish",
+    "release": "semantic-release",
+    "test": "mocha -r ts-node/register --full-trace --ui tdd --bail ./test/*.spec.ts",
+    "test:js": "npm run build && mocha --full-trace --ui tdd --bail ./build/test/**/*.spec.js && npm run build:remove"
   },
   "repository": {
     "type": "git",
@@ -60,30 +67,14 @@
     "exchange",
     "API"
   ],
-  "author": "Sergey Bakulin",
+  "author": "Sergey Bakulin <sergey.bakulin.github@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/vansergen/gemini-node-api/issues"
   },
   "homepage": "https://github.com/vansergen/gemini-node-api#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,json,md}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.{ts,js}": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
   "funding": {
     "type": "Coinbase Commerce",
     "url": "https://commerce.coinbase.com/checkout/04a40393-21f0-44aa-b11b-726b67f08c5a"
-  },
-  "snyk": true
+  }
 }

@@ -1,25 +1,26 @@
-import * as crypto from "crypto";
+import { createHmac } from "crypto";
 
-export type SignerOptions = { key: string; secret: string; options: object };
+export interface SignerOptions {
+  key: string;
+  secret: string;
+  payload: string;
+}
 
-export type AuthHeaders = {
+export interface AuthHeaders {
   "X-GEMINI-PAYLOAD": string;
   "X-GEMINI-SIGNATURE": string;
   "X-GEMINI-APIKEY": string;
-};
+}
 
 export function SignRequest({
   key,
   secret,
-  options
+  payload,
 }: SignerOptions): AuthHeaders {
-  const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+  const signature = createHmac("sha384", secret).update(payload).digest("hex");
   return {
     "X-GEMINI-PAYLOAD": payload,
-    "X-GEMINI-SIGNATURE": crypto
-      .createHmac("sha384", secret)
-      .update(payload)
-      .digest("hex"),
-    "X-GEMINI-APIKEY": key
+    "X-GEMINI-SIGNATURE": signature,
+    "X-GEMINI-APIKEY": key,
   };
 }

@@ -1,7 +1,8 @@
 {
-  "out": "doc",
-  "mode": "modules",
+  "out": "docs",
+  "mode": "file",
   "name": "gemini-node-api",
-  "exclude": "test/",
-  "hideGenerator": true
+  "exclude": "test/**/*",
+  "hideGenerator": true,
+  "includeVersion": true
 }

@@ -1,0 +1,5 @@
+# Coverage directory used by nyc
+coverage
+
+# nyc test coverage
+.nyc_output

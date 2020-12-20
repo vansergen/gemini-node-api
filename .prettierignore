@@ -1,0 +1,8 @@
+# nyc test coverage
+.nyc_output/
+
+# Coverage directory used by nyc
+coverage/
+
+# Documentation
+docs/
