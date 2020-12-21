@@ -1,5 +1,11 @@
 # Changelog
 
+### [3.0.1](https://github.com/vansergen/gemini-node-api/compare/v3.0.0...v3.0.1) (2020-12-21)
+
+### Dependencies
+
+- update `rpc-bluebird` to `v3.0.1` ([1a61f64](https://github.com/vansergen/gemini-node-api/commit/1a61f646bf2980a508fbf8980f9eb99a62242ffa))
+
 ## [3.0.0](https://github.com/vansergen/gemini-node-api/compare/v2.1.0...v3.0.0) (2020-12-20)
 
 ### ⚠ BREAKING CHANGES
