@@ -408,7 +408,8 @@ export class WebsocketClient extends EventEmitter {
     await this.sendMessage({ type: "unsubscribe", subscriptions });
   }
 
-  private async sendMessage(message: MessageV2): Promise<void> {
+  private async sendMessage(data: MessageV2): Promise<void> {
+    const message = JSON.stringify(data);
     const { v2: ws } = this.sockets;
 
     if (!ws) {
@@ -416,7 +417,7 @@ export class WebsocketClient extends EventEmitter {
     }
 
     await new Promise<void>((resolve, reject) => {
-      ws.send(JSON.stringify(message), (error) => {
+      ws.send(message, (error) => {
         if (error) {
           reject(error);
         } else {
@@ -431,30 +432,41 @@ export class WebsocketClient extends EventEmitter {
     url: string | URL,
     headers?: Record<string, string>
   ): Promise<void> {
-    if (this.sockets[symbol]) {
-      switch (this.sockets[symbol].readyState) {
-        case Websocket.CLOSING:
-        case Websocket.CONNECTING:
-          throw new Error(
-            `Could not connect. State: ${this.sockets[symbol].readyState}`
-          );
-        case Websocket.OPEN:
-          return;
-        default:
-          break;
-      }
+    switch (this.sockets[symbol]?.readyState) {
+      case Websocket.CLOSING:
+      case Websocket.CONNECTING:
+        throw new Error(
+          `Could not connect. State: ${this.sockets[symbol].readyState}`
+        );
+      case Websocket.OPEN:
+        return;
+      default:
+        break;
     }
 
     await new Promise<void>((resolve, reject) => {
       this.sockets[symbol] = new Websocket(url, { headers: { ...headers } });
-      this.sockets[symbol].once("open", () => {
-        resolve();
-      });
+      this.sockets[symbol].once("open", resolve);
       this.sockets[symbol].once("error", reject);
-      this.sockets[symbol].on("message", this.onMessage.bind(this, symbol));
-      this.sockets[symbol].on("open", this.onOpen.bind(this, symbol));
-      this.sockets[symbol].on("close", this.onClose.bind(this, symbol));
-      this.sockets[symbol].on("error", this.onError.bind(this, symbol));
+      this.sockets[symbol].on("message", (data: string) => {
+        try {
+          const message = JSON.parse(data) as WSMessage;
+          this.emit("message", message, symbol);
+        } catch (error) {
+          this.emit("error", error, symbol);
+        }
+      });
+      this.sockets[symbol].on("open", () => {
+        this.emit("open", symbol);
+      });
+      this.sockets[symbol].on("close", () => {
+        this.emit("close", symbol);
+      });
+      this.sockets[symbol].on("error", (error) => {
+        if (error) {
+          this.emit("error", error, symbol);
+        }
+      });
     });
   }
 
@@ -478,30 +490,6 @@ export class WebsocketClient extends EventEmitter {
         ws.close();
       }
     });
-  }
-
-  private onMessage(symbol: string, data: string): void {
-    try {
-      const message = JSON.parse(data) as WSMessage;
-      this.emit("message", message, symbol);
-    } catch (error) {
-      this.onError(symbol, error);
-    }
-  }
-
-  private onOpen(symbol: string): void {
-    this.emit("open", symbol);
-  }
-
-  private onClose(symbol: string): void {
-    this.emit("close", symbol);
-  }
-
-  private onError(symbol: string, error: unknown): void {
-    if (!error) {
-      return;
-    }
-    this.emit("error", error, symbol);
   }
 
   public set nonce(nonce: () => number) {

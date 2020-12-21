@@ -639,8 +639,8 @@ suite("WebsocketClient", () => {
     await assert.rejects(client.unsubscribe(subscriptions), error);
   });
 
-  suite(".socket listeners", () => {
-    suite(".onOpen()", () => {
+  suite("socket events", () => {
+    suite("open", () => {
       test("emits `open`", async () => {
         const clientConnect = new Promise<void>((resolve, reject) => {
           client.once("open", (market) => {
@@ -666,7 +666,7 @@ suite("WebsocketClient", () => {
       });
     });
 
-    suite(".onClose()", () => {
+    suite("close", () => {
       test("emits `close`", async () => {
         const clientConnect = new Promise<void>((resolve, reject) => {
           client.once("close", (market) => {
@@ -693,7 +693,7 @@ suite("WebsocketClient", () => {
       });
     });
 
-    suite(".onError()", () => {
+    suite("error", () => {
       test("emits `error`", async () => {
         const error = new Error("Something bad happened");
         const clientConnect = new Promise<void>((resolve, reject) => {
@@ -728,7 +728,7 @@ suite("WebsocketClient", () => {
       });
     });
 
-    suite(".onMessage()", () => {
+    suite("message", () => {
       test("emits `error` on bad JSON", async () => {
         const error = new SyntaxError(
           "Unexpected token N in JSON at position 0"
