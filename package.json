@@ -14,7 +14,7 @@
   "dependencies": {
     "@types/ws": "^7.4.0",
     "rpc-bluebird": "^3.0.1",
-    "ws": "^7.4.1"
+    "ws": "^7.4.3"
   },
   "devDependencies": {
     "@b2broker/tsconfig": "^1.0.3",
@@ -25,15 +25,15 @@
     "commitlint-config-b2broker": "^1.0.0",
     "coveralls": "^3.1.0",
     "eslint-config-b2broker-ts": "^1.0.0",
-    "husky": "^4.3.6",
+    "husky": "^4.3.8",
     "lint-staged": "^10.5.3",
     "mocha": "^8.2.1",
-    "nock": "^13.0.5",
+    "nock": "^13.0.7",
     "nyc": "^15.1.0",
     "prettier": "^2.2.1",
-    "semantic-release": "^17.3.0",
+    "semantic-release": "^17.3.7",
     "ts-node": "^9.1.1",
-    "typedoc": "^0.19.2"
+    "typedoc": "^0.20.20"
   },
   "scripts": {
     "build": "npm run build:remove && tsc",
@@ -42,7 +42,7 @@
     "commitlint": "commitlint --verbose",
     "commitlint:all": "npm run commitlint -- --from=fe44f0a9370553a77f73fbe4383697956c91c65f",
     "coverage": "nyc npm test && nyc report --reporter=lcov",
-    "docs:build": "npm run docs:remove && typedoc && npm run lint:fix && npm run prettier:write -- --ignore-path .prettierignore_docs",
+    "docs:build": "npm run docs:remove && typedoc && npm run prettier:write -- --ignore-path .prettierignore_docs",
     "docs:remove": "rm -rf ./docs",
     "docs:test": "npm run docs:build && npm run docs:remove",
     "install:clean": "rm -fr node_modules && rm -f package-lock.json && npm install",

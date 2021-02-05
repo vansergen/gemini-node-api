@@ -1,8 +1,8 @@
 {
   "out": "docs",
-  "mode": "file",
+  "entryPoints": ["./index.ts"],
   "name": "gemini-node-api",
   "exclude": "test/**/*",
   "hideGenerator": true,
-  "includeVersion": true
+  "gitRevision": "master"
 }

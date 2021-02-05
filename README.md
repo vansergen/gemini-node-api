@@ -23,6 +23,13 @@ const client = new PublicClient();
 const symbols = await client.getSymbols();
 ```
 
+- [`getSymbol`](https://docs.gemini.com/rest-api/#symbol-details)
+
+```typescript
+const symbol = "ZECLTC";
+const info = await client.getSymbol({ symbol });
+```
+
 - [`getTicker`](https://docs.gemini.com/rest-api/#ticker)
 
 ```typescript
