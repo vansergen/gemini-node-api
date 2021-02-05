@@ -132,6 +132,24 @@ suite("PublicClient", () => {
     assert.deepStrictEqual(data, response);
   });
 
+  test(".getSymbol()", async () => {
+    const symbol = "ZECLTC";
+    const uri = `/v1/symbols/details/${symbol}`;
+    const response = {
+      symbol: "ZECLTC",
+      base_currency: "ZEC",
+      quote_currency: "LTC",
+      tick_size: 3,
+      quote_increment: 6,
+      min_order_size: "0.001",
+      status: "open",
+    };
+    nock(ApiUri).get(uri).reply(200, response);
+
+    const data = await client.getSymbol({ symbol });
+    assert.deepStrictEqual(data, response);
+  });
+
   test(".getTicker()", async () => {
     const symbol = "btcusd";
     const uri = `/v1/pubticker/${symbol}`;
