@@ -42,6 +42,16 @@ export interface AuctionHistoryFilter extends SymbolFilter {
   include_indicative?: boolean;
 }
 
+export interface ISymbol {
+  symbol: string;
+  base_currency: string;
+  quote_currency: string;
+  tick_size: number;
+  quote_increment: number;
+  min_order_size: string;
+  status: "open" | "closed" | "cancel_only" | "post_only" | "limit_only";
+}
+
 export interface TickerV1 {
   bid: string;
   ask: string;
@@ -174,6 +184,13 @@ export class PublicClient extends FetchClient<unknown> {
    */
   public getSymbols(): Bluebird<string[]> {
     return this.get("v1/symbols") as Bluebird<string[]>;
+  }
+
+  /**
+   * Get extra details about the symbol.
+   */
+  public getSymbol({ symbol }: { symbol: string }): Bluebird<ISymbol> {
+    return this.get(`v1/symbols/details/${symbol}`) as Bluebird<ISymbol>;
   }
 
   /**
