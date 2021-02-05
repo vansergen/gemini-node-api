@@ -3,13 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>FilledOrder | gemini-node-api - v3.0.1</title>
-    <meta
-      name="description"
-      content="Documentation for gemini-node-api - v3.0.1"
-    />
+    <title>FilledOrder | gemini-node-api</title>
+    <meta name="description" content="Documentation for gemini-node-api" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/css/main.css" />
+    <script async src="../assets/js/search.js" id="search-script"></script>
   </head>
   <body>
     <header>
@@ -34,7 +32,7 @@
                 <li class="state loading">Preparing search index...</li>
                 <li class="state failure">The search index is not available</li>
               </ul>
-              <a href="../index.html" class="title">gemini-node-api - v3.0.1</a>
+              <a href="../index.html" class="title">gemini-node-api</a>
             </div>
             <div class="table-cell" id="tsd-widgets">
               <div id="tsd-filter">
@@ -61,10 +59,6 @@
                   <label class="tsd-widget" for="tsd-filter-externals"
                     >Externals</label
                   >
-                  <input type="checkbox" id="tsd-filter-only-exported" />
-                  <label class="tsd-widget" for="tsd-filter-only-exported"
-                    >Only exported</label
-                  >
                 </div>
               </div>
               <a href="#" class="tsd-widget menu no-caption" data-toggle="menu"
@@ -78,7 +72,7 @@
         <div class="container">
           <ul class="tsd-breadcrumb">
             <li>
-              <a href="../globals.html">Globals</a>
+              <a href="../modules.html">gemini-node-api</a>
             </li>
             <li>
               <a href="filledorder.html">FilledOrder</a>
@@ -95,7 +89,10 @@
             <h3>Hierarchy</h3>
             <ul class="tsd-hierarchy">
               <li>
-                <a href="basewsorder.html" class="tsd-signature-type"
+                <a
+                  href="basewsorder.html"
+                  class="tsd-signature-type"
+                  data-tsd-kind="Interface"
                   >BaseWSOrder</a
                 >
                 <ul class="tsd-hierarchy">
@@ -305,7 +302,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/websocket.ts#L144"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/websocket.ts#L144"
                       >src/websocket.ts:144</a
                     >
                   </li>
@@ -340,7 +337,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/websocket.ts#L148"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/websocket.ts#L148"
                       >src/websocket.ts:148</a
                     >
                   </li>
@@ -356,9 +353,22 @@
               </h3>
               <div class="tsd-signature tsd-kind-icon">
                 behavior<span class="tsd-signature-symbol">:</span>
-                <a href="../globals.html#ordertype" class="tsd-signature-type"
-                  >OrderType</a
-                >
+                <span class="tsd-signature-type">undefined</span
+                ><span class="tsd-signature-symbol"> | </span
+                ><span class="tsd-signature-type"
+                  >&quot;indication-of-interest&quot;</span
+                ><span class="tsd-signature-symbol"> | </span
+                ><span class="tsd-signature-type"
+                  >&quot;exchange limit&quot;</span
+                ><span class="tsd-signature-symbol"> | </span
+                ><span class="tsd-signature-type">&quot;stop-limit&quot;</span
+                ><span class="tsd-signature-symbol"> | </span
+                ><span class="tsd-signature-type"
+                  >&quot;auction-only exchange limit&quot;</span
+                ><span class="tsd-signature-symbol"> | </span
+                ><span class="tsd-signature-type">&quot;market buy&quot;</span
+                ><span class="tsd-signature-symbol"> | </span
+                ><span class="tsd-signature-type">&quot;market sell&quot;</span>
               </div>
               <aside class="tsd-sources">
                 <p>
@@ -371,7 +381,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/websocket.ts#L146"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/websocket.ts#L146"
                       >src/websocket.ts:146</a
                     >
                   </li>
@@ -396,8 +406,8 @@
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#client_order_id"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#client_order_id"
                     >client_order_id</a
                   >
                 </p>
@@ -405,7 +415,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L126"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L126"
                       >src/auth.ts:126</a
                     >
                   </li>
@@ -430,8 +440,8 @@
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#executed_amount"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#executed_amount"
                     >executed_amount</a
                   >
                 </p>
@@ -439,7 +449,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L134"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L134"
                       >src/auth.ts:134</a
                     >
                   </li>
@@ -468,15 +478,16 @@
                 ><span class="tsd-signature-symbol">; </span>liquidity<span
                   class="tsd-signature-symbol"
                   >: </span
-                ><span class="tsd-signature-type">"Taker"</span
+                ><span class="tsd-signature-type">&quot;Taker&quot;</span
                 ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">"Maker"</span
+                ><span class="tsd-signature-type">&quot;Maker&quot;</span
                 ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">"Auction"</span
+                ><span class="tsd-signature-type">&quot;Auction&quot;</span
                 ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">"Block"</span
+                ><span class="tsd-signature-type">&quot;Block&quot;</span
                 ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">"IndicatorOfInterest"</span
+                ><span class="tsd-signature-type"
+                  >&quot;IndicatorOfInterest&quot;</span
                 ><span class="tsd-signature-symbol">; </span>price<span
                   class="tsd-signature-symbol"
                   >: </span
@@ -492,7 +503,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/websocket.ts#L171"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/websocket.ts#L171"
                       >src/websocket.ts:171</a
                     >
                   </li>
@@ -523,16 +534,17 @@
                   <li class="tsd-parameter">
                     <h5>
                       liquidity<span class="tsd-signature-symbol">: </span
-                      ><span class="tsd-signature-type">"Taker"</span
+                      ><span class="tsd-signature-type">&quot;Taker&quot;</span
                       ><span class="tsd-signature-symbol"> | </span
-                      ><span class="tsd-signature-type">"Maker"</span
-                      ><span class="tsd-signature-symbol"> | </span
-                      ><span class="tsd-signature-type">"Auction"</span
-                      ><span class="tsd-signature-symbol"> | </span
-                      ><span class="tsd-signature-type">"Block"</span
+                      ><span class="tsd-signature-type">&quot;Maker&quot;</span
                       ><span class="tsd-signature-symbol"> | </span
                       ><span class="tsd-signature-type"
-                        >"IndicatorOfInterest"</span
+                        >&quot;Auction&quot;</span
+                      ><span class="tsd-signature-symbol"> | </span
+                      ><span class="tsd-signature-type">&quot;Block&quot;</span
+                      ><span class="tsd-signature-symbol"> | </span
+                      ><span class="tsd-signature-type"
+                        >&quot;IndicatorOfInterest&quot;</span
                       >
                     </h5>
                   </li>
@@ -562,8 +574,8 @@
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#is_cancelled"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#is_cancelled"
                     >is_cancelled</a
                   >
                 </p>
@@ -571,7 +583,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L130"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L130"
                       >src/auth.ts:130</a
                     >
                   </li>
@@ -589,8 +601,8 @@
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#is_hidden"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#is_hidden"
                     >is_hidden</a
                   >
                 </p>
@@ -598,7 +610,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L131"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L131"
                       >src/auth.ts:131</a
                     >
                   </li>
@@ -616,8 +628,8 @@
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#is_live"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#is_live"
                     >is_live</a
                   >
                 </p>
@@ -625,7 +637,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L129"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L129"
                       >src/auth.ts:129</a
                     >
                   </li>
@@ -643,8 +655,8 @@
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#order_id"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#order_id"
                     >order_id</a
                   >
                 </p>
@@ -652,7 +664,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L125"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L125"
                       >src/auth.ts:125</a
                     >
                   </li>
@@ -679,7 +691,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/websocket.ts#L147"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/websocket.ts#L147"
                       >src/websocket.ts:147</a
                     >
                   </li>
@@ -704,8 +716,8 @@
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#original_amount"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#original_amount"
                     >original_amount</a
                   >
                 </p>
@@ -713,7 +725,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L133"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L133"
                       >src/auth.ts:133</a
                     >
                   </li>
@@ -735,8 +747,8 @@
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#price"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#price"
                     >price</a
                   >
                 </p>
@@ -744,7 +756,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L123"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L123"
                       >src/auth.ts:123</a
                     >
                   </li>
@@ -769,8 +781,8 @@
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#remaining_amount"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#remaining_amount"
                     >remaining_amount</a
                   >
                 </p>
@@ -778,7 +790,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L132"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L132"
                       >src/auth.ts:132</a
                     >
                   </li>
@@ -792,14 +804,14 @@
               <h3>side</h3>
               <div class="tsd-signature tsd-kind-icon">
                 side<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">"buy"</span
+                <span class="tsd-signature-type">&quot;buy&quot;</span
                 ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">"sell"</span>
+                ><span class="tsd-signature-type">&quot;sell&quot;</span>
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#side"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#side"
                     >side</a
                   >
                 </p>
@@ -807,7 +819,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L122"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L122"
                       >src/auth.ts:122</a
                     >
                   </li>
@@ -836,7 +848,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/websocket.ts#L145"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/websocket.ts#L145"
                       >src/websocket.ts:145</a
                     >
                   </li>
@@ -854,8 +866,8 @@
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#symbol"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#symbol"
                     >symbol</a
                   >
                 </p>
@@ -863,7 +875,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L124"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L124"
                       >src/auth.ts:124</a
                     >
                   </li>
@@ -881,8 +893,8 @@
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#timestamp"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#timestamp"
                     >timestamp</a
                   >
                 </p>
@@ -890,7 +902,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L127"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L127"
                       >src/auth.ts:127</a
                     >
                   </li>
@@ -908,8 +920,8 @@
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from <a href="baseorder.html">BaseOrder</a>.<a
-                    href="baseorder.html#timestampms"
+                  Inherited from <a href="basewsorder.html">BaseWSOrder</a>.<a
+                    href="basewsorder.html#timestampms"
                     >timestampms</a
                   >
                 </p>
@@ -917,7 +929,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/auth.ts#L128"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L128"
                       >src/auth.ts:128</a
                     >
                   </li>
@@ -949,7 +961,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/websocket.ts#L149"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/websocket.ts#L149"
                       >src/websocket.ts:149</a
                     >
                   </li>
@@ -963,14 +975,14 @@
               <h3>type</h3>
               <div class="tsd-signature tsd-kind-icon">
                 type<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">"fill"</span>
+                <span class="tsd-signature-type">&quot;fill&quot;</span>
               </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/06460da/src/websocket.ts#L170"
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/websocket.ts#L170"
                       >src/websocket.ts:170</a
                     >
                   </li>
@@ -982,8 +994,8 @@
         <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
           <nav class="tsd-navigation primary">
             <ul>
-              <li class="globals">
-                <a href="../globals.html"><em>Globals</em></a>
+              <li class=" ">
+                <a href="../modules.html">Exports</a>
               </li>
             </ul>
           </nav>
@@ -1180,17 +1192,17 @@
           </ul>
           <ul class="tsd-legend">
             <li
+              class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"
+            >
+              <span class="tsd-kind-icon">Inherited constructor</span>
+            </li>
+            <li
               class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"
             >
               <span class="tsd-kind-icon">Inherited property</span>
             </li>
             <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
               <span class="tsd-kind-icon">Inherited method</span>
-            </li>
-            <li
-              class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"
-            >
-              <span class="tsd-kind-icon">Inherited accessor</span>
             </li>
           </ul>
           <ul class="tsd-legend">

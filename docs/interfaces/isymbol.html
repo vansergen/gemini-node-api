@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Transfer | gemini-node-api</title>
+    <title>ISymbol | gemini-node-api</title>
     <meta name="description" content="Documentation for gemini-node-api" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/css/main.css" />
@@ -75,10 +75,10 @@
               <a href="../modules.html">gemini-node-api</a>
             </li>
             <li>
-              <a href="transfer.html">Transfer</a>
+              <a href="isymbol.html">ISymbol</a>
             </li>
           </ul>
-          <h1>Interface Transfer</h1>
+          <h1>Interface ISymbol</h1>
         </div>
       </div>
     </header>
@@ -89,7 +89,7 @@
             <h3>Hierarchy</h3>
             <ul class="tsd-hierarchy">
               <li>
-                <span class="target">Transfer</span>
+                <span class="target">ISymbol</span>
               </li>
             </ul>
           </section>
@@ -101,56 +101,44 @@
                   <h3>Properties</h3>
                   <ul class="tsd-index-list">
                     <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="transfer.html#amount" class="tsd-kind-icon"
-                        >amount</a
+                      <a href="isymbol.html#base_currency" class="tsd-kind-icon"
+                        >base_<wbr />currency</a
                       >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="transfer.html#currency" class="tsd-kind-icon"
-                        >currency</a
+                      <a
+                        href="isymbol.html#min_order_size"
+                        class="tsd-kind-icon"
+                        >min_<wbr />order_<wbr />size</a
                       >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="transfer.html#destination" class="tsd-kind-icon"
-                        >destination</a
+                      <a
+                        href="isymbol.html#quote_currency"
+                        class="tsd-kind-icon"
+                        >quote_<wbr />currency</a
                       >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="transfer.html#eid" class="tsd-kind-icon">eid</a>
-                    </li>
-                    <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="transfer.html#method" class="tsd-kind-icon"
-                        >method</a
+                      <a
+                        href="isymbol.html#quote_increment"
+                        class="tsd-kind-icon"
+                        >quote_<wbr />increment</a
                       >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="transfer.html#outputidx" class="tsd-kind-icon"
-                        >output<wbr />Idx</a
-                      >
-                    </li>
-                    <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="transfer.html#purpose" class="tsd-kind-icon"
-                        >purpose</a
-                      >
-                    </li>
-                    <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="transfer.html#status" class="tsd-kind-icon"
+                      <a href="isymbol.html#status" class="tsd-kind-icon"
                         >status</a
                       >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="transfer.html#timestampms" class="tsd-kind-icon"
-                        >timestampms</a
+                      <a href="isymbol.html#symbol" class="tsd-kind-icon"
+                        >symbol</a
                       >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="transfer.html#txhash" class="tsd-kind-icon"
-                        >tx<wbr />Hash</a
-                      >
-                    </li>
-                    <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="transfer.html#type" class="tsd-kind-icon"
-                        >type</a
+                      <a href="isymbol.html#tick_size" class="tsd-kind-icon"
+                        >tick_<wbr />size</a
                       >
                     </li>
                   </ul>
@@ -163,10 +151,10 @@
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a name="amount" class="tsd-anchor"></a>
-              <h3>amount</h3>
+              <a name="base_currency" class="tsd-anchor"></a>
+              <h3>base_<wbr />currency</h3>
               <div class="tsd-signature tsd-kind-icon">
-                amount<span class="tsd-signature-symbol">:</span>
+                base_<wbr />currency<span class="tsd-signature-symbol">:</span>
                 <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
@@ -174,8 +162,8 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L266"
-                      >src/auth.ts:266</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/public.ts#L47"
+                      >src/public.ts:47</a
                     >
                   </li>
                 </ul>
@@ -184,10 +172,12 @@
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a name="currency" class="tsd-anchor"></a>
-              <h3>currency</h3>
+              <a name="min_order_size" class="tsd-anchor"></a>
+              <h3>min_<wbr />order_<wbr />size</h3>
               <div class="tsd-signature tsd-kind-icon">
-                currency<span class="tsd-signature-symbol">:</span>
+                min_<wbr />order_<wbr />size<span class="tsd-signature-symbol"
+                  >:</span
+                >
                 <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
@@ -195,8 +185,8 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L265"
-                      >src/auth.ts:265</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/public.ts#L51"
+                      >src/public.ts:51</a
                     >
                   </li>
                 </ul>
@@ -205,24 +195,19 @@
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a name="destination" class="tsd-anchor"></a>
-              <h3>
-                <span class="tsd-flag ts-flagOptional">Optional</span>
-                destination
-              </h3>
+              <a name="quote_currency" class="tsd-anchor"></a>
+              <h3>quote_<wbr />currency</h3>
               <div class="tsd-signature tsd-kind-icon">
-                destination<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">undefined</span
-                ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">string</span>
+                quote_<wbr />currency<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L270"
-                      >src/auth.ts:270</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/public.ts#L48"
+                      >src/public.ts:48</a
                     >
                   </li>
                 </ul>
@@ -231,10 +216,12 @@
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a name="eid" class="tsd-anchor"></a>
-              <h3>eid</h3>
+              <a name="quote_increment" class="tsd-anchor"></a>
+              <h3>quote_<wbr />increment</h3>
               <div class="tsd-signature tsd-kind-icon">
-                eid<span class="tsd-signature-symbol">:</span>
+                quote_<wbr />increment<span class="tsd-signature-symbol"
+                  >:</span
+                >
                 <span class="tsd-signature-type">number</span>
               </div>
               <aside class="tsd-sources">
@@ -242,86 +229,8 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L264"
-                      >src/auth.ts:264</a
-                    >
-                  </li>
-                </ul>
-              </aside>
-            </section>
-            <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
-            >
-              <a name="method" class="tsd-anchor"></a>
-              <h3>
-                <span class="tsd-flag ts-flagOptional">Optional</span> method
-              </h3>
-              <div class="tsd-signature tsd-kind-icon">
-                method<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">undefined</span
-                ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">&quot;ACH&quot;</span
-                ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">&quot;Wire&quot;</span>
-              </div>
-              <aside class="tsd-sources">
-                <ul>
-                  <li>
-                    Defined in
-                    <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L267"
-                      >src/auth.ts:267</a
-                    >
-                  </li>
-                </ul>
-              </aside>
-            </section>
-            <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
-            >
-              <a name="outputidx" class="tsd-anchor"></a>
-              <h3>
-                <span class="tsd-flag ts-flagOptional">Optional</span>
-                output<wbr />Idx
-              </h3>
-              <div class="tsd-signature tsd-kind-icon">
-                output<wbr />Idx<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">undefined</span
-                ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">number</span>
-              </div>
-              <aside class="tsd-sources">
-                <ul>
-                  <li>
-                    Defined in
-                    <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L269"
-                      >src/auth.ts:269</a
-                    >
-                  </li>
-                </ul>
-              </aside>
-            </section>
-            <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
-            >
-              <a name="purpose" class="tsd-anchor"></a>
-              <h3>
-                <span class="tsd-flag ts-flagOptional">Optional</span> purpose
-              </h3>
-              <div class="tsd-signature tsd-kind-icon">
-                purpose<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">undefined</span
-                ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">string</span>
-              </div>
-              <aside class="tsd-sources">
-                <ul>
-                  <li>
-                    Defined in
-                    <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L271"
-                      >src/auth.ts:271</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/public.ts#L50"
+                      >src/public.ts:50</a
                     >
                   </li>
                 </ul>
@@ -334,17 +243,23 @@
               <h3>status</h3>
               <div class="tsd-signature tsd-kind-icon">
                 status<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">&quot;Advanced&quot;</span
+                <span class="tsd-signature-type">&quot;open&quot;</span
                 ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">&quot;Complete&quot;</span>
+                ><span class="tsd-signature-type">&quot;closed&quot;</span
+                ><span class="tsd-signature-symbol"> | </span
+                ><span class="tsd-signature-type">&quot;cancel_only&quot;</span
+                ><span class="tsd-signature-symbol"> | </span
+                ><span class="tsd-signature-type">&quot;post_only&quot;</span
+                ><span class="tsd-signature-symbol"> | </span
+                ><span class="tsd-signature-type">&quot;limit_only&quot;</span>
               </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L262"
-                      >src/auth.ts:262</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/public.ts#L52"
+                      >src/public.ts:52</a
                     >
                   </li>
                 </ul>
@@ -353,10 +268,31 @@
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a name="timestampms" class="tsd-anchor"></a>
-              <h3>timestampms</h3>
+              <a name="symbol" class="tsd-anchor"></a>
+              <h3>symbol</h3>
               <div class="tsd-signature tsd-kind-icon">
-                timestampms<span class="tsd-signature-symbol">:</span>
+                symbol<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">string</span>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/public.ts#L46"
+                      >src/public.ts:46</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+            </section>
+            <section
+              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
+            >
+              <a name="tick_size" class="tsd-anchor"></a>
+              <h3>tick_<wbr />size</h3>
+              <div class="tsd-signature tsd-kind-icon">
+                tick_<wbr />size<span class="tsd-signature-symbol">:</span>
                 <span class="tsd-signature-type">number</span>
               </div>
               <aside class="tsd-sources">
@@ -364,57 +300,8 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L263"
-                      >src/auth.ts:263</a
-                    >
-                  </li>
-                </ul>
-              </aside>
-            </section>
-            <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
-            >
-              <a name="txhash" class="tsd-anchor"></a>
-              <h3>
-                <span class="tsd-flag ts-flagOptional">Optional</span>
-                tx<wbr />Hash
-              </h3>
-              <div class="tsd-signature tsd-kind-icon">
-                tx<wbr />Hash<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">undefined</span
-                ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">string</span>
-              </div>
-              <aside class="tsd-sources">
-                <ul>
-                  <li>
-                    Defined in
-                    <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L268"
-                      >src/auth.ts:268</a
-                    >
-                  </li>
-                </ul>
-              </aside>
-            </section>
-            <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
-            >
-              <a name="type" class="tsd-anchor"></a>
-              <h3>type</h3>
-              <div class="tsd-signature tsd-kind-icon">
-                type<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">&quot;Deposit&quot;</span
-                ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">&quot;Withdrawal&quot;</span>
-              </div>
-              <aside class="tsd-sources">
-                <ul>
-                  <li>
-                    Defined in
-                    <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/auth.ts#L261"
-                      >src/auth.ts:261</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/master/src/public.ts#L49"
+                      >src/public.ts:49</a
                     >
                   </li>
                 </ul>
@@ -434,58 +321,42 @@
             <ul class="before-current"></ul>
             <ul class="current">
               <li class="current tsd-kind-interface">
-                <a href="transfer.html" class="tsd-kind-icon">Transfer</a>
+                <a href="isymbol.html" class="tsd-kind-icon">ISymbol</a>
                 <ul>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="transfer.html#amount" class="tsd-kind-icon"
-                      >amount</a
+                    <a href="isymbol.html#base_currency" class="tsd-kind-icon"
+                      >base_<wbr />currency</a
                     >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="transfer.html#currency" class="tsd-kind-icon"
-                      >currency</a
+                    <a href="isymbol.html#min_order_size" class="tsd-kind-icon"
+                      >min_<wbr />order_<wbr />size</a
                     >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="transfer.html#destination" class="tsd-kind-icon"
-                      >destination</a
+                    <a href="isymbol.html#quote_currency" class="tsd-kind-icon"
+                      >quote_<wbr />currency</a
                     >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="transfer.html#eid" class="tsd-kind-icon">eid</a>
-                  </li>
-                  <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="transfer.html#method" class="tsd-kind-icon"
-                      >method</a
+                    <a href="isymbol.html#quote_increment" class="tsd-kind-icon"
+                      >quote_<wbr />increment</a
                     >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="transfer.html#outputidx" class="tsd-kind-icon"
-                      >output<wbr />Idx</a
-                    >
-                  </li>
-                  <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="transfer.html#purpose" class="tsd-kind-icon"
-                      >purpose</a
-                    >
-                  </li>
-                  <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="transfer.html#status" class="tsd-kind-icon"
+                    <a href="isymbol.html#status" class="tsd-kind-icon"
                       >status</a
                     >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="transfer.html#timestampms" class="tsd-kind-icon"
-                      >timestampms</a
+                    <a href="isymbol.html#symbol" class="tsd-kind-icon"
+                      >symbol</a
                     >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="transfer.html#txhash" class="tsd-kind-icon"
-                      >tx<wbr />Hash</a
+                    <a href="isymbol.html#tick_size" class="tsd-kind-icon"
+                      >tick_<wbr />size</a
                     >
-                  </li>
-                  <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="transfer.html#type" class="tsd-kind-icon">type</a>
                   </li>
                 </ul>
               </li>

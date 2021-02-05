@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.1.0](https://github.com/vansergen/gemini-node-api/compare/v3.0.1...v3.1.0) (2021-02-05)
+
+### Features
+
+- add the `getSymbol` method ([d98ec03](https://github.com/vansergen/gemini-node-api/commit/d98ec03d48fcff7d58cd5b2dc928db4eb990d08b))
+
+### Dependencies
+
+- update `ws` to `v7.4.3` ([5e2fc35](https://github.com/vansergen/gemini-node-api/commit/5e2fc355a77bf040ed6475562e54d4137ae19261))
+
 ### [3.0.1](https://github.com/vansergen/gemini-node-api/compare/v3.0.0...v3.0.1) (2020-12-21)
 
 ### Dependencies

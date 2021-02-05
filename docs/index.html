@@ -3,13 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>gemini-node-api - v3.0.1</title>
-    <meta
-      name="description"
-      content="Documentation for gemini-node-api - v3.0.1"
-    />
+    <title>gemini-node-api</title>
+    <meta name="description" content="Documentation for gemini-node-api" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <script async src="assets/js/search.js" id="search-script"></script>
   </head>
   <body>
     <header>
@@ -34,7 +32,7 @@
                 <li class="state loading">Preparing search index...</li>
                 <li class="state failure">The search index is not available</li>
               </ul>
-              <a href="index.html" class="title">gemini-node-api - v3.0.1</a>
+              <a href="index.html" class="title">gemini-node-api</a>
             </div>
             <div class="table-cell" id="tsd-widgets">
               <div id="tsd-filter">
@@ -61,10 +59,6 @@
                   <label class="tsd-widget" for="tsd-filter-externals"
                     >Externals</label
                   >
-                  <input type="checkbox" id="tsd-filter-only-exported" />
-                  <label class="tsd-widget" for="tsd-filter-only-exported"
-                    >Only exported</label
-                  >
                 </div>
               </div>
               <a href="#" class="tsd-widget menu no-caption" data-toggle="menu"
@@ -76,12 +70,7 @@
       </div>
       <div class="tsd-page-title">
         <div class="container">
-          <ul class="tsd-breadcrumb">
-            <li>
-              <a href="globals.html">Globals</a>
-            </li>
-          </ul>
-          <h1>gemini-node-api - v3.0.1</h1>
+          <h1>gemini-node-api</h1>
         </div>
       </div>
     </header>
@@ -158,7 +147,8 @@
             >
               <h2>Installation</h2>
             </a>
-            <pre><code class="language-bash">npm install gemini-node-api</code></pre>
+            <pre><code class="language-bash"><span style="color: #000000">npm install gemini-node-api</span>
+</code></pre>
             <a
               href="#usage"
               id="usage"
@@ -173,8 +163,9 @@
             >
               <h3>PublicClient</h3>
             </a>
-            <pre><code class="language-typescript"><span class="hljs-keyword">import</span> { PublicClient } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gemini-node-api&quot;</span>;
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> PublicClient();</code></pre>
+            <pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">PublicClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;gemini-node-api&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">PublicClient</span><span style="color: #000000">();</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#symbols"
@@ -182,7 +173,18 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbols = <span class="hljs-keyword">await</span> client.getSymbols();</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbols</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getSymbols</span><span style="color: #000000">();</span>
+</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#symbol-details"
+                  ><code>getSymbol</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;ZECLTC&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">info</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getSymbol</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#ticker"
@@ -190,14 +192,15 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
-<span class="hljs-keyword">const</span> ticker = <span class="hljs-keyword">await</span> client.getTicker({ symbol });
-<span class="hljs-comment">/**
- * for V2
- * <span class="hljs-doctag">@see </span>https://docs.gemini.com/rest-api/#ticker-v2
- */</span>
-<span class="hljs-keyword">const</span> v = <span class="hljs-string">&quot;v2&quot;</span>;
-<span class="hljs-keyword">const</span> tickerV2 = <span class="hljs-keyword">await</span> client.getTicker({ symbol, v });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ticker</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getTicker</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000"> });</span>
+<span style="color: #008000">/**</span>
+<span style="color: #008000"> * for V2</span>
+<span style="color: #008000"> * </span><span style="color: #0000FF">@see</span><span style="color: #008000"> </span><span style="color: #001080">https://docs.gemini.com/rest-api/#ticker-v2</span>
+<span style="color: #008000"> */</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">v</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;v2&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">tickerV2</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getTicker</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000">, </span><span style="color: #001080">v</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#candles"
@@ -205,9 +208,10 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
-<span class="hljs-keyword">const</span> time_frame = <span class="hljs-string">&quot;30m&quot;</span>;
-<span class="hljs-keyword">const</span> candles = <span class="hljs-keyword">await</span> client.getCandles({ symbol, time_frame });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">time_frame</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;30m&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">candles</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getCandles</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000">, </span><span style="color: #001080">time_frame</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#current-order-book"
@@ -215,14 +219,15 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
-<span class="hljs-keyword">const</span> limit_bids = <span class="hljs-number">25</span>;
-<span class="hljs-keyword">const</span> limit_asks = <span class="hljs-number">20</span>;
-<span class="hljs-keyword">const</span> book = <span class="hljs-keyword">await</span> client.getOrderBook({
-  symbol,
-  limit_bids,
-  limit_asks,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">limit_bids</span><span style="color: #000000"> = </span><span style="color: #098658">25</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">limit_asks</span><span style="color: #000000"> = </span><span style="color: #098658">20</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">book</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getOrderBook</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">limit_bids</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">limit_asks</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#trade-history"
@@ -230,16 +235,17 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
-<span class="hljs-keyword">const</span> timestamp = <span class="hljs-number">1547146811</span>;
-<span class="hljs-keyword">const</span> limit_trades = <span class="hljs-number">100</span>;
-<span class="hljs-keyword">const</span> include_breaks = <span class="hljs-literal">true</span>;
-<span class="hljs-keyword">const</span> trades = <span class="hljs-keyword">await</span> client.getTradeHistory({
-  symbol,
-  timestamp,
-  limit_trades,
-  include_breaks,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timestamp</span><span style="color: #000000"> = </span><span style="color: #098658">1547146811</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">limit_trades</span><span style="color: #000000"> = </span><span style="color: #098658">100</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">include_breaks</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">trades</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getTradeHistory</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">timestamp</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">limit_trades</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">include_breaks</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#current-auction"
@@ -247,8 +253,9 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
-<span class="hljs-keyword">const</span> auction = <span class="hljs-keyword">await</span> client.getCurrentAuction({ symbol });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">auction</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getCurrentAuction</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#auction-history"
@@ -256,16 +263,17 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
-<span class="hljs-keyword">const</span> timestamp = <span class="hljs-number">1547146811</span>;
-<span class="hljs-keyword">const</span> limit_auction_results = <span class="hljs-number">100</span>;
-<span class="hljs-keyword">const</span> include_indicative = <span class="hljs-literal">true</span>;
-<span class="hljs-keyword">const</span> history = <span class="hljs-keyword">await</span> client.getAuctionHistory({
-  symbol,
-  timestamp,
-  limit_auction_results,
-  include_indicative,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timestamp</span><span style="color: #000000"> = </span><span style="color: #098658">1547146811</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">limit_auction_results</span><span style="color: #000000"> = </span><span style="color: #098658">100</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">include_indicative</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">history</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getAuctionHistory</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">timestamp</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">limit_auction_results</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">include_indicative</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#price-feed"
@@ -273,7 +281,8 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> priceFeed = <span class="hljs-keyword">await</span> client.getPriceFeed();</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">priceFeed</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getPriceFeed</span><span style="color: #000000">();</span>
+</code></pre>
             <a
               href="#authenticatedclient"
               id="authenticatedclient"
@@ -281,10 +290,11 @@
             >
               <h3>AuthenticatedClient</h3>
             </a>
-            <pre><code class="language-typescript"><span class="hljs-keyword">import</span> { AuthenticatedClient } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gemini-node-api&quot;</span>;
-<span class="hljs-keyword">const</span> key = <span class="hljs-string">&quot;gemini-api-key&quot;</span>;
-<span class="hljs-keyword">const</span> secret = <span class="hljs-string">&quot;gemini-api-secret&quot;</span>;
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> AuthenticatedClient({ key, secret });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">AuthenticatedClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;gemini-node-api&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">key</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;gemini-api-key&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">secret</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;gemini-api-secret&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">AuthenticatedClient</span><span style="color: #000000">({ </span><span style="color: #001080">key</span><span style="color: #000000">, </span><span style="color: #001080">secret</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#new-order"
@@ -292,20 +302,21 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
-<span class="hljs-keyword">const</span> client_order_id = <span class="hljs-string">&quot;d0c5340b-6d6c-49d9-b567-48c4bfca13d2&quot;</span>;
-<span class="hljs-keyword">const</span> amount = <span class="hljs-number">1</span>;
-<span class="hljs-keyword">const</span> price = <span class="hljs-number">0.9</span>;
-<span class="hljs-keyword">const</span> side = <span class="hljs-string">&quot;buy&quot;</span>;
-<span class="hljs-keyword">const</span> options = [<span class="hljs-string">&quot;maker-or-cancel&quot;</span>];
-<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.newOrder({
-  symbol,
-  client_order_id,
-  amount,
-  price,
-  side,
-  options,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client_order_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;d0c5340b-6d6c-49d9-b567-48c4bfca13d2&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">1</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">price</span><span style="color: #000000"> = </span><span style="color: #098658">0.9</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">side</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;buy&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">options</span><span style="color: #000000"> = [</span><span style="color: #A31515">&quot;maker-or-cancel&quot;</span><span style="color: #000000">];</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">newOrder</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">client_order_id</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">amount</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">price</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">side</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">options</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#new-order"
@@ -313,12 +324,13 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
-<span class="hljs-keyword">const</span> amount = <span class="hljs-number">1</span>;
-<span class="hljs-keyword">const</span> price = <span class="hljs-number">0.9</span>;
-<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">type</span> = <span class="hljs-string">&quot;exchange limit&quot;</span>;
-<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.buy({ symbol, amount, price, account, <span class="hljs-keyword">type</span> });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">1</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">price</span><span style="color: #000000"> = </span><span style="color: #098658">0.9</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">type</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;exchange limit&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">buy</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000">, </span><span style="color: #001080">amount</span><span style="color: #000000">, </span><span style="color: #001080">price</span><span style="color: #000000">, </span><span style="color: #001080">account</span><span style="color: #000000">, </span><span style="color: #001080">type</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#new-order"
@@ -326,12 +338,13 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
-<span class="hljs-keyword">const</span> amount = <span class="hljs-number">0.99</span>;
-<span class="hljs-keyword">const</span> price = <span class="hljs-number">0.99</span>;
-<span class="hljs-keyword">const</span> stop_price = <span class="hljs-number">1</span>;
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">type</span> = <span class="hljs-string">&quot;exchange stop limit&quot;</span>;
-<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.sell({ symbol, amount, price, stop_price, <span class="hljs-keyword">type</span> });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">0.99</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">price</span><span style="color: #000000"> = </span><span style="color: #098658">0.99</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">stop_price</span><span style="color: #000000"> = </span><span style="color: #098658">1</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">type</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;exchange stop limit&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">sell</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000">, </span><span style="color: #001080">amount</span><span style="color: #000000">, </span><span style="color: #001080">price</span><span style="color: #000000">, </span><span style="color: #001080">stop_price</span><span style="color: #000000">, </span><span style="color: #001080">type</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#cancel-order"
@@ -339,9 +352,10 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> order_id = <span class="hljs-number">106817811</span>;
-<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.cancelOrder({ order_id, account });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order_id</span><span style="color: #000000"> = </span><span style="color: #098658">106817811</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">cancelOrder</span><span style="color: #000000">({ </span><span style="color: #001080">order_id</span><span style="color: #000000">, </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a
@@ -350,8 +364,9 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> client.cancelSession({ account });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">response</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">cancelSession</span><span style="color: #000000">({ </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a
@@ -360,8 +375,9 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> client.cancelAll({ account });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">response</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">cancelAll</span><span style="color: #000000">({ </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#order-status"
@@ -369,9 +385,10 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> order_id = <span class="hljs-number">44375901</span>;
-<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.getOrderStatus({ order_id, account });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order_id</span><span style="color: #000000"> = </span><span style="color: #098658">44375901</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getOrderStatus</span><span style="color: #000000">({ </span><span style="color: #001080">order_id</span><span style="color: #000000">, </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#get-active-orders"
@@ -379,8 +396,9 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> orders = <span class="hljs-keyword">await</span> client.getActiveOrders({ account });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">orders</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getActiveOrders</span><span style="color: #000000">({ </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#get-past-trades"
@@ -388,16 +406,17 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;bcheth&quot;</span>;
-<span class="hljs-keyword">const</span> limit_trades = <span class="hljs-number">10</span>;
-<span class="hljs-keyword">const</span> timestamp = <span class="hljs-number">1547232911</span>;
-<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> trades = <span class="hljs-keyword">await</span> client.getPastTrades({
-  symbol,
-  limit_trades,
-  timestamp,
-  account,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;bcheth&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">limit_trades</span><span style="color: #000000"> = </span><span style="color: #098658">10</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timestamp</span><span style="color: #000000"> = </span><span style="color: #098658">1547232911</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">trades</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getPastTrades</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">limit_trades</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">timestamp</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">account</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#get-notional-volume"
@@ -405,8 +424,9 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> volume = <span class="hljs-keyword">await</span> client.getNotionalVolume({ account });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">volume</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getNotionalVolume</span><span style="color: #000000">({ </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#get-trade-volume"
@@ -414,7 +434,8 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> volume = <span class="hljs-keyword">await</span> client.getTradeVolume();</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">volume</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getTradeVolume</span><span style="color: #000000">();</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#new-clearing-order"
@@ -422,20 +443,21 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> counterparty_id = <span class="hljs-string">&quot;OM9VNL1G&quot;</span>;
-<span class="hljs-keyword">const</span> expires_in_hrs = <span class="hljs-number">24</span>;
-<span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;btcusd&quot;</span>;
-<span class="hljs-keyword">const</span> amount = <span class="hljs-number">100</span>;
-<span class="hljs-keyword">const</span> price = <span class="hljs-number">9500</span>;
-<span class="hljs-keyword">const</span> side = <span class="hljs-string">&quot;buy&quot;</span>;
-<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.newClearingOrder({
-  counterparty_id,
-  expires_in_hrs,
-  symbol,
-  amount,
-  price,
-  side,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">counterparty_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;OM9VNL1G&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">expires_in_hrs</span><span style="color: #000000"> = </span><span style="color: #098658">24</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;btcusd&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">100</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">price</span><span style="color: #000000"> = </span><span style="color: #098658">9500</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">side</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;buy&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">newClearingOrder</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">counterparty_id</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">expires_in_hrs</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">amount</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">price</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">side</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#new-broker-order"
@@ -443,22 +465,23 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> source_counterparty_id = <span class="hljs-string">&quot;R485E04Q&quot;</span>;
-<span class="hljs-keyword">const</span> target_counterparty_id = <span class="hljs-string">&quot;Z4929ZDY&quot;</span>;
-<span class="hljs-keyword">const</span> expires_in_hrs = <span class="hljs-number">1</span>;
-<span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;ethusd&quot;</span>;
-<span class="hljs-keyword">const</span> amount = <span class="hljs-number">175</span>;
-<span class="hljs-keyword">const</span> price = <span class="hljs-number">200</span>;
-<span class="hljs-keyword">const</span> side = <span class="hljs-string">&quot;sell&quot;</span>;
-<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.newBrokerOrder({
-  source_counterparty_id,
-  target_counterparty_id,
-  expires_in_hrs,
-  symbol,
-  amount,
-  price,
-  side,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">source_counterparty_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;R485E04Q&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">target_counterparty_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;Z4929ZDY&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">expires_in_hrs</span><span style="color: #000000"> = </span><span style="color: #098658">1</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;ethusd&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">175</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">price</span><span style="color: #000000"> = </span><span style="color: #098658">200</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">side</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;sell&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">newBrokerOrder</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">source_counterparty_id</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">target_counterparty_id</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">expires_in_hrs</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">amount</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">price</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">side</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a
@@ -467,8 +490,9 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> clearing_id = <span class="hljs-string">&quot;OM9VNL1G&quot;</span>;
-<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.getClearingOrderStatus({ clearing_id });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clearing_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;OM9VNL1G&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getClearingOrderStatus</span><span style="color: #000000">({ </span><span style="color: #001080">clearing_id</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a
@@ -477,8 +501,9 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> clearing_id = <span class="hljs-string">&quot;OM9VNL1G&quot;</span>;
-<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.cancelClearingOrder({ clearing_id });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clearing_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;OM9VNL1G&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">cancelClearingOrder</span><span style="color: #000000">({ </span><span style="color: #001080">clearing_id</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a
@@ -487,18 +512,19 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> clearing_id = <span class="hljs-string">&quot;OM9VNL1G&quot;</span>;
-<span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;btcusd&quot;</span>;
-<span class="hljs-keyword">const</span> amount = <span class="hljs-number">100</span>;
-<span class="hljs-keyword">const</span> price = <span class="hljs-number">9500</span>;
-<span class="hljs-keyword">const</span> side = <span class="hljs-string">&quot;sell&quot;</span>;
-<span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> client.confirmClearingOrder({
-  clearing_id,
-  symbol,
-  amount,
-  price,
-  side,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clearing_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;OM9VNL1G&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;btcusd&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">100</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">price</span><span style="color: #000000"> = </span><span style="color: #098658">9500</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">side</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;sell&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">confirmClearingOrder</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">clearing_id</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">amount</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">price</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">side</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a
@@ -507,8 +533,9 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> balances = <span class="hljs-keyword">await</span> client.getAvailableBalances({ account });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">balances</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getAvailableBalances</span><span style="color: #000000">({ </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a
@@ -517,8 +544,9 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> balances = <span class="hljs-keyword">await</span> client.getNotionalBalances({ account });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">balances</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getNotionalBalances</span><span style="color: #000000">({ </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#transfers"
@@ -526,14 +554,15 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> timestamp = <span class="hljs-number">1495127793</span>;
-<span class="hljs-keyword">const</span> limit_transfers = <span class="hljs-number">12</span>;
-<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> transfers = <span class="hljs-keyword">await</span> client.getTransfers({
-  timestamp,
-  limit_transfers,
-  account,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timestamp</span><span style="color: #000000"> = </span><span style="color: #098658">1495127793</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">limit_transfers</span><span style="color: #000000"> = </span><span style="color: #098658">12</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">transfers</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getTransfers</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">timestamp</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">limit_transfers</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">account</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a
@@ -542,9 +571,10 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> network = <span class="hljs-string">&quot;bitcoincash&quot;</span>;
-<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> addresses = <span class="hljs-keyword">await</span> client.getDepositAddresses({ network, account });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">network</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;bitcoincash&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">addresses</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getDepositAddresses</span><span style="color: #000000">({ </span><span style="color: #001080">network</span><span style="color: #000000">, </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#new-deposit-address"
@@ -552,16 +582,17 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> currency = <span class="hljs-string">&quot;ltc&quot;</span>;
-<span class="hljs-keyword">const</span> label = <span class="hljs-string">&quot;New LTC deposit address&quot;</span>;
-<span class="hljs-keyword">const</span> legacy = <span class="hljs-literal">true</span>;
-<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.getNewAddress({
-  currency,
-  label,
-  legacy,
-  account,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">currency</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;ltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">label</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;New LTC deposit address&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">legacy</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">address</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getNewAddress</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">currency</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">label</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">legacy</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">account</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a
@@ -570,16 +601,17 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> currency = <span class="hljs-string">&quot;btc&quot;</span>;
-<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;mi98Z9brJ3TgaKsmvXatuRahbFRUFKRUdR&quot;</span>;
-<span class="hljs-keyword">const</span> amount = <span class="hljs-number">10</span>;
-<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> withdrawal = <span class="hljs-keyword">await</span> client.withdrawCrypto({
-  currency,
-  address,
-  account,
-  amount,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">currency</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;btc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">address</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;mi98Z9brJ3TgaKsmvXatuRahbFRUFKRUdR&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">10</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">withdrawal</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">withdrawCrypto</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">currency</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">address</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">account</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">amount</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#internal-transfers"
@@ -587,16 +619,17 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> currency = <span class="hljs-string">&quot;btc&quot;</span>;
-<span class="hljs-keyword">const</span> sourceAccount = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> targetAccount = <span class="hljs-string">&quot;secondary&quot;</span>;
-<span class="hljs-keyword">const</span> amount = <span class="hljs-string">&quot;100&quot;</span>;
-<span class="hljs-keyword">const</span> transfer = <span class="hljs-keyword">await</span> client.internalTransfer({
-  currency,
-  sourceAccount,
-  targetAccount,
-  amount,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">currency</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;btc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sourceAccount</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">targetAccount</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;secondary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;100&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">transfer</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">internalTransfer</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">currency</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">sourceAccount</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">targetAccount</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">amount</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#create-account"
@@ -604,9 +637,10 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> name = <span class="hljs-string">&quot;My Secondary Account&quot;</span>;
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">type</span> = <span class="hljs-string">&quot;custody&quot;</span>;
-<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.createAccount({ name, <span class="hljs-keyword">type</span> });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">name</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;My Secondary Account&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">type</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;custody&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">createAccount</span><span style="color: #000000">({ </span><span style="color: #001080">name</span><span style="color: #000000">, </span><span style="color: #001080">type</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a
@@ -615,7 +649,8 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> accounts = <span class="hljs-keyword">await</span> client.getAccounts();</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">accounts</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getAccounts</span><span style="color: #000000">();</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#withdraw-usd-as-gusd"
@@ -623,10 +658,11 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;0x0F2B20Acb2fD7EEbC0ABc3AEe0b00d57533b6bD1&quot;</span>;
-<span class="hljs-keyword">const</span> amount = <span class="hljs-string">&quot;500&quot;</span>;
-<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-<span class="hljs-keyword">const</span> withdrawal = <span class="hljs-keyword">await</span> client.withdrawGUSD({ address, amount, account });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">address</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;0x0F2B20Acb2fD7EEbC0ABc3AEe0b00d57533b6bD1&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;500&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">withdrawal</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">withdrawGUSD</span><span style="color: #000000">({ </span><span style="color: #001080">address</span><span style="color: #000000">, </span><span style="color: #001080">amount</span><span style="color: #000000">, </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/rest-api/#heartbeat"
@@ -634,7 +670,8 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> heartbeat = <span class="hljs-keyword">await</span> client.heartbeat();</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">heartbeat</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">heartbeat</span><span style="color: #000000">();</span>
+</code></pre>
             <a
               href="#websocketclient"
               id="websocketclient"
@@ -646,23 +683,24 @@
                 >
               </h3>
             </a>
-            <pre><code class="language-typescript"><span class="hljs-keyword">import</span> { WebsocketClient } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gemini-node-api&quot;</span>;
-<span class="hljs-keyword">const</span> key = <span class="hljs-string">&quot;gemini-api-key&quot;</span>;
-<span class="hljs-keyword">const</span> secret = <span class="hljs-string">&quot;gemini-api-secret&quot;</span>;
-<span class="hljs-keyword">const</span> websocket = <span class="hljs-keyword">new</span> WebsocketClient({ key, secret });
-websocket.on(<span class="hljs-string">&quot;error&quot;</span>, <span class="hljs-function">(<span class="hljs-params">error, market</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.error(error);
-});
-websocket.on(<span class="hljs-string">&quot;open&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;The connection is open&quot;</span>, market);
-});
-websocket.on(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;The connection is closed&quot;</span>, market);
-});
-websocket.on(<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-function">(<span class="hljs-params">message, market</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.info(<span class="hljs-string">&quot;New message from&quot;</span>, market);
-  <span class="hljs-built_in">console</span>.info(message);
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">WebsocketClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;gemini-node-api&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">key</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;gemini-api-key&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">secret</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;gemini-api-secret&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">websocket</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">WebsocketClient</span><span style="color: #000000">({ </span><span style="color: #001080">key</span><span style="color: #000000">, </span><span style="color: #001080">secret</span><span style="color: #000000"> });</span>
+<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;error&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">error</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #001080">error</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;open&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;The connection is open&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;close&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;The connection is closed&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;message&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">message</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;New message from&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">);</span>
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">message</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/websocket-api/#market-data"
@@ -670,24 +708,25 @@ websocket.on(<span class="hljs-string">&quot;message&quot;</span>, <span class="
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> heartbeat = <span class="hljs-literal">true</span>;
-<span class="hljs-keyword">const</span> top_of_book = <span class="hljs-literal">false</span>;
-<span class="hljs-keyword">const</span> bids = <span class="hljs-literal">true</span>;
-<span class="hljs-keyword">const</span> offers = <span class="hljs-literal">true</span>;
-<span class="hljs-keyword">const</span> trades = <span class="hljs-literal">true</span>;
-<span class="hljs-keyword">const</span> auctions = <span class="hljs-literal">false</span>;
-<span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
-websocket.on(<span class="hljs-string">&quot;open&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Open:&quot;</span>, market));
-<span class="hljs-keyword">await</span> websocket.connectMarket({
-  symbol,
-  heartbeat,
-  top_of_book,
-  bids,
-  offers,
-  trades,
-  auctions,
-});
-<span class="hljs-keyword">await</span> websocket.connectMarket({ <span class="hljs-attr">symbol</span>: <span class="hljs-string">&quot;btcusd&quot;</span> });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">heartbeat</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">top_of_book</span><span style="color: #000000"> = </span><span style="color: #0000FF">false</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bids</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">offers</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">trades</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">auctions</span><span style="color: #000000"> = </span><span style="color: #0000FF">false</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;open&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Open:&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">));</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">connectMarket</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">heartbeat</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">top_of_book</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">bids</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">offers</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">trades</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">auctions</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">connectMarket</span><span style="color: #000000">({ </span><span style="color: #001080">symbol:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;btcusd&quot;</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/websocket-api/#market-data"
@@ -695,9 +734,10 @@ websocket.on(<span class="hljs-string">&quot;open&quot;</span>, <span class="hlj
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbol = <span class="hljs-string">&quot;zecltc&quot;</span>;
-websocket.once(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Closed:&quot;</span>, market));
-<span class="hljs-keyword">await</span> websocket.disconnectMarket({ symbol });</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">once</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;close&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Closed:&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">));</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">disconnectMarket</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000"> });</span>
+</code></pre>
             <ul>
               <li>
                 <a
@@ -706,8 +746,9 @@ websocket.once(<span class="hljs-string">&quot;close&quot;</span>, <span class="
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript">websocket.on(<span class="hljs-string">&quot;open&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Open:&quot;</span>, market));
-<span class="hljs-keyword">await</span> websocket.connect();</code></pre>
+            <pre><code class="language-typescript"><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;open&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Open:&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">));</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">connect</span><span style="color: #000000">();</span>
+</code></pre>
             <ul>
               <li>
                 <a
@@ -716,8 +757,9 @@ websocket.once(<span class="hljs-string">&quot;close&quot;</span>, <span class="
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript">websocket.once(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Closed:&quot;</span>, market));
-<span class="hljs-keyword">await</span> websocket.disconnect();</code></pre>
+            <pre><code class="language-typescript"><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">once</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;close&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Closed:&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">));</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">disconnect</span><span style="color: #000000">();</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/websocket-api/#level-2-data"
@@ -725,12 +767,13 @@ websocket.once(<span class="hljs-string">&quot;close&quot;</span>, <span class="
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> subscriptions = [
-  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;l2&quot;</span>, <span class="hljs-attr">symbols</span>: [<span class="hljs-string">&quot;BTCUSD&quot;</span>, <span class="hljs-string">&quot;ETHUSD&quot;</span>] },
-  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;candles_1m&quot;</span>, <span class="hljs-attr">symbols</span>: [<span class="hljs-string">&quot;BTCUSD&quot;</span>] },
-];
-<span class="hljs-keyword">await</span> websocket.connect();
-<span class="hljs-keyword">await</span> websocket.subscribe(subscriptions);</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">subscriptions</span><span style="color: #000000"> = [</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;l2&quot;</span><span style="color: #000000">, </span><span style="color: #001080">symbols:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;BTCUSD&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;ETHUSD&quot;</span><span style="color: #000000">] },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;candles_1m&quot;</span><span style="color: #000000">, </span><span style="color: #001080">symbols:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;BTCUSD&quot;</span><span style="color: #000000">] },</span>
+<span style="color: #000000">];</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">connect</span><span style="color: #000000">();</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #001080">subscriptions</span><span style="color: #000000">);</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/websocket-api/#unsubscribe"
@@ -738,8 +781,9 @@ websocket.once(<span class="hljs-string">&quot;close&quot;</span>, <span class="
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> subscriptions = [{ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;l2&quot;</span>, <span class="hljs-attr">symbols</span>: [<span class="hljs-string">&quot;BTCUSD&quot;</span>, <span class="hljs-string">&quot;ETHUSD&quot;</span>] }];
-<span class="hljs-keyword">await</span> websocket.unsubscribe(subscriptions);</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">subscriptions</span><span style="color: #000000"> = [{ </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;l2&quot;</span><span style="color: #000000">, </span><span style="color: #001080">symbols:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;BTCUSD&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;ETHUSD&quot;</span><span style="color: #000000">] }];</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">unsubscribe</span><span style="color: #000000">(</span><span style="color: #001080">subscriptions</span><span style="color: #000000">);</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/websocket-api/#order-events"
@@ -747,21 +791,22 @@ websocket.once(<span class="hljs-string">&quot;close&quot;</span>, <span class="
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span class="hljs-keyword">const</span> symbolFilter = <span class="hljs-string">&quot;zecltc&quot;</span>;
-<span class="hljs-keyword">const</span> apiSessionFilter = <span class="hljs-string">&quot;UI&quot;</span>;
-<span class="hljs-keyword">const</span> eventTypeFilter = [<span class="hljs-string">&quot;accepted&quot;</span>, <span class="hljs-string">&quot;rejected&quot;</span>];
-<span class="hljs-keyword">const</span> account = <span class="hljs-string">&quot;primary&quot;</span>;
-websocket.on(<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-function">(<span class="hljs-params">message, market</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (market === <span class="hljs-string">&quot;orders&quot;</span>) {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;New message:&quot;</span>, message);
-  }
-});
-<span class="hljs-keyword">await</span> websocket.connectOrders({
-  account,
-  symbolFilter,
-  apiSessionFilter,
-  eventTypeFilter,
-});</code></pre>
+            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbolFilter</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">apiSessionFilter</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;UI&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">eventTypeFilter</span><span style="color: #000000"> = [</span><span style="color: #A31515">&quot;accepted&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;rejected&quot;</span><span style="color: #000000">];</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
+<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;message&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">message</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">market</span><span style="color: #000000"> === </span><span style="color: #A31515">&quot;orders&quot;</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;New message:&quot;</span><span style="color: #000000">, </span><span style="color: #001080">message</span><span style="color: #000000">);</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">});</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">connectOrders</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">account</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">symbolFilter</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">apiSessionFilter</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">eventTypeFilter</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
             <ul>
               <li>
                 <a href="https://docs.gemini.com/websocket-api/#order-events"
@@ -769,12 +814,13 @@ websocket.on(<span class="hljs-string">&quot;message&quot;</span>, <span class="
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript">websocket.once(<span class="hljs-string">&quot;close&quot;</span>, <span class="hljs-function">(<span class="hljs-params">market</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (market === <span class="hljs-string">&quot;orders&quot;</span>) {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Closed&quot;</span>);
-  }
-});
-<span class="hljs-keyword">await</span> websocket.disconnectOrders();</code></pre>
+            <pre><code class="language-typescript"><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">once</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;close&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">market</span><span style="color: #000000"> === </span><span style="color: #A31515">&quot;orders&quot;</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Closed&quot;</span><span style="color: #000000">);</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">});</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">disconnectOrders</span><span style="color: #000000">();</span>
+</code></pre>
             <a
               href="#test"
               id="test"
@@ -782,14 +828,15 @@ websocket.on(<span class="hljs-string">&quot;message&quot;</span>, <span class="
             >
               <h3>Test</h3>
             </a>
-            <pre><code class="language-bash">npm <span class="hljs-built_in">test</span></code></pre>
+            <pre><code class="language-bash"><span style="color: #000000">npm </span><span style="color: #795E26">test</span>
+</code></pre>
           </div>
         </div>
         <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
           <nav class="tsd-navigation primary">
             <ul>
-              <li class="globals">
-                <a href="globals.html"><em>Globals</em></a>
+              <li class=" ">
+                <a href="modules.html">Exports</a>
               </li>
             </ul>
           </nav>
@@ -1060,6 +1107,11 @@ websocket.on(<span class="hljs-string">&quot;message&quot;</span>, <span class="
                 >
               </li>
               <li class="tsd-kind-interface">
+                <a href="interfaces/isymbol.html" class="tsd-kind-icon"
+                  >ISymbol</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
                 <a href="interfaces/initialupdate.html" class="tsd-kind-icon"
                   >Initial<wbr />Update</a
                 >
@@ -1281,123 +1333,123 @@ websocket.on(<span class="hljs-string">&quot;message&quot;</span>, <span class="
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#basicorderoptions" class="tsd-kind-icon"
+                <a href="modules.html#basicorderoptions" class="tsd-kind-icon"
                   >Basic<wbr />Order<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#candle" class="tsd-kind-icon">Candle</a>
+                <a href="modules.html#candle" class="tsd-kind-icon">Candle</a>
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#candlestype" class="tsd-kind-icon"
+                <a href="modules.html#candlestype" class="tsd-kind-icon"
                   >Candles<wbr />Type</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#l2message" class="tsd-kind-icon"
+                <a href="modules.html#l2message" class="tsd-kind-icon"
                   >L2<wbr />Message</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#marketdataevent" class="tsd-kind-icon"
+                <a href="modules.html#marketdataevent" class="tsd-kind-icon"
                   >Market<wbr />Data<wbr />Event</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#marketdatamessage" class="tsd-kind-icon"
+                <a href="modules.html#marketdatamessage" class="tsd-kind-icon"
                   >Market<wbr />Data<wbr />Message</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#marketv2message" class="tsd-kind-icon"
+                <a href="modules.html#marketv2message" class="tsd-kind-icon"
                   >Market<wbr />V2Message</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#order" class="tsd-kind-icon">Order</a>
+                <a href="modules.html#order" class="tsd-kind-icon">Order</a>
               </li>
               <li class="tsd-kind-type-alias">
                 <a
-                  href="globals.html#ordereexecutionoptions"
+                  href="modules.html#ordereexecutionoptions"
                   class="tsd-kind-icon"
                   >Order<wbr />Eexecution<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#ordertype" class="tsd-kind-icon"
+                <a href="modules.html#ordertype" class="tsd-kind-icon"
                   >Order<wbr />Type</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#ordersmessage" class="tsd-kind-icon"
+                <a href="modules.html#ordersmessage" class="tsd-kind-icon"
                   >Orders<wbr />Message</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#pasttradesfilter" class="tsd-kind-icon"
+                <a href="modules.html#pasttradesfilter" class="tsd-kind-icon"
                   >Past<wbr />Trades<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#subscriptions" class="tsd-kind-icon"
+                <a href="modules.html#subscriptions" class="tsd-kind-icon"
                   >Subscriptions</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#ticker" class="tsd-kind-icon">Ticker</a>
+                <a href="modules.html#ticker" class="tsd-kind-icon">Ticker</a>
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#wsmarket" class="tsd-kind-icon"
+                <a href="modules.html#wsmarket" class="tsd-kind-icon"
                   >WSMarket</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#wsmessage" class="tsd-kind-icon"
+                <a href="modules.html#wsmessage" class="tsd-kind-icon"
                   >WSMessage</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="globals.html#wsorderoptions" class="tsd-kind-icon"
+                <a href="modules.html#wsorderoptions" class="tsd-kind-icon"
                   >WSOrder<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-variable">
-                <a href="globals.html#apilimit" class="tsd-kind-icon"
+                <a href="modules.html#apilimit" class="tsd-kind-icon"
                   >Api<wbr />Limit</a
                 >
               </li>
               <li class="tsd-kind-variable">
-                <a href="globals.html#apiuri" class="tsd-kind-icon"
+                <a href="modules.html#apiuri" class="tsd-kind-icon"
                   >Api<wbr />Uri</a
                 >
               </li>
               <li class="tsd-kind-variable">
-                <a href="globals.html#defaultsymbol" class="tsd-kind-icon"
+                <a href="modules.html#defaultsymbol" class="tsd-kind-icon"
                   >Default<wbr />Symbol</a
                 >
               </li>
               <li class="tsd-kind-variable">
-                <a href="globals.html#sandboxapiuri" class="tsd-kind-icon"
+                <a href="modules.html#headers" class="tsd-kind-icon">Headers</a>
+              </li>
+              <li class="tsd-kind-variable">
+                <a href="modules.html#sandboxapiuri" class="tsd-kind-icon"
                   >Sandbox<wbr />Api<wbr />Uri</a
                 >
               </li>
               <li class="tsd-kind-variable">
-                <a href="globals.html#sandboxwsuri" class="tsd-kind-icon"
+                <a href="modules.html#sandboxwsuri" class="tsd-kind-icon"
                   >Sandbox<wbr />WsUri</a
                 >
               </li>
               <li class="tsd-kind-variable">
-                <a href="globals.html#wsuri" class="tsd-kind-icon"
+                <a href="modules.html#wsuri" class="tsd-kind-icon"
                   >Ws<wbr />Uri</a
                 >
               </li>
               <li class="tsd-kind-function">
-                <a href="globals.html#signrequest" class="tsd-kind-icon"
+                <a href="modules.html#signrequest" class="tsd-kind-icon"
                   >Sign<wbr />Request</a
                 >
-              </li>
-              <li class="tsd-kind-object-literal">
-                <a href="globals.html#headers" class="tsd-kind-icon">Headers</a>
               </li>
             </ul>
           </nav>
@@ -1424,17 +1476,17 @@ websocket.on(<span class="hljs-string">&quot;message&quot;</span>, <span class="
           </ul>
           <ul class="tsd-legend">
             <li
+              class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"
+            >
+              <span class="tsd-kind-icon">Inherited constructor</span>
+            </li>
+            <li
               class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"
             >
               <span class="tsd-kind-icon">Inherited property</span>
             </li>
             <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
               <span class="tsd-kind-icon">Inherited method</span>
-            </li>
-            <li
-              class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"
-            >
-              <span class="tsd-kind-icon">Inherited accessor</span>
             </li>
           </ul>
           <ul class="tsd-legend">
