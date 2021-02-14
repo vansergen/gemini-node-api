@@ -24,7 +24,7 @@ docs/
 .eslintignore
 
 # husky config - https://github.com/typicode/husky
-.huskyrc.json
+.husky
 
 # lint-staged config - https://github.com/okonet/lint-staged
 .lintstagedrc.json
