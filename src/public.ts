@@ -208,9 +208,7 @@ export class PublicClient extends FetchClient<unknown> {
     return this.get(`/${v}/pubticker/${symbol}`) as Bluebird<TickerV1>;
   }
 
-  /**
-   * Get time-intervaled data for the provided symbol.
-   */
+  /** Get time-intervaled data for the provided symbol. */
   public getCandles({
     symbol = this.symbol,
     time_frame = "1day",
@@ -220,9 +218,7 @@ export class PublicClient extends FetchClient<unknown> {
     >;
   }
 
-  /**
-   * Get the current order book.
-   */
+  /** Get the current order book. */
   public getOrderBook({
     symbol = this.symbol,
     ...qs
@@ -232,9 +228,7 @@ export class PublicClient extends FetchClient<unknown> {
     return this.get(url.toString()) as Bluebird<OrderBook>;
   }
 
-  /**
-   * Get the trades that have executed since the specified timestamp.
-   */
+  /** Get the trades that have executed since the specified timestamp. */
   public getTradeHistory({
     symbol = this.symbol,
     limit_trades = ApiLimit,
@@ -245,18 +239,14 @@ export class PublicClient extends FetchClient<unknown> {
     return this.get(url.toString()) as Bluebird<Trade[]>;
   }
 
-  /**
-   * Get current auction information.
-   */
+  /** Get current auction information. */
   public getCurrentAuction({
     symbol = this.symbol,
   }: SymbolFilter = {}): Bluebird<AuctionInfo> {
     return this.get(`v1/auction/${symbol}`) as Bluebird<AuctionInfo>;
   }
 
-  /**
-   * Get the auction events.
-   */
+  /** Get the auction events. */
   public getAuctionHistory({
     symbol = this.symbol,
     limit_auction_results = ApiLimit,
@@ -267,9 +257,7 @@ export class PublicClient extends FetchClient<unknown> {
     return this.get(url.toString()) as Bluebird<AuctionHistory[]>;
   }
 
-  /**
-   * Get the price feed.
-   */
+  /** Get the price feed. */
   public getPriceFeed(): Bluebird<PriceFeedItem[]> {
     return this.get("v1/pricefeed") as Bluebird<PriceFeedItem[]>;
   }

@@ -364,9 +364,7 @@ export class AuthenticatedClient extends PublicClient {
     });
   }
 
-  /**
-   * Submit a new order.
-   */
+  /** Submit a new order. */
   public newOrder({
     symbol = this.symbol,
     ...rest
@@ -376,9 +374,7 @@ export class AuthenticatedClient extends PublicClient {
     return this.post(request, {}, body) as Bluebird<OrderStatus>;
   }
 
-  /**
-   * Submit a new buy order.
-   */
+  /** Submit a new buy order. */
   public buy({
     symbol = this.symbol,
     ...rest
@@ -388,9 +384,7 @@ export class AuthenticatedClient extends PublicClient {
     return this.post(request, {}, body) as Bluebird<OrderStatus>;
   }
 
-  /**
-   * Submit a new sell order.
-   */
+  /** Submit a new sell order. */
   public sell({
     symbol = this.symbol,
     ...rest
@@ -400,54 +394,42 @@ export class AuthenticatedClient extends PublicClient {
     return this.post(request, {}, body) as Bluebird<OrderStatus>;
   }
 
-  /**
-   * Cancel an order.
-   */
+  /** Cancel an order. */
   public cancelOrder(params: OrderID): Bluebird<OrderStatus> {
     const request = "/v1/order/cancel";
     const body = { request, ...params };
     return this.post(request, {}, body) as Bluebird<OrderStatus>;
   }
 
-  /**
-   * Cancel all orders opened by this session.
-   */
+  /** Cancel all orders opened by this session. */
   public cancelSession(account?: AccountName): Bluebird<CancelOrdersResponse> {
     const request = "/v1/order/cancel/session";
     const body = { request, ...account };
     return this.post(request, {}, body) as Bluebird<CancelOrdersResponse>;
   }
 
-  /**
-   * Cancel all outstanding orders created by all sessions owned by this account.
-   */
+  /** Cancel all outstanding orders created by all sessions owned by this account. */
   public cancelAll(account?: AccountName): Bluebird<CancelOrdersResponse> {
     const request = "/v1/order/cancel/all";
     const body = { request, ...account };
     return this.post(request, {}, body) as Bluebird<CancelOrdersResponse>;
   }
 
-  /**
-   * Get an order status.
-   */
+  /** Get an order status. */
   public getOrderStatus(params: OrderID): Bluebird<OrderStatus> {
     const request = "/v1/order/status";
     const body = { request, ...params };
     return this.post(request, {}, body) as Bluebird<OrderStatus>;
   }
 
-  /**
-   * Get all your live orders.
-   */
+  /** Get all your live orders. */
   public getActiveOrders(account?: AccountName): Bluebird<OrderStatus[]> {
     const request = "/v1/orders";
     const body = { request, ...account };
     return this.post(request, {}, body) as Bluebird<OrderStatus[]>;
   }
 
-  /**
-   * Get your past trades.
-   */
+  /** Get your past trades. */
   public getPastTrades({
     symbol = this.symbol,
     limit_trades = ApiLimit,
@@ -458,27 +440,21 @@ export class AuthenticatedClient extends PublicClient {
     return this.post(request, {}, body) as Bluebird<PastTrade[]>;
   }
 
-  /**
-   * Get the volume in price currency that has been traded across all pairs over a period of 30 days.
-   */
+  /** Get the volume in price currency that has been traded across all pairs over a period of 30 days. */
   public getNotionalVolume(account?: AccountName): Bluebird<NotionalVolume> {
     const request = "/v1/notionalvolume";
     const body = { request, ...account };
     return this.post(request, {}, body) as Bluebird<NotionalVolume>;
   }
 
-  /**
-   * Get the trade volume for each symbol.
-   */
+  /** Get the trade volume for each symbol. */
   public getTradeVolume(account?: AccountName): Bluebird<TradeVolume[][]> {
     const request = "/v1/tradevolume";
     const body = { request, ...account };
     return this.post(request, {}, body) as Bluebird<TradeVolume[][]>;
   }
 
-  /**
-   * Submit a new clearing order.
-   */
+  /** Submit a new clearing order. */
   public newClearingOrder({
     symbol = this.symbol,
     ...rest
@@ -488,9 +464,7 @@ export class AuthenticatedClient extends PublicClient {
     return this.post(request, {}, body) as Bluebird<NewClearingOrderResponse>;
   }
 
-  /**
-   * Submit a new broker clearing order.
-   */
+  /** Submit a new broker clearing order. */
   public newBrokerOrder({
     symbol = this.symbol,
     ...rest
@@ -500,9 +474,7 @@ export class AuthenticatedClient extends PublicClient {
     return this.post(request, {}, body) as Bluebird<NewClearingOrderResponse>;
   }
 
-  /**
-   * Get a clearing order status.
-   */
+  /** Get a clearing order status. */
   public getClearingOrderStatus(
     order: ClearingOrderID
   ): Bluebird<ClearingOrderStatus> {
@@ -511,9 +483,7 @@ export class AuthenticatedClient extends PublicClient {
     return this.post(request, {}, body) as Bluebird<ClearingOrderStatus>;
   }
 
-  /**
-   * Cancel a clearing order.
-   */
+  /** Cancel a clearing order. */
   public cancelClearingOrder(
     order: ClearingOrderID
   ): Bluebird<CancelClearingOrderResponse> {
@@ -526,9 +496,7 @@ export class AuthenticatedClient extends PublicClient {
     ) as Bluebird<CancelClearingOrderResponse>;
   }
 
-  /**
-   * Confirm a clearing order.
-   */
+  /** Confirm a clearing order. */
   public confirmClearingOrder({
     symbol = this.symbol,
     ...rest
@@ -542,18 +510,14 @@ export class AuthenticatedClient extends PublicClient {
     ) as Bluebird<ConfirmClearingOptionsResponse>;
   }
 
-  /**
-   * Get the available balances in the supported currencies.
-   */
+  /** Get the available balances in the supported currencies. */
   public getAvailableBalances(account?: AccountName): Bluebird<Balance[]> {
     const request = "/v1/balances";
     const body = { request, ...account };
     return this.post(request, {}, body) as Bluebird<Balance[]>;
   }
 
-  /**
-   * Get the available balances in the supported currencies as well as in notional USD.
-   */
+  /** Get the available balances in the supported currencies as well as in notional USD. */
   public getNotionalBalances(
     account?: AccountName
   ): Bluebird<NotionalBalance[]> {
@@ -562,18 +526,14 @@ export class AuthenticatedClient extends PublicClient {
     return this.post(request, {}, body) as Bluebird<NotionalBalance[]>;
   }
 
-  /**
-   * Get deposits and withdrawals in the supported currencies.
-   */
+  /** Get deposits and withdrawals in the supported currencies. */
   public getTransfers(rest?: TransferFilter): Bluebird<Transfer[]> {
     const request = "/v1/transfers";
     const body = { request, ...rest };
     return this.post(request, {}, body) as Bluebird<Transfer[]>;
   }
 
-  /**
-   * Get deposit addresses.
-   */
+  /** Get deposit addresses. */
   public getDepositAddresses({
     network,
     ...rest
@@ -583,9 +543,7 @@ export class AuthenticatedClient extends PublicClient {
     return this.post(request, {}, body) as Bluebird<DepositAddress[]>;
   }
 
-  /**
-   * Get a new deposit address.
-   */
+  /** Get a new deposit address. */
   public getNewAddress({
     currency,
     ...rest
@@ -595,9 +553,7 @@ export class AuthenticatedClient extends PublicClient {
     return this.post(request, {}, body) as Bluebird<NewAddress>;
   }
 
-  /**
-   * Withdraw cryptocurrency funds to a whitelisted address.
-   */
+  /** Withdraw cryptocurrency funds to a whitelisted address. */
   public withdrawCrypto({
     currency,
     ...rest
@@ -607,9 +563,7 @@ export class AuthenticatedClient extends PublicClient {
     return this.post(request, {}, body) as Bluebird<Withdrawal>;
   }
 
-  /**
-   * Make an internal transfer between any two exchange accounts within the Group.
-   */
+  /** Make an internal transfer between any two exchange accounts within the Group. */
   public internalTransfer({
     currency,
     ...rest
@@ -619,35 +573,27 @@ export class AuthenticatedClient extends PublicClient {
     return this.post(request, {}, body) as Bluebird<InternalTransferResponse>;
   }
 
-  /**
-   * Create a new exchange account within the group.
-   */
+  /** Create a new exchange account within the group. */
   public createAccount(account: Account): Bluebird<Account> {
     const request = "/v1/account/create";
     const body = { request, ...account };
     return this.post(request, {}, body) as Bluebird<Account>;
   }
 
-  /**
-   * Get the accounts within the group.
-   */
+  /** Get the accounts within the group. */
   public getAccounts(): Bluebird<AccountInfo[]> {
     const request = "/v1/account/list";
     return this.post(request, {}, { request }) as Bluebird<AccountInfo[]>;
   }
 
-  /**
-   * Withdraw `USD` as `GUSD`.
-   */
+  /** Withdraw `USD` as `GUSD`. */
   public withdrawGUSD(options: WithdrawGUSDFilter): Bluebird<GUSDWithdrawal> {
     const request = "/v1/withdraw/usd";
     const body = { request, ...options };
     return this.post(request, {}, body) as Bluebird<GUSDWithdrawal>;
   }
 
-  /**
-   * Prevent a session from timing out and canceling orders if the require heartbeat flag has been set.
-   */
+  /** Prevent a session from timing out and canceling orders if the require heartbeat flag has been set. */
   public heartbeat(): Bluebird<Heartbeat> {
     const request = "/v1/heartbeat";
     return this.post(request, {}, { request }) as Bluebird<Heartbeat>;
