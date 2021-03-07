@@ -321,9 +321,7 @@ export class WebsocketClient extends EventEmitter {
     this.#nonce = (): number => Date.now();
   }
 
-  /**
-   * Connect to the public API (V1) that streams all the market data on a given symbol.
-   */
+  /** Connect to the public API (V1) that streams all the market data on a given symbol. */
   public async connectMarket({
     symbol = this.symbol,
     ...qs
@@ -334,18 +332,14 @@ export class WebsocketClient extends EventEmitter {
     await this.connectWS(symbol, url);
   }
 
-  /**
-   * Disconnect from the public API (V1).
-   */
+  /** Disconnect from the public API (V1). */
   public async disconnectMarket({
     symbol = this.symbol,
   }: SymbolFilter = {}): Promise<void> {
     await this.disconnectWS(this.sockets[symbol]);
   }
 
-  /**
-   * Connect to the private API that gives you information about your orders in real time.
-   */
+  /** Connect to the private API that gives you information about your orders in real time. */
   public async connectOrders({
     account,
     ...qs
@@ -372,38 +366,28 @@ export class WebsocketClient extends EventEmitter {
     await this.connectWS("orders", url, { ...signedPayload });
   }
 
-  /**
-   * Disconnect from the private API.
-   */
+  /** Disconnect from the private API. */
   public async disconnectOrders(): Promise<void> {
     await this.disconnectWS(this.sockets.orders);
   }
 
-  /**
-   * Connect to the public API (V2) that can stream all market and candle data across books.
-   */
+  /** Connect to the public API (V2) that can stream all market and candle data across books. */
   public async connect(): Promise<void> {
     const url = new URL("/v2/marketdata", this.wsUri);
     await this.connectWS("v2", url);
   }
 
-  /**
-   * Disconnect from the public API (V2).
-   */
+  /** Disconnect from the public API (V2). */
   public async disconnect(): Promise<void> {
     await this.disconnectWS(this.sockets.v2);
   }
 
-  /**
-   * Subscribe to data feeds (V2).
-   */
+  /** Subscribe to data feeds (V2). */
   public async subscribe(subscriptions: Subscriptions): Promise<void> {
     await this.sendMessage({ type: "subscribe", subscriptions });
   }
 
-  /**
-   * Unsubscribe from data feeds (V2).
-   */
+  /** Unsubscribe from data feeds (V2). */
   public async unsubscribe(subscriptions: Subscriptions): Promise<void> {
     await this.sendMessage({ type: "unsubscribe", subscriptions });
   }
