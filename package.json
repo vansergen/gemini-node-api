@@ -12,7 +12,7 @@
     "node": ">=14.15.3"
   },
   "dependencies": {
-    "@types/ws": "^7.4.0",
+    "@types/ws": "^7.4.1",
     "rpc-bluebird": "^3.0.3",
     "ws": "^7.4.4"
   },
