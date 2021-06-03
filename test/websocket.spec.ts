@@ -577,7 +577,7 @@ suite("WebsocketClient", () => {
     ];
     const serverConnect = new Promise<void>((resolve, reject) => {
       server.once("connection", (socket) => {
-        socket.once("message", (data) => {
+        socket.once("message", (data: string) => {
           try {
             const message = JSON.parse(data) as unknown;
             const type = "subscribe";
@@ -613,7 +613,7 @@ suite("WebsocketClient", () => {
     ];
     const serverConnect = new Promise<void>((resolve, reject) => {
       server.once("connection", (socket) => {
-        socket.once("message", (data) => {
+        socket.once("message", (data: string) => {
           try {
             const message = JSON.parse(data) as unknown;
             const type = "unsubscribe";
