@@ -4,5 +4,5 @@
   "name": "gemini-node-api",
   "exclude": "test/**/*",
   "hideGenerator": true,
-  "gitRevision": "master"
+  "gitRevision": "main"
 }

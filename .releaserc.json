@@ -1,5 +1,5 @@
 {
-  "branches": "master",
+  "branches": "main",
   "preset": "conventionalcommits",
   "presetConfig": {
     "types": [
@@ -31,7 +31,6 @@
           { "type": "fix", "release": "patch" },
           { "type": "perf", "release": "patch" },
           { "type": "build", "release": "patch" },
-          { "type": "docs", "scope": "readme", "release": "patch" },
           { "type": "initial", "release": "minor" },
           { "type": "dependencies", "release": "patch" },
           { "type": "peerDependencies", "release": "patch" },
