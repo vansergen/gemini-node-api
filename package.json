@@ -45,7 +45,6 @@
     "coverage": "nyc npm test && nyc report --reporter=lcov",
     "docs:build": "npm run docs:remove && typedoc && npm run prettier:write -- --ignore-path .prettierignore_docs",
     "docs:remove": "rm -rf ./docs",
-    "docs:test": "npm run docs:build && npm run docs:remove",
     "install:clean": "rm -fr node_modules && rm -f package-lock.json && npm install",
     "lint": "eslint --ext .ts ./",
     "lint:fix": "npm run lint -- --fix",
