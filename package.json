@@ -31,7 +31,7 @@
     "mocha": "^8.4.0",
     "nock": "^13.1.0",
     "nyc": "^15.1.0",
-    "prettier": "^2.3.0",
+    "prettier": "^2.4.1",
     "semantic-release": "^17.4.3",
     "ts-node": "^10.3.0",
     "typedoc": "^0.20.36"
