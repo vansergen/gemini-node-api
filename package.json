@@ -13,7 +13,7 @@
     "npm": ">=7.15.1"
   },
   "dependencies": {
-    "@types/ws": "^7.4.4",
+    "@types/ws": "^8.2.0",
     "rpc-bluebird": "^3.0.3",
     "ws": "^7.4.6"
   },
