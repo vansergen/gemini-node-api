@@ -15,7 +15,7 @@
   "dependencies": {
     "@types/ws": "^8.2.0",
     "rpc-bluebird": "^3.0.3",
-    "ws": "^7.4.6"
+    "ws": "^8.2.3"
   },
   "devDependencies": {
     "@b2broker/tsconfig": "^1.0.3",
