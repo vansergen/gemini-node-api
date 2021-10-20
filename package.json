@@ -34,7 +34,7 @@
     "prettier": "^2.4.1",
     "semantic-release": "^17.4.3",
     "ts-node": "^10.3.0",
-    "typedoc": "^0.20.36"
+    "typedoc": "^0.22.6"
   },
   "scripts": {
     "build": "npm run build:remove && tsc",
