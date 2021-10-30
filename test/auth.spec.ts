@@ -18,6 +18,7 @@ import {
   CancelClearingOrderResponse,
   ConfirmClearingOptionsResponse,
   Account,
+  AccountDetails,
   Balance,
   NotionalBalance,
   Transfer,
@@ -1376,6 +1377,45 @@ suite("AuthenticatedClient", () => {
       targetAccount,
       amount,
     });
+    deepStrictEqual(data, response);
+  });
+
+  test(".getAccountDetails()", async () => {
+    const request = "/v1/account";
+    const account = "primary";
+    const options = { request, account, nonce };
+    const response: AccountDetails = {
+      account: {
+        accountName: "Primary",
+        shortName: "primary",
+        type: "exchange",
+        created: "1498245007981",
+      },
+      users: [
+        {
+          name: "Satoshi Nakamoto",
+          lastSignIn: "2020-07-21T13:37:39.453Z",
+          status: "Active",
+          countryCode: "US",
+          isVerified: true,
+        },
+        {
+          name: "Gemini Support",
+          lastSignIn: "2018-07-11T20:04:36.073Z",
+          status: "Suspended",
+          countryCode: "US",
+          isVerified: false,
+        },
+      ],
+      memo_reference_code: "GEMPJBRDZ",
+    };
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
+      .post(request)
+      .reply(200, response);
+
+    const data = await client.getAccountDetails({ account });
     deepStrictEqual(data, response);
   });
 
