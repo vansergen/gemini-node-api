@@ -1,5 +1,39 @@
 # Changelog
 
+## [4.0.0](https://github.com/vansergen/gemini-node-api/compare/v3.1.2...v4.0.0) (2021-10-30)
+
+### ⚠ BREAKING CHANGES
+
+- drop Node `<16.13.0` support
+- change package type from `commonjs` to `module`
+- async methods return native promises instead of `Bluebird`
+- drop Node `<16.3.0`
+
+### Features
+
+- add the `.getAccountDetails()` method ([3f0d010](https://github.com/vansergen/gemini-node-api/commit/3f0d010dcca2f1a679229236da888d7781b90b1d))
+
+### Performance Improvements
+
+- change package type from `commonjs` to `module` ([c580cce](https://github.com/vansergen/gemini-node-api/commit/c580cce6f60c8933319172b8026dc6a7f17456e6))
+- drop Node `<16.13.0` support ([47fb9a9](https://github.com/vansergen/gemini-node-api/commit/47fb9a99c85b1df9a09a608d7e5ad5da2a04aac5))
+
+### Miscellaneous Chores
+
+- drop Node `<16.3.0` ([905f35b](https://github.com/vansergen/gemini-node-api/commit/905f35b6dc50f6a9eb732329e4450cca7c8a640c))
+
+### Dependencies
+
+- upgrade `@types/ws` to `v7.4.4` ([ed1f456](https://github.com/vansergen/gemini-node-api/commit/ed1f4560cf2f765c1bee6ebbef9cbb342d925add))
+- upgrade `@types/ws` to `v8.2.0` ([b163895](https://github.com/vansergen/gemini-node-api/commit/b16389521e5e9305d5923c848838372976f8d962))
+- upgrade `ws` to `v7.4.6` ([7094eee](https://github.com/vansergen/gemini-node-api/commit/7094eeef30a4debf00845f3258f3618fa535fb8b))
+- upgrade `ws` to `v8.2.3` ([8f4c588](https://github.com/vansergen/gemini-node-api/commit/8f4c588350cad21c1742040b8dfb98989aeeff07))
+- use `rpc-request` instead of `rpc-bluebird` ([a9d729a](https://github.com/vansergen/gemini-node-api/commit/a9d729a6a7a4182d1f4b45fcbb7a0113eb296772))
+
+### Code Refactoring
+
+- async methods return native promises instead of `Bluebird` ([65cec82](https://github.com/vansergen/gemini-node-api/commit/65cec8221f22c41fa6dab324385e6da6e9889640))
+
 ### [3.1.2](https://github.com/vansergen/gemini-node-api/compare/v3.1.1...v3.1.2) (2021-03-07)
 
 ### Dependencies

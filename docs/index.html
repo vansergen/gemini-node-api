@@ -2,31 +2,29 @@
 <html class="default no-js">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
     <title>gemini-node-api</title>
     <meta name="description" content="Documentation for gemini-node-api" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <script async src="assets/js/search.js" id="search-script"></script>
+    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/highlight.css" />
+    <script async src="assets/search.js" id="search-script"></script>
   </head>
   <body>
+    <script>
+      document.body.classList.add(localStorage.getItem("tsd-theme") || "os");
+    </script>
     <header>
       <div class="tsd-page-toolbar">
         <div class="container">
           <div class="table-wrap">
-            <div
-              class="table-cell"
-              id="tsd-search"
-              data-index="assets/js/search.json"
-              data-base="."
-            >
+            <div class="table-cell" id="tsd-search" data-base=".">
               <div class="field">
                 <label
                   for="tsd-search-field"
                   class="tsd-widget search no-caption"
                   >Search</label
-                >
-                <input id="tsd-search-field" type="text" />
+                ><input type="text" id="tsd-search-field" />
               </div>
               <ul class="results">
                 <li class="state loading">Preparing search index...</li>
@@ -51,12 +49,17 @@
                       <li data-value="private" class="selected">All</li>
                     </ul>
                   </div>
-                  <input type="checkbox" id="tsd-filter-inherited" checked />
-                  <label class="tsd-widget" for="tsd-filter-inherited"
+                  <input
+                    type="checkbox"
+                    id="tsd-filter-inherited"
+                    checked
+                  /><label class="tsd-widget" for="tsd-filter-inherited"
                     >Inherited</label
-                  >
-                  <input type="checkbox" id="tsd-filter-externals" checked />
-                  <label class="tsd-widget" for="tsd-filter-externals"
+                  ><input
+                    type="checkbox"
+                    id="tsd-filter-externals"
+                    checked
+                  /><label class="tsd-widget" for="tsd-filter-externals"
                     >Externals</label
                   >
                 </div>
@@ -69,9 +72,7 @@
         </div>
       </div>
       <div class="tsd-page-title">
-        <div class="container">
-          <h1>gemini-node-api</h1>
-        </div>
+        <div class="container"><h1>gemini-node-api</h1></div>
       </div>
     </header>
     <div class="container container-main">
@@ -94,9 +95,9 @@
                   alt="npm"
                 />
                 <a
-                  href="https://coveralls.io/github/vansergen/gemini-node-api?branch=master"
+                  href="https://coveralls.io/github/vansergen/gemini-node-api?branch=main"
                   ><img
-                    src="https://coveralls.io/repos/github/vansergen/gemini-node-api/badge.svg?branch=master"
+                    src="https://coveralls.io/repos/github/vansergen/gemini-node-api/badge.svg?branch=main"
                     alt="Coverage Status"
                 /></a>
                 <a href="https://snyk.io/test/github/vansergen/gemini-node-api"
@@ -140,6 +141,7 @@
             <p>
               Node.js library for <a href="https://docs.gemini.com/">Gemini</a>.
             </p>
+
             <a
               href="#installation"
               id="installation"
@@ -147,8 +149,9 @@
             >
               <h2>Installation</h2>
             </a>
-            <pre><code class="language-bash"><span style="color: #000000">npm install gemini-node-api</span>
+            <pre><code class="language-bash"><span class="hl-0">npm install gemini-node-api</span>
 </code></pre>
+
             <a
               href="#usage"
               id="usage"
@@ -156,6 +159,7 @@
             >
               <h2>Usage</h2>
             </a>
+
             <a
               href="#publicclient"
               id="publicclient"
@@ -163,8 +167,7 @@
             >
               <h3>PublicClient</h3>
             </a>
-            <pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">PublicClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;gemini-node-api&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">PublicClient</span><span style="color: #000000">();</span>
+            <pre><code class="language-typescript"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">PublicClient</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&quot;gemini-node-api&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">client</span><span class="hl-0"> = </span><span class="hl-4">new</span><span class="hl-0"> </span><span class="hl-6">PublicClient</span><span class="hl-0">();</span>
 </code></pre>
             <ul>
               <li>
@@ -173,7 +176,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbols</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getSymbols</span><span style="color: #000000">();</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbols</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getSymbols</span><span class="hl-0">();</span>
 </code></pre>
             <ul>
               <li>
@@ -182,8 +185,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;ZECLTC&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">info</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getSymbol</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;ZECLTC&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">info</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getSymbol</span><span class="hl-0">({ </span><span class="hl-2">symbol</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -192,14 +194,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ticker</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getTicker</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000"> });</span>
-<span style="color: #008000">/**</span>
-<span style="color: #008000"> * for V2</span>
-<span style="color: #008000"> * </span><span style="color: #0000FF">@see</span><span style="color: #008000"> </span><span style="color: #001080">https://docs.gemini.com/rest-api/#ticker-v2</span>
-<span style="color: #008000"> */</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">v</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;v2&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">tickerV2</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getTicker</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000">, </span><span style="color: #001080">v</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;zecltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">ticker</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getTicker</span><span class="hl-0">({ </span><span class="hl-2">symbol</span><span class="hl-0"> });</span><br/><span class="hl-7">/**</span><br/><span class="hl-7"> * for V2</span><br/><span class="hl-7"> * </span><span class="hl-4">@see</span><span class="hl-7"> </span><span class="hl-2">https://docs.gemini.com/rest-api/#ticker-v2</span><br/><span class="hl-7"> */</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">v</span><span class="hl-0"> = </span><span class="hl-3">&quot;v2&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">tickerV2</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getTicker</span><span class="hl-0">({ </span><span class="hl-2">symbol</span><span class="hl-0">, </span><span class="hl-2">v</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -208,9 +203,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">time_frame</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;30m&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">candles</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getCandles</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000">, </span><span style="color: #001080">time_frame</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;zecltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">time_frame</span><span class="hl-0"> = </span><span class="hl-3">&quot;30m&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">candles</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getCandles</span><span class="hl-0">({ </span><span class="hl-2">symbol</span><span class="hl-0">, </span><span class="hl-2">time_frame</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -219,14 +212,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">limit_bids</span><span style="color: #000000"> = </span><span style="color: #098658">25</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">limit_asks</span><span style="color: #000000"> = </span><span style="color: #098658">20</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">book</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getOrderBook</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">limit_bids</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">limit_asks</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;zecltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">limit_bids</span><span class="hl-0"> = </span><span class="hl-8">25</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">limit_asks</span><span class="hl-0"> = </span><span class="hl-8">20</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">book</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getOrderBook</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">symbol</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">limit_bids</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">limit_asks</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -235,16 +221,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timestamp</span><span style="color: #000000"> = </span><span style="color: #098658">1547146811</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">limit_trades</span><span style="color: #000000"> = </span><span style="color: #098658">100</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">include_breaks</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">trades</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getTradeHistory</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">timestamp</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">limit_trades</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">include_breaks</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;zecltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">timestamp</span><span class="hl-0"> = </span><span class="hl-8">1547146811</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">limit_trades</span><span class="hl-0"> = </span><span class="hl-8">100</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">include_breaks</span><span class="hl-0"> = </span><span class="hl-4">true</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">trades</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getTradeHistory</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">symbol</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">timestamp</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">limit_trades</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">include_breaks</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -253,8 +230,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">auction</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getCurrentAuction</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;zecltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">auction</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getCurrentAuction</span><span class="hl-0">({ </span><span class="hl-2">symbol</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -263,16 +239,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timestamp</span><span style="color: #000000"> = </span><span style="color: #098658">1547146811</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">limit_auction_results</span><span style="color: #000000"> = </span><span style="color: #098658">100</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">include_indicative</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">history</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getAuctionHistory</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">timestamp</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">limit_auction_results</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">include_indicative</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;zecltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">timestamp</span><span class="hl-0"> = </span><span class="hl-8">1547146811</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">limit_auction_results</span><span class="hl-0"> = </span><span class="hl-8">100</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">include_indicative</span><span class="hl-0"> = </span><span class="hl-4">true</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">history</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getAuctionHistory</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">symbol</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">timestamp</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">limit_auction_results</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">include_indicative</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -281,8 +248,9 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">priceFeed</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getPriceFeed</span><span style="color: #000000">();</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">priceFeed</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getPriceFeed</span><span class="hl-0">();</span>
 </code></pre>
+
             <a
               href="#authenticatedclient"
               id="authenticatedclient"
@@ -290,10 +258,7 @@
             >
               <h3>AuthenticatedClient</h3>
             </a>
-            <pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">AuthenticatedClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;gemini-node-api&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">key</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;gemini-api-key&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">secret</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;gemini-api-secret&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">AuthenticatedClient</span><span style="color: #000000">({ </span><span style="color: #001080">key</span><span style="color: #000000">, </span><span style="color: #001080">secret</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">AuthenticatedClient</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&quot;gemini-node-api&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">key</span><span class="hl-0"> = </span><span class="hl-3">&quot;gemini-api-key&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">secret</span><span class="hl-0"> = </span><span class="hl-3">&quot;gemini-api-secret&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">client</span><span class="hl-0"> = </span><span class="hl-4">new</span><span class="hl-0"> </span><span class="hl-6">AuthenticatedClient</span><span class="hl-0">({ </span><span class="hl-2">key</span><span class="hl-0">, </span><span class="hl-2">secret</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -302,20 +267,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client_order_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;d0c5340b-6d6c-49d9-b567-48c4bfca13d2&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">1</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">price</span><span style="color: #000000"> = </span><span style="color: #098658">0.9</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">side</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;buy&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">options</span><span style="color: #000000"> = [</span><span style="color: #A31515">&quot;maker-or-cancel&quot;</span><span style="color: #000000">];</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">newOrder</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">client_order_id</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">amount</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">price</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">side</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">options</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;zecltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">client_order_id</span><span class="hl-0"> = </span><span class="hl-3">&quot;d0c5340b-6d6c-49d9-b567-48c4bfca13d2&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">amount</span><span class="hl-0"> = </span><span class="hl-8">1</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">price</span><span class="hl-0"> = </span><span class="hl-8">0.9</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">side</span><span class="hl-0"> = </span><span class="hl-3">&quot;buy&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">options</span><span class="hl-0"> = [</span><span class="hl-3">&quot;maker-or-cancel&quot;</span><span class="hl-0">];</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">order</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">newOrder</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">symbol</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">client_order_id</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">amount</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">price</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">side</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">options</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -324,12 +276,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">1</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">price</span><span style="color: #000000"> = </span><span style="color: #098658">0.9</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">type</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;exchange limit&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">buy</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000">, </span><span style="color: #001080">amount</span><span style="color: #000000">, </span><span style="color: #001080">price</span><span style="color: #000000">, </span><span style="color: #001080">account</span><span style="color: #000000">, </span><span style="color: #001080">type</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;zecltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">amount</span><span class="hl-0"> = </span><span class="hl-8">1</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">price</span><span class="hl-0"> = </span><span class="hl-8">0.9</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">type</span><span class="hl-0"> = </span><span class="hl-3">&quot;exchange limit&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">order</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">buy</span><span class="hl-0">({ </span><span class="hl-2">symbol</span><span class="hl-0">, </span><span class="hl-2">amount</span><span class="hl-0">, </span><span class="hl-2">price</span><span class="hl-0">, </span><span class="hl-2">account</span><span class="hl-0">, </span><span class="hl-2">type</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -338,12 +285,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">0.99</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">price</span><span style="color: #000000"> = </span><span style="color: #098658">0.99</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">stop_price</span><span style="color: #000000"> = </span><span style="color: #098658">1</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">type</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;exchange stop limit&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">sell</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000">, </span><span style="color: #001080">amount</span><span style="color: #000000">, </span><span style="color: #001080">price</span><span style="color: #000000">, </span><span style="color: #001080">stop_price</span><span style="color: #000000">, </span><span style="color: #001080">type</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;zecltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">amount</span><span class="hl-0"> = </span><span class="hl-8">0.99</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">price</span><span class="hl-0"> = </span><span class="hl-8">0.99</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">stop_price</span><span class="hl-0"> = </span><span class="hl-8">1</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">type</span><span class="hl-0"> = </span><span class="hl-3">&quot;exchange stop limit&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">order</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">sell</span><span class="hl-0">({ </span><span class="hl-2">symbol</span><span class="hl-0">, </span><span class="hl-2">amount</span><span class="hl-0">, </span><span class="hl-2">price</span><span class="hl-0">, </span><span class="hl-2">stop_price</span><span class="hl-0">, </span><span class="hl-2">type</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -352,9 +294,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order_id</span><span style="color: #000000"> = </span><span style="color: #098658">106817811</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">cancelOrder</span><span style="color: #000000">({ </span><span style="color: #001080">order_id</span><span style="color: #000000">, </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">order_id</span><span class="hl-0"> = </span><span class="hl-8">106817811</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">order</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">cancelOrder</span><span class="hl-0">({ </span><span class="hl-2">order_id</span><span class="hl-0">, </span><span class="hl-2">account</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -364,8 +304,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">response</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">cancelSession</span><span style="color: #000000">({ </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">response</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">cancelSession</span><span class="hl-0">({ </span><span class="hl-2">account</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -375,8 +314,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">response</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">cancelAll</span><span style="color: #000000">({ </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">response</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">cancelAll</span><span class="hl-0">({ </span><span class="hl-2">account</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -385,9 +323,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order_id</span><span style="color: #000000"> = </span><span style="color: #098658">44375901</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getOrderStatus</span><span style="color: #000000">({ </span><span style="color: #001080">order_id</span><span style="color: #000000">, </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">order_id</span><span class="hl-0"> = </span><span class="hl-8">44375901</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">order</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getOrderStatus</span><span class="hl-0">({ </span><span class="hl-2">order_id</span><span class="hl-0">, </span><span class="hl-2">account</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -396,8 +332,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">orders</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getActiveOrders</span><span style="color: #000000">({ </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">orders</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getActiveOrders</span><span class="hl-0">({ </span><span class="hl-2">account</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -406,16 +341,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;bcheth&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">limit_trades</span><span style="color: #000000"> = </span><span style="color: #098658">10</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timestamp</span><span style="color: #000000"> = </span><span style="color: #098658">1547232911</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">trades</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getPastTrades</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">limit_trades</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">timestamp</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">account</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;bcheth&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">limit_trades</span><span class="hl-0"> = </span><span class="hl-8">10</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">timestamp</span><span class="hl-0"> = </span><span class="hl-8">1547232911</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">trades</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getPastTrades</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">symbol</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">limit_trades</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">timestamp</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">account</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -424,8 +350,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">volume</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getNotionalVolume</span><span style="color: #000000">({ </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">volume</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getNotionalVolume</span><span class="hl-0">({ </span><span class="hl-2">account</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -434,7 +359,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">volume</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getTradeVolume</span><span style="color: #000000">();</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">volume</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getTradeVolume</span><span class="hl-0">();</span>
 </code></pre>
             <ul>
               <li>
@@ -443,20 +368,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">counterparty_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;OM9VNL1G&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">expires_in_hrs</span><span style="color: #000000"> = </span><span style="color: #098658">24</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;btcusd&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">100</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">price</span><span style="color: #000000"> = </span><span style="color: #098658">9500</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">side</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;buy&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">newClearingOrder</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">counterparty_id</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">expires_in_hrs</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">amount</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">price</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">side</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">counterparty_id</span><span class="hl-0"> = </span><span class="hl-3">&quot;OM9VNL1G&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">expires_in_hrs</span><span class="hl-0"> = </span><span class="hl-8">24</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;btcusd&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">amount</span><span class="hl-0"> = </span><span class="hl-8">100</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">price</span><span class="hl-0"> = </span><span class="hl-8">9500</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">side</span><span class="hl-0"> = </span><span class="hl-3">&quot;buy&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">order</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">newClearingOrder</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">counterparty_id</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">expires_in_hrs</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">symbol</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">amount</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">price</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">side</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -465,22 +377,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">source_counterparty_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;R485E04Q&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">target_counterparty_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;Z4929ZDY&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">expires_in_hrs</span><span style="color: #000000"> = </span><span style="color: #098658">1</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;ethusd&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">175</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">price</span><span style="color: #000000"> = </span><span style="color: #098658">200</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">side</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;sell&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">newBrokerOrder</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">source_counterparty_id</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">target_counterparty_id</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">expires_in_hrs</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">amount</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">price</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">side</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">source_counterparty_id</span><span class="hl-0"> = </span><span class="hl-3">&quot;R485E04Q&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">target_counterparty_id</span><span class="hl-0"> = </span><span class="hl-3">&quot;Z4929ZDY&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">expires_in_hrs</span><span class="hl-0"> = </span><span class="hl-8">1</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;ethusd&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">amount</span><span class="hl-0"> = </span><span class="hl-8">175</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">price</span><span class="hl-0"> = </span><span class="hl-8">200</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">side</span><span class="hl-0"> = </span><span class="hl-3">&quot;sell&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">order</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">newBrokerOrder</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">source_counterparty_id</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">target_counterparty_id</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">expires_in_hrs</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">symbol</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">amount</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">price</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">side</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -490,8 +387,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clearing_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;OM9VNL1G&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getClearingOrderStatus</span><span style="color: #000000">({ </span><span style="color: #001080">clearing_id</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">clearing_id</span><span class="hl-0"> = </span><span class="hl-3">&quot;OM9VNL1G&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">order</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getClearingOrderStatus</span><span class="hl-0">({ </span><span class="hl-2">clearing_id</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -501,8 +397,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clearing_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;OM9VNL1G&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">cancelClearingOrder</span><span style="color: #000000">({ </span><span style="color: #001080">clearing_id</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">clearing_id</span><span class="hl-0"> = </span><span class="hl-3">&quot;OM9VNL1G&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">order</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">cancelClearingOrder</span><span class="hl-0">({ </span><span class="hl-2">clearing_id</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -512,18 +407,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clearing_id</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;OM9VNL1G&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;btcusd&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">100</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">price</span><span style="color: #000000"> = </span><span style="color: #098658">9500</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">side</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;sell&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">order</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">confirmClearingOrder</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">clearing_id</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">amount</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">price</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">side</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">clearing_id</span><span class="hl-0"> = </span><span class="hl-3">&quot;OM9VNL1G&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;btcusd&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">amount</span><span class="hl-0"> = </span><span class="hl-8">100</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">price</span><span class="hl-0"> = </span><span class="hl-8">9500</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">side</span><span class="hl-0"> = </span><span class="hl-3">&quot;sell&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">order</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">confirmClearingOrder</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">clearing_id</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">symbol</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">amount</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">price</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">side</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -533,8 +417,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">balances</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getAvailableBalances</span><span style="color: #000000">({ </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">balances</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getAvailableBalances</span><span class="hl-0">({ </span><span class="hl-2">account</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -544,8 +427,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">balances</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getNotionalBalances</span><span style="color: #000000">({ </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">balances</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getNotionalBalances</span><span class="hl-0">({ </span><span class="hl-2">account</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -554,14 +436,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">timestamp</span><span style="color: #000000"> = </span><span style="color: #098658">1495127793</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">limit_transfers</span><span style="color: #000000"> = </span><span style="color: #098658">12</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">transfers</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getTransfers</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">timestamp</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">limit_transfers</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">account</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">timestamp</span><span class="hl-0"> = </span><span class="hl-8">1495127793</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">limit_transfers</span><span class="hl-0"> = </span><span class="hl-8">12</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">transfers</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getTransfers</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">timestamp</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">limit_transfers</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">account</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -571,9 +446,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">network</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;bitcoincash&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">addresses</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getDepositAddresses</span><span style="color: #000000">({ </span><span style="color: #001080">network</span><span style="color: #000000">, </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">network</span><span class="hl-0"> = </span><span class="hl-3">&quot;bitcoincash&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">addresses</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getDepositAddresses</span><span class="hl-0">({ </span><span class="hl-2">network</span><span class="hl-0">, </span><span class="hl-2">account</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -582,16 +455,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">currency</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;ltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">label</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;New LTC deposit address&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">legacy</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">address</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getNewAddress</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">currency</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">label</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">legacy</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">account</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">currency</span><span class="hl-0"> = </span><span class="hl-3">&quot;ltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">label</span><span class="hl-0"> = </span><span class="hl-3">&quot;New LTC deposit address&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">legacy</span><span class="hl-0"> = </span><span class="hl-4">true</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">address</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getNewAddress</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">currency</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">label</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">legacy</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">account</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -601,16 +465,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">currency</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;btc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">address</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;mi98Z9brJ3TgaKsmvXatuRahbFRUFKRUdR&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #098658">10</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">withdrawal</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">withdrawCrypto</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">currency</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">address</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">account</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">amount</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">currency</span><span class="hl-0"> = </span><span class="hl-3">&quot;btc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">address</span><span class="hl-0"> = </span><span class="hl-3">&quot;mi98Z9brJ3TgaKsmvXatuRahbFRUFKRUdR&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">amount</span><span class="hl-0"> = </span><span class="hl-8">10</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">withdrawal</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">withdrawCrypto</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">currency</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">address</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">account</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">amount</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -619,16 +474,16 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">currency</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;btc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sourceAccount</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">targetAccount</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;secondary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;100&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">transfer</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">internalTransfer</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">currency</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">sourceAccount</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">targetAccount</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">amount</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">currency</span><span class="hl-0"> = </span><span class="hl-3">&quot;btc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">sourceAccount</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">targetAccount</span><span class="hl-0"> = </span><span class="hl-3">&quot;secondary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">amount</span><span class="hl-0"> = </span><span class="hl-3">&quot;100&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">transfer</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">internalTransfer</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">currency</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">sourceAccount</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">targetAccount</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">amount</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
+</code></pre>
+            <ul>
+              <li>
+                <a href="https://docs.gemini.com/rest-api/#account-detail"
+                  ><code>getAccountDetails</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">details</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getAccountDetails</span><span class="hl-0">({ </span><span class="hl-2">account</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -637,9 +492,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">name</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;My Secondary Account&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">type</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;custody&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">createAccount</span><span style="color: #000000">({ </span><span style="color: #001080">name</span><span style="color: #000000">, </span><span style="color: #001080">type</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">name</span><span class="hl-0"> = </span><span class="hl-3">&quot;My Secondary Account&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">type</span><span class="hl-0"> = </span><span class="hl-3">&quot;custody&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">result</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">createAccount</span><span class="hl-0">({ </span><span class="hl-2">name</span><span class="hl-0">, </span><span class="hl-2">type</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -649,7 +502,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">accounts</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getAccounts</span><span style="color: #000000">();</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">accounts</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getAccounts</span><span class="hl-0">();</span>
 </code></pre>
             <ul>
               <li>
@@ -658,10 +511,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">address</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;0x0F2B20Acb2fD7EEbC0ABc3AEe0b00d57533b6bD1&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">amount</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;500&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">withdrawal</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">withdrawGUSD</span><span style="color: #000000">({ </span><span style="color: #001080">address</span><span style="color: #000000">, </span><span style="color: #001080">amount</span><span style="color: #000000">, </span><span style="color: #001080">account</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">address</span><span class="hl-0"> = </span><span class="hl-3">&quot;0x0F2B20Acb2fD7EEbC0ABc3AEe0b00d57533b6bD1&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">amount</span><span class="hl-0"> = </span><span class="hl-3">&quot;500&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">withdrawal</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">withdrawGUSD</span><span class="hl-0">({ </span><span class="hl-2">address</span><span class="hl-0">, </span><span class="hl-2">amount</span><span class="hl-0">, </span><span class="hl-2">account</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -670,8 +520,9 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">heartbeat</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">heartbeat</span><span style="color: #000000">();</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">heartbeat</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">heartbeat</span><span class="hl-0">();</span>
 </code></pre>
+
             <a
               href="#websocketclient"
               id="websocketclient"
@@ -683,23 +534,7 @@
                 >
               </h3>
             </a>
-            <pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">WebsocketClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;gemini-node-api&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">key</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;gemini-api-key&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">secret</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;gemini-api-secret&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">websocket</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">WebsocketClient</span><span style="color: #000000">({ </span><span style="color: #001080">key</span><span style="color: #000000">, </span><span style="color: #001080">secret</span><span style="color: #000000"> });</span>
-<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;error&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">error</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #001080">error</span><span style="color: #000000">);</span>
-<span style="color: #000000">});</span>
-<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;open&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;The connection is open&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">);</span>
-<span style="color: #000000">});</span>
-<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;close&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;The connection is closed&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">);</span>
-<span style="color: #000000">});</span>
-<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;message&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">message</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;New message from&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">);</span>
-<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">message</span><span style="color: #000000">);</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">WebsocketClient</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&quot;gemini-node-api&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">key</span><span class="hl-0"> = </span><span class="hl-3">&quot;gemini-api-key&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">secret</span><span class="hl-0"> = </span><span class="hl-3">&quot;gemini-api-secret&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">websocket</span><span class="hl-0"> = </span><span class="hl-4">new</span><span class="hl-0"> </span><span class="hl-6">WebsocketClient</span><span class="hl-0">({ </span><span class="hl-2">key</span><span class="hl-0">, </span><span class="hl-2">secret</span><span class="hl-0"> });</span><br/><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">on</span><span class="hl-0">(</span><span class="hl-3">&quot;error&quot;</span><span class="hl-0">, (</span><span class="hl-2">error</span><span class="hl-0">, </span><span class="hl-2">market</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-6">error</span><span class="hl-0">(</span><span class="hl-2">error</span><span class="hl-0">);</span><br/><span class="hl-0">});</span><br/><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">on</span><span class="hl-0">(</span><span class="hl-3">&quot;open&quot;</span><span class="hl-0">, (</span><span class="hl-2">market</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-6">log</span><span class="hl-0">(</span><span class="hl-3">&quot;The connection is open&quot;</span><span class="hl-0">, </span><span class="hl-2">market</span><span class="hl-0">);</span><br/><span class="hl-0">});</span><br/><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">on</span><span class="hl-0">(</span><span class="hl-3">&quot;close&quot;</span><span class="hl-0">, (</span><span class="hl-2">market</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-6">log</span><span class="hl-0">(</span><span class="hl-3">&quot;The connection is closed&quot;</span><span class="hl-0">, </span><span class="hl-2">market</span><span class="hl-0">);</span><br/><span class="hl-0">});</span><br/><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">on</span><span class="hl-0">(</span><span class="hl-3">&quot;message&quot;</span><span class="hl-0">, (</span><span class="hl-2">message</span><span class="hl-0">, </span><span class="hl-2">market</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-6">info</span><span class="hl-0">(</span><span class="hl-3">&quot;New message from&quot;</span><span class="hl-0">, </span><span class="hl-2">market</span><span class="hl-0">);</span><br/><span class="hl-0">  </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-6">info</span><span class="hl-0">(</span><span class="hl-2">message</span><span class="hl-0">);</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -708,24 +543,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">heartbeat</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">top_of_book</span><span style="color: #000000"> = </span><span style="color: #0000FF">false</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bids</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">offers</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">trades</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">auctions</span><span style="color: #000000"> = </span><span style="color: #0000FF">false</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;open&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Open:&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">));</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">connectMarket</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">symbol</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">heartbeat</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">top_of_book</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">bids</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">offers</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">trades</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">auctions</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">connectMarket</span><span style="color: #000000">({ </span><span style="color: #001080">symbol:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;btcusd&quot;</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">heartbeat</span><span class="hl-0"> = </span><span class="hl-4">true</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">top_of_book</span><span class="hl-0"> = </span><span class="hl-4">false</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">bids</span><span class="hl-0"> = </span><span class="hl-4">true</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">offers</span><span class="hl-0"> = </span><span class="hl-4">true</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">trades</span><span class="hl-0"> = </span><span class="hl-4">true</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">auctions</span><span class="hl-0"> = </span><span class="hl-4">false</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;zecltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">on</span><span class="hl-0">(</span><span class="hl-3">&quot;open&quot;</span><span class="hl-0">, (</span><span class="hl-2">market</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-6">log</span><span class="hl-0">(</span><span class="hl-3">&quot;Open:&quot;</span><span class="hl-0">, </span><span class="hl-2">market</span><span class="hl-0">));</span><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">connectMarket</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">symbol</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">heartbeat</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">top_of_book</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">bids</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">offers</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">trades</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">auctions</span><span class="hl-0">,</span><br/><span class="hl-0">});</span><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">connectMarket</span><span class="hl-0">({ </span><span class="hl-2">symbol:</span><span class="hl-0"> </span><span class="hl-3">&quot;btcusd&quot;</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -734,9 +552,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbol</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">once</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;close&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Closed:&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">));</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">disconnectMarket</span><span style="color: #000000">({ </span><span style="color: #001080">symbol</span><span style="color: #000000"> });</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbol</span><span class="hl-0"> = </span><span class="hl-3">&quot;zecltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">once</span><span class="hl-0">(</span><span class="hl-3">&quot;close&quot;</span><span class="hl-0">, (</span><span class="hl-2">market</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-6">log</span><span class="hl-0">(</span><span class="hl-3">&quot;Closed:&quot;</span><span class="hl-0">, </span><span class="hl-2">market</span><span class="hl-0">));</span><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">disconnectMarket</span><span class="hl-0">({ </span><span class="hl-2">symbol</span><span class="hl-0"> });</span>
 </code></pre>
             <ul>
               <li>
@@ -746,8 +562,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;open&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Open:&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">));</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">connect</span><span style="color: #000000">();</span>
+            <pre><code class="language-typescript"><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">on</span><span class="hl-0">(</span><span class="hl-3">&quot;open&quot;</span><span class="hl-0">, (</span><span class="hl-2">market</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-6">log</span><span class="hl-0">(</span><span class="hl-3">&quot;Open:&quot;</span><span class="hl-0">, </span><span class="hl-2">market</span><span class="hl-0">));</span><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">connect</span><span class="hl-0">();</span>
 </code></pre>
             <ul>
               <li>
@@ -757,8 +572,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">once</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;close&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Closed:&quot;</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">));</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">disconnect</span><span style="color: #000000">();</span>
+            <pre><code class="language-typescript"><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">once</span><span class="hl-0">(</span><span class="hl-3">&quot;close&quot;</span><span class="hl-0">, (</span><span class="hl-2">market</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-6">log</span><span class="hl-0">(</span><span class="hl-3">&quot;Closed:&quot;</span><span class="hl-0">, </span><span class="hl-2">market</span><span class="hl-0">));</span><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">disconnect</span><span class="hl-0">();</span>
 </code></pre>
             <ul>
               <li>
@@ -767,12 +581,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">subscriptions</span><span style="color: #000000"> = [</span>
-<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;l2&quot;</span><span style="color: #000000">, </span><span style="color: #001080">symbols:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;BTCUSD&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;ETHUSD&quot;</span><span style="color: #000000">] },</span>
-<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;candles_1m&quot;</span><span style="color: #000000">, </span><span style="color: #001080">symbols:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;BTCUSD&quot;</span><span style="color: #000000">] },</span>
-<span style="color: #000000">];</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">connect</span><span style="color: #000000">();</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #001080">subscriptions</span><span style="color: #000000">);</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">subscriptions</span><span class="hl-0"> = [</span><br/><span class="hl-0">  { </span><span class="hl-2">name:</span><span class="hl-0"> </span><span class="hl-3">&quot;l2&quot;</span><span class="hl-0">, </span><span class="hl-2">symbols:</span><span class="hl-0"> [</span><span class="hl-3">&quot;BTCUSD&quot;</span><span class="hl-0">, </span><span class="hl-3">&quot;ETHUSD&quot;</span><span class="hl-0">] },</span><br/><span class="hl-0">  { </span><span class="hl-2">name:</span><span class="hl-0"> </span><span class="hl-3">&quot;candles_1m&quot;</span><span class="hl-0">, </span><span class="hl-2">symbols:</span><span class="hl-0"> [</span><span class="hl-3">&quot;BTCUSD&quot;</span><span class="hl-0">] },</span><br/><span class="hl-0">];</span><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">connect</span><span class="hl-0">();</span><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">subscribe</span><span class="hl-0">(</span><span class="hl-2">subscriptions</span><span class="hl-0">);</span>
 </code></pre>
             <ul>
               <li>
@@ -781,8 +590,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">subscriptions</span><span style="color: #000000"> = [{ </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;l2&quot;</span><span style="color: #000000">, </span><span style="color: #001080">symbols:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;BTCUSD&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;ETHUSD&quot;</span><span style="color: #000000">] }];</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">unsubscribe</span><span style="color: #000000">(</span><span style="color: #001080">subscriptions</span><span style="color: #000000">);</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">subscriptions</span><span class="hl-0"> = [{ </span><span class="hl-2">name:</span><span class="hl-0"> </span><span class="hl-3">&quot;l2&quot;</span><span class="hl-0">, </span><span class="hl-2">symbols:</span><span class="hl-0"> [</span><span class="hl-3">&quot;BTCUSD&quot;</span><span class="hl-0">, </span><span class="hl-3">&quot;ETHUSD&quot;</span><span class="hl-0">] }];</span><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">unsubscribe</span><span class="hl-0">(</span><span class="hl-2">subscriptions</span><span class="hl-0">);</span>
 </code></pre>
             <ul>
               <li>
@@ -791,21 +599,7 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">symbolFilter</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;zecltc&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">apiSessionFilter</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;UI&quot;</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">eventTypeFilter</span><span style="color: #000000"> = [</span><span style="color: #A31515">&quot;accepted&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;rejected&quot;</span><span style="color: #000000">];</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">account</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;primary&quot;</span><span style="color: #000000">;</span>
-<span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;message&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">message</span><span style="color: #000000">, </span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">market</span><span style="color: #000000"> === </span><span style="color: #A31515">&quot;orders&quot;</span><span style="color: #000000">) {</span>
-<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;New message:&quot;</span><span style="color: #000000">, </span><span style="color: #001080">message</span><span style="color: #000000">);</span>
-<span style="color: #000000">  }</span>
-<span style="color: #000000">});</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">connectOrders</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">account</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">symbolFilter</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">apiSessionFilter</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">eventTypeFilter</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">symbolFilter</span><span class="hl-0"> = </span><span class="hl-3">&quot;zecltc&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">apiSessionFilter</span><span class="hl-0"> = </span><span class="hl-3">&quot;UI&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">eventTypeFilter</span><span class="hl-0"> = [</span><span class="hl-3">&quot;accepted&quot;</span><span class="hl-0">, </span><span class="hl-3">&quot;rejected&quot;</span><span class="hl-0">];</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">on</span><span class="hl-0">(</span><span class="hl-3">&quot;message&quot;</span><span class="hl-0">, (</span><span class="hl-2">message</span><span class="hl-0">, </span><span class="hl-2">market</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-1">if</span><span class="hl-0"> (</span><span class="hl-2">market</span><span class="hl-0"> === </span><span class="hl-3">&quot;orders&quot;</span><span class="hl-0">) {</span><br/><span class="hl-0">    </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-6">log</span><span class="hl-0">(</span><span class="hl-3">&quot;New message:&quot;</span><span class="hl-0">, </span><span class="hl-2">message</span><span class="hl-0">);</span><br/><span class="hl-0">  }</span><br/><span class="hl-0">});</span><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">connectOrders</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">account</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">symbolFilter</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">apiSessionFilter</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">eventTypeFilter</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
             <ul>
               <li>
@@ -814,13 +608,9 @@
                 >
               </li>
             </ul>
-            <pre><code class="language-typescript"><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">once</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;close&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">market</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">market</span><span style="color: #000000"> === </span><span style="color: #A31515">&quot;orders&quot;</span><span style="color: #000000">) {</span>
-<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Closed&quot;</span><span style="color: #000000">);</span>
-<span style="color: #000000">  }</span>
-<span style="color: #000000">});</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">websocket</span><span style="color: #000000">.</span><span style="color: #795E26">disconnectOrders</span><span style="color: #000000">();</span>
+            <pre><code class="language-typescript"><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">once</span><span class="hl-0">(</span><span class="hl-3">&quot;close&quot;</span><span class="hl-0">, (</span><span class="hl-2">market</span><span class="hl-0">) </span><span class="hl-4">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-1">if</span><span class="hl-0"> (</span><span class="hl-2">market</span><span class="hl-0"> === </span><span class="hl-3">&quot;orders&quot;</span><span class="hl-0">) {</span><br/><span class="hl-0">    </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-6">log</span><span class="hl-0">(</span><span class="hl-3">&quot;Closed&quot;</span><span class="hl-0">);</span><br/><span class="hl-0">  }</span><br/><span class="hl-0">});</span><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">websocket</span><span class="hl-0">.</span><span class="hl-6">disconnectOrders</span><span class="hl-0">();</span>
 </code></pre>
+
             <a
               href="#test"
               id="test"
@@ -828,626 +618,629 @@
             >
               <h3>Test</h3>
             </a>
-            <pre><code class="language-bash"><span style="color: #000000">npm </span><span style="color: #795E26">test</span>
+            <pre><code class="language-bash"><span class="hl-0">npm </span><span class="hl-6">test</span>
 </code></pre>
           </div>
         </div>
         <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
           <nav class="tsd-navigation primary">
             <ul>
-              <li class=" ">
-                <a href="modules.html">Exports</a>
-              </li>
+              <li class="current"><a href="modules.html">Exports</a></li>
             </ul>
           </nav>
           <nav class="tsd-navigation secondary menu-sticky">
-            <ul class="before-current">
+            <ul>
               <li class="tsd-kind-class">
-                <a href="classes/authenticatedclient.html" class="tsd-kind-icon"
+                <a href="classes/AuthenticatedClient.html" class="tsd-kind-icon"
                   >Authenticated<wbr />Client</a
                 >
               </li>
               <li class="tsd-kind-class">
-                <a href="classes/publicclient.html" class="tsd-kind-icon"
+                <a href="classes/PublicClient.html" class="tsd-kind-icon"
                   >Public<wbr />Client</a
                 >
               </li>
               <li class="tsd-kind-class">
-                <a href="classes/websocketclient.html" class="tsd-kind-icon"
+                <a href="classes/WebsocketClient.html" class="tsd-kind-icon"
                   >Websocket<wbr />Client</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/acceptedorder.html" class="tsd-kind-icon"
+                <a href="interfaces/AcceptedOrder.html" class="tsd-kind-icon"
                   >Accepted<wbr />Order</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/account.html" class="tsd-kind-icon"
+                <a href="interfaces/Account.html" class="tsd-kind-icon"
                   >Account</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/accountinfo.html" class="tsd-kind-icon"
+                <a href="interfaces/AccountDetails.html" class="tsd-kind-icon"
+                  >Account<wbr />Details</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/AccountInfo.html" class="tsd-kind-icon"
                   >Account<wbr />Info</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/accountname.html" class="tsd-kind-icon"
+                <a href="interfaces/AccountName.html" class="tsd-kind-icon"
                   >Account<wbr />Name</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/activeorder.html" class="tsd-kind-icon"
+                <a href="interfaces/ActiveOrder.html" class="tsd-kind-icon"
                   >Active<wbr />Order</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/auctionhistory.html" class="tsd-kind-icon"
+                <a href="interfaces/AuctionHistory.html" class="tsd-kind-icon"
                   >Auction<wbr />History</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/auctionhistoryfilter.html"
+                  href="interfaces/AuctionHistoryFilter.html"
                   class="tsd-kind-icon"
                   >Auction<wbr />History<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/auctionindicativeevent.html"
+                  href="interfaces/AuctionIndicativeEvent.html"
                   class="tsd-kind-icon"
                   >Auction<wbr />Indicative<wbr />Event</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/auctioninfo.html" class="tsd-kind-icon"
+                <a href="interfaces/AuctionInfo.html" class="tsd-kind-icon"
                   >Auction<wbr />Info</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/auctionopenevent.html" class="tsd-kind-icon"
+                <a href="interfaces/AuctionOpenEvent.html" class="tsd-kind-icon"
                   >Auction<wbr />Open<wbr />Event</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/auctionresultevent.html"
+                  href="interfaces/AuctionResultEvent.html"
                   class="tsd-kind-icon"
                   >Auction<wbr />Result<wbr />Event</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/authheaders.html" class="tsd-kind-icon"
+                <a href="interfaces/AuthHeaders.html" class="tsd-kind-icon"
                   >Auth<wbr />Headers</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/authenticatedclientoptions.html"
+                  href="interfaces/AuthenticatedClientOptions.html"
                   class="tsd-kind-icon"
                   >Authenticated<wbr />Client<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/balance.html" class="tsd-kind-icon"
+                <a href="interfaces/Balance.html" class="tsd-kind-icon"
                   >Balance</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/baseclearingorder.html"
+                  href="interfaces/BaseClearingOrder.html"
                   class="tsd-kind-icon"
                   >Base<wbr />Clearing<wbr />Order</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/baseorder.html" class="tsd-kind-icon"
+                <a href="interfaces/BaseOrder.html" class="tsd-kind-icon"
                   >Base<wbr />Order</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/basewsorder.html" class="tsd-kind-icon"
+                <a href="interfaces/BaseWSOrder.html" class="tsd-kind-icon"
                   >BaseWSOrder</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/blocktradeevent.html" class="tsd-kind-icon"
+                <a href="interfaces/BlockTradeEvent.html" class="tsd-kind-icon"
                   >Block<wbr />Trade<wbr />Event</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/bookentry.html" class="tsd-kind-icon"
+                <a href="interfaces/BookEntry.html" class="tsd-kind-icon"
                   >Book<wbr />Entry</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/bookfilter.html" class="tsd-kind-icon"
+                <a href="interfaces/BookFilter.html" class="tsd-kind-icon"
                   >Book<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/bookedorder.html" class="tsd-kind-icon"
+                <a href="interfaces/BookedOrder.html" class="tsd-kind-icon"
                   >Booked<wbr />Order</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/brokerorderoptions.html"
+                  href="interfaces/BrokerOrderOptions.html"
                   class="tsd-kind-icon"
                   >Broker<wbr />Order<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/cancelclearingorderresponse.html"
+                  href="interfaces/CancelClearingOrderResponse.html"
                   class="tsd-kind-icon"
                   >Cancel<wbr />Clearing<wbr />Order<wbr />Response</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/cancelordersresponse.html"
+                  href="interfaces/CancelOrdersResponse.html"
                   class="tsd-kind-icon"
                   >Cancel<wbr />Orders<wbr />Response</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/cancelrejectedorder.html"
+                  href="interfaces/CancelRejectedOrder.html"
                   class="tsd-kind-icon"
                   >Cancel<wbr />Rejected<wbr />Order</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/cancelledorder.html" class="tsd-kind-icon"
+                <a href="interfaces/CancelledOrder.html" class="tsd-kind-icon"
                   >Cancelled<wbr />Order</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/candlesfilter.html" class="tsd-kind-icon"
+                <a href="interfaces/CandlesFilter.html" class="tsd-kind-icon"
                   >Candles<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/candlesupdate.html" class="tsd-kind-icon"
+                <a href="interfaces/CandlesUpdate.html" class="tsd-kind-icon"
                   >Candles<wbr />Update</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/changeevent.html" class="tsd-kind-icon"
+                <a href="interfaces/ChangeEvent.html" class="tsd-kind-icon"
                   >Change<wbr />Event</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/clearingorderid.html" class="tsd-kind-icon"
+                <a href="interfaces/ClearingOrderID.html" class="tsd-kind-icon"
                   >Clearing<wbr />OrderID</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/clearingorderoptions.html"
+                  href="interfaces/ClearingOrderOptions.html"
                   class="tsd-kind-icon"
                   >Clearing<wbr />Order<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/clearingorderstatus.html"
+                  href="interfaces/ClearingOrderStatus.html"
                   class="tsd-kind-icon"
                   >Clearing<wbr />Order<wbr />Status</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/closedorder.html" class="tsd-kind-icon"
+                <a href="interfaces/ClosedOrder.html" class="tsd-kind-icon"
                   >Closed<wbr />Order</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/confirmclearingoptions.html"
+                  href="interfaces/ConfirmClearingOptions.html"
                   class="tsd-kind-icon"
                   >Confirm<wbr />Clearing<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/confirmclearingoptionsresponse.html"
+                  href="interfaces/ConfirmClearingOptionsResponse.html"
                   class="tsd-kind-icon"
                   >Confirm<wbr />Clearing<wbr />Options<wbr />Response</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/depositaddress.html" class="tsd-kind-icon"
+                <a href="interfaces/DepositAddress.html" class="tsd-kind-icon"
                   >Deposit<wbr />Address</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/depositaddressesfilter.html"
+                  href="interfaces/DepositAddressesFilter.html"
                   class="tsd-kind-icon"
                   >Deposit<wbr />Addresses<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/filledorder.html" class="tsd-kind-icon"
+                <a href="interfaces/FilledOrder.html" class="tsd-kind-icon"
                   >Filled<wbr />Order</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/gusdwithdrawal.html" class="tsd-kind-icon"
+                <a href="interfaces/GUSDWithdrawal.html" class="tsd-kind-icon"
                   >GUSDWithdrawal</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/heartbeat.html" class="tsd-kind-icon"
+                <a href="interfaces/Heartbeat.html" class="tsd-kind-icon"
                   >Heartbeat</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/heartbeatmarketmessage.html"
+                  href="interfaces/HeartbeatMarketMessage.html"
                   class="tsd-kind-icon"
                   >Heartbeat<wbr />Market<wbr />Message</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/heartbeatmarketv2.html"
+                  href="interfaces/HeartbeatMarketV2.html"
                   class="tsd-kind-icon"
                   >Heartbeat<wbr />Market<wbr />V2</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/heartbeatordersmessage.html"
+                  href="interfaces/HeartbeatOrdersMessage.html"
                   class="tsd-kind-icon"
                   >Heartbeat<wbr />Orders<wbr />Message</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/isymbol.html" class="tsd-kind-icon"
+                <a href="interfaces/ISymbol.html" class="tsd-kind-icon"
                   >ISymbol</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/initialupdate.html" class="tsd-kind-icon"
+                <a href="interfaces/InitialUpdate.html" class="tsd-kind-icon"
                   >Initial<wbr />Update</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/internaltransferfilter.html"
+                  href="interfaces/InternalTransferFilter.html"
                   class="tsd-kind-icon"
                   >Internal<wbr />Transfer<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/internaltransferresponse.html"
+                  href="interfaces/InternalTransferResponse.html"
                   class="tsd-kind-icon"
                   >Internal<wbr />Transfer<wbr />Response</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/l2auction.html" class="tsd-kind-icon"
+                <a href="interfaces/L2Auction.html" class="tsd-kind-icon"
                   >L2<wbr />Auction</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/l2initialresponse.html"
+                  href="interfaces/L2InitialResponse.html"
                   class="tsd-kind-icon"
                   >L2<wbr />Initial<wbr />Response</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/l2trade.html" class="tsd-kind-icon"
+                <a href="interfaces/L2Trade.html" class="tsd-kind-icon"
                   >L2<wbr />Trade</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/l2update.html" class="tsd-kind-icon"
+                <a href="interfaces/L2Update.html" class="tsd-kind-icon"
                   >L2<wbr />Update</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/messagev2.html" class="tsd-kind-icon"
+                <a href="interfaces/MessageV2.html" class="tsd-kind-icon"
                   >Message<wbr />V2</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/newaddress.html" class="tsd-kind-icon"
+                <a href="interfaces/NewAddress.html" class="tsd-kind-icon"
                   >New<wbr />Address</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/newaddressfilter.html" class="tsd-kind-icon"
+                <a href="interfaces/NewAddressFilter.html" class="tsd-kind-icon"
                   >New<wbr />Address<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/newclearingorderresponse.html"
+                  href="interfaces/NewClearingOrderResponse.html"
                   class="tsd-kind-icon"
                   >New<wbr />Clearing<wbr />Order<wbr />Response</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/notionalbalance.html" class="tsd-kind-icon"
+                <a href="interfaces/NotionalBalance.html" class="tsd-kind-icon"
                   >Notional<wbr />Balance</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/notionalvolume.html" class="tsd-kind-icon"
+                <a href="interfaces/NotionalVolume.html" class="tsd-kind-icon"
                   >Notional<wbr />Volume</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/orderbook.html" class="tsd-kind-icon"
+                <a href="interfaces/OrderBook.html" class="tsd-kind-icon"
                   >Order<wbr />Book</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/orderid.html" class="tsd-kind-icon"
+                <a href="interfaces/OrderID.html" class="tsd-kind-icon"
                   >OrderID</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/orderoptions.html" class="tsd-kind-icon"
+                <a href="interfaces/OrderOptions.html" class="tsd-kind-icon"
                   >Order<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/orderstatus.html" class="tsd-kind-icon"
+                <a href="interfaces/OrderStatus.html" class="tsd-kind-icon"
                   >Order<wbr />Status</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/pasttrade.html" class="tsd-kind-icon"
+                <a href="interfaces/PastTrade.html" class="tsd-kind-icon"
                   >Past<wbr />Trade</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/pricefeeditem.html" class="tsd-kind-icon"
+                <a href="interfaces/PriceFeedItem.html" class="tsd-kind-icon"
                   >Price<wbr />Feed<wbr />Item</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/publicclientoptions.html"
+                  href="interfaces/PublicClientOptions.html"
                   class="tsd-kind-icon"
                   >Public<wbr />Client<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/rejectedorder.html" class="tsd-kind-icon"
+                <a href="interfaces/RejectedOrder.html" class="tsd-kind-icon"
                   >Rejected<wbr />Order</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/signeroptions.html" class="tsd-kind-icon"
+                <a href="interfaces/SignerOptions.html" class="tsd-kind-icon"
                   >Signer<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/subscriptionack.html" class="tsd-kind-icon"
+                <a href="interfaces/SubscriptionAck.html" class="tsd-kind-icon"
                   >Subscription<wbr />Ack</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/symbolfilter.html" class="tsd-kind-icon"
+                <a href="interfaces/SymbolFilter.html" class="tsd-kind-icon"
                   >Symbol<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/tickerfilter.html" class="tsd-kind-icon"
+                <a href="interfaces/TickerFilter.html" class="tsd-kind-icon"
                   >Ticker<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/tickerv1.html" class="tsd-kind-icon"
+                <a href="interfaces/TickerV1.html" class="tsd-kind-icon"
                   >Ticker<wbr />V1</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/tickerv2.html" class="tsd-kind-icon"
+                <a href="interfaces/TickerV2.html" class="tsd-kind-icon"
                   >Ticker<wbr />V2</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/trade.html" class="tsd-kind-icon">Trade</a>
+                <a href="interfaces/Trade.html" class="tsd-kind-icon">Trade</a>
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/tradeevent.html" class="tsd-kind-icon"
+                <a href="interfaces/TradeEvent.html" class="tsd-kind-icon"
                   >Trade<wbr />Event</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/tradehistoryfilter.html"
+                  href="interfaces/TradeHistoryFilter.html"
                   class="tsd-kind-icon"
                   >Trade<wbr />History<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/tradevolume.html" class="tsd-kind-icon"
+                <a href="interfaces/TradeVolume.html" class="tsd-kind-icon"
                   >Trade<wbr />Volume</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/transfer.html" class="tsd-kind-icon"
+                <a href="interfaces/Transfer.html" class="tsd-kind-icon"
                   >Transfer</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/transferfilter.html" class="tsd-kind-icon"
+                <a href="interfaces/TransferFilter.html" class="tsd-kind-icon"
                   >Transfer<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/update.html" class="tsd-kind-icon"
+                <a href="interfaces/Update.html" class="tsd-kind-icon"
                   >Update</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/wsmarketqs.html" class="tsd-kind-icon"
+                <a href="interfaces/WSMarketQS.html" class="tsd-kind-icon"
                   >WSMarketQS</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/wsorderqs.html" class="tsd-kind-icon"
+                <a href="interfaces/WSOrderQS.html" class="tsd-kind-icon"
                   >WSOrderQS</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/wssigneroptions.html" class="tsd-kind-icon"
+                <a href="interfaces/WSSignerOptions.html" class="tsd-kind-icon"
                   >WSSigner<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/websocketclientoptions.html"
+                  href="interfaces/WebsocketClientOptions.html"
                   class="tsd-kind-icon"
                   >Websocket<wbr />Client<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/withdrawcryptofilter.html"
+                  href="interfaces/WithdrawCryptoFilter.html"
                   class="tsd-kind-icon"
                   >Withdraw<wbr />Crypto<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-interface">
                 <a
-                  href="interfaces/withdrawgusdfilter.html"
+                  href="interfaces/WithdrawGUSDFilter.html"
                   class="tsd-kind-icon"
                   >WithdrawGUSDFilter</a
                 >
               </li>
               <li class="tsd-kind-interface">
-                <a href="interfaces/withdrawal.html" class="tsd-kind-icon"
+                <a href="interfaces/Withdrawal.html" class="tsd-kind-icon"
                   >Withdrawal</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#basicorderoptions" class="tsd-kind-icon"
+                <a href="modules.html#BasicOrderOptions" class="tsd-kind-icon"
                   >Basic<wbr />Order<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#candle" class="tsd-kind-icon">Candle</a>
+                <a href="modules.html#Candle" class="tsd-kind-icon">Candle</a>
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#candlestype" class="tsd-kind-icon"
+                <a href="modules.html#CandlesType" class="tsd-kind-icon"
                   >Candles<wbr />Type</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#l2message" class="tsd-kind-icon"
+                <a href="modules.html#L2Message" class="tsd-kind-icon"
                   >L2<wbr />Message</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#marketdataevent" class="tsd-kind-icon"
+                <a href="modules.html#MarketDataEvent" class="tsd-kind-icon"
                   >Market<wbr />Data<wbr />Event</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#marketdatamessage" class="tsd-kind-icon"
+                <a href="modules.html#MarketDataMessage" class="tsd-kind-icon"
                   >Market<wbr />Data<wbr />Message</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#marketv2message" class="tsd-kind-icon"
-                  >Market<wbr />V2Message</a
+                <a href="modules.html#MarketV2Message" class="tsd-kind-icon"
+                  >Market<wbr />V2<wbr />Message</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#order" class="tsd-kind-icon">Order</a>
+                <a href="modules.html#Order" class="tsd-kind-icon">Order</a>
               </li>
               <li class="tsd-kind-type-alias">
                 <a
-                  href="modules.html#ordereexecutionoptions"
+                  href="modules.html#OrderEexecutionOptions"
                   class="tsd-kind-icon"
                   >Order<wbr />Eexecution<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#ordertype" class="tsd-kind-icon"
+                <a href="modules.html#OrderType" class="tsd-kind-icon"
                   >Order<wbr />Type</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#ordersmessage" class="tsd-kind-icon"
+                <a href="modules.html#OrdersMessage" class="tsd-kind-icon"
                   >Orders<wbr />Message</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#pasttradesfilter" class="tsd-kind-icon"
+                <a href="modules.html#PastTradesFilter" class="tsd-kind-icon"
                   >Past<wbr />Trades<wbr />Filter</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#subscriptions" class="tsd-kind-icon"
+                <a href="modules.html#Subscriptions" class="tsd-kind-icon"
                   >Subscriptions</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#ticker" class="tsd-kind-icon">Ticker</a>
+                <a href="modules.html#Ticker" class="tsd-kind-icon">Ticker</a>
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#wsmarket" class="tsd-kind-icon"
+                <a href="modules.html#WSMarket" class="tsd-kind-icon"
                   >WSMarket</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#wsmessage" class="tsd-kind-icon"
+                <a href="modules.html#WSMessage" class="tsd-kind-icon"
                   >WSMessage</a
                 >
               </li>
               <li class="tsd-kind-type-alias">
-                <a href="modules.html#wsorderoptions" class="tsd-kind-icon"
+                <a href="modules.html#WSOrderOptions" class="tsd-kind-icon"
                   >WSOrder<wbr />Options</a
                 >
               </li>
               <li class="tsd-kind-variable">
-                <a href="modules.html#apilimit" class="tsd-kind-icon"
+                <a href="modules.html#ApiLimit" class="tsd-kind-icon"
                   >Api<wbr />Limit</a
                 >
               </li>
               <li class="tsd-kind-variable">
-                <a href="modules.html#apiuri" class="tsd-kind-icon"
+                <a href="modules.html#ApiUri" class="tsd-kind-icon"
                   >Api<wbr />Uri</a
                 >
               </li>
               <li class="tsd-kind-variable">
-                <a href="modules.html#defaultsymbol" class="tsd-kind-icon"
+                <a href="modules.html#DefaultSymbol" class="tsd-kind-icon"
                   >Default<wbr />Symbol</a
                 >
               </li>
               <li class="tsd-kind-variable">
-                <a href="modules.html#headers" class="tsd-kind-icon">Headers</a>
+                <a href="modules.html#Headers" class="tsd-kind-icon">Headers</a>
               </li>
               <li class="tsd-kind-variable">
-                <a href="modules.html#sandboxapiuri" class="tsd-kind-icon"
+                <a href="modules.html#SandboxApiUri" class="tsd-kind-icon"
                   >Sandbox<wbr />Api<wbr />Uri</a
                 >
               </li>
               <li class="tsd-kind-variable">
-                <a href="modules.html#sandboxwsuri" class="tsd-kind-icon"
-                  >Sandbox<wbr />WsUri</a
+                <a href="modules.html#SandboxWsUri" class="tsd-kind-icon"
+                  >Sandbox<wbr />Ws<wbr />Uri</a
                 >
               </li>
               <li class="tsd-kind-variable">
-                <a href="modules.html#wsuri" class="tsd-kind-icon"
+                <a href="modules.html#WsUri" class="tsd-kind-icon"
                   >Ws<wbr />Uri</a
                 >
               </li>
               <li class="tsd-kind-function">
-                <a href="modules.html#signrequest" class="tsd-kind-icon"
+                <a href="modules.html#SignRequest" class="tsd-kind-icon"
                   >Sign<wbr />Request</a
                 >
               </li>
@@ -1456,7 +1249,7 @@
         </div>
       </div>
     </div>
-    <footer>
+    <footer class="">
       <div class="container">
         <h2>Legend</h2>
         <div class="tsd-legend-group">
@@ -1475,11 +1268,6 @@
             </li>
           </ul>
           <ul class="tsd-legend">
-            <li
-              class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"
-            >
-              <span class="tsd-kind-icon">Inherited constructor</span>
-            </li>
             <li
               class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"
             >
@@ -1503,9 +1291,18 @@
             </li>
           </ul>
         </div>
+        <h2>Settings</h2>
+        <p>
+          Theme
+          <select id="theme">
+            <option value="os">OS</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </p>
       </div>
     </footer>
     <div class="overlay"></div>
-    <script src="assets/js/main.js"></script>
+    <script src="assets/main.js"></script>
   </body>
 </html>
