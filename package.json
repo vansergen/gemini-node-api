@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@types/ws": "^8.2.0",
-    "rpc-bluebird": "^3.0.3",
+    "rpc-request": "^6.0.0",
     "ws": "^8.2.3"
   },
   "devDependencies": {
