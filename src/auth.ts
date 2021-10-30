@@ -98,6 +98,23 @@ export interface InternalTransferFilter {
   amount: number;
 }
 
+export interface AccountDetails {
+  account: {
+    accountName: string;
+    shortName: string;
+    type: string;
+    created: string;
+  };
+  users: {
+    name: string;
+    lastSignIn: string;
+    status: string;
+    countryCode: string;
+    isVerified: boolean;
+  }[];
+  memo_reference_code: string;
+}
+
 export interface Account {
   name: string;
   type?: "exchange" | "custody";
@@ -563,6 +580,13 @@ export class AuthenticatedClient extends PublicClient {
     const request = `/v1/account/transfer/${currency}`;
     const body = { request, ...rest };
     return this.post<InternalTransferResponse>(request, {}, body);
+  }
+
+  /** Get details about the specific account requested such as users, country codes, etc. */
+  public getAccountDetails(account?: AccountName): Promise<AccountDetails> {
+    const request = "/v1/account";
+    const body = { request, ...account };
+    return this.post<AccountDetails>(request, {}, body);
   }
 
   /** Create a new exchange account within the group. */
