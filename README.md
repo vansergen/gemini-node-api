@@ -373,6 +373,13 @@ const transfer = await client.internalTransfer({
 });
 ```
 
+- [`getAccountDetails`](https://docs.gemini.com/rest-api/#account-detail)
+
+```typescript
+const account = "primary";
+const details = await client.getAccountDetails({ account });
+```
+
 - [`createAccount`](https://docs.gemini.com/rest-api/#create-account)
 
 ```typescript
