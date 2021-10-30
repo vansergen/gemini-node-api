@@ -1,7 +1,7 @@
-import assert from "assert";
-import { stringify } from "querystring";
-import { Server, OPEN, CLOSING, CONNECTING, CLOSED } from "ws";
-import type { IncomingMessage } from "http";
+import { deepStrictEqual, ok, rejects } from "assert";
+import { stringify } from "node:querystring";
+import { WebSocketServer, WebSocket } from "ws";
+import type { IncomingMessage } from "node:http";
 import {
   WebsocketClient,
   WsUri,
@@ -11,7 +11,7 @@ import {
   AuthHeaders,
   SignRequest,
   WSSignerOptions,
-} from "../index";
+} from "../index.js";
 
 const key = "Gemini-API-KEY";
 const secret = "Gemini-API-SECRET";
@@ -49,16 +49,17 @@ function VerifySignature(
 
 suite("WebsocketClient", () => {
   let client: WebsocketClient;
-  let server: Server;
+  let server: WebSocketServer;
 
   setup(async () => {
     await new Promise<void>((resolve) => {
-      server = new Server({ port }, resolve);
+      server = new WebSocketServer({ port }, resolve);
     });
     client = new WebsocketClient({ wsUri });
   });
 
   teardown(async () => {
+    server.clients?.forEach((c) => c.close());
     await new Promise<void>((resolve, reject) => {
       server.close((error) => {
         if (error) {
@@ -73,22 +74,22 @@ suite("WebsocketClient", () => {
   test("constructor", () => {
     const otherClient = new WebsocketClient();
 
-    assert.deepStrictEqual(otherClient.wsUri, WsUri);
-    assert.deepStrictEqual(otherClient.symbol, DefaultSymbol);
+    deepStrictEqual(otherClient.wsUri, WsUri);
+    deepStrictEqual(otherClient.symbol, DefaultSymbol);
   });
 
   test("constructor (with sandbox flag)", () => {
     const otherClient = new WebsocketClient({ sandbox: true, key, symbol });
 
-    assert.deepStrictEqual(otherClient.wsUri, SandboxWsUri);
-    assert.deepStrictEqual(otherClient.symbol, symbol);
+    deepStrictEqual(otherClient.wsUri, SandboxWsUri);
+    deepStrictEqual(otherClient.symbol, symbol);
   });
 
   test("constructor (with `wsUri`)", () => {
     const otherClient = new WebsocketClient({ key, secret, wsUri });
 
-    assert.deepStrictEqual(otherClient.wsUri, wsUri);
-    assert.deepStrictEqual(otherClient.symbol, DefaultSymbol);
+    deepStrictEqual(otherClient.wsUri, wsUri);
+    deepStrictEqual(otherClient.symbol, DefaultSymbol);
   });
 
   test(".connectMarket()", async () => {
@@ -97,9 +98,9 @@ suite("WebsocketClient", () => {
       server.once("connection", (_socket, req) => {
         try {
           const url = new URL(req.url ?? "", wsUri);
-          assert.deepStrictEqual(url.search, `?${stringify(queryParams)}`);
-          assert.deepStrictEqual(url.hash, "");
-          assert.deepStrictEqual(url.pathname, `/v1/marketdata/${symbol}`);
+          deepStrictEqual(url.search, `?${stringify(queryParams)}`);
+          deepStrictEqual(url.hash, "");
+          deepStrictEqual(url.pathname, `/v1/marketdata/${symbol}`);
           resolve();
         } catch (error) {
           reject(error);
@@ -109,7 +110,7 @@ suite("WebsocketClient", () => {
     const clientConnect = new Promise<void>((resolve, reject) => {
       client.once("open", (market) => {
         try {
-          assert.deepStrictEqual(market, symbol);
+          deepStrictEqual(market, symbol);
           resolve();
         } catch (error) {
           reject(error);
@@ -118,7 +119,7 @@ suite("WebsocketClient", () => {
     });
 
     await client.connectMarket({ symbol, ...queryParams });
-    assert.deepStrictEqual(client.sockets[symbol].readyState, OPEN);
+    deepStrictEqual(client.sockets[symbol].readyState, WebSocket.OPEN);
     await clientConnect;
     await serverConnect;
   });
@@ -129,9 +130,9 @@ suite("WebsocketClient", () => {
       server.once("connection", (_socket, req) => {
         try {
           const url = new URL(req.url ?? "", wsUri);
-          assert.deepStrictEqual(url.search, "");
-          assert.deepStrictEqual(url.hash, "");
-          assert.deepStrictEqual(url.pathname, `/v1/marketdata/${symbol}`);
+          deepStrictEqual(url.search, "");
+          deepStrictEqual(url.hash, "");
+          deepStrictEqual(url.pathname, `/v1/marketdata/${symbol}`);
           resolve();
         } catch (error) {
           reject(error);
@@ -141,7 +142,7 @@ suite("WebsocketClient", () => {
     const clientConnect = new Promise<void>((resolve, reject) => {
       otherClient.once("open", (market) => {
         try {
-          assert.deepStrictEqual(market, symbol);
+          deepStrictEqual(market, symbol);
           resolve();
         } catch (error) {
           reject(error);
@@ -150,7 +151,7 @@ suite("WebsocketClient", () => {
     });
 
     await otherClient.connectMarket();
-    assert.deepStrictEqual(otherClient.sockets[symbol].readyState, OPEN);
+    deepStrictEqual(otherClient.sockets[symbol].readyState, WebSocket.OPEN);
     await clientConnect;
     await serverConnect;
   });
@@ -163,21 +164,15 @@ suite("WebsocketClient", () => {
       server.once("connection", (_socket, req) => {
         try {
           const url = new URL(req.url ?? "", wsUri);
-          assert.deepStrictEqual(url.search, "");
-          assert.deepStrictEqual(url.hash, "");
-          assert.deepStrictEqual(url.pathname, `/v1/marketdata/${_symbol}`);
+          deepStrictEqual(url.search, "");
+          deepStrictEqual(url.hash, "");
+          deepStrictEqual(url.pathname, `/v1/marketdata/${_symbol}`);
           server.once("connection", (__socket, _req) => {
             try {
               const newUrl = new URL(_req.url ?? "", wsUri);
-              assert.deepStrictEqual(
-                newUrl.search,
-                `?${stringify({ heartbeat })}`
-              );
-              assert.deepStrictEqual(newUrl.hash, "");
-              assert.deepStrictEqual(
-                newUrl.pathname,
-                `/v1/marketdata/${symbol}`
-              );
+              deepStrictEqual(newUrl.search, `?${stringify({ heartbeat })}`);
+              deepStrictEqual(newUrl.hash, "");
+              deepStrictEqual(newUrl.pathname, `/v1/marketdata/${symbol}`);
               resolve();
             } catch (error) {
               reject(error);
@@ -191,10 +186,10 @@ suite("WebsocketClient", () => {
     const clientConnect = new Promise<void>((resolve, reject) => {
       otherClient.once("open", (market) => {
         try {
-          assert.deepStrictEqual(market, _symbol);
+          deepStrictEqual(market, _symbol);
           otherClient.once("open", (otherMarket) => {
             try {
-              assert.deepStrictEqual(otherMarket, symbol);
+              deepStrictEqual(otherMarket, symbol);
               resolve();
             } catch (error) {
               reject(error);
@@ -207,9 +202,9 @@ suite("WebsocketClient", () => {
     });
 
     await otherClient.connectMarket({ symbol: _symbol });
-    assert.deepStrictEqual(otherClient.sockets[_symbol].readyState, OPEN);
+    deepStrictEqual(otherClient.sockets[_symbol].readyState, WebSocket.OPEN);
     await otherClient.connectMarket({ heartbeat });
-    assert.deepStrictEqual(otherClient.sockets[symbol].readyState, OPEN);
+    deepStrictEqual(otherClient.sockets[symbol].readyState, WebSocket.OPEN);
     await clientConnect;
     await serverConnect;
   });
@@ -219,9 +214,9 @@ suite("WebsocketClient", () => {
       server.once("connection", (_socket, req) => {
         try {
           const url = new URL(req.url ?? "", wsUri);
-          assert.deepStrictEqual(url.search, "");
-          assert.deepStrictEqual(url.hash, "");
-          assert.deepStrictEqual(url.pathname, `/v1/marketdata/${symbol}`);
+          deepStrictEqual(url.search, "");
+          deepStrictEqual(url.hash, "");
+          deepStrictEqual(url.pathname, `/v1/marketdata/${symbol}`);
           resolve();
         } catch (error) {
           reject(error);
@@ -231,10 +226,10 @@ suite("WebsocketClient", () => {
     const clientConnect = new Promise<void>((resolve, reject) => {
       client.once("open", (market) => {
         try {
-          assert.deepStrictEqual(market, symbol);
+          deepStrictEqual(market, symbol);
           client.once("close", (otherMarket) => {
             try {
-              assert.deepStrictEqual(otherMarket, symbol);
+              deepStrictEqual(otherMarket, symbol);
               resolve();
             } catch (error) {
               reject(error);
@@ -259,9 +254,9 @@ suite("WebsocketClient", () => {
       server.once("connection", (_socket, req) => {
         try {
           const url = new URL(req.url ?? "", wsUri);
-          assert.deepStrictEqual(url.search, "");
-          assert.deepStrictEqual(url.hash, "");
-          assert.deepStrictEqual(url.pathname, `/v1/marketdata/${symbol}`);
+          deepStrictEqual(url.search, "");
+          deepStrictEqual(url.hash, "");
+          deepStrictEqual(url.pathname, `/v1/marketdata/${symbol}`);
           resolve();
         } catch (error) {
           reject(error);
@@ -271,10 +266,10 @@ suite("WebsocketClient", () => {
     const clientConnect = new Promise<void>((resolve, reject) => {
       otherClient.once("open", (market) => {
         try {
-          assert.deepStrictEqual(market, symbol);
+          deepStrictEqual(market, symbol);
           otherClient.once("close", (otherMarket) => {
             try {
-              assert.deepStrictEqual(otherMarket, symbol);
+              deepStrictEqual(otherMarket, symbol);
               resolve();
             } catch (error) {
               reject(error);
@@ -287,9 +282,9 @@ suite("WebsocketClient", () => {
     });
 
     await otherClient.connectMarket();
-    assert.deepStrictEqual(otherClient.sockets[symbol].readyState, OPEN);
+    deepStrictEqual(otherClient.sockets[symbol].readyState, WebSocket.OPEN);
     await otherClient.disconnectMarket();
-    assert.deepStrictEqual(otherClient.sockets[symbol].readyState, CLOSED);
+    deepStrictEqual(otherClient.sockets[symbol].readyState, WebSocket.CLOSED);
     await clientConnect;
     await serverConnect;
   });
@@ -309,16 +304,16 @@ suite("WebsocketClient", () => {
         try {
           const url = new URL(req.url ?? "", wsUri);
           const request = "/v1/order/events";
-          assert.deepStrictEqual(url.search, "");
-          assert.deepStrictEqual(url.hash, "");
-          assert.deepStrictEqual(url.pathname, request);
+          deepStrictEqual(url.search, "");
+          deepStrictEqual(url.hash, "");
+          deepStrictEqual(url.pathname, request);
           const verify = VerifySignature(req, key, secret);
-          assert.ok(verify);
+          ok(verify);
           const { "X-GEMINI-PAYLOAD": payload } = verify;
           const parsedPayload = JSON.parse(
             Buffer.from(payload, "base64").toString("utf8")
           ) as WSSignerOptions;
-          assert.deepStrictEqual(parsedPayload, { request, nonce });
+          deepStrictEqual(parsedPayload, { request, nonce });
           resolve();
         } catch (error) {
           reject(error);
@@ -328,7 +323,7 @@ suite("WebsocketClient", () => {
     const clientConnect = new Promise<void>((resolve, reject) => {
       otherClient.once("open", (market) => {
         try {
-          assert.deepStrictEqual(market, "orders");
+          deepStrictEqual(market, "orders");
           resolve();
         } catch (error) {
           reject(error);
@@ -337,7 +332,7 @@ suite("WebsocketClient", () => {
     });
 
     await otherClient.connectOrders();
-    assert.deepStrictEqual(otherClient.sockets.orders.readyState, OPEN);
+    deepStrictEqual(otherClient.sockets.orders.readyState, WebSocket.OPEN);
     await clientConnect;
     await serverConnect;
     delete server.options.verifyClient;
@@ -346,7 +341,7 @@ suite("WebsocketClient", () => {
   test(".connectOrders() (with no api key)", async () => {
     const otherClient = new WebsocketClient({ wsUri, secret });
     const error = new Error("`connectOrders` requires both `key` and `secret`");
-    await assert.rejects(otherClient.connectOrders(), error);
+    await rejects(otherClient.connectOrders(), error);
   });
 
   test(".connectOrders() (with `account`)", async () => {
@@ -370,16 +365,16 @@ suite("WebsocketClient", () => {
         try {
           const url = new URL(req.url ?? "", wsUri);
           const request = "/v1/order/events";
-          assert.deepStrictEqual(url.search, `?${stringify(qs)}`);
-          assert.deepStrictEqual(url.hash, "");
-          assert.deepStrictEqual(url.pathname, request);
+          deepStrictEqual(url.search, `?${stringify(qs)}`);
+          deepStrictEqual(url.hash, "");
+          deepStrictEqual(url.pathname, request);
           const verify = VerifySignature(req, key, secret);
-          assert.ok(verify);
+          ok(verify);
           const { "X-GEMINI-PAYLOAD": payload } = verify;
           const parsedPayload = JSON.parse(
             Buffer.from(payload, "base64").toString("utf8")
           ) as WSSignerOptions;
-          assert.deepStrictEqual(parsedPayload, { request, nonce, account });
+          deepStrictEqual(parsedPayload, { request, nonce, account });
           resolve();
         } catch (error) {
           reject(error);
@@ -389,7 +384,7 @@ suite("WebsocketClient", () => {
     const clientConnect = new Promise<void>((resolve, reject) => {
       otherClient.once("open", (market) => {
         try {
-          assert.deepStrictEqual(market, "orders");
+          deepStrictEqual(market, "orders");
           resolve();
         } catch (error) {
           reject(error);
@@ -398,7 +393,7 @@ suite("WebsocketClient", () => {
     });
 
     await otherClient.connectOrders({ account, ...qs });
-    assert.deepStrictEqual(otherClient.sockets.orders.readyState, OPEN);
+    deepStrictEqual(otherClient.sockets.orders.readyState, WebSocket.OPEN);
     await clientConnect;
     await serverConnect;
     delete server.options.verifyClient;
@@ -414,7 +409,7 @@ suite("WebsocketClient", () => {
     const clientConnect = new Promise<void>((resolve, reject) => {
       otherClient.once("close", (market) => {
         try {
-          assert.deepStrictEqual(market, "orders");
+          deepStrictEqual(market, "orders");
           resolve();
         } catch (error) {
           reject(error);
@@ -423,9 +418,9 @@ suite("WebsocketClient", () => {
     });
 
     await otherClient.connectOrders();
-    assert.deepStrictEqual(otherClient.sockets.orders.readyState, OPEN);
+    deepStrictEqual(otherClient.sockets.orders.readyState, WebSocket.OPEN);
     await otherClient.disconnectOrders();
-    assert.deepStrictEqual(otherClient.sockets.orders.readyState, CLOSED);
+    deepStrictEqual(otherClient.sockets.orders.readyState, WebSocket.CLOSED);
     await clientConnect;
     delete server.options.verifyClient;
   });
@@ -435,9 +430,9 @@ suite("WebsocketClient", () => {
       server.once("connection", (_socket, req) => {
         try {
           const url = new URL(req.url ?? "", wsUri);
-          assert.deepStrictEqual(url.search, "");
-          assert.deepStrictEqual(url.hash, "");
-          assert.deepStrictEqual(url.pathname, `/v2/marketdata`);
+          deepStrictEqual(url.search, "");
+          deepStrictEqual(url.hash, "");
+          deepStrictEqual(url.pathname, `/v2/marketdata`);
           resolve();
         } catch (error) {
           reject(error);
@@ -447,7 +442,7 @@ suite("WebsocketClient", () => {
     const clientConnect = new Promise<void>((resolve, reject) => {
       client.once("open", (market) => {
         try {
-          assert.deepStrictEqual(market, "v2");
+          deepStrictEqual(market, "v2");
           resolve();
         } catch (error) {
           reject(error);
@@ -456,44 +451,44 @@ suite("WebsocketClient", () => {
     });
 
     await client.connect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, OPEN);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.OPEN);
     await clientConnect;
     await serverConnect;
   });
 
   test(".connect() (when `readyState` is OPEN)", async () => {
     await client.connect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, OPEN);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.OPEN);
     await client.connect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, OPEN);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.OPEN);
   });
 
   test(".connect() (when `readyState` is CLOSED)", async () => {
     await client.connect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, OPEN);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.OPEN);
     await client.disconnect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, CLOSED);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.CLOSED);
     await client.connect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, OPEN);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.OPEN);
   });
 
   test(".connect() (when `readyState` is CLOSING)", async () => {
     await client.connect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, OPEN);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.OPEN);
     const disconnect = client.disconnect();
     const error = new Error("Could not connect. State: 2");
-    assert.deepStrictEqual(client.sockets.v2.readyState, CLOSING);
-    await assert.rejects(client.connect(), error);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.CLOSING);
+    await rejects(client.connect(), error);
     await disconnect;
   });
 
   test(".connect() (when `readyState` is CONNECTING)", async () => {
     const connect = client.connect();
     const error = new Error("Could not connect. State: 0");
-    assert.deepStrictEqual(client.sockets.v2.readyState, CONNECTING);
-    await assert.rejects(client.connect(), error);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.CONNECTING);
+    await rejects(client.connect(), error);
     await connect;
-    assert.deepStrictEqual(client.sockets.v2.readyState, OPEN);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.OPEN);
   });
 
   test(".disconnect()", async () => {
@@ -501,9 +496,9 @@ suite("WebsocketClient", () => {
       server.once("connection", (_socket, req) => {
         try {
           const url = new URL(req.url ?? "", wsUri);
-          assert.deepStrictEqual(url.search, "");
-          assert.deepStrictEqual(url.hash, "");
-          assert.deepStrictEqual(url.pathname, `/v2/marketdata`);
+          deepStrictEqual(url.search, "");
+          deepStrictEqual(url.hash, "");
+          deepStrictEqual(url.pathname, `/v2/marketdata`);
           resolve();
         } catch (error) {
           reject(error);
@@ -513,10 +508,10 @@ suite("WebsocketClient", () => {
     const clientConnect = new Promise<void>((resolve, reject) => {
       client.once("open", (market) => {
         try {
-          assert.deepStrictEqual(market, "v2");
+          deepStrictEqual(market, "v2");
           client.once("close", (_market) => {
             try {
-              assert.deepStrictEqual(_market, "v2");
+              deepStrictEqual(_market, "v2");
               resolve();
             } catch (error) {
               reject(error);
@@ -529,46 +524,46 @@ suite("WebsocketClient", () => {
     });
 
     await client.connect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, OPEN);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.OPEN);
     await client.disconnect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, CLOSED);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.CLOSED);
     await clientConnect;
     await serverConnect;
   });
 
   test(".disconnect() (when `socket` is not initialized)", async () => {
-    assert.ok(typeof client.sockets.v2 === "undefined");
+    ok(typeof client.sockets.v2 === "undefined");
     await client.disconnect();
-    assert.ok(typeof client.sockets.v2 === "undefined");
+    ok(typeof client.sockets.v2 === "undefined");
   });
 
   test(".disconnect() (when `readyState` is CLOSED)", async () => {
     await client.connect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, OPEN);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.OPEN);
     await client.disconnect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, CLOSED);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.CLOSED);
     await client.disconnect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, CLOSED);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.CLOSED);
   });
 
   test(".disconnect() (when `readyState` is CLOSING)", async () => {
     await client.connect();
-    assert.deepStrictEqual(client.sockets.v2.readyState, OPEN);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.OPEN);
     const disconnect = client.disconnect();
     const error = new Error("Could not disconnect. State: 2");
-    assert.deepStrictEqual(client.sockets.v2.readyState, CLOSING);
-    await assert.rejects(client.disconnect(), error);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.CLOSING);
+    await rejects(client.disconnect(), error);
     await disconnect;
-    assert.deepStrictEqual(client.sockets.v2.readyState, CLOSED);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.CLOSED);
   });
 
   test(".disconnect() (when `readyState` is CONNECTING)", async () => {
     const connect = client.connect();
     const error = new Error("Could not disconnect. State: 0");
-    assert.deepStrictEqual(client.sockets.v2.readyState, CONNECTING);
-    await assert.rejects(client.disconnect(), error);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.CONNECTING);
+    await rejects(client.disconnect(), error);
     await connect;
-    assert.deepStrictEqual(client.sockets.v2.readyState, OPEN);
+    deepStrictEqual(client.sockets.v2.readyState, WebSocket.OPEN);
   });
 
   test(".subscribe()", async () => {
@@ -581,7 +576,7 @@ suite("WebsocketClient", () => {
           try {
             const message = JSON.parse(data) as unknown;
             const type = "subscribe";
-            assert.deepStrictEqual(message, { type, subscriptions });
+            deepStrictEqual(message, { type, subscriptions });
             resolve();
           } catch (error) {
             reject(error);
@@ -603,7 +598,7 @@ suite("WebsocketClient", () => {
     await client.connect();
     const disconnect = client.disconnect();
     const error = new Error("WebSocket is not open: readyState 2 (CLOSING)");
-    await assert.rejects(client.subscribe(subscriptions), error);
+    await rejects(client.subscribe(subscriptions), error);
     await disconnect;
   });
 
@@ -617,7 +612,7 @@ suite("WebsocketClient", () => {
           try {
             const message = JSON.parse(data) as unknown;
             const type = "unsubscribe";
-            assert.deepStrictEqual(message, { type, subscriptions });
+            deepStrictEqual(message, { type, subscriptions });
             resolve();
           } catch (error) {
             reject(error);
@@ -636,7 +631,7 @@ suite("WebsocketClient", () => {
       { name: "l2", symbols: ["BTCUSD", "ETHUSD", "ETHBTC"] },
     ];
     const error = new Error("Websocket is not initialized");
-    await assert.rejects(client.unsubscribe(subscriptions), error);
+    await rejects(client.unsubscribe(subscriptions), error);
   });
 
   suite("socket events", () => {
@@ -645,10 +640,10 @@ suite("WebsocketClient", () => {
         const clientConnect = new Promise<void>((resolve, reject) => {
           client.once("open", (market) => {
             try {
-              assert.deepStrictEqual(market, "v2");
+              deepStrictEqual(market, "v2");
               client.once("open", (_market) => {
                 try {
-                  assert.deepStrictEqual(_market, "v2");
+                  deepStrictEqual(_market, "v2");
                   resolve();
                 } catch (error) {
                   reject(error);
@@ -671,10 +666,10 @@ suite("WebsocketClient", () => {
         const clientConnect = new Promise<void>((resolve, reject) => {
           client.once("close", (market) => {
             try {
-              assert.deepStrictEqual(market, "v2");
+              deepStrictEqual(market, "v2");
               client.once("close", (_market) => {
                 try {
-                  assert.deepStrictEqual(_market, "v2");
+                  deepStrictEqual(_market, "v2");
                   resolve();
                 } catch (error) {
                   reject(error);
@@ -699,8 +694,8 @@ suite("WebsocketClient", () => {
         const clientConnect = new Promise<void>((resolve, reject) => {
           client.once("error", (_error, market) => {
             try {
-              assert.deepStrictEqual(market, "v2");
-              assert.deepStrictEqual(_error, error);
+              deepStrictEqual(market, "v2");
+              deepStrictEqual(_error, error);
               resolve();
             } catch (err) {
               reject(err);
@@ -736,8 +731,8 @@ suite("WebsocketClient", () => {
         const clientConnect = new Promise<void>((resolve, reject) => {
           client.once("error", (_error, market) => {
             try {
-              assert.deepStrictEqual(market, "v2");
-              assert.deepStrictEqual(_error, error);
+              deepStrictEqual(market, "v2");
+              deepStrictEqual(_error, error);
               resolve();
             } catch (err) {
               reject(err);
@@ -762,8 +757,8 @@ suite("WebsocketClient", () => {
         const clientConnect = new Promise<void>((resolve, reject) => {
           client.once("message", (data, market) => {
             try {
-              assert.deepStrictEqual(market, "v2");
-              assert.deepStrictEqual(data, message);
+              deepStrictEqual(market, "v2");
+              deepStrictEqual(data, message);
               resolve();
             } catch (error) {
               reject(error);
