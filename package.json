@@ -6,7 +6,7 @@
   "directories": {
     "test": "test"
   },
-  "type": "commonjs",
+  "type": "module",
   "types": "build/index.d.ts",
   "engines": {
     "node": ">=16.3.0",

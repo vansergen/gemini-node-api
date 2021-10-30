@@ -1,1 +1,4 @@
-{ "extends": "@b2broker/tsconfig", "compilerOptions": { "outDir": "./build" } }
+{
+  "extends": "@b2broker/tsconfig",
+  "compilerOptions": { "module": "esnext", "outDir": "./build" }
+}
