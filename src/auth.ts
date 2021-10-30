@@ -1,14 +1,12 @@
-import Bluebird from "bluebird";
+import { UnsuccessfulFetch } from "rpc-request";
 import {
   PublicClient,
   PublicClientOptions,
   SymbolFilter,
   ApiLimit,
-} from "./public";
-import { SignRequest } from "./signer";
-import type fetch from "node-fetch";
-
-import { UnsuccessfulFetch } from "rpc-bluebird";
+} from "./public.js";
+import { SignRequest } from "./signer.js";
+import type { RequestInit } from "node-fetch";
 
 export interface AccountName {
   account?: string;
@@ -330,21 +328,23 @@ export class AuthenticatedClient extends PublicClient {
     this.#nonce = (): number => Date.now();
   }
 
-  public post(
+  public post<T = unknown>(
     path: string | undefined,
-    _options: fetch.RequestInit | undefined,
+    _options: RequestInit | undefined,
     body: { request: string } & Record<string, unknown> = { request: "/" }
-  ): Bluebird<unknown> {
+  ): Promise<T> {
     body.nonce = this.nonce();
     const payload = Buffer.from(JSON.stringify(body)).toString("base64");
     const request = { key: this.#key, secret: this.#secret, payload };
     const headers = { ...SignRequest(request) };
 
-    return new Bluebird<unknown>((resolve, reject) => {
+    return new Promise<T>((resolve, reject) => {
       super
         .post(path ?? body.request, { headers })
-        .then(resolve)
-        .catch((error) => {
+        .then((data) => {
+          resolve(data as T);
+        })
+        .catch((error: unknown) => {
           if (error instanceof UnsuccessfulFetch) {
             error.response
               .json()
@@ -368,65 +368,65 @@ export class AuthenticatedClient extends PublicClient {
   public newOrder({
     symbol = this.symbol,
     ...rest
-  }: OrderOptions): Bluebird<OrderStatus> {
+  }: OrderOptions): Promise<OrderStatus> {
     const request = "/v1/order/new";
     const body = { request, symbol, ...rest };
-    return this.post(request, {}, body) as Bluebird<OrderStatus>;
+    return this.post<OrderStatus>(request, {}, body);
   }
 
   /** Submit a new buy order. */
   public buy({
     symbol = this.symbol,
     ...rest
-  }: BasicOrderOptions): Bluebird<OrderStatus> {
+  }: BasicOrderOptions): Promise<OrderStatus> {
     const request = "/v1/order/new";
     const body = { request, symbol, ...rest, side: "buy" };
-    return this.post(request, {}, body) as Bluebird<OrderStatus>;
+    return this.post<OrderStatus>(request, {}, body);
   }
 
   /** Submit a new sell order. */
   public sell({
     symbol = this.symbol,
     ...rest
-  }: BasicOrderOptions): Bluebird<OrderStatus> {
+  }: BasicOrderOptions): Promise<OrderStatus> {
     const request = "/v1/order/new";
     const body = { request, symbol, ...rest, side: "sell" };
-    return this.post(request, {}, body) as Bluebird<OrderStatus>;
+    return this.post<OrderStatus>(request, {}, body);
   }
 
   /** Cancel an order. */
-  public cancelOrder(params: OrderID): Bluebird<OrderStatus> {
+  public cancelOrder(params: OrderID): Promise<OrderStatus> {
     const request = "/v1/order/cancel";
     const body = { request, ...params };
-    return this.post(request, {}, body) as Bluebird<OrderStatus>;
+    return this.post<OrderStatus>(request, {}, body);
   }
 
   /** Cancel all orders opened by this session. */
-  public cancelSession(account?: AccountName): Bluebird<CancelOrdersResponse> {
+  public cancelSession(account?: AccountName): Promise<CancelOrdersResponse> {
     const request = "/v1/order/cancel/session";
     const body = { request, ...account };
-    return this.post(request, {}, body) as Bluebird<CancelOrdersResponse>;
+    return this.post<CancelOrdersResponse>(request, {}, body);
   }
 
   /** Cancel all outstanding orders created by all sessions owned by this account. */
-  public cancelAll(account?: AccountName): Bluebird<CancelOrdersResponse> {
+  public cancelAll(account?: AccountName): Promise<CancelOrdersResponse> {
     const request = "/v1/order/cancel/all";
     const body = { request, ...account };
-    return this.post(request, {}, body) as Bluebird<CancelOrdersResponse>;
+    return this.post<CancelOrdersResponse>(request, {}, body);
   }
 
   /** Get an order status. */
-  public getOrderStatus(params: OrderID): Bluebird<OrderStatus> {
+  public getOrderStatus(params: OrderID): Promise<OrderStatus> {
     const request = "/v1/order/status";
     const body = { request, ...params };
-    return this.post(request, {}, body) as Bluebird<OrderStatus>;
+    return this.post<OrderStatus>(request, {}, body);
   }
 
   /** Get all your live orders. */
-  public getActiveOrders(account?: AccountName): Bluebird<OrderStatus[]> {
+  public getActiveOrders(account?: AccountName): Promise<OrderStatus[]> {
     const request = "/v1/orders";
     const body = { request, ...account };
-    return this.post(request, {}, body) as Bluebird<OrderStatus[]>;
+    return this.post<OrderStatus[]>(request, {}, body);
   }
 
   /** Get your past trades. */
@@ -434,169 +434,161 @@ export class AuthenticatedClient extends PublicClient {
     symbol = this.symbol,
     limit_trades = ApiLimit,
     ...rest
-  }: PastTradesFilter = {}): Bluebird<PastTrade[]> {
+  }: PastTradesFilter = {}): Promise<PastTrade[]> {
     const request = "/v1/mytrades";
     const body = { request, symbol, limit_trades, ...rest };
-    return this.post(request, {}, body) as Bluebird<PastTrade[]>;
+    return this.post<PastTrade[]>(request, {}, body);
   }
 
   /** Get the volume in price currency that has been traded across all pairs over a period of 30 days. */
-  public getNotionalVolume(account?: AccountName): Bluebird<NotionalVolume> {
+  public getNotionalVolume(account?: AccountName): Promise<NotionalVolume> {
     const request = "/v1/notionalvolume";
     const body = { request, ...account };
-    return this.post(request, {}, body) as Bluebird<NotionalVolume>;
+    return this.post<NotionalVolume>(request, {}, body);
   }
 
   /** Get the trade volume for each symbol. */
-  public getTradeVolume(account?: AccountName): Bluebird<TradeVolume[][]> {
+  public getTradeVolume(account?: AccountName): Promise<TradeVolume[][]> {
     const request = "/v1/tradevolume";
     const body = { request, ...account };
-    return this.post(request, {}, body) as Bluebird<TradeVolume[][]>;
+    return this.post<TradeVolume[][]>(request, {}, body);
   }
 
   /** Submit a new clearing order. */
   public newClearingOrder({
     symbol = this.symbol,
     ...rest
-  }: ClearingOrderOptions): Bluebird<NewClearingOrderResponse> {
+  }: ClearingOrderOptions): Promise<NewClearingOrderResponse> {
     const request = "/v1/clearing/new";
     const body = { request, symbol, ...rest };
-    return this.post(request, {}, body) as Bluebird<NewClearingOrderResponse>;
+    return this.post<NewClearingOrderResponse>(request, {}, body);
   }
 
   /** Submit a new broker clearing order. */
   public newBrokerOrder({
     symbol = this.symbol,
     ...rest
-  }: BrokerOrderOptions): Bluebird<NewClearingOrderResponse> {
+  }: BrokerOrderOptions): Promise<NewClearingOrderResponse> {
     const request = "/v1/clearing/broker/new";
     const body = { request, symbol, ...rest };
-    return this.post(request, {}, body) as Bluebird<NewClearingOrderResponse>;
+    return this.post<NewClearingOrderResponse>(request, {}, body);
   }
 
   /** Get a clearing order status. */
   public getClearingOrderStatus(
     order: ClearingOrderID
-  ): Bluebird<ClearingOrderStatus> {
+  ): Promise<ClearingOrderStatus> {
     const request = "/v1/clearing/status";
     const body = { request, ...order };
-    return this.post(request, {}, body) as Bluebird<ClearingOrderStatus>;
+    return this.post<ClearingOrderStatus>(request, {}, body);
   }
 
   /** Cancel a clearing order. */
   public cancelClearingOrder(
     order: ClearingOrderID
-  ): Bluebird<CancelClearingOrderResponse> {
+  ): Promise<CancelClearingOrderResponse> {
     const request = "/v1/clearing/cancel";
     const body = { request, ...order };
-    return this.post(
-      request,
-      {},
-      body
-    ) as Bluebird<CancelClearingOrderResponse>;
+    return this.post<CancelClearingOrderResponse>(request, {}, body);
   }
 
   /** Confirm a clearing order. */
   public confirmClearingOrder({
     symbol = this.symbol,
     ...rest
-  }: ConfirmClearingOptions): Bluebird<ConfirmClearingOptionsResponse> {
+  }: ConfirmClearingOptions): Promise<ConfirmClearingOptionsResponse> {
     const request = "/v1/clearing/confirm";
     const body = { request, symbol, ...rest };
-    return this.post(
-      request,
-      {},
-      body
-    ) as Bluebird<ConfirmClearingOptionsResponse>;
+    return this.post<ConfirmClearingOptionsResponse>(request, {}, body);
   }
 
   /** Get the available balances in the supported currencies. */
-  public getAvailableBalances(account?: AccountName): Bluebird<Balance[]> {
+  public getAvailableBalances(account?: AccountName): Promise<Balance[]> {
     const request = "/v1/balances";
     const body = { request, ...account };
-    return this.post(request, {}, body) as Bluebird<Balance[]>;
+    return this.post<Balance[]>(request, {}, body);
   }
 
   /** Get the available balances in the supported currencies as well as in notional USD. */
   public getNotionalBalances(
     account?: AccountName
-  ): Bluebird<NotionalBalance[]> {
+  ): Promise<NotionalBalance[]> {
     const request = "/v1/notionalbalances/usd";
     const body = { request, ...account };
-    return this.post(request, {}, body) as Bluebird<NotionalBalance[]>;
+    return this.post<NotionalBalance[]>(request, {}, body);
   }
 
   /** Get deposits and withdrawals in the supported currencies. */
-  public getTransfers(rest?: TransferFilter): Bluebird<Transfer[]> {
+  public getTransfers(rest?: TransferFilter): Promise<Transfer[]> {
     const request = "/v1/transfers";
     const body = { request, ...rest };
-    return this.post(request, {}, body) as Bluebird<Transfer[]>;
+    return this.post<Transfer[]>(request, {}, body);
   }
 
   /** Get deposit addresses. */
   public getDepositAddresses({
     network,
     ...rest
-  }: DepositAddressesFilter): Bluebird<DepositAddress[]> {
+  }: DepositAddressesFilter): Promise<DepositAddress[]> {
     const request = `/v1/addresses/${network}`;
     const body = { request, ...rest };
-    return this.post(request, {}, body) as Bluebird<DepositAddress[]>;
+    return this.post<DepositAddress[]>(request, {}, body);
   }
 
   /** Get a new deposit address. */
   public getNewAddress({
     currency,
     ...rest
-  }: NewAddressFilter): Bluebird<NewAddress> {
+  }: NewAddressFilter): Promise<NewAddress> {
     const request = `/v1/deposit/${currency}/newAddress`;
     const body = { request, ...rest };
-    return this.post(request, {}, body) as Bluebird<NewAddress>;
+    return this.post<NewAddress>(request, {}, body);
   }
 
   /** Withdraw cryptocurrency funds to a whitelisted address. */
   public withdrawCrypto({
     currency,
     ...rest
-  }: WithdrawCryptoFilter): Bluebird<Withdrawal> {
+  }: WithdrawCryptoFilter): Promise<Withdrawal> {
     const request = `/v1/withdraw/${currency}`;
     const body = { request, ...rest };
-    return this.post(request, {}, body) as Bluebird<Withdrawal>;
+    return this.post<Withdrawal>(request, {}, body);
   }
 
   /** Make an internal transfer between any two exchange accounts within the Group. */
   public internalTransfer({
     currency,
     ...rest
-  }: InternalTransferFilter): Bluebird<InternalTransferResponse> {
+  }: InternalTransferFilter): Promise<InternalTransferResponse> {
     const request = `/v1/account/transfer/${currency}`;
     const body = { request, ...rest };
-    return this.post(request, {}, body) as Bluebird<InternalTransferResponse>;
+    return this.post<InternalTransferResponse>(request, {}, body);
   }
 
   /** Create a new exchange account within the group. */
-  public createAccount(account: Account): Bluebird<Account> {
+  public createAccount(account: Account): Promise<Account> {
     const request = "/v1/account/create";
     const body = { request, ...account };
-    return this.post(request, {}, body) as Bluebird<Account>;
+    return this.post<Account>(request, {}, body);
   }
 
   /** Get the accounts within the group. */
-  public getAccounts(): Bluebird<AccountInfo[]> {
+  public getAccounts(): Promise<AccountInfo[]> {
     const request = "/v1/account/list";
-    return this.post(request, {}, { request }) as Bluebird<AccountInfo[]>;
+    return this.post<AccountInfo[]>(request, {}, { request });
   }
 
   /** Withdraw `USD` as `GUSD`. */
-  public withdrawGUSD(options: WithdrawGUSDFilter): Bluebird<GUSDWithdrawal> {
+  public withdrawGUSD(options: WithdrawGUSDFilter): Promise<GUSDWithdrawal> {
     const request = "/v1/withdraw/usd";
     const body = { request, ...options };
-    return this.post(request, {}, body) as Bluebird<GUSDWithdrawal>;
+    return this.post<GUSDWithdrawal>(request, {}, body);
   }
 
   /** Prevent a session from timing out and canceling orders if the require heartbeat flag has been set. */
-  public heartbeat(): Bluebird<Heartbeat> {
+  public heartbeat(): Promise<Heartbeat> {
     const request = "/v1/heartbeat";
-    return this.post(request, {}, { request }) as Bluebird<Heartbeat>;
+    return this.post<Heartbeat>(request, {}, { request });
   }
 
   public set nonce(nonce: () => number) {
