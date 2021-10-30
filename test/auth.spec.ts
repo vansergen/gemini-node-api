@@ -1,5 +1,7 @@
-import assert from "assert";
+import { deepStrictEqual, fail, ok, rejects } from "node:assert";
+import { Server } from "node:http";
 import nock from "nock";
+import { FetchError } from "node-fetch";
 import {
   ApiLimit,
   AuthenticatedClient,
@@ -16,6 +18,7 @@ import {
   CancelClearingOrderResponse,
   ConfirmClearingOptionsResponse,
   Account,
+  AccountDetails,
   Balance,
   NotionalBalance,
   Transfer,
@@ -26,9 +29,7 @@ import {
   AccountInfo,
   GUSDWithdrawal,
   Heartbeat,
-} from "../index";
-import { FetchError } from "node-fetch";
-import http from "http";
+} from "../index.js";
 
 const key = "Gemini-API-KEY";
 const secret = "Gemini-API-SECRET";
@@ -51,9 +52,9 @@ suite("AuthenticatedClient", () => {
       secret,
     });
     otherClient.nonce = _nonce;
-    assert.deepStrictEqual(otherClient.apiUri, apiUri);
-    assert.deepStrictEqual(otherClient.symbol, symbol);
-    assert.deepStrictEqual(otherClient.nonce, _nonce);
+    deepStrictEqual(otherClient.apiUri, apiUri);
+    deepStrictEqual(otherClient.symbol, symbol);
+    deepStrictEqual(otherClient.nonce, _nonce);
   });
 
   test(".post() (reject non 2xx responses)", async () => {
@@ -66,7 +67,7 @@ suite("AuthenticatedClient", () => {
 
     nock(ApiUri).post(uri).delay(1).reply(429, response);
 
-    await assert.rejects(client.post(uri, {}), new Error(response.message));
+    await rejects(client.post(uri, {}), new Error(response.message));
   });
 
   test(".post() (reject non 2xx responses when no message is provided) ", async () => {
@@ -78,7 +79,7 @@ suite("AuthenticatedClient", () => {
 
     nock(ApiUri).post(uri).delay(1).reply(429, response);
 
-    await assert.rejects(client.post(uri, {}), new Error(response.reason));
+    await rejects(client.post(uri, {}), new Error(response.reason));
   });
 
   test(".post() (reject non 2xx responses with invalid JSON response) ", async () => {
@@ -87,7 +88,7 @@ suite("AuthenticatedClient", () => {
 
     let path: undefined;
 
-    await assert.rejects(
+    await rejects(
       client.post(path, {}),
       new SyntaxError("Unexpected token N in JSON at position 0")
     );
@@ -96,8 +97,8 @@ suite("AuthenticatedClient", () => {
   test(".post() (reject on errors)", async () => {
     const port = 28080;
     const apiUri = `http://127.0.0.1:${port}`;
-    const server = await new Promise<http.Server>((resolve) => {
-      const _server = new http.Server((_request, response) => {
+    const server = await new Promise<Server>((resolve) => {
+      const _server = new Server((_request, response) => {
         response.destroy();
       });
       _server
@@ -111,9 +112,9 @@ suite("AuthenticatedClient", () => {
     const uri = "/v1/symbols";
     try {
       await otherClient.post(uri, {});
-      assert.fail("Should throw an error");
+      fail("Should throw an error");
     } catch (error) {
-      assert.ok(error instanceof FetchError);
+      ok(error instanceof FetchError);
     }
     await new Promise<void>((resolve, reject) => {
       server.close((error) => {
@@ -182,7 +183,7 @@ suite("AuthenticatedClient", () => {
       side,
       stop_price,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".newOrder() (with no `symbol`)", async () => {
@@ -240,7 +241,7 @@ suite("AuthenticatedClient", () => {
       side,
       stop_price,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".buy() (with no `symbol`)", async () => {
@@ -295,7 +296,7 @@ suite("AuthenticatedClient", () => {
       type,
       stop_price,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".sell() (with no `symbol`)", async () => {
@@ -350,7 +351,7 @@ suite("AuthenticatedClient", () => {
       type,
       stop_price,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".cancelOrder()", async () => {
@@ -386,7 +387,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.cancelOrder({ order_id, account });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".cancelSession()", async () => {
@@ -407,7 +408,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.cancelSession({ account });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".cancelAll()", async () => {
@@ -428,7 +429,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.cancelAll({ account });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getOrderStatus()", async () => {
@@ -463,7 +464,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getOrderStatus({ order_id, account });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getActiveOrders()", async () => {
@@ -519,7 +520,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getActiveOrders({ account });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getPastTrades()", async () => {
@@ -578,7 +579,7 @@ suite("AuthenticatedClient", () => {
       symbol,
       limit_trades,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getPastTrades() (with no `symbol`)", async () => {
@@ -636,7 +637,7 @@ suite("AuthenticatedClient", () => {
       account,
       limit_trades,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getPastTrades() (with no `limit_trades`)", async () => {
@@ -694,7 +695,7 @@ suite("AuthenticatedClient", () => {
       account,
       symbol,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getPastTrades() (with no arguments)", async () => {
@@ -744,7 +745,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getPastTrades();
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getNotionalVolume()", async () => {
@@ -784,7 +785,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getNotionalVolume({ account });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getTradeVolume()", async () => {
@@ -842,7 +843,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getTradeVolume({ account });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".newClearingOrder()", async () => {
@@ -881,7 +882,7 @@ suite("AuthenticatedClient", () => {
       side,
       symbol,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".newClearingOrder() (with no `symbol`)", async () => {
@@ -919,7 +920,7 @@ suite("AuthenticatedClient", () => {
       price,
       side,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".newBrokerOrder()", async () => {
@@ -961,7 +962,7 @@ suite("AuthenticatedClient", () => {
       side,
       symbol,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".newBrokerOrder() (with no `symbol`)", async () => {
@@ -1002,7 +1003,7 @@ suite("AuthenticatedClient", () => {
       price,
       side,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getClearingOrderStatus()", async () => {
@@ -1020,7 +1021,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getClearingOrderStatus({ clearing_id });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".cancelClearingOrder()", async () => {
@@ -1038,7 +1039,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.cancelClearingOrder({ clearing_id });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".confirmClearingOrder()", async () => {
@@ -1073,7 +1074,7 @@ suite("AuthenticatedClient", () => {
       clearing_id,
       symbol,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".confirmClearingOrder() (with no `symbol`)", async () => {
@@ -1107,7 +1108,7 @@ suite("AuthenticatedClient", () => {
       side,
       clearing_id,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getAvailableBalances()", async () => {
@@ -1144,7 +1145,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getAvailableBalances({ account });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getNotionalBalances()", async () => {
@@ -1178,7 +1179,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getNotionalBalances({ account });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getTransfers()", async () => {
@@ -1268,7 +1269,7 @@ suite("AuthenticatedClient", () => {
       timestamp,
       account,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getDepositAddresses()", async () => {
@@ -1289,7 +1290,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getDepositAddresses({ network, account });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getNewAddress()", async () => {
@@ -1316,7 +1317,7 @@ suite("AuthenticatedClient", () => {
       legacy,
       account,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".withdrawCrypto()", async () => {
@@ -1345,7 +1346,7 @@ suite("AuthenticatedClient", () => {
       amount,
       account,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".internalTransfer()", async () => {
@@ -1376,7 +1377,46 @@ suite("AuthenticatedClient", () => {
       targetAccount,
       amount,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
+  });
+
+  test(".getAccountDetails()", async () => {
+    const request = "/v1/account";
+    const account = "primary";
+    const options = { request, account, nonce };
+    const response: AccountDetails = {
+      account: {
+        accountName: "Primary",
+        shortName: "primary",
+        type: "exchange",
+        created: "1498245007981",
+      },
+      users: [
+        {
+          name: "Satoshi Nakamoto",
+          lastSignIn: "2020-07-21T13:37:39.453Z",
+          status: "Active",
+          countryCode: "US",
+          isVerified: true,
+        },
+        {
+          name: "Gemini Support",
+          lastSignIn: "2018-07-11T20:04:36.073Z",
+          status: "Suspended",
+          countryCode: "US",
+          isVerified: false,
+        },
+      ],
+      memo_reference_code: "GEMPJBRDZ",
+    };
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
+      .post(request)
+      .reply(200, response);
+
+    const data = await client.getAccountDetails({ account });
+    deepStrictEqual(data, response);
   });
 
   test(".createAccount()", async () => {
@@ -1392,7 +1432,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.createAccount({ name, type });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getAccounts()", async () => {
@@ -1428,7 +1468,7 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getAccounts();
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".withdrawGUSD()", async () => {
@@ -1454,7 +1494,7 @@ suite("AuthenticatedClient", () => {
       amount,
       account,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".heartbeat()", async () => {
@@ -1468,12 +1508,12 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.heartbeat();
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".nonce()", () => {
     const otherClient = new AuthenticatedClient({ key, secret });
     const otherNonce = otherClient.nonce();
-    assert.deepStrictEqual(typeof otherNonce, "number");
+    deepStrictEqual(typeof otherNonce, "number");
   });
 });

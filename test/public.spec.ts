@@ -1,5 +1,7 @@
-import assert from "assert";
+import { deepStrictEqual, fail, ok, rejects } from "node:assert";
+import { Server } from "node:http";
 import nock from "nock";
+import { FetchError } from "node-fetch";
 import {
   ApiLimit,
   PublicClient,
@@ -13,22 +15,20 @@ import {
   AuctionInfo,
   AuctionHistory,
   PriceFeedItem,
-} from "../index";
-import http from "http";
-import { FetchError } from "node-fetch";
+} from "../index.js";
 
 const client = new PublicClient();
 
 suite("PublicClient", () => {
   test(".constructor()", () => {
-    assert.deepStrictEqual(client.apiUri, ApiUri);
-    assert.deepStrictEqual(client.symbol, DefaultSymbol);
+    deepStrictEqual(client.apiUri, ApiUri);
+    deepStrictEqual(client.symbol, DefaultSymbol);
   });
 
   test(".constructor() (with sandbox flag)", () => {
     const otherClient = new PublicClient({ sandbox: true });
-    assert.deepStrictEqual(otherClient.apiUri, SandboxApiUri);
-    assert.deepStrictEqual(otherClient.symbol, DefaultSymbol);
+    deepStrictEqual(otherClient.apiUri, SandboxApiUri);
+    deepStrictEqual(otherClient.symbol, DefaultSymbol);
   });
 
   test(".constructor() (with custom apiUri)", () => {
@@ -36,8 +36,8 @@ suite("PublicClient", () => {
     const apiUri = "https://new-gemini-api-uri.com";
     const symbol = "zecbtc";
     const otherClient = new PublicClient({ sandbox, apiUri, symbol });
-    assert.deepStrictEqual(otherClient.apiUri, apiUri);
-    assert.deepStrictEqual(otherClient.symbol, symbol);
+    deepStrictEqual(otherClient.apiUri, apiUri);
+    deepStrictEqual(otherClient.symbol, symbol);
   });
 
   test(".get() (reject non 2xx responses)", async () => {
@@ -49,7 +49,7 @@ suite("PublicClient", () => {
     };
     nock(ApiUri).get(uri).delay(1).reply(429, response);
 
-    await assert.rejects(client.get(uri), new Error(response.message));
+    await rejects(client.get(uri), new Error(response.message));
   });
 
   test(".get() (reject non 2xx responses when no message is provided) ", async () => {
@@ -60,7 +60,7 @@ suite("PublicClient", () => {
     };
     nock(ApiUri).get(uri).delay(1).reply(429, response);
 
-    await assert.rejects(client.get(uri), new Error(response.reason));
+    await rejects(client.get(uri), new Error(response.reason));
   });
 
   test(".get() (reject non 2xx responses with invalid JSON response) ", async () => {
@@ -68,7 +68,7 @@ suite("PublicClient", () => {
     const response = "Not valid JSON";
     nock(ApiUri).get(uri).delay(1).reply(429, response);
 
-    await assert.rejects(
+    await rejects(
       client.get(uri),
       new SyntaxError("Unexpected token N in JSON at position 0")
     );
@@ -77,8 +77,8 @@ suite("PublicClient", () => {
   test(".get() (reject on errors)", async () => {
     const port = 28080;
     const apiUri = `http://127.0.0.1:${port}`;
-    const server = await new Promise<http.Server>((resolve) => {
-      const _server = new http.Server((_request, response) => {
+    const server = await new Promise<Server>((resolve) => {
+      const _server = new Server((_request, response) => {
         response.destroy();
       });
       _server
@@ -92,9 +92,9 @@ suite("PublicClient", () => {
     const uri = "/v1/symbols";
     try {
       await otherClient.get(uri);
-      assert.fail("Should throw an error");
+      fail("Should throw an error");
     } catch (error) {
-      assert.ok(error instanceof FetchError);
+      ok(error instanceof FetchError);
     }
     await new Promise<void>((resolve, reject) => {
       server.close((error) => {
@@ -129,7 +129,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getSymbols();
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getSymbol()", async () => {
@@ -147,7 +147,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getSymbol({ symbol });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getTicker()", async () => {
@@ -166,7 +166,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getTicker({ symbol });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getTicker() (with no `symbol`)", async () => {
@@ -185,7 +185,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getTicker({});
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getTicker() (v2)", async () => {
@@ -229,7 +229,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getTicker({ symbol, v: "v2" });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getTicker() (with no arguments)", async () => {
@@ -248,7 +248,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getTicker();
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getCandles()", async () => {
@@ -262,7 +262,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCandles({ symbol, time_frame });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getCandles() (with no `symbol`)", async () => {
@@ -276,7 +276,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCandles({ time_frame });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getCandles() (with no `time_frame`)", async () => {
@@ -290,7 +290,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCandles({ symbol });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getCandles() (with no arguments)", async () => {
@@ -304,7 +304,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCandles();
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getOrderBook()", async () => {
@@ -334,7 +334,7 @@ suite("PublicClient", () => {
       .reply(200, response);
 
     const data = await client.getOrderBook({ symbol, limit_bids, limit_asks });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getOrderBook() (with no `symbol`)", async () => {
@@ -361,7 +361,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).query({ limit_bids }).reply(200, response);
 
     const data = await client.getOrderBook({ limit_bids, limit_asks });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getOrderBook() (with no arguments)", async () => {
@@ -386,7 +386,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getOrderBook();
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getTradeHistory()", async () => {
@@ -417,7 +417,7 @@ suite("PublicClient", () => {
       include_breaks,
       timestamp,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getTradeHistory() (with no `symbol`)", async () => {
@@ -447,7 +447,7 @@ suite("PublicClient", () => {
       include_breaks,
       timestamp,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getTradeHistory() (with no `limit_trades`)", async () => {
@@ -477,7 +477,7 @@ suite("PublicClient", () => {
       include_breaks,
       timestamp,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getTradeHistory() (with no arguments)", async () => {
@@ -498,7 +498,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).query({ limit_trades }).reply(200, response);
 
     const data = await client.getTradeHistory();
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getCurrentAuction()", async () => {
@@ -517,7 +517,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCurrentAuction({ symbol });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getCurrentAuction() (with no `symbol`)", async () => {
@@ -536,7 +536,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCurrentAuction({});
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getCurrentAuction() (with no arguments)", async () => {
@@ -555,7 +555,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getCurrentAuction();
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getAuctionHistory()", async () => {
@@ -603,7 +603,7 @@ suite("PublicClient", () => {
       include_indicative,
       timestamp,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getAuctionHistory() (with no `symbol`)", async () => {
@@ -650,7 +650,7 @@ suite("PublicClient", () => {
       include_indicative,
       timestamp,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getAuctionHistory() (with no `limit_auction_results`)", async () => {
@@ -697,7 +697,7 @@ suite("PublicClient", () => {
       include_indicative,
       timestamp,
     });
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getAuctionHistory() (with no arguments)", async () => {
@@ -735,7 +735,7 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).query({ limit_auction_results }).reply(200, response);
 
     const data = await client.getAuctionHistory();
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 
   test(".getPriceFeed()", async () => {
@@ -760,6 +760,6 @@ suite("PublicClient", () => {
     nock(ApiUri).get(uri).reply(200, response);
 
     const data = await client.getPriceFeed();
-    assert.deepStrictEqual(data, response);
+    deepStrictEqual(data, response);
   });
 });

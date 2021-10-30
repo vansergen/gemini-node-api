@@ -1,1 +1,1 @@
-{ "*": "npm run prettier:write", "*.{ts,js}": "npm run lint:fix" }
+{ "*": "npm run prettier:write", "*.ts": "npm run lint:fix" }

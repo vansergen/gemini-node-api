@@ -21,23 +21,19 @@
       { "type": "ci", "section": "Continuous Integration", "hidden": true }
     ]
   },
+  "releaseRules": [
+    { "breaking": true, "release": "major" },
+    { "type": "feat", "release": "minor" },
+    { "type": "fix", "release": "patch" },
+    { "type": "perf", "release": "patch" },
+    { "type": "build", "release": "patch" },
+    { "type": "initial", "release": "minor" },
+    { "type": "dependencies", "release": "patch" },
+    { "type": "peerDependencies", "release": "patch" },
+    { "type": "metadata", "release": "patch" }
+  ],
   "plugins": [
-    [
-      "@semantic-release/commit-analyzer",
-      {
-        "releaseRules": [
-          { "breaking": true, "release": "major" },
-          { "type": "feat", "release": "minor" },
-          { "type": "fix", "release": "patch" },
-          { "type": "perf", "release": "patch" },
-          { "type": "build", "release": "patch" },
-          { "type": "initial", "release": "minor" },
-          { "type": "dependencies", "release": "patch" },
-          { "type": "peerDependencies", "release": "patch" },
-          { "type": "metadata", "release": "patch" }
-        ]
-      }
-    ],
+    "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     ["@semantic-release/changelog", { "changelogTitle": "# Changelog" }],
     "@semantic-release/npm",

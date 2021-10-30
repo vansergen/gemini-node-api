@@ -1,21 +1,20 @@
 name: CI
 
-on: [push]
+on: push
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14, 15]
-
-    container: node:${{ matrix.node-version }}-buster
-
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
         with:
           fetch-depth: 0
+
+      - uses: actions/setup-node@main
+        with:
+          node-version: 16
+          check-latest: true
 
       - name: Node.js version
         run: node --version
@@ -23,108 +22,85 @@ jobs:
       - name: npm version
         run: npm --version
 
-      - name: Git version
-        run: git --version
-
       - name: Install dependencies
         run: npm ci
 
-      - name: Tests
-        run: npm test
-
-      - name: Tests:js
-        run: npm run test:js
+      - name: Commitlint
+        run: npm run commitlint:all
 
       - name: Prettier
         run: npm run prettier
 
-      - name: commitlint
-        run: npm run commitlint:all
-
       - name: ESLint
         run: npm run lint
 
-      - name: Publish test
+      - name: Tests
+        run: npm run test:ci
+
+      - name: Publish (test)
         run: npm run publish:test
 
-      - name: Docs
-        run: |
-          rm -rf docs
-          npm run docs:test
-
-      - name: npm vulnerabilities
-        run: npm audit --production
-
-  coverage:
-    runs-on: ubuntu-latest
-
-    container: node:14
-
-    steps:
-      - uses: actions/checkout@master
-
-      - name: Node.js version
-        run: node --version
-
-      - name: npm version
-        run: npm --version
-
-      - name: Install dependencies
-        run: npm ci
-
       - name: Coverage
-        run: npm run coverage
+        run: npm run coverage:ci
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@main
+
+      - uses: actions/setup-node@main
+        with:
+          node-version: 16
+          check-latest: true
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Docs
+        run: npm run docs:build
+
   release:
-    needs: [test, coverage]
+    needs: [test, docs]
 
     runs-on: ubuntu-latest
 
-    container: node:14-buster
-
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
         with:
           fetch-depth: 0
 
-      - name: Node.js version
-        run: node --version
-
-      - name: npm version
-        run: npm --version
-
-      - name: git version
-        run: git --version
-
-      - name: gpg version
-        run: gpg --version
+      - uses: actions/setup-node@main
+        with:
+          node-version: 16
+          check-latest: true
 
       - name: Install dependencies
         run: npm ci
 
       - name: Decrypt PGP key
         run: ./.github/scripts/decrypt.sh
+        env:
+          PRIVATE_KEY_PASSPHRASE: ${{ secrets.PRIVATE_KEY_PASSPHRASE }}
 
       - name: Setup git
         run: ./.github/scripts/git.sh
+        env:
+          PGP_KEY_ID: ${{ secrets.PGP_KEY_ID }}
 
       - name: Release
         run: npm run release
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIT_COMMITTER_EMAIL: ${{ secrets.GIT_COMMITTER_EMAIL }}
+          GIT_COMMITTER_NAME: ${{ secrets.GIT_COMMITTER_NAME }}
+          PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Cleanup
         run: ./.github/scripts/cleanup.sh
-
-    env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      GIT_COMMITTER_EMAIL: ${{ secrets.GIT_COMMITTER_EMAIL }}
-      GIT_COMMITTER_NAME: ${{ secrets.GIT_COMMITTER_NAME }}
-      NPM_CONFIG_UNSAFE_PERM: true
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      PGP_KEY_ID: ${{ secrets.PGP_KEY_ID }}
-      PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
-      PRIVATE_KEY_PASSPHRASE: ${{ secrets.PRIVATE_KEY_PASSPHRASE }}

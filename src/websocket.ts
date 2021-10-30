@@ -1,9 +1,9 @@
-import { EventEmitter } from "events";
+import { EventEmitter } from "node:events";
+import { stringify } from "node:querystring";
 import Websocket from "ws";
-import { DefaultSymbol, SymbolFilter, Candle } from "./public";
-import { AccountName, BaseOrder, OrderType } from "./auth";
-import { SignRequest } from "./signer";
-import { stringify } from "querystring";
+import { AccountName, BaseOrder, OrderType } from "./auth.js";
+import { DefaultSymbol, SymbolFilter, Candle } from "./public.js";
+import { SignRequest } from "./signer.js";
 
 export const WsUri = "wss://api.gemini.com";
 export const SandboxWsUri = "wss://api.sandbox.gemini.com";
@@ -329,14 +329,14 @@ export class WebsocketClient extends EventEmitter {
     const url = new URL(`/v1/marketdata/${symbol}`, this.wsUri);
     url.search = stringify({ ...qs });
 
-    await this.connectWS(symbol, url);
+    await this.#connectWS(symbol, url);
   }
 
   /** Disconnect from the public API (V1). */
   public async disconnectMarket({
     symbol = this.symbol,
   }: SymbolFilter = {}): Promise<void> {
-    await this.disconnectWS(this.sockets[symbol]);
+    await this.#disconnectWS(this.sockets[symbol]);
   }
 
   /** Connect to the private API that gives you information about your orders in real time. */
@@ -363,36 +363,36 @@ export class WebsocketClient extends EventEmitter {
       payload,
     });
 
-    await this.connectWS("orders", url, { ...signedPayload });
+    await this.#connectWS("orders", url, { ...signedPayload });
   }
 
   /** Disconnect from the private API. */
   public async disconnectOrders(): Promise<void> {
-    await this.disconnectWS(this.sockets.orders);
+    await this.#disconnectWS(this.sockets.orders);
   }
 
   /** Connect to the public API (V2) that can stream all market and candle data across books. */
   public async connect(): Promise<void> {
     const url = new URL("/v2/marketdata", this.wsUri);
-    await this.connectWS("v2", url);
+    await this.#connectWS("v2", url);
   }
 
   /** Disconnect from the public API (V2). */
   public async disconnect(): Promise<void> {
-    await this.disconnectWS(this.sockets.v2);
+    await this.#disconnectWS(this.sockets.v2);
   }
 
   /** Subscribe to data feeds (V2). */
   public async subscribe(subscriptions: Subscriptions): Promise<void> {
-    await this.sendMessage({ type: "subscribe", subscriptions });
+    await this.#sendMessage({ type: "subscribe", subscriptions });
   }
 
   /** Unsubscribe from data feeds (V2). */
   public async unsubscribe(subscriptions: Subscriptions): Promise<void> {
-    await this.sendMessage({ type: "unsubscribe", subscriptions });
+    await this.#sendMessage({ type: "unsubscribe", subscriptions });
   }
 
-  private async sendMessage(data: MessageV2): Promise<void> {
+  async #sendMessage(data: MessageV2): Promise<void> {
     const message = JSON.stringify(data);
     const { v2: ws } = this.sockets;
 
@@ -411,7 +411,7 @@ export class WebsocketClient extends EventEmitter {
     });
   }
 
-  private async connectWS(
+  async #connectWS(
     symbol: string,
     url: string | URL,
     headers?: Record<string, string>
@@ -430,31 +430,32 @@ export class WebsocketClient extends EventEmitter {
 
     await new Promise<void>((resolve, reject) => {
       this.sockets[symbol] = new Websocket(url, { headers: { ...headers } });
-      this.sockets[symbol].once("open", resolve);
-      this.sockets[symbol].once("error", reject);
-      this.sockets[symbol].on("message", (data: string) => {
-        try {
-          const message = JSON.parse(data) as WSMessage;
-          this.emit("message", message, symbol);
-        } catch (error) {
-          this.emit("error", error, symbol);
-        }
-      });
-      this.sockets[symbol].on("open", () => {
-        this.emit("open", symbol);
-      });
-      this.sockets[symbol].on("close", () => {
-        this.emit("close", symbol);
-      });
-      this.sockets[symbol].on("error", (error) => {
-        if (error) {
-          this.emit("error", error, symbol);
-        }
-      });
+      this.sockets[symbol]
+        .once("open", resolve)
+        .once("error", reject)
+        .on("message", (data: string) => {
+          try {
+            const message = JSON.parse(data) as WSMessage;
+            this.emit("message", message, symbol);
+          } catch (error) {
+            this.emit("error", error, symbol);
+          }
+        })
+        .on("open", () => {
+          this.emit("open", symbol);
+        })
+        .on("close", () => {
+          this.emit("close", symbol);
+        })
+        .on("error", (error) => {
+          if (error) {
+            this.emit("error", error, symbol);
+          }
+        });
     });
   }
 
-  private async disconnectWS(ws: Websocket | undefined): Promise<void> {
+  async #disconnectWS(ws: Websocket | undefined): Promise<void> {
     switch (ws?.readyState) {
       case Websocket.CLOSED:
         return;
@@ -469,9 +470,7 @@ export class WebsocketClient extends EventEmitter {
       if (!ws) {
         resolve();
       } else {
-        ws.once("error", reject);
-        ws.once("close", resolve);
-        ws.close();
+        ws.once("error", reject).once("close", resolve).close();
       }
     });
   }

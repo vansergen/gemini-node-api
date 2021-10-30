@@ -1,5 +1,5 @@
-import assert from "assert";
-import { SignRequest, AuthHeaders } from "../index";
+import { deepStrictEqual } from "node:assert";
+import { SignRequest, AuthHeaders } from "../index.js";
 
 suite("SignRequest", () => {
   test("correct signature", () => {
@@ -15,6 +15,6 @@ suite("SignRequest", () => {
         "51f2d46b8d13add5414bb73d72c1e1e1d3e1f6f8ed411960d860510df3219d0ed3514578d14f18cd1340109bf0c0385b",
     };
     const signtature = SignRequest({ key, secret, payload });
-    assert.deepStrictEqual(signtature, expectedSignature);
+    deepStrictEqual(signtature, expectedSignature);
   });
 });

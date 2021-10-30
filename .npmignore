@@ -4,6 +4,9 @@
 # Coverage directory used by nyc
 coverage
 
+# c8 config - https://github.com/bcoe/c8
+.c8rc.json
+
 # GitHub folder
 .github/
 

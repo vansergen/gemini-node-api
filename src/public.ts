@@ -1,5 +1,4 @@
-import { FetchClient, UnsuccessfulFetch } from "rpc-bluebird";
-import Bluebird from "bluebird";
+import { FetchClient, UnsuccessfulFetch } from "rpc-request";
 
 export const ApiLimit = 500;
 export const DefaultSymbol = "btcusd";
@@ -154,11 +153,13 @@ export class PublicClient extends FetchClient<unknown> {
     this.symbol = symbol;
   }
 
-  public get(path: string): Bluebird<unknown> {
-    return new Bluebird<unknown>((resolve, reject) => {
+  public get<T = unknown>(path: string): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
       super
         .get(path)
-        .then(resolve)
+        .then((data) => {
+          resolve(data as T);
+        })
         .catch((error) => {
           if (error instanceof UnsuccessfulFetch) {
             error.response
@@ -174,58 +175,55 @@ export class PublicClient extends FetchClient<unknown> {
           } else {
             reject(error);
           }
-        })
-        .catch(reject);
+        });
     });
   }
 
   /**
    * Get all available symbols for trading.
    */
-  public getSymbols(): Bluebird<string[]> {
-    return this.get("v1/symbols") as Bluebird<string[]>;
+  public getSymbols(): Promise<string[]> {
+    return this.get<string[]>("v1/symbols");
   }
 
   /**
    * Get extra details about the symbol.
    */
-  public getSymbol({ symbol }: { symbol: string }): Bluebird<ISymbol> {
-    return this.get(`v1/symbols/details/${symbol}`) as Bluebird<ISymbol>;
+  public getSymbol({ symbol }: { symbol: string }): Promise<ISymbol> {
+    return this.get<ISymbol>(`v1/symbols/details/${symbol}`);
   }
 
   /**
    * Get information about recent trading activity for the symbol.
    */
-  public getTicker(options: { symbol?: string; v: "v2" }): Bluebird<TickerV2>;
-  public getTicker(options?: { symbol?: string; v?: "v1" }): Bluebird<TickerV1>;
+  public getTicker(options: { symbol?: string; v: "v2" }): Promise<TickerV2>;
+  public getTicker(options?: { symbol?: string; v?: "v1" }): Promise<TickerV1>;
   public getTicker({
     symbol = this.symbol,
     v = "v1",
-  }: TickerFilter = {}): Bluebird<Ticker> {
+  }: TickerFilter = {}): Promise<Ticker> {
     if (v === "v2") {
-      return this.get(`/${v}/ticker/${symbol}`) as Bluebird<TickerV2>;
+      return this.get<TickerV2>(`/${v}/ticker/${symbol}`);
     }
-    return this.get(`/${v}/pubticker/${symbol}`) as Bluebird<TickerV1>;
+    return this.get<TickerV1>(`/${v}/pubticker/${symbol}`);
   }
 
   /** Get time-intervaled data for the provided symbol. */
   public getCandles({
     symbol = this.symbol,
     time_frame = "1day",
-  }: CandlesFilter = {}): Bluebird<Candle[]> {
-    return this.get(`/v2/candles/${symbol}/${time_frame}`) as Bluebird<
-      Candle[]
-    >;
+  }: CandlesFilter = {}): Promise<Candle[]> {
+    return this.get<Candle[]>(`/v2/candles/${symbol}/${time_frame}`);
   }
 
   /** Get the current order book. */
   public getOrderBook({
     symbol = this.symbol,
     ...qs
-  }: BookFilter = {}): Bluebird<OrderBook> {
+  }: BookFilter = {}): Promise<OrderBook> {
     const url = new URL(`/v1/book/${symbol}`, this.apiUri);
-    PublicClient.addOptions(url, { ...qs });
-    return this.get(url.toString()) as Bluebird<OrderBook>;
+    PublicClient.#addOptions(url, { ...qs });
+    return this.get<OrderBook>(url.toString());
   }
 
   /** Get the trades that have executed since the specified timestamp. */
@@ -233,17 +231,17 @@ export class PublicClient extends FetchClient<unknown> {
     symbol = this.symbol,
     limit_trades = ApiLimit,
     ...qs
-  }: TradeHistoryFilter = {}): Bluebird<Trade[]> {
+  }: TradeHistoryFilter = {}): Promise<Trade[]> {
     const url = new URL(`/v1/trades/${symbol}`, this.apiUri);
-    PublicClient.addOptions(url, { limit_trades, ...qs });
-    return this.get(url.toString()) as Bluebird<Trade[]>;
+    PublicClient.#addOptions(url, { limit_trades, ...qs });
+    return this.get<Trade[]>(url.toString());
   }
 
   /** Get current auction information. */
   public getCurrentAuction({
     symbol = this.symbol,
-  }: SymbolFilter = {}): Bluebird<AuctionInfo> {
-    return this.get(`v1/auction/${symbol}`) as Bluebird<AuctionInfo>;
+  }: SymbolFilter = {}): Promise<AuctionInfo> {
+    return this.get<AuctionInfo>(`v1/auction/${symbol}`);
   }
 
   /** Get the auction events. */
@@ -251,18 +249,18 @@ export class PublicClient extends FetchClient<unknown> {
     symbol = this.symbol,
     limit_auction_results = ApiLimit,
     ...qs
-  }: AuctionHistoryFilter = {}): Bluebird<AuctionHistory[]> {
+  }: AuctionHistoryFilter = {}): Promise<AuctionHistory[]> {
     const url = new URL(`/v1/auction/${symbol}/history`, this.apiUri);
-    PublicClient.addOptions(url, { limit_auction_results, ...qs });
-    return this.get(url.toString()) as Bluebird<AuctionHistory[]>;
+    PublicClient.#addOptions(url, { limit_auction_results, ...qs });
+    return this.get<AuctionHistory[]>(url.toString());
   }
 
   /** Get the price feed. */
-  public getPriceFeed(): Bluebird<PriceFeedItem[]> {
-    return this.get("v1/pricefeed") as Bluebird<PriceFeedItem[]>;
+  public getPriceFeed(): Promise<PriceFeedItem[]> {
+    return this.get<PriceFeedItem[]>("v1/pricefeed");
   }
 
-  private static addOptions(
+  static #addOptions(
     target: URL,
     data: Record<string, string | number | boolean | undefined>
   ): void {
