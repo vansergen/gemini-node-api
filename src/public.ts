@@ -2,6 +2,7 @@ import { FetchClient, UnsuccessfulFetch } from "rpc-request";
 
 export const ApiLimit = 500;
 export const DefaultSymbol = "btcusd";
+export const DefaultCurrency = "usd";
 export const ApiUri = "https://api.gemini.com";
 export const SandboxApiUri = "https://api.sandbox.gemini.com";
 export const Headers = {
