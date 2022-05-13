@@ -13,9 +13,11 @@
     "npm": ">=8.1.0"
   },
   "dependencies": {
-    "@types/ws": "^8.5.3",
     "rpc-request": "^6.0.0",
     "ws": "^8.6.0"
+  },
+  "peerDependencies": {
+    "@types/ws": "^8.5.3"
   },
   "devDependencies": {
     "@b2broker/tsconfig": "^1.0.3",
