@@ -1,5 +1,12 @@
 # Changelog
 
+### [4.0.2](https://github.com/vansergen/gemini-node-api/compare/v4.0.1...v4.0.2) (2022-05-13)
+
+### Performance Improvements
+
+- allow to get notional balances in different currencies ([5892f5f](https://github.com/vansergen/gemini-node-api/commit/5892f5f64709ea1d68b90077c1a2d783c37b9284))
+- set `usd` as the default currency ([ebdbc80](https://github.com/vansergen/gemini-node-api/commit/ebdbc805eee06eb5c3129f994d1e0626594a22d4))
+
 ### [4.0.1](https://github.com/vansergen/gemini-node-api/compare/v4.0.0...v4.0.1) (2022-05-13)
 
 ### Dependencies

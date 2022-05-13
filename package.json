@@ -1,6 +1,6 @@
 {
   "name": "gemini-node-api",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Gemini Node.js API",
   "main": "build/index.js",
   "directories": {

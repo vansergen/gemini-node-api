@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>Account | gemini-node-api</title>
+    <title>NotionalBalancesOptions | gemini-node-api</title>
     <meta name="description" content="Documentation for gemini-node-api" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/style.css" />
@@ -75,9 +75,11 @@
         <div class="container">
           <ul class="tsd-breadcrumb">
             <li><a href="../modules.html">gemini-node-api</a></li>
-            <li><a href="Account.html">Account</a></li>
+            <li>
+              <a href="NotionalBalancesOptions.html">NotionalBalancesOptions</a>
+            </li>
           </ul>
-          <h1>Interface Account</h1>
+          <h1>Interface NotionalBalancesOptions</h1>
         </div>
       </div>
     </header>
@@ -87,7 +89,17 @@
           <section class="tsd-panel tsd-hierarchy">
             <h3>Hierarchy</h3>
             <ul class="tsd-hierarchy">
-              <li><span class="target">Account</span></li>
+              <li>
+                <a
+                  href="AccountName.html"
+                  class="tsd-signature-type"
+                  data-tsd-kind="Interface"
+                  >AccountName</a
+                >
+                <ul class="tsd-hierarchy">
+                  <li><span class="target">NotionalBalancesOptions</span></li>
+                </ul>
+              </li>
             </ul>
           </section>
           <section class="tsd-panel-group tsd-index-group">
@@ -97,11 +109,21 @@
                 <section class="tsd-index-section">
                   <h3>Properties</h3>
                   <ul class="tsd-index-list">
-                    <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="Account.html#name" class="tsd-kind-icon">name</a>
+                    <li
+                      class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
+                    >
+                      <a
+                        href="NotionalBalancesOptions.html#account"
+                        class="tsd-kind-icon"
+                        >account</a
+                      >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="Account.html#type" class="tsd-kind-icon">type</a>
+                      <a
+                        href="NotionalBalancesOptions.html#currency"
+                        class="tsd-kind-icon"
+                        >currency</a
+                      >
                     </li>
                   </ul>
                 </section>
@@ -111,12 +133,12 @@
           <section class="tsd-panel-group tsd-member-group">
             <h2>Properties</h2>
             <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
+              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
             >
-              <a id="name" class="tsd-anchor"></a>
+              <a id="account" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                name<a
-                  href="#name"
+                <span class="tsd-flag ts-flagOptional">Optional</span> account<a
+                  href="#account"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -139,16 +161,22 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                name<span class="tsd-signature-symbol">:</span>
+                account<span class="tsd-signature-symbol">?:</span>
                 <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
+                <p>
+                  Inherited from <a href="AccountName.html">AccountName</a>.<a
+                    href="AccountName.html#account"
+                    >account</a
+                  >
+                </p>
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L124"
-                      >src/auth.ts:124</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L13"
+                      >src/auth.ts:13</a
                     >
                   </li>
                 </ul>
@@ -157,10 +185,11 @@
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a id="type" class="tsd-anchor"></a>
+              <a id="currency" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                <span class="tsd-flag ts-flagOptional">Optional</span> type<a
-                  href="#type"
+                <span class="tsd-flag ts-flagOptional">Optional</span>
+                currency<a
+                  href="#currency"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -183,18 +212,16 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                type<span class="tsd-signature-symbol">?:</span>
-                <span class="tsd-signature-type">&quot;exchange&quot;</span
-                ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">&quot;custody&quot;</span>
+                currency<span class="tsd-signature-symbol">?:</span>
+                <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L125"
-                      >src/auth.ts:125</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L75"
+                      >src/auth.ts:75</a
                     >
                   </li>
                 </ul>
@@ -211,13 +238,25 @@
           <nav class="tsd-navigation secondary menu-sticky">
             <ul>
               <li class="current tsd-kind-interface">
-                <a href="Account.html" class="tsd-kind-icon">Account</a>
+                <a href="NotionalBalancesOptions.html" class="tsd-kind-icon"
+                  >Notional<wbr />Balances<wbr />Options</a
+                >
                 <ul>
-                  <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="Account.html#name" class="tsd-kind-icon">name</a>
+                  <li
+                    class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
+                  >
+                    <a
+                      href="NotionalBalancesOptions.html#account"
+                      class="tsd-kind-icon"
+                      >account</a
+                    >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="Account.html#type" class="tsd-kind-icon">type</a>
+                    <a
+                      href="NotionalBalancesOptions.html#currency"
+                      class="tsd-kind-icon"
+                      >currency</a
+                    >
                   </li>
                 </ul>
               </li>
