@@ -304,7 +304,8 @@ const balances = await client.getAvailableBalances({ account });
 
 ```typescript
 const account = "primary";
-const balances = await client.getNotionalBalances({ account });
+const currency = "gbp";
+const balances = await client.getNotionalBalances({ account, currency });
 ```
 
 - [`getTransfers`](https://docs.gemini.com/rest-api/#transfers)
