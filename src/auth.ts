@@ -1,5 +1,6 @@
 import { UnsuccessfulFetch } from "rpc-request";
 import {
+  DefaultCurrency,
   PublicClient,
   PublicClientOptions,
   SymbolFilter,
@@ -68,6 +69,10 @@ export interface ConfirmClearingOptions {
   amount: number;
   price: number;
   side: "buy" | "sell";
+}
+
+export interface NotionalBalancesOptions extends AccountName {
+  currency?: string;
 }
 
 export interface TransferFilter extends AccountName {
@@ -527,10 +532,11 @@ export class AuthenticatedClient extends PublicClient {
   }
 
   /** Get the available balances in the supported currencies as well as in notional USD. */
-  public getNotionalBalances(
-    account?: AccountName
-  ): Promise<NotionalBalance[]> {
-    const request = "/v1/notionalbalances/usd";
+  public getNotionalBalances({
+    currency = DefaultCurrency,
+    ...account
+  }: NotionalBalancesOptions = {}): Promise<NotionalBalance[]> {
+    const request = `/v1/notionalbalances/${currency}`;
     const body = { request, ...account };
     return this.post<NotionalBalance[]>(request, {}, body);
   }
