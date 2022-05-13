@@ -1,5 +1,11 @@
 # Changelog
 
+### [4.0.1](https://github.com/vansergen/gemini-node-api/compare/v4.0.0...v4.0.1) (2022-05-13)
+
+### Dependencies
+
+- upgrdate `ws` to `v8.6.0` ([a0cd563](https://github.com/vansergen/gemini-node-api/commit/a0cd5634ed617609b3bfc5f92d953ae4d47421b6))
+
 ## [4.0.0](https://github.com/vansergen/gemini-node-api/compare/v3.1.2...v4.0.0) (2021-10-30)
 
 ### ⚠ BREAKING CHANGES
