@@ -7,6 +7,7 @@ import {
   AuthenticatedClient,
   ApiUri,
   SignRequest,
+  DefaultCurrency,
   DefaultSymbol,
   OrderStatus,
   CancelOrdersResponse,
@@ -1148,8 +1149,8 @@ suite("AuthenticatedClient", () => {
     deepStrictEqual(data, response);
   });
 
-  test(".getNotionalBalances()", async () => {
-    const request = "/v1/notionalbalances/usd";
+  test(".getNotionalBalances() (with default currency)", async () => {
+    const request = `/v1/notionalbalances/${DefaultCurrency}`;
     const account = "primary";
     const options = { request, account, nonce };
     const response: NotionalBalance[] = [
@@ -1179,6 +1180,41 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getNotionalBalances({ account });
+    deepStrictEqual(data, response);
+  });
+
+  test(".getNotionalBalances()", async () => {
+    const currency = "gbp";
+    const request = `/v1/notionalbalances/${currency}`;
+    const account = "primary";
+    const options = { request, account, nonce };
+    const response: NotionalBalance[] = [
+      {
+        currency: "USD",
+        amount: "2.911176035",
+        amountNotional: "2.911176035",
+        available: "2.911176035",
+        availableNotional: "2.911176035",
+        availableForWithdrawal: "2.91",
+        availableForWithdrawalNotional: "2.91",
+      },
+      {
+        currency: "ETH",
+        amount: "0.53",
+        amountNotional: "69.9759",
+        available: "0.523",
+        availableNotional: "69.05169",
+        availableForWithdrawal: "0.523",
+        availableForWithdrawalNotional: "69.05169",
+      },
+    ];
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
+      .post(request)
+      .reply(200, response);
+
+    const data = await client.getNotionalBalances({ account, currency });
     deepStrictEqual(data, response);
   });
 
