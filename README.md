@@ -184,7 +184,12 @@ const response = await client.cancelAll({ account });
 ```typescript
 const order_id = 44375901;
 const account = "primary";
-const order = await client.getOrderStatus({ order_id, account });
+const include_trades = true;
+const order = await client.getOrderStatus({
+  order_id,
+  account,
+  include_trades,
+});
 ```
 
 - [`getActiveOrders`](https://docs.gemini.com/rest-api/#get-active-orders)
