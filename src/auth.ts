@@ -36,6 +36,8 @@ export interface OrderOptions extends BasicOrderOptions {
 
 export interface OrderID extends AccountName {
   order_id: number;
+  client_order_id?: string;
+  include_trades?: boolean;
 }
 
 export type PastTradesFilter = SymbolFilter & {
@@ -161,6 +163,7 @@ export interface OrderStatus extends BaseOrder {
   type: OrderType;
   options: [OrderEexecutionOptions] | [];
   reason?: string;
+  trades?: PastTrade[];
   was_forced: boolean;
   stop_price?: string;
 }
