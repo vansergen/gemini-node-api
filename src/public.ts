@@ -180,23 +180,17 @@ export class PublicClient extends FetchClient<unknown> {
     });
   }
 
-  /**
-   * Get all available symbols for trading.
-   */
+  /** Get all available symbols for trading. */
   public getSymbols(): Promise<string[]> {
     return this.get<string[]>("v1/symbols");
   }
 
-  /**
-   * Get extra details about the symbol.
-   */
+  /** Get extra details about the symbol. */
   public getSymbol({ symbol }: { symbol: string }): Promise<ISymbol> {
     return this.get<ISymbol>(`v1/symbols/details/${symbol}`);
   }
 
-  /**
-   * Get information about recent trading activity for the symbol.
-   */
+  /** Get information about recent trading activity for the symbol. */
   public getTicker(options: { symbol?: string; v: "v2" }): Promise<TickerV2>;
   public getTicker(options?: { symbol?: string; v?: "v1" }): Promise<TickerV1>;
   public getTicker({
