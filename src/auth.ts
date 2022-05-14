@@ -105,6 +105,17 @@ export interface InternalTransferFilter {
   amount: number;
 }
 
+export interface AddBankOptions extends AccountName {
+  /** Account number of bank account to be added */
+  accountnumber: string;
+  /** Routing number of bank account to be added */
+  routing: string;
+  /** Type of bank account to be added */
+  type: "checking" | "savings";
+  /** The name of the bank account as shown on your account statements */
+  name: string;
+}
+
 export interface AccountDetails {
   account: {
     accountName: string;
@@ -316,6 +327,11 @@ export interface Withdrawal {
 
 export interface InternalTransferResponse {
   uuid: string;
+}
+
+export interface AddBankResponse {
+  /** Reference ID for the new bank addition request. Once received, send in a wire from the requested bank account to verify it and enable withdrawals to that account. */
+  referenceId: string;
 }
 
 export interface AccountInfo {
@@ -589,6 +605,13 @@ export class AuthenticatedClient extends PublicClient {
     const request = `/v1/account/transfer/${currency}`;
     const body = { request, ...rest };
     return this.post<InternalTransferResponse>(request, {}, body);
+  }
+
+  /** The add bank API allows for banking information to be sent in via API. However, for the bank to be verified, you must still send in a wire for any amount from the bank account. */
+  public addBank(bank: AddBankOptions): Promise<AddBankResponse> {
+    const request = `/v1/payments/addbank`;
+    const body = { request, ...bank };
+    return this.post<AddBankResponse>(request, {}, body);
   }
 
   /** Get details about the specific account requested such as users, country codes, etc. */
