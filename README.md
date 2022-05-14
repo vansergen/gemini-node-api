@@ -379,6 +379,21 @@ const transfer = await client.internalTransfer({
 });
 ```
 
+- [`addBank`](https://docs.gemini.com/rest-api/#add-bank)
+
+```typescript
+const accountnumber = "account-number-string";
+const routing = "routing-number-string";
+const type = "checking";
+const name = "Satoshi Nakamoto Checking";
+const result = await client.addBank({
+  accountnumber,
+  routing,
+  type,
+  name,
+});
+```
+
 - [`getAccountDetails`](https://docs.gemini.com/rest-api/#account-detail)
 
 ```typescript
