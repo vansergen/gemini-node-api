@@ -27,6 +27,7 @@ import {
   NewAddress,
   Withdrawal,
   InternalTransferResponse,
+  AddBankResponse,
   AccountInfo,
   GUSDWithdrawal,
   Heartbeat,
@@ -1466,6 +1467,38 @@ suite("AuthenticatedClient", () => {
       sourceAccount,
       targetAccount,
       amount,
+    });
+    deepStrictEqual(data, response);
+  });
+
+  test(".addBank()", async () => {
+    const request = `/v1/payments/addbank`;
+    const accountnumber = "account-number-string";
+    const routing = "routing-number-string";
+    const type = "checking";
+    const name = "Satoshi Nakamoto Checking";
+    const options = {
+      request,
+      accountnumber,
+      routing,
+      type,
+      name,
+      nonce,
+    };
+    const response: AddBankResponse = {
+      referenceId: "BankAccountRefId(18428)",
+    };
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
+      .post(request)
+      .reply(200, response);
+
+    const data = await client.addBank({
+      accountnumber,
+      routing,
+      type,
+      name,
     });
     deepStrictEqual(data, response);
   });
