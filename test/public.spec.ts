@@ -54,10 +54,7 @@ suite("PublicClient", () => {
 
   test(".get() (reject non 2xx responses when no message is provided) ", async () => {
     const uri = "/v1/symbols";
-    const response = {
-      result: "error",
-      reason: "RateLimit",
-    };
+    const response = { result: "error", reason: "RateLimit" };
     nock(ApiUri).get(uri).delay(1).reply(429, response);
 
     await rejects(client.get(uri), new Error(response.reason));
