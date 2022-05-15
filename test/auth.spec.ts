@@ -28,6 +28,7 @@ import {
   Withdrawal,
   InternalTransferResponse,
   AddBankResponse,
+  PaymentMethods,
   AccountInfo,
   GUSDWithdrawal,
   Heartbeat,
@@ -1500,6 +1501,37 @@ suite("AuthenticatedClient", () => {
       type,
       name,
     });
+    deepStrictEqual(data, response);
+  });
+
+  test(".getPaymentMethods()", async () => {
+    const request = `/v1/payments/methods`;
+    const account = "primary";
+    const options = { request, account, nonce };
+    const response: PaymentMethods = {
+      balances: [
+        {
+          type: "exchange",
+          currency: "USD",
+          amount: "50893484.26",
+          available: "50889972.01",
+          availableForWithdrawal: "50889972.01",
+        },
+      ],
+      banks: [
+        {
+          bank: "Jpmorgan Chase Bank Checking  - 1111",
+          bankId: "97631a24-ca40-4277-b3d5-38c37673d029",
+        },
+      ],
+    };
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
+      .post(request)
+      .reply(200, response);
+
+    const data = await client.getPaymentMethods({ account });
     deepStrictEqual(data, response);
   });
 

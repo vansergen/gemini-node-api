@@ -394,6 +394,13 @@ const result = await client.addBank({
 });
 ```
 
+- [`getPaymentMethods`](https://docs.gemini.com/rest-api/#add-bank)
+
+```typescript
+const account = "primary";
+const methods = await client.getPaymentMethods({ account });
+```
+
 - [`getAccountDetails`](https://docs.gemini.com/rest-api/#account-detail)
 
 ```typescript
