@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>BrokerOrderOptions | gemini-node-api</title>
+    <title>AddBankOptions | gemini-node-api</title>
     <meta name="description" content="Documentation for gemini-node-api" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/style.css" />
@@ -75,9 +75,9 @@
         <div class="container">
           <ul class="tsd-breadcrumb">
             <li><a href="../modules.html">gemini-node-api</a></li>
-            <li><a href="BrokerOrderOptions.html">BrokerOrderOptions</a></li>
+            <li><a href="AddBankOptions.html">AddBankOptions</a></li>
           </ul>
-          <h1>Interface BrokerOrderOptions</h1>
+          <h1>Interface AddBankOptions</h1>
         </div>
       </div>
     </header>
@@ -89,13 +89,13 @@
             <ul class="tsd-hierarchy">
               <li>
                 <a
-                  href="BaseClearingOrder.html"
+                  href="AccountName.html"
                   class="tsd-signature-type"
                   data-tsd-kind="Interface"
-                  >BaseClearingOrder</a
+                  >AccountName</a
                 >
                 <ul class="tsd-hierarchy">
-                  <li><span class="target">BrokerOrderOptions</span></li>
+                  <li><span class="target">AddBankOptions</span></li>
                 </ul>
               </li>
             </ul>
@@ -111,59 +111,33 @@
                       class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
                     >
                       <a
-                        href="BrokerOrderOptions.html#amount"
+                        href="AddBankOptions.html#account"
                         class="tsd-kind-icon"
-                        >amount</a
-                      >
-                    </li>
-                    <li
-                      class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
-                    >
-                      <a
-                        href="BrokerOrderOptions.html#expires_in_hrs"
-                        class="tsd-kind-icon"
-                        >expires_<wbr />in_<wbr />hrs</a
-                      >
-                    </li>
-                    <li
-                      class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
-                    >
-                      <a
-                        href="BrokerOrderOptions.html#price"
-                        class="tsd-kind-icon"
-                        >price</a
-                      >
-                    </li>
-                    <li
-                      class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
-                    >
-                      <a
-                        href="BrokerOrderOptions.html#side"
-                        class="tsd-kind-icon"
-                        >side</a
+                        >account</a
                       >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
                       <a
-                        href="BrokerOrderOptions.html#source_counterparty_id"
+                        href="AddBankOptions.html#accountnumber"
                         class="tsd-kind-icon"
-                        >source_<wbr />counterparty_<wbr />id</a
+                        >accountnumber</a
                       >
                     </li>
-                    <li
-                      class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
-                    >
-                      <a
-                        href="BrokerOrderOptions.html#symbol"
-                        class="tsd-kind-icon"
-                        >symbol</a
+                    <li class="tsd-kind-property tsd-parent-kind-interface">
+                      <a href="AddBankOptions.html#name" class="tsd-kind-icon"
+                        >name</a
                       >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
                       <a
-                        href="BrokerOrderOptions.html#target_counterparty_id"
+                        href="AddBankOptions.html#routing"
                         class="tsd-kind-icon"
-                        >target_<wbr />counterparty_<wbr />id</a
+                        >routing</a
+                      >
+                    </li>
+                    <li class="tsd-kind-property tsd-parent-kind-interface">
+                      <a href="AddBankOptions.html#type" class="tsd-kind-icon"
+                        >type</a
                       >
                     </li>
                   </ul>
@@ -176,10 +150,10 @@
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
             >
-              <a id="amount" class="tsd-anchor"></a>
+              <a id="account" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                amount<a
-                  href="#amount"
+                <span class="tsd-flag ts-flagOptional">Optional</span> account<a
+                  href="#account"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -202,35 +176,34 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                amount<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">number</span>
+                account<span class="tsd-signature-symbol">?:</span>
+                <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
                 <p>
-                  Inherited from
-                  <a href="BaseClearingOrder.html">BaseClearingOrder</a>.<a
-                    href="BaseClearingOrder.html#amount"
-                    >amount</a
+                  Inherited from <a href="AccountName.html">AccountName</a>.<a
+                    href="AccountName.html#account"
+                    >account</a
                   >
                 </p>
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L49"
-                      >src/auth.ts:49</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L13"
+                      >src/auth.ts:13</a
                     >
                   </li>
                 </ul>
               </aside>
             </section>
             <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
+              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a id="expires_in_hrs" class="tsd-anchor"></a>
+              <a id="accountnumber" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                expires_<wbr />in_<wbr />hrs<a
-                  href="#expires_in_hrs"
+                accountnumber<a
+                  href="#accountnumber"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -253,37 +226,33 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                expires_<wbr />in_<wbr />hrs<span class="tsd-signature-symbol"
-                  >:</span
-                >
-                <span class="tsd-signature-type">number</span>
+                accountnumber<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
-                <p>
-                  Inherited from
-                  <a href="BaseClearingOrder.html">BaseClearingOrder</a>.<a
-                    href="BaseClearingOrder.html#expires_in_hrs"
-                    >expires_in_hrs</a
-                  >
-                </p>
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L52"
-                      >src/auth.ts:52</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L110"
+                      >src/auth.ts:110</a
                     >
                   </li>
                 </ul>
               </aside>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>Account number of bank account to be added</p>
+                </div>
+              </div>
             </section>
             <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
+              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a id="price" class="tsd-anchor"></a>
+              <a id="name" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                price<a
-                  href="#price"
+                name<a
+                  href="#name"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -306,35 +275,36 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                price<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">number</span>
+                name<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
-                <p>
-                  Inherited from
-                  <a href="BaseClearingOrder.html">BaseClearingOrder</a>.<a
-                    href="BaseClearingOrder.html#price"
-                    >price</a
-                  >
-                </p>
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L50"
-                      >src/auth.ts:50</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L116"
+                      >src/auth.ts:116</a
                     >
                   </li>
                 </ul>
               </aside>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>
+                    The name of the bank account as shown on your account
+                    statements
+                  </p>
+                </div>
+              </div>
             </section>
             <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
+              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a id="side" class="tsd-anchor"></a>
+              <a id="routing" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                side<a
-                  href="#side"
+                routing<a
+                  href="#routing"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -357,174 +327,76 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                side<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">&quot;buy&quot;</span
+                routing<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">string</span>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L112"
+                      >src/auth.ts:112</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>Routing number of bank account to be added</p>
+                </div>
+              </div>
+            </section>
+            <section
+              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
+            >
+              <a id="type" class="tsd-anchor"></a>
+              <h3 class="tsd-anchor-link">
+                type<a
+                  href="#type"
+                  aria-label="Permalink"
+                  class="tsd-anchor-icon"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-link"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                      d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"
+                    ></path>
+                    <path
+                      d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"
+                    ></path></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature tsd-kind-icon">
+                type<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">&quot;checking&quot;</span
                 ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">&quot;sell&quot;</span>
-              </div>
-              <aside class="tsd-sources">
-                <p>
-                  Inherited from
-                  <a href="BaseClearingOrder.html">BaseClearingOrder</a>.<a
-                    href="BaseClearingOrder.html#side"
-                    >side</a
-                  >
-                </p>
-                <ul>
-                  <li>
-                    Defined in
-                    <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L51"
-                      >src/auth.ts:51</a
-                    >
-                  </li>
-                </ul>
-              </aside>
-            </section>
-            <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
-            >
-              <a id="source_counterparty_id" class="tsd-anchor"></a>
-              <h3 class="tsd-anchor-link">
-                source_<wbr />counterparty_<wbr />id<a
-                  href="#source_counterparty_id"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-link"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path
-                      d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"
-                    ></path>
-                    <path
-                      d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"
-                    ></path></svg
-                ></a>
-              </h3>
-              <div class="tsd-signature tsd-kind-icon">
-                source_<wbr />counterparty_<wbr />id<span
-                  class="tsd-signature-symbol"
-                  >:</span
-                >
-                <span class="tsd-signature-type">string</span>
+                ><span class="tsd-signature-type">&quot;savings&quot;</span>
               </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L61"
-                      >src/auth.ts:61</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L114"
+                      >src/auth.ts:114</a
                     >
                   </li>
                 </ul>
               </aside>
-            </section>
-            <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
-            >
-              <a id="symbol" class="tsd-anchor"></a>
-              <h3 class="tsd-anchor-link">
-                <span class="tsd-flag ts-flagOptional">Optional</span> symbol<a
-                  href="#symbol"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-link"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path
-                      d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"
-                    ></path>
-                    <path
-                      d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"
-                    ></path></svg
-                ></a>
-              </h3>
-              <div class="tsd-signature tsd-kind-icon">
-                symbol<span class="tsd-signature-symbol">?:</span>
-                <span class="tsd-signature-type">string</span>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>Type of bank account to be added</p>
+                </div>
               </div>
-              <aside class="tsd-sources">
-                <p>
-                  Inherited from
-                  <a href="BaseClearingOrder.html">BaseClearingOrder</a>.<a
-                    href="BaseClearingOrder.html#symbol"
-                    >symbol</a
-                  >
-                </p>
-                <ul>
-                  <li>
-                    Defined in
-                    <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/public.ts#L17"
-                      >src/public.ts:17</a
-                    >
-                  </li>
-                </ul>
-              </aside>
-            </section>
-            <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
-            >
-              <a id="target_counterparty_id" class="tsd-anchor"></a>
-              <h3 class="tsd-anchor-link">
-                target_<wbr />counterparty_<wbr />id<a
-                  href="#target_counterparty_id"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-link"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path
-                      d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"
-                    ></path>
-                    <path
-                      d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"
-                    ></path></svg
-                ></a>
-              </h3>
-              <div class="tsd-signature tsd-kind-icon">
-                target_<wbr />counterparty_<wbr />id<span
-                  class="tsd-signature-symbol"
-                  >:</span
-                >
-                <span class="tsd-signature-type">string</span>
-              </div>
-              <aside class="tsd-sources">
-                <ul>
-                  <li>
-                    Defined in
-                    <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L60"
-                      >src/auth.ts:60</a
-                    >
-                  </li>
-                </ul>
-              </aside>
             </section>
           </section>
         </div>
@@ -537,65 +409,37 @@
           <nav class="tsd-navigation secondary menu-sticky">
             <ul>
               <li class="current tsd-kind-interface">
-                <a href="BrokerOrderOptions.html" class="tsd-kind-icon"
-                  >Broker<wbr />Order<wbr />Options</a
+                <a href="AddBankOptions.html" class="tsd-kind-icon"
+                  >Add<wbr />Bank<wbr />Options</a
                 >
                 <ul>
                   <li
                     class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
                   >
-                    <a
-                      href="BrokerOrderOptions.html#amount"
-                      class="tsd-kind-icon"
-                      >amount</a
-                    >
-                  </li>
-                  <li
-                    class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
-                  >
-                    <a
-                      href="BrokerOrderOptions.html#expires_in_hrs"
-                      class="tsd-kind-icon"
-                      >expires_<wbr />in_<wbr />hrs</a
-                    >
-                  </li>
-                  <li
-                    class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
-                  >
-                    <a
-                      href="BrokerOrderOptions.html#price"
-                      class="tsd-kind-icon"
-                      >price</a
-                    >
-                  </li>
-                  <li
-                    class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
-                  >
-                    <a href="BrokerOrderOptions.html#side" class="tsd-kind-icon"
-                      >side</a
+                    <a href="AddBankOptions.html#account" class="tsd-kind-icon"
+                      >account</a
                     >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
                     <a
-                      href="BrokerOrderOptions.html#source_counterparty_id"
+                      href="AddBankOptions.html#accountnumber"
                       class="tsd-kind-icon"
-                      >source_<wbr />counterparty_<wbr />id</a
-                    >
-                  </li>
-                  <li
-                    class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
-                  >
-                    <a
-                      href="BrokerOrderOptions.html#symbol"
-                      class="tsd-kind-icon"
-                      >symbol</a
+                      >accountnumber</a
                     >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a
-                      href="BrokerOrderOptions.html#target_counterparty_id"
-                      class="tsd-kind-icon"
-                      >target_<wbr />counterparty_<wbr />id</a
+                    <a href="AddBankOptions.html#name" class="tsd-kind-icon"
+                      >name</a
+                    >
+                  </li>
+                  <li class="tsd-kind-property tsd-parent-kind-interface">
+                    <a href="AddBankOptions.html#routing" class="tsd-kind-icon"
+                      >routing</a
+                    >
+                  </li>
+                  <li class="tsd-kind-property tsd-parent-kind-interface">
+                    <a href="AddBankOptions.html#type" class="tsd-kind-icon"
+                      >type</a
                     >
                   </li>
                 </ul>

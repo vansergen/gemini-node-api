@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.1.0](https://github.com/vansergen/gemini-node-api/compare/v4.0.2...v4.1.0) (2022-05-15)
+
+### Features
+
+- add the `addBank` method to the `AuthenticatedClient` class ([8e93bdc](https://github.com/vansergen/gemini-node-api/commit/8e93bdca6594a2e0d0e2a3270ff72ab68cd5689b))
+
+### Bug Fixes
+
+- update order interfaces ([70c0cf3](https://github.com/vansergen/gemini-node-api/commit/70c0cf3375a34faec4bd05ab5da638fbf7469735))
+
 ### [4.0.2](https://github.com/vansergen/gemini-node-api/compare/v4.0.1...v4.0.2) (2022-05-13)
 
 ### Performance Improvements
