@@ -184,7 +184,12 @@ const response = await client.cancelAll({ account });
 ```typescript
 const order_id = 44375901;
 const account = "primary";
-const order = await client.getOrderStatus({ order_id, account });
+const include_trades = true;
+const order = await client.getOrderStatus({
+  order_id,
+  account,
+  include_trades,
+});
 ```
 
 - [`getActiveOrders`](https://docs.gemini.com/rest-api/#get-active-orders)
@@ -371,6 +376,21 @@ const transfer = await client.internalTransfer({
   sourceAccount,
   targetAccount,
   amount,
+});
+```
+
+- [`addBank`](https://docs.gemini.com/rest-api/#add-bank)
+
+```typescript
+const accountnumber = "account-number-string";
+const routing = "routing-number-string";
+const type = "checking";
+const name = "Satoshi Nakamoto Checking";
+const result = await client.addBank({
+  accountnumber,
+  routing,
+  type,
+  name,
 });
 ```
 

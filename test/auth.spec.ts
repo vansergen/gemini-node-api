@@ -27,6 +27,7 @@ import {
   NewAddress,
   Withdrawal,
   InternalTransferResponse,
+  AddBankResponse,
   AccountInfo,
   GUSDWithdrawal,
   Heartbeat,
@@ -465,6 +466,60 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getOrderStatus({ order_id, account });
+    deepStrictEqual(data, response);
+  });
+
+  test(".getOrderStatus() (include trades)", async () => {
+    const request = "/v1/order/status";
+    const account = "primary";
+    const order_id = 17379712927;
+    const include_trades = true;
+    const options = { request, order_id, account, include_trades, nonce };
+    const response: OrderStatus = {
+      avg_execution_price: "22728.94",
+      exchange: "gemini",
+      executed_amount: "0.0219983861",
+      id: "17379712927",
+      is_cancelled: false,
+      is_hidden: false,
+      is_live: false,
+      options: [],
+      order_id: "17379712927",
+      remaining_amount: "0",
+      side: "buy",
+      symbol: "btcusd",
+      timestamp: "1608229172",
+      timestampms: 1608229172627,
+      trades: [
+        {
+          aggressor: true,
+          amount: "0.0219983861",
+          exchange: "gemini",
+          fee_amount: "0.00",
+          fee_currency: "USD",
+          is_auction_fill: false,
+          order_id: "17379712927",
+          price: "22728.94",
+          tid: 17379712930,
+          timestamp: 1608229172,
+          timestampms: 1608229172627,
+          type: "Buy",
+        },
+      ],
+      type: "market buy",
+      was_forced: false,
+    };
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
+      .post(request)
+      .reply(200, response);
+
+    const data = await client.getOrderStatus({
+      order_id,
+      account,
+      include_trades,
+    });
     deepStrictEqual(data, response);
   });
 
@@ -1412,6 +1467,38 @@ suite("AuthenticatedClient", () => {
       sourceAccount,
       targetAccount,
       amount,
+    });
+    deepStrictEqual(data, response);
+  });
+
+  test(".addBank()", async () => {
+    const request = `/v1/payments/addbank`;
+    const accountnumber = "account-number-string";
+    const routing = "routing-number-string";
+    const type = "checking";
+    const name = "Satoshi Nakamoto Checking";
+    const options = {
+      request,
+      accountnumber,
+      routing,
+      type,
+      name,
+      nonce,
+    };
+    const response: AddBankResponse = {
+      referenceId: "BankAccountRefId(18428)",
+    };
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
+      .post(request)
+      .reply(200, response);
+
+    const data = await client.addBank({
+      accountnumber,
+      routing,
+      type,
+      name,
     });
     deepStrictEqual(data, response);
   });
