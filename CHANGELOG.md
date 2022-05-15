@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.2.0](https://github.com/vansergen/gemini-node-api/compare/v4.1.0...v4.2.0) (2022-05-15)
+
+### Features
+
+- add the `getPaymentMethods` method ([7a2ffa9](https://github.com/vansergen/gemini-node-api/commit/7a2ffa90d888df5c991c12666cb70c407d71df13))
+
 ## [4.1.0](https://github.com/vansergen/gemini-node-api/compare/v4.0.2...v4.1.0) (2022-05-15)
 
 ### Features

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>GUSDWithdrawal | gemini-node-api</title>
+    <title>PaymentBalance | gemini-node-api</title>
     <meta name="description" content="Documentation for gemini-node-api" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/style.css" />
@@ -75,9 +75,9 @@
         <div class="container">
           <ul class="tsd-breadcrumb">
             <li><a href="../modules.html">gemini-node-api</a></li>
-            <li><a href="GUSDWithdrawal.html">GUSDWithdrawal</a></li>
+            <li><a href="PaymentBalance.html">PaymentBalance</a></li>
           </ul>
-          <h1>Interface GUSDWithdrawal</h1>
+          <h1>Interface PaymentBalance</h1>
         </div>
       </div>
     </header>
@@ -87,7 +87,7 @@
           <section class="tsd-panel tsd-hierarchy">
             <h3>Hierarchy</h3>
             <ul class="tsd-hierarchy">
-              <li><span class="target">GUSDWithdrawal</span></li>
+              <li><span class="target">PaymentBalance</span></li>
             </ul>
           </section>
           <section class="tsd-panel-group tsd-index-group">
@@ -98,20 +98,34 @@
                   <h3>Properties</h3>
                   <ul class="tsd-index-list">
                     <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="GUSDWithdrawal.html#amount" class="tsd-kind-icon"
+                      <a href="PaymentBalance.html#amount" class="tsd-kind-icon"
                         >amount</a
                       >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
                       <a
-                        href="GUSDWithdrawal.html#destination"
+                        href="PaymentBalance.html#available"
                         class="tsd-kind-icon"
-                        >destination</a
+                        >available</a
                       >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="GUSDWithdrawal.html#txHash" class="tsd-kind-icon"
-                        >tx<wbr />Hash</a
+                      <a
+                        href="PaymentBalance.html#availableForWithdrawal"
+                        class="tsd-kind-icon"
+                        >available<wbr />For<wbr />Withdrawal</a
+                      >
+                    </li>
+                    <li class="tsd-kind-property tsd-parent-kind-interface">
+                      <a
+                        href="PaymentBalance.html#currency"
+                        class="tsd-kind-icon"
+                        >currency</a
+                      >
+                    </li>
+                    <li class="tsd-kind-property tsd-parent-kind-interface">
+                      <a href="PaymentBalance.html#type" class="tsd-kind-icon"
+                        >type</a
                       >
                     </li>
                   </ul>
@@ -158,20 +172,25 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L372"
-                      >src/auth.ts:372</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L343"
+                      >src/auth.ts:343</a
                     >
                   </li>
                 </ul>
               </aside>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>Total account balance for currency.</p>
+                </div>
+              </div>
             </section>
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a id="destination" class="tsd-anchor"></a>
+              <a id="available" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                destination<a
-                  href="#destination"
+                available<a
+                  href="#available"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -194,7 +213,7 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                destination<span class="tsd-signature-symbol">:</span>
+                available<span class="tsd-signature-symbol">:</span>
                 <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
@@ -202,20 +221,25 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L371"
-                      >src/auth.ts:371</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L345"
+                      >src/auth.ts:345</a
                     >
                   </li>
                 </ul>
               </aside>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>Total amount available for trading</p>
+                </div>
+              </div>
             </section>
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a id="txHash" class="tsd-anchor"></a>
+              <a id="availableForWithdrawal" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                tx<wbr />Hash<a
-                  href="#txHash"
+                available<wbr />For<wbr />Withdrawal<a
+                  href="#availableForWithdrawal"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -238,7 +262,10 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                tx<wbr />Hash<span class="tsd-signature-symbol">:</span>
+                available<wbr />For<wbr />Withdrawal<span
+                  class="tsd-signature-symbol"
+                  >:</span
+                >
                 <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
@@ -246,12 +273,115 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L373"
-                      >src/auth.ts:373</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L347"
+                      >src/auth.ts:347</a
                     >
                   </li>
                 </ul>
               </aside>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>Total amount available for withdrawal</p>
+                </div>
+              </div>
+            </section>
+            <section
+              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
+            >
+              <a id="currency" class="tsd-anchor"></a>
+              <h3 class="tsd-anchor-link">
+                currency<a
+                  href="#currency"
+                  aria-label="Permalink"
+                  class="tsd-anchor-icon"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-link"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                      d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"
+                    ></path>
+                    <path
+                      d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"
+                    ></path></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature tsd-kind-icon">
+                currency<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">&quot;USD&quot;</span>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L341"
+                      >src/auth.ts:341</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>Symbol for fiat balance.</p>
+                </div>
+              </div>
+            </section>
+            <section
+              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
+            >
+              <a id="type" class="tsd-anchor"></a>
+              <h3 class="tsd-anchor-link">
+                type<a
+                  href="#type"
+                  aria-label="Permalink"
+                  class="tsd-anchor-icon"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-link"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                      d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"
+                    ></path>
+                    <path
+                      d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"
+                    ></path></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature tsd-kind-icon">
+                type<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">&quot;exchange&quot;</span>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L339"
+                      >src/auth.ts:339</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>Account type. Will always be <code>exchange</code>.</p>
+                </div>
+              </div>
             </section>
           </section>
         </div>
@@ -264,25 +394,37 @@
           <nav class="tsd-navigation secondary menu-sticky">
             <ul>
               <li class="current tsd-kind-interface">
-                <a href="GUSDWithdrawal.html" class="tsd-kind-icon"
-                  >GUSDWithdrawal</a
+                <a href="PaymentBalance.html" class="tsd-kind-icon"
+                  >Payment<wbr />Balance</a
                 >
                 <ul>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="GUSDWithdrawal.html#amount" class="tsd-kind-icon"
+                    <a href="PaymentBalance.html#amount" class="tsd-kind-icon"
                       >amount</a
                     >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
                     <a
-                      href="GUSDWithdrawal.html#destination"
+                      href="PaymentBalance.html#available"
                       class="tsd-kind-icon"
-                      >destination</a
+                      >available</a
                     >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="GUSDWithdrawal.html#txHash" class="tsd-kind-icon"
-                      >tx<wbr />Hash</a
+                    <a
+                      href="PaymentBalance.html#availableForWithdrawal"
+                      class="tsd-kind-icon"
+                      >available<wbr />For<wbr />Withdrawal</a
+                    >
+                  </li>
+                  <li class="tsd-kind-property tsd-parent-kind-interface">
+                    <a href="PaymentBalance.html#currency" class="tsd-kind-icon"
+                      >currency</a
+                    >
+                  </li>
+                  <li class="tsd-kind-property tsd-parent-kind-interface">
+                    <a href="PaymentBalance.html#type" class="tsd-kind-icon"
+                      >type</a
                     >
                   </li>
                 </ul>

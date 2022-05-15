@@ -487,6 +487,15 @@
 </code></pre>
             <ul>
               <li>
+                <a href="https://docs.gemini.com/rest-api/#add-bank"
+                  ><code>getPaymentMethods</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">methods</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getPaymentMethods</span><span class="hl-0">({ </span><span class="hl-2">account</span><span class="hl-0"> });</span>
+</code></pre>
+            <ul>
+              <li>
                 <a href="https://docs.gemini.com/rest-api/#account-detail"
                   ><code>getAccountDetails</code></a
                 >
@@ -1026,6 +1035,21 @@
               <li class="tsd-kind-interface">
                 <a href="interfaces/PastTrade.html" class="tsd-kind-icon"
                   >Past<wbr />Trade</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/PaymentBalance.html" class="tsd-kind-icon"
+                  >Payment<wbr />Balance</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/PaymentBank.html" class="tsd-kind-icon"
+                  >Payment<wbr />Bank</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/PaymentMethods.html" class="tsd-kind-icon"
+                  >Payment<wbr />Methods</a
                 >
               </li>
               <li class="tsd-kind-interface">

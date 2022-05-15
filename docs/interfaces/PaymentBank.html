@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>Heartbeat | gemini-node-api</title>
+    <title>PaymentBank | gemini-node-api</title>
     <meta name="description" content="Documentation for gemini-node-api" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/style.css" />
@@ -75,9 +75,9 @@
         <div class="container">
           <ul class="tsd-breadcrumb">
             <li><a href="../modules.html">gemini-node-api</a></li>
-            <li><a href="Heartbeat.html">Heartbeat</a></li>
+            <li><a href="PaymentBank.html">PaymentBank</a></li>
           </ul>
-          <h1>Interface Heartbeat</h1>
+          <h1>Interface PaymentBank</h1>
         </div>
       </div>
     </header>
@@ -87,7 +87,7 @@
           <section class="tsd-panel tsd-hierarchy">
             <h3>Hierarchy</h3>
             <ul class="tsd-hierarchy">
-              <li><span class="target">Heartbeat</span></li>
+              <li><span class="target">PaymentBank</span></li>
             </ul>
           </section>
           <section class="tsd-panel-group tsd-index-group">
@@ -98,8 +98,13 @@
                   <h3>Properties</h3>
                   <ul class="tsd-index-list">
                     <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a href="Heartbeat.html#result" class="tsd-kind-icon"
-                        >result</a
+                      <a href="PaymentBank.html#bank" class="tsd-kind-icon"
+                        >bank</a
+                      >
+                    </li>
+                    <li class="tsd-kind-property tsd-parent-kind-interface">
+                      <a href="PaymentBank.html#bankId" class="tsd-kind-icon"
+                        >bank<wbr />Id</a
                       >
                     </li>
                   </ul>
@@ -112,10 +117,10 @@
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a id="result" class="tsd-anchor"></a>
+              <a id="bank" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                result<a
-                  href="#result"
+                bank<a
+                  href="#bank"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -138,20 +143,74 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                result<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">&quot;ok&quot;</span>
+                bank<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L377"
-                      >src/auth.ts:377</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L352"
+                      >src/auth.ts:352</a
                     >
                   </li>
                 </ul>
               </aside>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>Name of bank account</p>
+                </div>
+              </div>
+            </section>
+            <section
+              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
+            >
+              <a id="bankId" class="tsd-anchor"></a>
+              <h3 class="tsd-anchor-link">
+                bank<wbr />Id<a
+                  href="#bankId"
+                  aria-label="Permalink"
+                  class="tsd-anchor-icon"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-link"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                      d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"
+                    ></path>
+                    <path
+                      d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"
+                    ></path></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature tsd-kind-icon">
+                bank<wbr />Id<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">string</span>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L354"
+                      >src/auth.ts:354</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>Unique identifier for bank account</p>
+                </div>
+              </div>
             </section>
           </section>
         </div>
@@ -164,11 +223,18 @@
           <nav class="tsd-navigation secondary menu-sticky">
             <ul>
               <li class="current tsd-kind-interface">
-                <a href="Heartbeat.html" class="tsd-kind-icon">Heartbeat</a>
+                <a href="PaymentBank.html" class="tsd-kind-icon"
+                  >Payment<wbr />Bank</a
+                >
                 <ul>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a href="Heartbeat.html#result" class="tsd-kind-icon"
-                      >result</a
+                    <a href="PaymentBank.html#bank" class="tsd-kind-icon"
+                      >bank</a
+                    >
+                  </li>
+                  <li class="tsd-kind-property tsd-parent-kind-interface">
+                    <a href="PaymentBank.html#bankId" class="tsd-kind-icon"
+                      >bank<wbr />Id</a
                     >
                   </li>
                 </ul>
