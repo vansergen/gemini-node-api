@@ -334,6 +334,31 @@ export interface AddBankResponse {
   referenceId: string;
 }
 
+export interface PaymentBalance {
+  /** Account type. Will always be `exchange`. */
+  type: "exchange";
+  /**	Symbol for fiat balance. */
+  currency: "USD";
+  /** Total account balance for currency. */
+  amount: string;
+  /** Total amount available for trading */
+  available: string;
+  /** Total amount available for withdrawal */
+  availableForWithdrawal: string;
+}
+
+export interface PaymentBank {
+  /** Name of bank account */
+  bank: string;
+  /** Unique identifier for bank account */
+  bankId: string;
+}
+
+export interface PaymentMethods {
+  balances: PaymentBalance[];
+  banks: PaymentBank[];
+}
+
 export interface AccountInfo {
   name: string;
   account: string;
@@ -612,6 +637,13 @@ export class AuthenticatedClient extends PublicClient {
     const request = `/v1/payments/addbank`;
     const body = { request, ...bank };
     return this.post<AddBankResponse>(request, {}, body);
+  }
+
+  /** Get data on balances in the account and linked banks */
+  public getPaymentMethods(account?: AccountName): Promise<PaymentMethods> {
+    const request = `/v1/payments/methods`;
+    const body = { request, ...account };
+    return this.post<PaymentMethods>(request, {}, body);
   }
 
   /** Get details about the specific account requested such as users, country codes, etc. */
