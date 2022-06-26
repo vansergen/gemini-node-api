@@ -29,6 +29,7 @@ import {
   InternalTransferResponse,
   AddBankResponse,
   PaymentMethods,
+  SENWithdrawal,
   AccountInfo,
   GUSDWithdrawal,
   Heartbeat,
@@ -1532,6 +1533,27 @@ suite("AuthenticatedClient", () => {
       .reply(200, response);
 
     const data = await client.getPaymentMethods({ account });
+    deepStrictEqual(data, response);
+  });
+
+  test(".withdrawSEN()", async () => {
+    const request = `/v1/payments/sen/withdraw`;
+    const account = "primary";
+    const amount = "893484.26";
+    const bankId = "97631a24-ca40-4277-b3d5-38c37673d029";
+    const options = { request, account, amount, bankId, nonce };
+    const response: SENWithdrawal = {
+      amount: "893484.26",
+      withdrawalId: "PQ66X7",
+      message: "You have requested a SEN transfer of 893484.26 USD.",
+    };
+    const payload = Buffer.from(JSON.stringify(options)).toString("base64");
+
+    nock(ApiUri, { reqheaders: { ...SignRequest({ key, secret, payload }) } })
+      .post(request)
+      .reply(200, response);
+
+    const data = await client.withdrawSEN({ account, amount, bankId });
     deepStrictEqual(data, response);
   });
 

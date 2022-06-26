@@ -401,6 +401,15 @@ const account = "primary";
 const methods = await client.getPaymentMethods({ account });
 ```
 
+- [`withdrawSEN`](https://docs.gemini.com/rest-api/#sen-withdrawals)
+
+```typescript
+const account = "primary";
+const amount = "893484.26";
+const bankId = "97631a24-ca40-4277-b3d5-38c37673d029";
+const response = await client.withdrawSEN({ account, amount, bankId });
+```
+
 - [`getAccountDetails`](https://docs.gemini.com/rest-api/#account-detail)
 
 ```typescript

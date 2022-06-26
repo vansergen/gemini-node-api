@@ -116,6 +116,13 @@ export interface AddBankOptions extends AccountName {
   name: string;
 }
 
+export interface SENWithdrawOptions extends AccountName {
+  /** Unique ID for your SEN bank account */
+  bankId: string;
+  /** Amount (USD) to transfer to your account */
+  amount: string;
+}
+
 export interface AccountDetails {
   account: {
     accountName: string;
@@ -357,6 +364,12 @@ export interface PaymentBank {
 export interface PaymentMethods {
   balances: PaymentBalance[];
   banks: PaymentBank[];
+}
+
+export interface SENWithdrawal {
+  amount: string;
+  withdrawalId: string;
+  message: string;
 }
 
 export interface AccountInfo {
@@ -644,6 +657,13 @@ export class AuthenticatedClient extends PublicClient {
     const request = `/v1/payments/methods`;
     const body = { request, ...account };
     return this.post<PaymentMethods>(request, {}, body);
+  }
+
+  /** The SEN Withdrawals API allows you to withdraw USD from your Gemini account via SEN */
+  public withdrawSEN(options: SENWithdrawOptions): Promise<SENWithdrawal> {
+    const request = `/v1/payments/sen/withdraw`;
+    const body = { request, ...options };
+    return this.post<SENWithdrawal>(request, {}, body);
   }
 
   /** Get details about the specific account requested such as users, country codes, etc. */
