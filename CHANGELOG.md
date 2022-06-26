@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.3.0](https://github.com/vansergen/gemini-node-api/compare/v4.2.1...v4.3.0) (2022-06-26)
+
+### Features
+
+- add the `.withdrawSEN()` method ([edc71fd](https://github.com/vansergen/gemini-node-api/commit/edc71fda0f7a54fa07690e4297a654c03a3af02d))
+
+### Dependencies
+
+- upgrade `rpc-request` to `v6.0.2` ([c4096b2](https://github.com/vansergen/gemini-node-api/commit/c4096b274941df4cc8e380266f53b1a1f0c40ca0))
+- upgrade `ws` to `v8.8.0` ([4d0d108](https://github.com/vansergen/gemini-node-api/commit/4d0d108eccbab2b5a32fe544df02b63b9988c2df))
+
 ### [4.2.1](https://github.com/vansergen/gemini-node-api/compare/v4.2.0...v4.2.1) (2022-05-15)
 
 ### Dependencies

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>CancelClearingOrderResponse | gemini-node-api</title>
+    <title>SENWithdrawOptions | gemini-node-api</title>
     <meta name="description" content="Documentation for gemini-node-api" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/style.css" />
@@ -75,13 +75,9 @@
         <div class="container">
           <ul class="tsd-breadcrumb">
             <li><a href="../modules.html">gemini-node-api</a></li>
-            <li>
-              <a href="CancelClearingOrderResponse.html"
-                >CancelClearingOrderResponse</a
-              >
-            </li>
+            <li><a href="SENWithdrawOptions.html">SENWithdrawOptions</a></li>
           </ul>
-          <h1>Interface CancelClearingOrderResponse</h1>
+          <h1>Interface SENWithdrawOptions</h1>
         </div>
       </div>
     </header>
@@ -91,7 +87,17 @@
           <section class="tsd-panel tsd-hierarchy">
             <h3>Hierarchy</h3>
             <ul class="tsd-hierarchy">
-              <li><span class="target">CancelClearingOrderResponse</span></li>
+              <li>
+                <a
+                  href="AccountName.html"
+                  class="tsd-signature-type"
+                  data-tsd-kind="Interface"
+                  >AccountName</a
+                >
+                <ul class="tsd-hierarchy">
+                  <li><span class="target">SENWithdrawOptions</span></li>
+                </ul>
+              </li>
             </ul>
           </section>
           <section class="tsd-panel-group tsd-index-group">
@@ -101,18 +107,27 @@
                 <section class="tsd-index-section">
                   <h3>Properties</h3>
                   <ul class="tsd-index-list">
-                    <li class="tsd-kind-property tsd-parent-kind-interface">
+                    <li
+                      class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
+                    >
                       <a
-                        href="CancelClearingOrderResponse.html#details"
+                        href="SENWithdrawOptions.html#account"
                         class="tsd-kind-icon"
-                        >details</a
+                        >account</a
                       >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
                       <a
-                        href="CancelClearingOrderResponse.html#result"
+                        href="SENWithdrawOptions.html#amount"
                         class="tsd-kind-icon"
-                        >result</a
+                        >amount</a
+                      >
+                    </li>
+                    <li class="tsd-kind-property tsd-parent-kind-interface">
+                      <a
+                        href="SENWithdrawOptions.html#bankId"
+                        class="tsd-kind-icon"
+                        >bank<wbr />Id</a
                       >
                     </li>
                   </ul>
@@ -123,12 +138,12 @@
           <section class="tsd-panel-group tsd-member-group">
             <h2>Properties</h2>
             <section
-              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
+              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
             >
-              <a id="details" class="tsd-anchor"></a>
+              <a id="account" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                details<a
-                  href="#details"
+                <span class="tsd-flag ts-flagOptional">Optional</span> account<a
+                  href="#account"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -151,16 +166,22 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                details<span class="tsd-signature-symbol">:</span>
+                account<span class="tsd-signature-symbol">?:</span>
                 <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
+                <p>
+                  Inherited from <a href="AccountName.html">AccountName</a>.<a
+                    href="AccountName.html#account"
+                    >account</a
+                  >
+                </p>
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L274"
-                      >src/auth.ts:274</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L13"
+                      >src/auth.ts:13</a
                     >
                   </li>
                 </ul>
@@ -169,10 +190,10 @@
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a id="result" class="tsd-anchor"></a>
+              <a id="amount" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                result<a
-                  href="#result"
+                amount<a
+                  href="#amount"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -195,22 +216,74 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                result<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">&quot;failed&quot;</span
-                ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">&quot;ok&quot;</span>
+                amount<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L273"
-                      >src/auth.ts:273</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L123"
+                      >src/auth.ts:123</a
                     >
                   </li>
                 </ul>
               </aside>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>Amount (USD) to transfer to your account</p>
+                </div>
+              </div>
+            </section>
+            <section
+              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
+            >
+              <a id="bankId" class="tsd-anchor"></a>
+              <h3 class="tsd-anchor-link">
+                bank<wbr />Id<a
+                  href="#bankId"
+                  aria-label="Permalink"
+                  class="tsd-anchor-icon"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-link"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                      d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"
+                    ></path>
+                    <path
+                      d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"
+                    ></path></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature tsd-kind-icon">
+                bank<wbr />Id<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">string</span>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L121"
+                      >src/auth.ts:121</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+              <div class="tsd-comment tsd-typography">
+                <div class="lead">
+                  <p>Unique ID for your SEN bank account</p>
+                </div>
+              </div>
             </section>
           </section>
         </div>
@@ -223,22 +296,31 @@
           <nav class="tsd-navigation secondary menu-sticky">
             <ul>
               <li class="current tsd-kind-interface">
-                <a href="CancelClearingOrderResponse.html" class="tsd-kind-icon"
-                  >Cancel<wbr />Clearing<wbr />Order<wbr />Response</a
+                <a href="SENWithdrawOptions.html" class="tsd-kind-icon"
+                  >SENWithdraw<wbr />Options</a
                 >
                 <ul>
-                  <li class="tsd-kind-property tsd-parent-kind-interface">
+                  <li
+                    class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"
+                  >
                     <a
-                      href="CancelClearingOrderResponse.html#details"
+                      href="SENWithdrawOptions.html#account"
                       class="tsd-kind-icon"
-                      >details</a
+                      >account</a
                     >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
                     <a
-                      href="CancelClearingOrderResponse.html#result"
+                      href="SENWithdrawOptions.html#amount"
                       class="tsd-kind-icon"
-                      >result</a
+                      >amount</a
+                    >
+                  </li>
+                  <li class="tsd-kind-property tsd-parent-kind-interface">
+                    <a
+                      href="SENWithdrawOptions.html#bankId"
+                      class="tsd-kind-icon"
+                      >bank<wbr />Id</a
                     >
                   </li>
                 </ul>

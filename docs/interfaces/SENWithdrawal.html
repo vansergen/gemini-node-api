@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>CancelClearingOrderResponse | gemini-node-api</title>
+    <title>SENWithdrawal | gemini-node-api</title>
     <meta name="description" content="Documentation for gemini-node-api" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/style.css" />
@@ -75,13 +75,9 @@
         <div class="container">
           <ul class="tsd-breadcrumb">
             <li><a href="../modules.html">gemini-node-api</a></li>
-            <li>
-              <a href="CancelClearingOrderResponse.html"
-                >CancelClearingOrderResponse</a
-              >
-            </li>
+            <li><a href="SENWithdrawal.html">SENWithdrawal</a></li>
           </ul>
-          <h1>Interface CancelClearingOrderResponse</h1>
+          <h1>Interface SENWithdrawal</h1>
         </div>
       </div>
     </header>
@@ -91,7 +87,7 @@
           <section class="tsd-panel tsd-hierarchy">
             <h3>Hierarchy</h3>
             <ul class="tsd-hierarchy">
-              <li><span class="target">CancelClearingOrderResponse</span></li>
+              <li><span class="target">SENWithdrawal</span></li>
             </ul>
           </section>
           <section class="tsd-panel-group tsd-index-group">
@@ -102,17 +98,20 @@
                   <h3>Properties</h3>
                   <ul class="tsd-index-list">
                     <li class="tsd-kind-property tsd-parent-kind-interface">
-                      <a
-                        href="CancelClearingOrderResponse.html#details"
-                        class="tsd-kind-icon"
-                        >details</a
+                      <a href="SENWithdrawal.html#amount" class="tsd-kind-icon"
+                        >amount</a
+                      >
+                    </li>
+                    <li class="tsd-kind-property tsd-parent-kind-interface">
+                      <a href="SENWithdrawal.html#message" class="tsd-kind-icon"
+                        >message</a
                       >
                     </li>
                     <li class="tsd-kind-property tsd-parent-kind-interface">
                       <a
-                        href="CancelClearingOrderResponse.html#result"
+                        href="SENWithdrawal.html#withdrawalId"
                         class="tsd-kind-icon"
-                        >result</a
+                        >withdrawal<wbr />Id</a
                       >
                     </li>
                   </ul>
@@ -125,10 +124,10 @@
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a id="details" class="tsd-anchor"></a>
+              <a id="amount" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                details<a
-                  href="#details"
+                amount<a
+                  href="#amount"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -151,7 +150,7 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                details<span class="tsd-signature-symbol">:</span>
+                amount<span class="tsd-signature-symbol">:</span>
                 <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
@@ -159,8 +158,8 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L274"
-                      >src/auth.ts:274</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L370"
+                      >src/auth.ts:370</a
                     >
                   </li>
                 </ul>
@@ -169,10 +168,10 @@
             <section
               class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
             >
-              <a id="result" class="tsd-anchor"></a>
+              <a id="message" class="tsd-anchor"></a>
               <h3 class="tsd-anchor-link">
-                result<a
-                  href="#result"
+                message<a
+                  href="#message"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg
@@ -195,18 +194,60 @@
                 ></a>
               </h3>
               <div class="tsd-signature tsd-kind-icon">
-                result<span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">&quot;failed&quot;</span
-                ><span class="tsd-signature-symbol"> | </span
-                ><span class="tsd-signature-type">&quot;ok&quot;</span>
+                message<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">string</span>
               </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L273"
-                      >src/auth.ts:273</a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L372"
+                      >src/auth.ts:372</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+            </section>
+            <section
+              class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface"
+            >
+              <a id="withdrawalId" class="tsd-anchor"></a>
+              <h3 class="tsd-anchor-link">
+                withdrawal<wbr />Id<a
+                  href="#withdrawalId"
+                  aria-label="Permalink"
+                  class="tsd-anchor-icon"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-link"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                      d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"
+                    ></path>
+                    <path
+                      d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"
+                    ></path></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature tsd-kind-icon">
+                withdrawal<wbr />Id<span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">string</span>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/vansergen/gemini-node-api/blob/main/src/auth.ts#L371"
+                      >src/auth.ts:371</a
                     >
                   </li>
                 </ul>
@@ -223,22 +264,25 @@
           <nav class="tsd-navigation secondary menu-sticky">
             <ul>
               <li class="current tsd-kind-interface">
-                <a href="CancelClearingOrderResponse.html" class="tsd-kind-icon"
-                  >Cancel<wbr />Clearing<wbr />Order<wbr />Response</a
+                <a href="SENWithdrawal.html" class="tsd-kind-icon"
+                  >SENWithdrawal</a
                 >
                 <ul>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
-                    <a
-                      href="CancelClearingOrderResponse.html#details"
-                      class="tsd-kind-icon"
-                      >details</a
+                    <a href="SENWithdrawal.html#amount" class="tsd-kind-icon"
+                      >amount</a
+                    >
+                  </li>
+                  <li class="tsd-kind-property tsd-parent-kind-interface">
+                    <a href="SENWithdrawal.html#message" class="tsd-kind-icon"
+                      >message</a
                     >
                   </li>
                   <li class="tsd-kind-property tsd-parent-kind-interface">
                     <a
-                      href="CancelClearingOrderResponse.html#result"
+                      href="SENWithdrawal.html#withdrawalId"
                       class="tsd-kind-icon"
-                      >result</a
+                      >withdrawal<wbr />Id</a
                     >
                   </li>
                 </ul>

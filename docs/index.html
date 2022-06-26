@@ -496,6 +496,15 @@
 </code></pre>
             <ul>
               <li>
+                <a href="https://docs.gemini.com/rest-api/#sen-withdrawals"
+                  ><code>withdrawSEN</code></a
+                >
+              </li>
+            </ul>
+            <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">account</span><span class="hl-0"> = </span><span class="hl-3">&quot;primary&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">amount</span><span class="hl-0"> = </span><span class="hl-3">&quot;893484.26&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">bankId</span><span class="hl-0"> = </span><span class="hl-3">&quot;97631a24-ca40-4277-b3d5-38c37673d029&quot;</span><span class="hl-0">;</span><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">response</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">withdrawSEN</span><span class="hl-0">({ </span><span class="hl-2">account</span><span class="hl-0">, </span><span class="hl-2">amount</span><span class="hl-0">, </span><span class="hl-2">bankId</span><span class="hl-0"> });</span>
+</code></pre>
+            <ul>
+              <li>
                 <a href="https://docs.gemini.com/rest-api/#account-detail"
                   ><code>getAccountDetails</code></a
                 >
@@ -1067,6 +1076,18 @@
               <li class="tsd-kind-interface">
                 <a href="interfaces/RejectedOrder.html" class="tsd-kind-icon"
                   >Rejected<wbr />Order</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a
+                  href="interfaces/SENWithdrawOptions.html"
+                  class="tsd-kind-icon"
+                  >SENWithdraw<wbr />Options</a
+                >
+              </li>
+              <li class="tsd-kind-interface">
+                <a href="interfaces/SENWithdrawal.html" class="tsd-kind-icon"
+                  >SENWithdrawal</a
                 >
               </li>
               <li class="tsd-kind-interface">
