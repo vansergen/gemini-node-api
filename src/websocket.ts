@@ -318,7 +318,7 @@ export class WebsocketClient extends EventEmitter {
       this.#key = key;
       this.#secret = secret;
     }
-    this.#nonce = (): number => Date.now();
+    this.#nonce = (): number => Math.floor(Date.now() / 1000);
   }
 
   /** Connect to the public API (V1) that streams all the market data on a given symbol. */

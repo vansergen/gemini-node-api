@@ -404,7 +404,7 @@ export class AuthenticatedClient extends PublicClient {
     super(rest);
     this.#key = key;
     this.#secret = secret;
-    this.#nonce = (): number => Date.now();
+    this.#nonce = (): number => Math.floor(Date.now() / 1000);
   }
 
   public post<T = unknown>(
